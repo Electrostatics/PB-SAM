@@ -35,6 +35,7 @@ private:
 /*#########################################################*/
 /*#########################################################*/
 
+#ifndef __FINDCON
 class CMolContact
 {
 	public:
@@ -70,5 +71,6 @@ class CMolContact
 			vector<CContact> m_contactlist;
 };
 
+#endif
 
 #endif

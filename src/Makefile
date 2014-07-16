@@ -14,7 +14,7 @@ BIN     = ../bin
 
 ## FindContacts ##
 
-FC_C =  contact.cpp findContacts.cpp
+FC_C =  expansion.cpp readutil.cpp findContacts.cpp
 FC_OBJS      =      $(FC_C:.cpp=.o)
 
 ## Makesphere ##
@@ -72,7 +72,7 @@ bdnam: $(BDNAM_OBJS) Makefile
 
 findContacts:  $(FC_OBJS)	 Makefile
 	rm -f ../bin/findContacts
-	$(CC)  $(CFLAGS) findContacts.cpp $(LIB) $(LIBS) -o ../bin/findContacts
+	$(CC)  $(CFLAGS) -D__FC  $(FC_OBJS) $(LIB) $(LIBS) -o ../bin/findContacts
 
 makesphere:  $(MS_OBJS) Makefile
 		rm -f ../bin/makesphere
