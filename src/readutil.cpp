@@ -335,6 +335,37 @@ void readpqr(const char * fname, vector<CPnt> & pnt, vector<REAL> & ch,
 	
 } // end readpqr
 
+//!  computeAtomCenter function 
+/*! A function to compute the center
+of geometry for a set of coordinates
+	\param pos a vector of atom positions */
+CPnt computeAtomCenter(const vector<CPnt> &pos)
+{
+  CPnt cen;
+  for(int i=0; i<pos.size(); i++) cen += pos[i];
+  cen /= pos.size();
+  return cen;
+}
+
+//!  computeMaxRadius_ByAtom function 
+/*! A function to determine the furthest atom
+from a sphere center with a given tolerance
+	\param pos a vector of atom positions 
+	\param cen a CPnt object for a CG sphere
+	\param sphereTol a floating point of tolerance for maxRad */
+REAL computeMaxRadius_ByAtom(const vector<CPnt> &pos, CPnt cen, REAL sphereTol)
+{
+  REAL maxR = 0.0;
+  for(int i=0; i<pos.size(); i++)
+    {
+      REAL distsq = (pos[i]-cen).normsq();
+      if(distsq > maxR) maxR = distsq; 
+    }
+
+  maxR = sqrt(maxR) + sphereTol;
+
+  return maxR;
+}
 
 //!  printM function 
 /*! A function to print out entries of a matrix

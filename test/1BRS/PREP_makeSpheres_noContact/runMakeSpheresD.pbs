@@ -1,0 +1,23 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -cwd
+#$ -j y
+
+
+EXEC=$PBSAMHOME/working_code/PBSAM_all/bin/makesphere
+MOLPATH=$PBSAMHOME/working_code/PBSAM_all/test/1BRS
+
+PQRFILE=$MOLPATH/config/1BRS_chainD.pqr
+VERTFILE=$MOLPATH/msms/1BRS_chainD.p1.5d3.vert
+
+TOLSP=5
+
+RUNNAME=chainD_ca_p1.5d3_s"$TOLSP"i"$TOLIP"
+OUTCENTERFILE=centers_$RUNNAME.cen
+LOGFILE=out_$RUNNAME.log
+
+$EXEC $PQRFILE $VERTFILE $OUTCENTERFILE $TOLSP 0 > $LOGFILE
+
+$PBSAMHOME/scripts/cen2pqr.pl $OUTCENTERFILE > $centers_$RUNNAME.pqr
+
+

@@ -12,6 +12,12 @@ BIN     = ../bin
 
 ### OBJECT FILES ###
 
+## Makesphere ##
+
+MS_C =  spheres.cpp spheres_contact.cpp readutil.cpp \
+					 makesphere.cpp expansion.cpp
+MS_OBJS      =      $(MS_C:.cpp=.o)
+
 ## PQR ##
 
 PQR_C = readutil.cpp expansion.cpp cfg2pqr.cpp
@@ -58,6 +64,10 @@ bdnam: $(BDNAM_OBJS) Makefile
 	rm -f $(BIN)/bdnam
 	$(CC) $(CFLAGS) $(PARAMS) $(BDNAM_OBJS) $(LINK) -o bdnam
 	mv bdnam $(BIN)
+
+makesphere:  $(MS_OBJS) Makefile
+		rm -f ../bin/makesphere
+		$(CC)  $(CFLAGS) $(MS_OBJS) $(LIB) $(LIBS) -o ../bin/makesphere
 
 nafion_nopbc: $(NAFION_OBJS) Makefile
 	rm -f $(BIN)/nafion_nopbc

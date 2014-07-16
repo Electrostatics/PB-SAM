@@ -1,0 +1,17 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -cwd
+#$ -j y
+#$ -pe orte 8
+
+THREAD=8
+EXEC=$PBSAMHOME/BD_tobeparallel/CODE_PBSAM/bin/pbsam70
+LOGFILE=makeMat_A.log
+
+MOLDIR=$PBSAMHOME/Example_1BRS
+
+SALT_CONC=0.05
+
+PQRFILE=$MOLDIR/PREP_makeSpheres/centers_chainA_ca_p1.5d3_s5i1.pqr
+
+$EXEC mat $THREAD $SALT_CONC  $PQRFILE > $LOGFILE  2>&1

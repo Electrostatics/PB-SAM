@@ -32,14 +32,17 @@ struct GridPnt
 // various functions to read / write files
 
 void readgrid(const char * fname, float * V, float * scale, 
-							CPnt & pGridRef)
+							CPnt & pGridRef);
 void readSurface( const char * fname, vector<CPnt> & SP, vector<CPnt> & NP  );
 
 void readpqrAtoms( const char * fname, vector<CPnt> & pnt, vector<REAL> & ch, 
-									vector<REAL> & R )
-void readpqrCenters(const char * fname, vector<CPnt> & scen, vector<REAL> & srad, bool bNew)
+									vector<REAL> & R );
+void readpqrCenters(const char * fname, vector<CPnt> & scen, vector<REAL> & srad, bool bNew);
 void readpqr( const char * fname, vector<CPnt> & pnt, vector<REAL> & ch, 
 						 vector<REAL> & rad, vector<CPnt> & cen );
+
+CPnt computeAtomCenter(const vector<CPnt> &pos);
+REAL computeMaxRadius_ByAtom(const vector<CPnt> &pos, CPnt cen, REAL sphereTol);
 
 void printM( double * A, int m, int n );
 void writeMat_Unformatted( double *mat, int p, char* fname );
