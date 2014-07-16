@@ -29,7 +29,7 @@ int mainMakesphere( int argc, char ** argv )
 	// Timer
 	double start = read_timer(  );
 	
-	if (argc < 6) 
+	if ( (argc != 6) && (argc != 8 ) )
 	{
 		cout << "Correct usage: ./makesphere [pqrfname] "
 				<< " [vertfname] [cenfname] [tolSP] [makecontacts] [[tolIP]]" 

@@ -12,6 +12,11 @@ BIN     = ../bin
 
 ### OBJECT FILES ###
 
+## FindContacts ##
+
+FC_C =  contact.cpp findContacts.cpp
+FC_OBJS      =      $(FC_C:.cpp=.o)
+
 ## Makesphere ##
 
 MS_C =  spheres.cpp spheres_contact.cpp readutil.cpp \
@@ -65,6 +70,10 @@ bdnam: $(BDNAM_OBJS) Makefile
 	$(CC) $(CFLAGS) $(PARAMS) $(BDNAM_OBJS) $(LINK) -o bdnam
 	mv bdnam $(BIN)
 
+findContacts:  $(FC_OBJS)	 Makefile
+	rm -f ../bin/findContacts
+	$(CC)  $(CFLAGS) findContacts.cpp $(LIB) $(LIBS) -o ../bin/findContacts
+
 makesphere:  $(MS_OBJS) Makefile
 		rm -f ../bin/makesphere
 		$(CC)  $(CFLAGS) $(MS_OBJS) $(LIB) $(LIBS) -o ../bin/makesphere
@@ -95,5 +104,4 @@ cfg2pqr: $(PQR_OBJS) Makefile
 clean:
 	rm -rf *.o 
 
-# DO NOT DELETE THIS LINE -- make depend depends on it.
 
