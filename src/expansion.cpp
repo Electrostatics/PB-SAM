@@ -2,23 +2,9 @@
 #include <cfloat>
 #include "expansion.h"
 
-/*###############################################################################
- * #
- * # File: expansion.cpp
- * #
- * # Date: June 2013
- * #
- * # Description:
- * #
- * # Author: EH Yap, L Felberg
- * #
- * # Copyright ( c )
- * #
- * ################################################################################*/
-
 #define EXPAN_EPS 1e-12
 
-REAL CExpan::RATIO = 18.0; //pow( EXPAN_EPS, -2.0/N_POLES ); // 4.0;
+REAL CExpan::RATIO = 18.0;
 REAL CRExpan::KAPPA = 0.0;
 int CExpan::IDX[2*N_POLES+1];
 
@@ -523,7 +509,6 @@ CSHExpan::computecoeff( int p, bool bRot )
 	if( bRot )
 	{
 		m_legendre.copy( *this, p );
-		//     cout << "copied m_legendre "<<p<<" "<<m_legendre.getRange(  )<<endl;
 	}
 
 	REAL cosp[p], sinp[p], ang = 0;
@@ -570,16 +555,13 @@ CSHExpan::specialSH( vector<REAL> & SH, int n, REAL val )
 	for ( int l = 3 ; l < n; l++ )   
 	{                             
 		SH[l] = ( val*(2*l-1 )*SH[l-1] - l*SH[l-2])/(l-1);  
-		//     cout<<"in a ) " <<SH[l]<<endl;
+
 	}
 	// This part converts the legendre polynomial to a spherical harmonic.
 	for ( int l = 1; l < n; l++ )
 	{
 		SH[l] *= ( -CONST3[l][1] );
-		// cout<<"in b ) "<<CONST3[l][1]<<" "<<SH[l]<<endl;
 	}
-	/*  for ( int l = 0; l < n; l++ )
-		cout<<SH[l]<<endl;*/
 }	// end specialSH
 
 /*#########################################################*/
@@ -618,12 +600,7 @@ CSHExpan::specialSH( vector<REAL> & SH, int n, REAL val )
 			_mm_storeu_pd(  &(m_M[idxn + k] ), tmp1);
 			__m128d tmp2 = _mm_set_pd1(  -negterm*CONST6[m+1]*sqrtterm*sint  ); 
 			_mm_storeu_pd(  &(m_M[idxn_plus1 + k+2] ), tmp2);
-			/*
-			m_M[idxn       + k]   = negterm*CONST6[m]*sqrtterm;
-			m_M[idxn       + k+1] = m_M[idxn + k];
-			m_M[idxn_plus1 + k+2] = -negterm*CONST6[m+1]*sqrtterm*sint;
-			m_M[idxn_plus1 + k+3] = m_M[idxn_plus1 + k+2];
-			*/
+
 			sqrtterm *= sint*sint;                                          
 
 			if ( m < p-2 )
@@ -637,15 +614,7 @@ CSHExpan::specialSH( vector<REAL> & SH, int n, REAL val )
 				__m128d tmp3 = _mm_set_pd1(  cost*CONST1[m+2][m]*m_M[idxn_plus1 + k] -
 							CONST2[m+2][m]*m_M[idxn + k]  ); 
 				_mm_storeu_pd(  &(m_M[idxn_plus2 + k] ), tmp3);
-				/*
-				m_M[idxn_plus1 + k]   = cost * ( 2*m+1 ) * m_M[idxn + k];  
-				m_M[idxn_plus1 + k+1] = m_M[idxn_plus1 + k];                    
-				m_M[idxn_plus2 + k+2] = cost * ( 2*m+3 ) * m_M[idxn_plus1 + k+2];  
-				m_M[idxn_plus2 + k+3] = m_M[idxn_plus2 + k+2];                    
-				m_M[idxn_plus2 + k] = cost*CONST1[m+2][m]*m_M[idxn_plus1 + k] -
-				CONST2[m+2][m]*m_M[idxn + k];
-				m_M[idxn_plus2 + k+1] =  m_M[idxn_plus2 + k];
-				*/
+
 				for( int n = m+3; n < p; n++ )
 				{
 					int idxn = IDX[n];
@@ -659,15 +628,6 @@ CSHExpan::specialSH( vector<REAL> & SH, int n, REAL val )
 					__m128d tmp2 = _mm_set_pd1(  cost*CONST1[n][m+1]*m_M[idxn_minus1 + k+2] -
 							  CONST2[n][m+1]*m_M[idxn_minus2 + k+2]  ); 
 					_mm_storeu_pd(  &(m_M[idxn + k+2] ), tmp2);
-
-					/*
-					m_M[idxn + k] = cost*CONST1[n][m]*m_M[idxn_minus1 + k] -
-					CONST2[n][m]*m_M[idxn_minus2 + k];
-					m_M[idxn + k+1] =  m_M[idxn + k];
-					m_M[idxn + k+2] = cost*CONST1[n][m+1]*m_M[idxn_minus1 + k+2] -
-					CONST2[n][m+1]*m_M[idxn_minus2 + k+2];
-					m_M[idxn + k+3] =  m_M[idxn + k+2];
-					*/
 				} 	// end n                                                       
 			}	// end if
 		}	// end m
@@ -679,10 +639,6 @@ CSHExpan::specialSH( vector<REAL> & SH, int n, REAL val )
 			int k = 2*n-1;
 			__m128d tmp1 = _mm_set_pd1(  negterm*CONST6[n]*sqrtterm   ); 
 			_mm_storeu_pd(  &(m_M[ IDX[n]+k ] ), tmp1);
-			/*
-			m_M[IDX[n]+k]     = negterm*CONST6[n]*sqrtterm;
-			m_M[IDX[n]+k+1]   = m_M[IDX[n]+k];
-			*/
 		}
 		else // odd
 		{
@@ -690,11 +646,7 @@ CSHExpan::specialSH( vector<REAL> & SH, int n, REAL val )
 			int k = 2*n-1;
 
 			__m128d tmp1 = _mm_set_pd1(  cost * (2*n+1 ) * m_M[IDX[n]+k] ); 
-			_mm_storeu_pd(  &(m_M[ IDX[n+1]+k ] ), tmp1);
-			/*
-			m_M[IDX[n+1]+k]   = cost * ( 2*n+1 ) * m_M[IDX[n]+k];  
-			m_M[IDX[n+1]+k+1] = m_M[IDX[n+1]+k];       
-			*/             
+			_mm_storeu_pd(  &(m_M[ IDX[n+1]+k ] ), tmp1);             
 		}
 	}	// end CSHExpan::legendre(  )
 
@@ -785,7 +737,6 @@ CSHExpan::incLegendre(  )
 	{
 		// recursive propagation from previous n's need to 
 		// use m_legendre since m_Ms are modified in computecoeff
-
 		m_legendre[IDX[n]] = cost*CONST1[n][0]*m_legendre[IDX[n-1]] - 
 					CONST2[n][0]*m_legendre[IDX[n-2]];
 
@@ -809,7 +760,6 @@ CSHExpan::incLegendre(  )
 
 	// update m_legendre for future increments
 	( *this ).copy_p(m_legendre, p);
-	//cout <<"copyed leg to M: p "<<p<<" range M "<<m_range<<endl;
 }	// end CSHExpan::incLegendre(  )
 
 /*#########################################################*/
@@ -878,8 +828,6 @@ CSHExpan::inc(  )
 									//	CRange circumvent makeValid(  )
 
 	incLegendre(  );
-	//cout <<" after legendre "<<endl;
-	//  this->outputComplex(  ); 
 
 	REAL cosp[p], sinp[p], ang = 0;
 	for ( int m = 0; m < p; m++, ang += m_phi )
@@ -1006,20 +954,17 @@ operator<<( ostream & fout, const CExpan & M )
 {
 	vector<REAL>::const_iterator pS = M.m_M.begin(  );
 
-//	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	for ( int n = M.m_range.p1( ); n < M.m_range.p2(); n++)
 	{
 		for ( int m = 0; m < 2*n+1; m++ ) 
 		{
 			REAL out = *( pS++ );
-			//if( abs(out ) < 1e-5 ) out = 0.0;
 			if( abs(out ) < 1e-15 ) out = 0.0;
 			fout << out << " ";
 		}
 		fout << endl;
 	}
 
-//	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	return fout;
 }	// end operator<<
 
@@ -1060,129 +1005,3 @@ CExpan::outputComplex( REAL fact ) const
 
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 }	// end CExpan::outputComplex
-
-/*#########################################################*/
-/*#########################################################*/
-// Code that was commented out
-/*#########################################################*/
-/*#########################################################*/
-
-/*
-// Construct a multipole expansion for a set of charges
-CMulExpan::CMulExpan( const vector<REAL> & ch, const vector<CPnt> & pos,
-		     int p, bool bKappa ) : CExpan( p)
-{
-  double scale = CExpan::chooseScale( pos );
-  for ( int i = 0; i < pos.size( ); i++)
-    {
-      if ( ch[i] == 0.0 )
-	continue;
-
-      CSpPnt spos = CartToSph( pos[i] );
-      CMExpan M( ch[i], spos, bKappa, p, scale );
-      *this += static_cast<CExpan&>( M );
-    }
-
-  m_scale = 1.0/scale;
-}
-*/
-
-/*
-// Construct a local expansion for a set of charges
-CLocalExpan::CLocalExpan( const vector<REAL> & ch, const vector<CPnt> & pos,
-			 int p, bool bKappa ) : CExpan( p)
-{
-  double scale = CExpan::chooseScale( pos );
-  for ( int i = 0; i < pos.size( ); i++)
-    {
-      if ( ch[i] == 0.0 )
-	continue;
-
-      CSpPnt spos = CartToSph( pos[i] );
-      CLExpan L( ch[i], spos, bKappa, p, scale );
-      *this += static_cast<CExpan&>( L );
-    }
-
-  m_scale = scale;
-}
-*/
-
-/*
-// Compute the legendre polynomials.
-void 
-CSHExpan::legendre(  ) 
-{                         
-  REAL negterm = 1.0;
-  REAL cost = cos( m_theta ), sint = sin(m_theta);
-  REAL sqrtterm = 1.0;   
-  int p = m_range.p2(  );
-  
-  m_M[0] = CONST6[0];           
-  negterm = -negterm;                                             
-  sqrtterm *= sint;                                          
-  if( p > 1 )
-    {                                                
-      m_M[IDX[1]] = cost * m_M[0];           
-
-     for( int n = 2; n < p; n++ )
- 
-	m_M[IDX[n]] = cost*CONST1[n][0]*m_M[IDX[n-1]] - 
-	  CONST2[n][0]*m_M[IDX[n-2]];}
-  
-  for ( int m = 1, k = 1; m < p-1 ; m+=2, k+=4 )
-    {       
-
-      int n = m;
-      m_M[IDX[n]+k]     = negterm*CONST6[n]*sqrtterm;
-      m_M[IDX[n]+k+1]   = m_M[IDX[n]+k];
-      m_M[IDX[n+1]+k+2] = -negterm*CONST6[n+1]*sqrtterm*sint;
-      m_M[IDX[n+1]+k+3] = m_M[IDX[n+1]+k+2];
-      sqrtterm *= sint*sint;                                          
-
-      if ( m < p-2 )
-	{                                                
-	  m_M[IDX[n+1]+k]   = cost * ( 2*n+1 ) * m_M[IDX[n]+k];  
-	  m_M[IDX[n+1]+k+1] = m_M[IDX[n+1]+k];                    
-	  m_M[IDX[n+2]+k+2] = cost * ( 2*n+3 ) * m_M[IDX[n+1]+k+2];  
-	  m_M[IDX[n+2]+k+3] = m_M[IDX[n+2]+k+2];                    
-
-	  n=m+2;
-	  m_M[IDX[n]+k] = cost*CONST1[n][m]*m_M[IDX[n-1]+k] -
-	    CONST2[n][m]*m_M[IDX[n-2]+k];
-	  m_M[IDX[n]+k+1] =  m_M[IDX[n]+k];
-	  
-	  for( int n = m+3; n < p; n++ )
-	    {
-
-	      m_M[IDX[n]+k] = cost*CONST1[n][m]*m_M[IDX[n-1]+k] -
-                CONST2[n][m]*m_M[IDX[n-2]+k];
-              m_M[IDX[n]+k+1] =  m_M[IDX[n]+k];
-
-	      m_M[IDX[n]+k+2] = cost*CONST1[n][m+1]*m_M[IDX[n-1]+k+2] -
-                CONST2[n][m+1]*m_M[IDX[n-2]+k+2];
-              m_M[IDX[n]+k+3] =  m_M[IDX[n]+k+2];
-
-	    }                                                        
-	}
-                                                                
-    }
-
-  // compute omitted coeff
-  if( p%2==0 ) // even
-    {
-      int n = p-1;
-      int k = 2*n-1;
-      m_M[IDX[n]+k]     = negterm*CONST6[n]*sqrtterm;
-      m_M[IDX[n]+k+1]   = m_M[IDX[n]+k];
-    }
-  else // odd
-    {
-      int n = p-2;
-      int k = 2*n-1;
-      m_M[IDX[n+1]+k]   = cost * ( 2*n+1 ) * m_M[IDX[n]+k];  
-      m_M[IDX[n+1]+k+1] = m_M[IDX[n+1]+k];                    
-    }
-
-}
-*/
-
