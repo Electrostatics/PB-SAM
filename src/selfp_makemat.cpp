@@ -121,7 +121,8 @@ int main_selfPolarize( int argc, char ** argv )
 
 
 /******************************************************************/
-/******************************************************************//**
+/******************************************************************/
+/**
 *  main_makeImat
 	\param flag for iMatrix computation
 	\param an integer for the number of OMP threads
@@ -150,37 +151,40 @@ int main_makeImat( int argc, char ** argv )
 	const double idiel = (  argc == 7 ? 4.0 :  atof(argv[5] ) );
 	const double sdiel = 78;
 	const double temp = 353;
-	const double kappa = ANGSTROM * sqrt(   (2 * salt_conc * AVOGADRO_NUM 
-																					 / LITRE * ELECT_CHG * ELECT_CHG ) 
-																			 / ( sdiel* PERMITTIVITY_VAC * KB * temp  ) );
+	const double kappa = ANGSTROM * sqrt(   (2 * salt_conc * AVOGADRO_NUM
+											 / LITRE * ELECT_CHG * ELECT_CHG )
+										 / ( sdiel* PERMITTIVITY_VAC * KB * temp  ) );
 	cout <<"EPS_SOLVENT:"<<sdiel<<" EPS_IN: "
 	<<idiel<<" KAPPA: "<<kappa<<endl;
 	
 	CSystem::initConstants( kappa, sdiel, temp );
 	
-	// read in charge + centers 
+	// read in charge + centers
 	vector<CPnt> scen, POS;
 	vector<double> srad, CHG;
 	const char * configfile  = argv[4];
-	readpqr( configfile, POS, CHG ,srad, scen ); // as PQR 
+	readpqr( configfile, POS, CHG ,srad, scen ); // as PQR
 	
 	// define center as center of spheres
-	CPnt rcen( 0,0,0 ); 
-	for( int i=0; i<scen.size( ); i++) 
-		rcen += scen[i]; 
-	rcen /= scen.size(  ); 
+	CPnt rcen( 0,0,0 );
+	for( int i=0; i<scen.size( ); i++)
+		rcen += scen[i];
+	rcen /= scen.size(  );
 	cout <<"rcen = "<<rcen<<endl;
 	
 	/////////////// generate a copy of moltype values ///////////////
 	vector<vector<CPnt> > SPxes;
-	vector<int> nSPx; 
+	vector<int> nSPx;
 	vector<vector<int> > neighs;
+	//// Generate Points for a solvent exposed sphere, only exposed points
 	CMolecule::generateMolSPX( scen, srad, SPxes, nSPx, neighs  );
 	
-	const double intraRcutoff = 300;       
+	const double intraRcutoff = 300;
 	vector< vector<int> > intraPolLists_far, intraPolLists_near;
+	///// Generating lists of CG spheres within the mol that are considered near
+	// And those that are considered far.
 	CMolecule::generateMolTypeIntraPolLists(scen, srad, intraRcutoff,
-																					intraPolLists_near, intraPolLists_far);
+											intraPolLists_near, intraPolLists_far);
 	
 	// create molecule
 	CMolecule mol(rcen, scen, srad, CHG, POS, idiel, SPxes, nSPx, neighs, intraPolLists_near);

@@ -15,19 +15,13 @@
 #define PREC_LIMIT ( 1e-30 )
 using namespace std;
 
-/*#########################################################*/
-/*#########################################################*/
-////////////////////////////////////////////////
-//    CRange
-///////////////////////////////////////////////
-/*#########################################################*/
-/*#########################################################*/
-
+////////////////////////
+//!  The CRange class
+/*! The CRange class contains information about a range for an expansion [p1,p2]
+ p1 is the index of the lowest order and p2 is one larger than the
+ index of the highest order.*/
 class CRange
 {
-	// A range for an expansion [p1,p2 )
-	// p1 is the index of the lowest order and p2 is one larger than the
-	// index of the highest order.
 public:
 	CRange(  ) : m_p1(0), m_p2(0) {}
 	CRange( int p2 ) : m_p1(0), m_p2(p2) { makeValid(); }
@@ -91,18 +85,15 @@ private:
 	int m_p1, m_p2;
 };	// end class CRange
 
-/*#########################################################*/
-/*#########################################################*/
-////////////////////////////////////////////////
-//    CExpan
-///////////////////////////////////////////////
-/*#########################################################*/
-/*#########################################################*/
 
+////////////////////////
+//!  The CExpan class
+/*! The CExpan class contains information about basic expansions. */
 class CExpan
 {
-	// A basic expansion.
 public:
+	//! CExpan initConstants function
+	/*!	This function is used to initialize system constants IDX. */
 	static void initConstants(  );
 	
 	// Choose and appropriate scale for the set of points
@@ -198,9 +189,6 @@ public:
 	void output( int p1, int p2 );
 	void output(  ) { output(m_range.p1(), m_range.p2()); }
 	void outputComplex( REAL fact = 1.0 ) const;
-	// Constants used in computing expansions
-	static int IDX[2*N_POLES+1];
-	static REAL SQRT2, ISQRT2;
 	
 	// Save and Undo functiona
 	void saveUndo(  ) 
@@ -229,37 +217,39 @@ public:
 	}
 	
 	static REAL computeDev( const CExpan & M1, const CExpan & M2 );
+
+	// Constants used in computing expansions
+	static int IDX[2*N_POLES+1];					//!< Contains the index for first position of constants of every n level
+	static REAL SQRT2;								//!<
+	static REAL ISQRT2;								//!<
 	
 protected:
-	static REAL RATIO;
-	vector<REAL> m_M, m_MU;
-	CRange m_range, m_rangeU;
-	double m_scale, m_scaleU;
+	static REAL RATIO;								//!<
+	vector<REAL> m_M;								//!<
+	vector<REAL> m_MU;								//!<
+	CRange m_range;									//!< A range object of current expansion
+	CRange m_rangeU;								//!< A saved range object of previous expansion, stored for undo
+	double m_scale;									//!<
+	double m_scaleU;								//!<
 	
 private:
-	int m_offset, m_offsetU;
+	int m_offset;									//!<
+	int m_offsetU;									//!<
 };	// end class CExpan
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
 
 class CLocalExpan;
 
-/*#########################################################*/
-/*#########################################################*/
-////////////////////////////////////////////////
-//    CMulExpan
-///////////////////////////////////////////////
-/*#########################################################*/
-/*#########################################################*/
-
+////////////////////////
+//!  The CMulExpan class
+/*! The CMulExpan class contains information about general multipole 
+ expansion class. */
 class CMulExpan : virtual public CExpan
 {
-	// A general multipole expansion class
 public:
-	// Construct multipole expansion from a vector of coefficients
+	//!  The CMulExpan class constructor
+	/*! Initialize a CMulExpan object from a vector of coefficients.
+	 \param p is an int that is a minimal number of poles. Default is zero.
+	 \param range a CRange object of the range of */
 	CMulExpan( const double * v, const CRange & range, 
 						double scale = 1.0 ) : 
 	CExpan( v, range, 1.0/scale ) {}
@@ -269,11 +259,15 @@ public:
 	CMulExpan( const vector<REAL> M, const CRange & range, double scale = 1.0 ) : 
 	CExpan( M, range, scale ) {} // ***assume scale is already inversed
 	
-	// Construct the multipole expansion of a set of charges.
+	//!  The CMulExpan class constructor
+	/*! Initialize a CMulExpan object of a set of charges, creates an MExpan object.
+	 \param ch a vector of point charges
+	 \param pos a vector of point charge XYZ coordinates
+	 \param p is an int that is the number of poles.
+	 \param bKappa a boolean of whether of not to include screened charges
+	 \param scale a length scale for the expansion */
 	CMulExpan( const vector<REAL> & ch, const vector<CPnt> & pos,
 						int p, bool bKappa, REAL scale );
-	/* CMulExpan( const vector<REAL> & ch, const vector<CPnt> & pos,
-	 int p, bool bKappa );*/
 	
 	// Create empty expansions
 	CMulExpan( int p = 0 ) : CExpan(p) {}
@@ -284,14 +278,10 @@ public:
 	friend REAL inprod( const CMulExpan & M, const CLocalExpan & L );
 };	// end class CMulExpan : virtual public CExpan
 
-/*#########################################################*/
-/*#########################################################*/
-////////////////////////////////////////////////
-//    CLocalExpan
-///////////////////////////////////////////////
-/*#########################################################*/
-/*#########################################################*/
-
+////////////////////////
+//!  The CLocalExpan class
+/*! The CLocalExpan class contains information about general local
+ expansion class. */
 class CLocalExpan : virtual public CExpan
 {
 	// A general local expansion class
@@ -324,14 +314,19 @@ public:
 	friend REAL inprod( const CMulExpan & M, const CLocalExpan & L );
 };	// end class CLocalExpan : virtual public CExpan
 
+
+////////////////////////
 //!  The CSHCoeff class 
 /*! The CSHCoeff class contains information about spherical
  harmonics. Contains computations for EQ(1) of Lotan 2006
  as well as bessel function calculations for equations 2 and 3 */
 class CSHExpan : virtual public CExpan
 {
-	// An expansion of spherical harmonics
 public:
+	//! CSHExpan initConstants function
+	/*!	This function is used to initialize kappa and system constants. 
+	 Calls initConstants for CExpan as well
+	 \param kappa a floating point of the inverse debye length */
 	static void initConstants(  );
 	
 	CSHExpan(  ) : CExpan(), m_theta(0.0), m_phi(0.0) {}
@@ -392,39 +387,37 @@ private:
 	// Constants used to construct the spherical harmonics.
 	static REAL CONST1[2*N_POLES][2*N_POLES];		//!< (2l-1)/(l-m) for use in legendre computation
 	static REAL CONST2[2*N_POLES][2*N_POLES];		//!< (l+m-1)/(l-m) for use in legendre computation
-	static REAL CONST3[2*N_POLES][2*N_POLES];		//!< sqrt((n-m)!/(n+m)!) in EQ1, Lotan 2006
-	static REAL CONST4[2*N_POLES];							//!< 1.0/((2*n-1)*(2*n-3)), Used for besselK recursion EQ3 in Lotan 2006
-	//	static REAL CONST5[2*N_POLES];						// unused
-	static REAL CONST6[2*N_POLES];							//!< (2l-1)!! double factorial, for use in legendre recursion
-	
-	static REAL CONST1[2*N_POLES][2*N_POLES], CONST2[2*N_POLES][2*N_POLES], 
-	CONST3[2*N_POLES][2*N_POLES], CONST5[2*N_POLES],
-	CONST6[2*N_POLES];
+	static REAL CONST3[2*N_POLES][2*N_POLES];		//!< sqrt((n-m)!/(n+m)!) in EQ1, Lotan 2006					
+	static REAL CONST5[2*N_POLES];					// (2n+1)*(2n+3) 
+	static REAL CONST6[2*N_POLES];					//!< (2l-1)!! double factorial, for use in legendre recursion
 };	// end class CSHExpan : virtual public CExpan
 
-/*#########################################################*/
-/*#########################################################*/
-////////////////////////////////////////////////
-//    CRExpan
-///////////////////////////////////////////////
-/*#########################################################*/
-/*#########################################################*/
 
+////////////////////////
+//! CRExpan class
+/*!	This class is the radial expansion abstract base class 
+ ( adding the radial component of the expansion to the spherical harmonics ) */
 class CRExpan : public CSHExpan
 {
-	// Radial expansion abstract base class ( adding the radial component of the
-	// expansion to the spherical harmonics )
 public:
+	//! CRExpan initConstants function
+	/*!	This function is used to initialize kappa. Calls initConstants
+	 for SHExpan as well
+	 \param kappa a floating point of the inverse debye length */
 	static void initConstants( REAL kappa );
 	
 	const CRExpan & operator=( const CRExpan & M );
 	
 	// compute the derivative expansion with respect to rho.
 	virtual CExpan dMdr(  ) const = 0;
+
+	//! CRExpan init function
+	/*!	This function is used to initialize k*r and creates 
+	 a bessel function too.  */
 	virtual void init(  )
 	{  m_val = ( m_bKappa ? m_rho * KAPPA : 0.0 ); bessel(); }
 	
-	static REAL KAPPA;
+	static REAL KAPPA;								//!< A floating point of the inverse debye length
 	
 protected:
 	// Construct a radial expansion for a single charge 
@@ -434,43 +427,51 @@ protected:
 	
 	void applyRadialComponent(  );
 	
-	// Compute the appropriate bessel functions
+	//! CRExpan bessel function
+	/*!	This function is used to create a bessel function.  */
 	virtual void bessel(  )
 	{  m_bessel.resize( m_range.p2( )+1, 1.0); }
 	virtual void incBessel(  )
 	{  m_bessel.resize( m_range.p2( )+1, 1.0); }
 	
-	static REAL CONST4[2*N_POLES];
-	vector<REAL> m_bessel;
-	bool m_bKappa;
-	REAL m_rho, m_val, m_r, m_k;
+	static REAL CONST4[2*N_POLES];		//!< 1.0/((2*n-1)*(2*n-3)), Used for besselK recursion EQ3 in Lotan 2006
+	vector<REAL> m_bessel;				//!< A vector of bessel functions for 0 to NPOLES
+	bool m_bKappa;						//!< A boolean of whether or not to include charge screening
+	REAL m_rho;							//!< The radial component of spherical coordinates
+	REAL m_val;							//!< A double of the product of kappa and of rho
+	REAL m_r;							//!< A double of the ratio of m_rho/rad_ki for MPE, of rad_ki/m_rho for Local
+	REAL m_k;							//!< A double of exp(-kappa*rho)/m_rho for Local
 };	// end class CRExpan : public CSHExpan
 
-/*#########################################################*/
-/*#########################################################*/
-////////////////////////////////////////////////
-//    CMExpan
-///////////////////////////////////////////////
-/*#########################################################*/
-/*#########################################################*/
 
+////////////////////////
+//! CMExpan class
+/*!	This class is the multipole expansion for a single charge  */
 class CMExpan : public CRExpan, public CMulExpan
 {
-	// Multipole expansion for a single charge
 public:
-	// Construct the multipole expansion of a single charge
+	//! CMExpan class constructor
+	/*!	Construct the multipole expansion of a single charge . Calls init and
+	 applyRadialComponent
+	 \param ch a floating point of the charge to create an MPE for
+	 \param spos a spherical coordinate position of the point charge
+	 \param bkappa a boolean of whether or not there is charge screening
+	 \param p an int of the number of poles in the expansion
+	 \param scale a scaling factor for the MPE */
 	CMExpan( REAL ch,  const CSpPnt & spos, bool bKappa, int p,
 					double scale = 1.0 ) : 
-	CExpan( p, 1.0/scale ), CRExpan(ch, spos, bKappa, p)
+			CExpan( p, 1.0/scale ), CRExpan(ch, spos, bKappa, p)
 	{ init(  ); applyRadialComponent();}
-	CMExpan( const CMExpan & M ) : 
-	CRExpan(static_cast<const CRExpan&>(M)) {}
+
+	CMExpan( const CMExpan & M ) :
+			CRExpan(static_cast<const CRExpan&>(M)) {}
 	
+	//! CMExpan init function
+	/*!	Initialize the multipole expansion of a single charge. */
 	virtual void init(  );
+
 	const CMExpan & operator=( const CMExpan & M )
 	{ 
-		// static_cast<CRExpan&>( *this ) 
-		// 			= static_cast<const CRExpan&>(M);
 		static_cast<CMExpan&>( *this ) = static_cast<const CMExpan&>(M);
 		return *this;
 	}
@@ -811,6 +812,172 @@ operator-( const CExpan & M1, const CExpan & M2 )
 	return S;
 }	// end operator-
 
+#ifdef __SSE
+/*#########################################################*/
+/*#########################################################*/
+// Compute the inner product of two
+// expansions but ignore the scaling
+// assume operation is performed on a unit sphere
+/*#########################################################*/
+/*#########################################################*/
+
+inline REAL
+inprod_unitScale( const CExpan & E1,  const CExpan & E2 )
+{
+	CRange R = CRange::intersection( E1.getRange( ), E2.getRange() );
+	
+	vector<REAL> ev1 = E1.getVector(  );
+	vector<REAL> ev2 = E2.getVector(  );
+	
+	REAL sum( 0.0 );
+	
+	__m128d e1, e2;
+	__m128d acc = _mm_setzero_pd(  );
+	double temp[2];
+	
+	for ( int n = R.p1( ); n < R.p2(); n++)
+	{
+		int idxn = CExpan::IDX[n];
+		for ( int mm = 1; mm < 2*n; mm+=2 )
+		{
+			e1 = _mm_loadu_pd(  &(ev1[idxn+mm] )  );
+			e2 = _mm_loadu_pd(  &(ev2[idxn+mm] )  );
+			acc = _mm_add_pd( acc, _mm_mul_pd(e1, e2 ));
+		}
+	}
+	
+	_mm_storeu_pd( temp, acc );
+	sum = 2.0* ( temp[0] + temp[1] );  // accounts for negative m
+	
+	for ( int n = R.p1( ); n < R.p2(); n++)
+	{
+		sum += E1( n,0 )*E2(n,0); // m=0 case
+	}
+	return sum;
+}	// end inprod_unitScale
+
+#else
+/*#########################################################*/
+/*#########################################################*/
+/*#########################################################*/
+/*#########################################################*/
+inline REAL
+inprod_unitScale( const CExpan & E1,  const CExpan & E2 )
+{
+	CRange R = CRange::intersection( E1.getRange( ), E2.getRange() );
+	REAL sum( 0.0 );
+	
+	for ( int n = R.p1( ); n < R.p2(); n++)
+	{
+		REAL s = 0.0;
+		for ( int mm = 1; mm < 2*n+1; mm++ ) s += E1(n,mm)*E2(n,mm);
+		
+		s *= 2.0; // accounts for negative m
+		s += E1( n,0 )*E2(n,0); // m=0 case
+		sum += s;
+	}
+	
+	return sum;
+}	// end inprod_unitScale
+
+#endif //endif-SSE
+
+/*#########################################################*/
+/*#########################################################*/
+// corrected version of computeDev
+/*#########################################################*/
+/*#########################################################*/
+
+inline REAL
+CExpan::computeDev( const CExpan & M1, const CExpan & M2 )
+{
+	assert( M1.getRange( ) == M2.getRange());
+	assert( IsScaleEqual(M1,M2 ));
+	
+	REAL sum = 0;
+	Complex tM1,tM2;
+	
+	int m_p = M1.getRange(  ).p2();
+	
+	for ( int n = 0; n < m_p; n++ )
+	{
+		for ( int m = 0; m <= n; m++ )
+		{
+			REAL s;
+			tM1 = M1.comp( n,m );
+			tM2 = M2.comp( n,m );
+			
+			if ( fabs(tM1.real( )) < PREC_LIMIT &&
+				fabs( tM1.imag( )) < PREC_LIMIT)
+			{
+				if ( fabs(tM2.real( )) < PREC_LIMIT &&
+					fabs( tM2.imag( )) < PREC_LIMIT)
+				{
+					continue;
+				}
+				else
+				{
+					s = 1.0;
+				}
+			}
+			else
+			{
+				if ( fabs(tM2.real( )) < PREC_LIMIT &&
+					fabs( tM2.imag( )) < PREC_LIMIT)
+				{
+					s = 1.0;
+				}
+				else
+				{
+					Complex diff = ( tM1 - tM2 );
+					REAL top = diff.real(  )*diff.real() +  diff.imag()*diff.imag();
+					REAL bot = tM1.real(  )*tM1.real() +  tM1.imag()*tM1.imag()
+					+ tM2.real(  )*tM2.real() +  tM2.imag()*tM2.imag();
+					
+					if( m!=0 ) s = 2* top / bot; // for m!=0
+					//  to account for m<0 conjugates
+					else s = top / bot;
+				}
+			}
+			sum += s;
+		}	// end m
+	}	// end n
+	
+	return sum;
+}	// end computeDev
+
+/*#########################################################*/
+/*#########################################################*/
+/*#########################################################*/
+/*#########################################################*/
+
+inline void
+CExpan::copy( const CExpan & M, const int p )
+{
+	assert( p <= M.m_range.p2( ));
+	m_M.assign( M.m_M.begin( ), M.m_M.begin()+IDX[p]);
+	m_range = CRange( 0,p,true ); // allows p up to 2NPOLES-1
+	m_scale = M.m_scale;
+}	// end copy
+
+/*#########################################################*/
+/*#########################################################*/
+/*#########################################################*/
+/*#########################################################*/
+
+inline void
+CExpan::copy_p( const CExpan & M, const int p )
+{
+	assert(  p <= M.m_range.p2( ) &&
+		   ( p == m_range.p2( ) || p == (m_range.p2()+1) ));
+	m_M.resize( IDX[p-1] );
+	m_M.insert( m_M.end( ), M.m_M.begin()+IDX[p-1], M.m_M.begin()+IDX[p]);
+	m_range = CRange( 0,p, true ); // allows p up to 2NPOLES-1
+	m_scale = M.m_scale;
+}	// end copy_p
+
+
+
 /*#########################################################*/
 /*#########################################################*/
 // Compute the inner product of a local 
@@ -842,10 +1009,7 @@ inprod( const CMulExpan & M,  const CLocalExpan & L )
 	{
 		REAL s = 0.0;
 		for ( int mm = 1; mm < 2*n+1; mm++ )
-		{
-			s += M( n,mm )*L(n,mm);
-			//	cout<<n<<" "<<mm<<" "<<M( n,mm )<<" "<<L(n,mm)<<endl;
-		}
+		{s += M( n,mm )*L(n,mm);}
 		s *= 2.0; // accounts for negative m
 		s += M( n,0 )*L(n,0); // m=0 case
 		
@@ -855,75 +1019,7 @@ inprod( const CMulExpan & M,  const CLocalExpan & L )
 	return sum;
 }	// end inprod
 
-#ifdef __SSE
-/*#########################################################*/
-/*#########################################################*/
-// Compute the inner product of two 
-// expansions but ignore the scaling
-// assume operation is performed on a unit sphere
-/*#########################################################*/
-/*#########################################################*/
 
-inline REAL 
-inprod_unitScale( const CExpan & E1,  const CExpan & E2 )
-{
-	CRange R = CRange::intersection( E1.getRange( ), E2.getRange() );
-	
-	vector<REAL> ev1 = E1.getVector(  );
-	vector<REAL> ev2 = E2.getVector(  );
-	
-	REAL sum( 0.0 );
-	
-	__m128d e1, e2;
-	__m128d acc = _mm_setzero_pd(  );
-	double temp[2];
-	
-	for ( int n = R.p1( ); n < R.p2(); n++)
-	{
-		int idxn = CExpan::IDX[n];
-		for ( int mm = 1; mm < 2*n; mm+=2 ) 
-		{
-			e1 = _mm_loadu_pd(  &(ev1[idxn+mm] )  );
-			e2 = _mm_loadu_pd(  &(ev2[idxn+mm] )  );
-			acc = _mm_add_pd( acc, _mm_mul_pd(e1, e2 ));  
-		}
-	}
-	
-	_mm_storeu_pd( temp, acc );
-	sum = 2.0* ( temp[0] + temp[1] );  // accounts for negative m
-	
-	for ( int n = R.p1( ); n < R.p2(); n++)
-	{
-		sum += E1( n,0 )*E2(n,0); // m=0 case
-	}
-	return sum;
-}	// end inprod_unitScale
-
-#else
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-inline REAL 
-inprod_unitScale( const CExpan & E1,  const CExpan & E2 )
-{
-	CRange R = CRange::intersection( E1.getRange( ), E2.getRange() );
-	REAL sum( 0.0 );
-	
-	for ( int n = R.p1( ); n < R.p2(); n++)
-	{
-		REAL s = 0.0;
-		for ( int mm = 1; mm < 2*n+1; mm++ ) s += E1(n,mm)*E2(n,mm);
-		
-		s *= 2.0; // accounts for negative m
-		s += E1( n,0 )*E2(n,0); // m=0 case
-		sum += s;
-	}
-	
-	return sum;
-}	// end inprod_unitScale
-
-#endif //endif-SSE
 
 /*#########################################################*/
 /*#########################################################*/
@@ -938,11 +1034,6 @@ operator*( const CExpan & M1,  const CExpan & M2 )
 	CRange R = CRange::intersection( M1.getRange( ), M2.getRange() );
 	REAL sum( 0.0 );
 	REAL fact = 1/( M1.getScale( ) * M2.getScale());
-	/*
-	 if( fabs(fact-1.0 ) > 1e-5) 
-	 cout <<"fact "<< fact <<" "<<M.getScale(  )<<" "<< L.getScale()<<endl; 
-	 assert( fabs(fact-1.0 )< 1e-5 ); 
-	 */
 	
 	REAL scale( 1.0 );
 	for ( int n = 0; n < R.p1( ); n++)
@@ -951,9 +1042,9 @@ operator*( const CExpan & M1,  const CExpan & M2 )
 	for ( int n = R.p1( ); n < R.p2(); n++)
 	{
 		REAL s = 0.0;
-		for ( int mm = 1; mm < 2*n+1; mm++ ){
+		for ( int mm = 1; mm < 2*n+1; mm++ )
+		{
 			s += M1( n,mm )*M2(n,mm);
-			//	cout<<n<<" "<<mm<<" "<<M( n,mm )<<" "<<L(n,mm)<<endl;
 		}
 		s *= 2.0; // accounts for negative m
 		s += M1( n,0 )*M2(n,0); // m=0 case
@@ -962,111 +1053,6 @@ operator*( const CExpan & M1,  const CExpan & M2 )
 	}
 	return sum;
 }	// end operator*
-
-/*#########################################################*/
-/*#########################################################*/
-// corrected version of computeDev
-/*#########################################################*/
-/*#########################################################*/
-
-inline REAL
-CExpan::computeDev( const CExpan & M1, const CExpan & M2 )
-{
-	assert( M1.getRange( ) == M2.getRange());
-	assert( IsScaleEqual(M1,M2 )); 
-	
-	REAL sum = 0;
-	Complex tM1,tM2;
-	
-	int m_p = M1.getRange(  ).p2();
-	
-	for ( int n = 0; n < m_p; n++ )
-	{
-		for ( int m = 0; m <= n; m++ )
-		{
-			REAL s;
-			
-			tM1 = M1.comp( n,m );
-			tM2 = M2.comp( n,m );
-			
-			if ( fabs(tM1.real( )) < PREC_LIMIT && 
-					fabs( tM1.imag( )) < PREC_LIMIT)
-			{	  
-				if ( fabs(tM2.real( )) < PREC_LIMIT && 
-						fabs( tM2.imag( )) < PREC_LIMIT)  
-				{
-					//cout <<"computedev1 "<<n<<" "<<m<<" "
-					//			<<tM1<<" "<<tM2<<endl;
-					continue;
-				}
-				else  
-				{
-					s = 1.0;
-					//cout <<"computedev2 "<<n<<" "<<m<<" "
-					//			<<tM1<<" "<<tM2<<endl;
-				}
-			}
-			else 
-			{
-				if ( fabs(tM2.real( )) < PREC_LIMIT && 
-						fabs( tM2.imag( )) < PREC_LIMIT)  
-				{
-					s = 1.0;
-					//cout <<"computedev3 "<<n<<" "<<m<<" "
-					//			<<tM1<<" "<<tM2<<endl;
-				}
-				else
-				{
-					//cout <<"computedev4 "<<n<<" "<<m<<" "
-					// 			<<tM1<<" "<<tM2<<endl;
-					Complex diff = ( tM1 - tM2 );
-					REAL top = diff.real(  )*diff.real() +  diff.imag()*diff.imag();
-					REAL bot = tM1.real(  )*tM1.real() +  tM1.imag()*tM1.imag() 
-					+ tM2.real(  )*tM2.real() +  tM2.imag()*tM2.imag();
-					
-					if( m!=0 ) s = 2* top / bot; // for m!=0 
-					//  to account for m<0 conjugates
-					else s = top / bot;
-					//cout <<"computedev4 "<<n<<" "<<m<<" "i
-					//			<<tM1<<" "<<tM2<<" "<<s<<endl;
-				}
-			}
-			sum += s;
-		}	// end m
-	}	// end n
-	
-	return sum;
-}	// end computeDev
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
-inline void 
-CExpan::copy( const CExpan & M, const int p )
-{
-	assert( p <= M.m_range.p2( ));
-	m_M.assign( M.m_M.begin( ), M.m_M.begin()+IDX[p]);
-	m_range = CRange( 0,p,true ); // allows p up to 2NPOLES-1
-	m_scale = M.m_scale;
-}	// end copy
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
-inline void 
-CExpan::copy_p( const CExpan & M, const int p )
-{
-	assert(  p <= M.m_range.p2( ) && 
-				 ( p == m_range.p2( ) || p == (m_range.p2()+1) ));
-	m_M.resize( IDX[p-1] );
-	m_M.insert( m_M.end( ), M.m_M.begin()+IDX[p-1], M.m_M.begin()+IDX[p]);
-	m_range = CRange( 0,p, true ); // allows p up to 2NPOLES-1
-	m_scale = M.m_scale;
-}	// end copy_p
 
 /*#########################################################*/
 /*#########################################################*/
@@ -1079,82 +1065,3 @@ bool IsScaleEqual( const CExpan & M1, const CExpan & M2 )
 //{ return (  M1.getScale( ) == M2.getScale() );}
 
 #endif
-
-/*#########################################################*/
-/*#########################################################*/
-// Commented out in old code!
-/*#########################################################*/
-/*#########################################################*/
-
-/*
- // Compute the inner product of a local and a multipole expansion
- inline REAL 
- inprod( const CMulExpan & M,  const CLocalExpan & L )
- {
- CRange R = CRange::intersection( M.getRange( ), L.getRange() );
- REAL sum( 0.0 );
- 
- // The appropriate scale is the product of the two scales
- REAL fact = 1/( M.getScale( ) * L.getScale());
- if( fabs(fact-1.0 ) > 1e-5) 
- cout <<"fact "<< fact <<" "<<M.getScale(  )<<" "<< L.getScale()<<endl; 
- assert( fabs(fact-1.0 )< 1e-5 ); // fact should be 1.0
- 
- //cout <<"inprod: Scale_m = "<<M.getScale(  ) <<" Scale_l"  <<L.getScale()<<endl;
- REAL scale( 1.0 );
- for ( int n = 0; n < R.p1( ); n++)
- scale *= fact;
- 
- for ( int n = R.p1( ); n < R.p2(); n++)
- {
- REAL s = 0.0;
- for ( int mm = 0; mm < 2*n+1; mm++ ){
- s += M( n,mm )*L(n,mm);
- //	cout<<n<<" "<<mm<<" "<<M( n,mm )<<" "<<L(n,mm)<<endl;
- }
- sum += scale * s;
- scale *= fact; 
- }
- 
- return sum;
- }
- */
-
-/*
- // wrong version ( Itay ) of computeDev : relative dev incorrectly 
- // calculated
- 
- inline REAL
- CExpan::computeDev( const CExpan & M1, const CExpan & M2 )
- {
- REAL sum = 0;
- Complex tM1,tM2;
- assert( M1.getRange( ) == M2.getRange());
- assert( M1.getScale( ) == M2.getScale()); 
- int m_p = M1.getRange(  ).p2();
- 
- for ( int n = 0; n < m_p; n++ )
- for ( int m = 0; m <= n; m++ )
- {
- tM1 = M1.comp( n,m );
- tM2 = M2.comp( n,m );
- if ( tM1 == Complex(0.0,0.0 ) && tM2 == Complex(0.0,0.0))
- continue;
- 
- Complex a;
- if ( fabs(tM1.real( )) < PREC_LIMIT && 
- fabs( tM1.imag( )) < PREC_LIMIT)
- a = tM2;
- else if ( fabs(tM2.real( )) < PREC_LIMIT && 
- fabs( tM2.imag( )) < PREC_LIMIT)
- a = tM1;
- else
- a = 0.5*( tM1 - tM2 )/(tM1 + tM2);
- 
- sum += a.real(  )*a.real() + a.imag()*a.imag();
- }
- 
- return sum;
- }
- */
-

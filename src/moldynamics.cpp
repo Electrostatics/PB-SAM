@@ -390,14 +390,13 @@ CMolecule::IsInsideSurface( CPnt P ) const
 	}
 	
 	return (  dot( m_SP[minID]- P,  m_NP[minID]  )  > 0.0 ); 
-}	// end OutsideAllBoundaries
+}	// end OutsideAll
 
-/*#########################################################*/
-/*#########################################################*/
-// calculate maxR from dielectric spheres
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************//**
+* calculate maxR from dielectric spheres
+******************************************************************/
 double
 CMolecule::computeMaxRadius( const vector<CPnt> &cens, const vector<REAL> &radii )
 {
@@ -410,12 +409,11 @@ CMolecule::computeMaxRadius( const vector<CPnt> &cens, const vector<REAL> &radii
 	return maxR;
 }	// end computeMaxRadius
 
-/*#########################################################*/
-/*#########################################################*/
-// calculate maxR from furthestmost charge points
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************//**
+* calculate maxR from furthestmost charge points
+******************************************************************/
 void 
 CMolecule::computeMaxRadius( const vector<CPnt> &cpos )
 {

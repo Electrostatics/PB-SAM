@@ -1,19 +1,5 @@
 #include "rotcoeff.h"
 
-/*###############################################################################
- * #
- * # File: rotcoeff.cpp
- * #
- * # Date: June 2013
- * #
- * # Description:
- * #
- * # Author: Yap, Felberg
- * #
- * # Copyright ( c )
- * #
- * ################################################################################*/
-
 #define EPS_SIN_THETA ( 1e-12 )
 
 REAL CRotCoeff::m_zeta[N_POLES*2][2*N_POLES-1];
