@@ -252,8 +252,8 @@ private:
   static REAL m_eta[N_POLES*2][4*N_POLES-1];	//!< Given as b(n,m) in Lotan, 2006 (eq 1.2)
   static REAL m_Q[2*N_POLES-1][N_POLES][2];		//!< Q coefficients used in computing dR for singularities
 	
-	vector<vector<vector<Complex>>> m_R;				//!< vector of rotation coefficients
-	vector<vector<vector<Complex>>> m_dR;				//!< vector of gradient rotation coeff
+	vector<vector<vector<Complex> > > m_R;				//!< vector of rotation coefficients
+	vector<vector<vector<Complex> > > m_dR;				//!< vector of gradient rotation coeff
 	//  vector<Complex**> m_RU, m_dRU;
 	
   REAL m_sint;										//!< The sin of theta

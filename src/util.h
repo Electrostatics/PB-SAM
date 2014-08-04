@@ -3,11 +3,13 @@
 
 #include <complex>
 #include <cmath>
+#include <vector>
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
 #include <sys/time.h>
 #include <memory>
+#include "getmemory.h"
 
 using namespace std;
 
@@ -562,7 +564,7 @@ inline void
 resetPos( vector<CPnt> &pos, CPnt P )
 {
 	for( int i=0; i < pos.size( ); i++) 
-	pos[i] -= P;
+		pos[i] -= P;
 }
 
 //! read_timer function

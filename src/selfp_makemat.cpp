@@ -147,9 +147,11 @@ int main_makeImat( int argc, char ** argv )
 	double start = read_timer(  );
 	
 	// system parameters
+	cout << "Test1" << endl;
 	const double salt_conc = atof( argv[3] );
-	const double idiel = (  argc == 7 ? 4.0 :  atof(argv[5] ) );
+	const double idiel = (  argc == 5 ? 4.0 :  atof(argv[5] ) );
 	const double sdiel = 78;
+	cout << "Test2" << endl;
 	const double temp = 353;
 	const double kappa = ANGSTROM * sqrt(   (2 * salt_conc * AVOGADRO_NUM
 											 / LITRE * ELECT_CHG * ELECT_CHG )

@@ -6,9 +6,9 @@
 
 POLE=30
 THREAD=8
-EXEC=$PBSAMHOME/BD_tobeparallel/CODE_PBSAM/bin/pbsam
+EXEC=$PBSAMHOME/working_code/PBSAM_all/bin/pbsam_30
 
-MOLDIR=$PBSAMHOME/Example_1BRS
+MOLDIR=$PBSAMHOME/working_code/PBSAM_all/test/1BRS
 
 SALT_CONC=0.05
 

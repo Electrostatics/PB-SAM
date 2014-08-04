@@ -364,9 +364,9 @@ CMolecule::CMolecule( CPnt rcen, const vector<CPnt> &cens, const vector<double> 
 					 const vector<double> &chg, const vector<CPnt> &cpos, double idiel,
 					 const vector<vector<CPnt> > &SPxes,  const  vector<int> &nSPx,
 					 const vector<vector<int> >&neighs,
-					 const vector< vector<int> > &intraPolLists_near/*, const vector<CMolCell> &molcell*/  )
+					 const vector< vector<int> > &intraPolLists_near, const vector<CMolCell> &molcell  )
 : m_rot( false ), m_p(N_POLES), m_idiel(idiel),
-m_bKappa(false), m_bAggregateM(false)/*, m_molcells( molcell ) */
+m_bKappa(false), m_bAggregateM(false), m_molcells( molcell ) 
 {
 	cout <<" =============== Molecule "<<N_MOL<<"================" <<endl;
 	m_rot.reset( CQuat( ), m_p);
@@ -921,8 +921,8 @@ CMolecule::~CMolecule(  )
  ******************************************************************/
 void
 CMolecule::generateMolSPX( const vector<CPnt> &scens,const vector<double> &srad,
-						  vector<vector<CPnt>> &SPxes, vector<int> &nSPx,
-						  vector<vector<int>> &neighs )
+						  vector<vector<CPnt> > &SPxes, vector<int> &nSPx,
+						  vector<vector<int> > &neighs )
 {
 	int ncen = scens.size(  );
 	SPxes.resize( ncen );

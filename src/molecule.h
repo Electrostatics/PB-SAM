@@ -48,8 +48,8 @@ public:
 						const vector<CPnt> &POS, double idiel,
 						const vector<vector<CPnt> > &SPxes,  const  vector<int> &nSPx, 
 						const vector<vector<int> >&neigh, 
-						const vector< vector<int> > &intraPolLists_near /*, 
-						const vector<CMolCell> &molcell = vector<CMolCell>( 0 )*/);
+						const vector< vector<int> > &intraPolLists_near , 
+						const vector<CMolCell> &molcell = vector<CMolCell>( 0 ));
 	
 	CMolecule( CPnt rcen, const vector<CPnt> &cens, const vector<double> &radii, 
 						const vector<double> &CH, 
@@ -463,7 +463,7 @@ protected:
 	REAL m_moldev;														//!<
 	
 	// cells for clash check
-	//const vector<CMolCell> & m_molcells;
+	const vector<CMolCell> & m_molcells;
 	vector<CPnt> m_cellCens;
 	
 	// for docking purpose
