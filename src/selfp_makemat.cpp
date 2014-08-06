@@ -18,6 +18,8 @@ const double PERMITTIVITY_VAC = 8.854187817e-12;	//!< the permittivity in a vacu
 const double KB = 1.3806503e-23;									//!< Boltzmann's const
 const double ANGSTROM = 1e-10;										//!< Angstrom to meter conversion
 const double LITRE = 1e-3;												//!< Litres in kL
+const double TEMP = 298.15; 											//!< System temperature in kelvin
+const double SDIEL = 78;													//!< solvent dielectric constant
 
 using namespace std;                       
 
@@ -55,8 +57,8 @@ int main_selfPolarize( int argc, char ** argv )
 	//////////////// system parameters //////////////
 	const double salt_conc = atof( argv[3] );
 	const double idiel = (  argc == 7 ? 4.0 :  atof(argv[7] ) );
-	const double sdiel = 78;
-	const double temp = 298.15;
+	const double sdiel = SDIEL;
+	const double temp = TEMP;
 	const double kappa = ANGSTROM * sqrt( (2 * salt_conc * AVOGADRO_NUM 
 																			 / LITRE * ELECT_CHG * ELECT_CHG ) 
 																			 / ( sdiel* PERMITTIVITY_VAC * KB * temp ) );
@@ -114,8 +116,6 @@ int main_selfPolarize( int argc, char ** argv )
 		
 	////////////////  clean up memory    //////////////
 	for( int i=0; i<ncen; i++ ) delete [] iMats[i];
-	CSystem::deleteConstants(  );
-	
 	return 0;
 } // end main_selfPolarize
 
@@ -147,12 +147,10 @@ int main_makeImat( int argc, char ** argv )
 	double start = read_timer(  );
 	
 	// system parameters
-	cout << "Test1" << endl;
 	const double salt_conc = atof( argv[3] );
 	const double idiel = (  argc == 5 ? 4.0 :  atof(argv[5] ) );
-	const double sdiel = 78;
-	cout << "Test2" << endl;
-	const double temp = 353;
+	const double sdiel = SDIEL;
+	const double temp = TEMP;
 	const double kappa = ANGSTROM * sqrt(   (2 * salt_conc * AVOGADRO_NUM
 											 / LITRE * ELECT_CHG * ELECT_CHG )
 										 / ( sdiel* PERMITTIVITY_VAC * KB * temp  ) );

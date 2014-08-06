@@ -27,7 +27,7 @@ public:
 
 	//!  The CSystem deleteConstants function
 	/*!	The function to clear system constants  */	
-	static void deleteConstants(  );
+	//static void deleteConstants(  );
 
 	//!  The CSystem setBoxLength function
 	/*!	The function to set the boxlength as that given from in [Angstroms]  

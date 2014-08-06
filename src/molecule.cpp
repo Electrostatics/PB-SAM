@@ -35,12 +35,11 @@ int CMolecule::N_MOL = 0;												//!< Number of molecules in the system
 double CMolecule::m_total;
 int CMolecule::m_unit = 1;
 
-/*#########################################################*/
-/*#########################################################*/
-//////////////// static functions ////////////////////////////
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Initialize system constants
+ ******************************************************************/
 void
 CMolecule::initConstants( REAL kappa, REAL sdiel )
 {
@@ -75,11 +74,11 @@ CMolecule::initConstants( REAL kappa, REAL sdiel )
 	
 } // end initConstants
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Initialize mutual constants for the system molecules
+ ******************************************************************/
 void
 CMolecule::initMutualConstants( const vector<CMolecule*> & mols, REAL interRCutoff,
 							   REAL interactRCutoff, bool bGrad )
@@ -102,40 +101,25 @@ CMolecule::initMutualConstants( const vector<CMolecule*> & mols, REAL interRCuto
 	}
 } // end initMutualConstants
 
-/*#########################################################*/
-/*#########################################################*/
-// reset static variables concerning molecules in the system
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * reset static variables concerning molecules in the system
+ ******************************************************************/
 void
 CMolecule::resetMolSystem(  )
 {
-	deleteConstants(  );
-	
 	N_MOL = 0;
 	m_unit = 1;
 	m_bInfinite = false;
 	m_interRcutoff = 10;
 } 	// end resetMolSystem
 
-/*#########################################################*/
-/*#########################################################*/
-//
-/*#########################################################*/
-/*#########################################################*/
-
-void
-CMolecule::deleteConstants(  )
-{}
-
-/*#########################################################*/
-/*#########################################################*/
-// prepare a list of spheres per
-// molecule for gradient polarization
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * prepare a list of spheres per molecule for gradient polarization
+ ******************************************************************/
 void
 CMolecule::generateInterMolPolList( vector<CMolecule*> & mols )
 {
@@ -159,18 +143,15 @@ CMolecule::generateInterMolPolList( vector<CMolecule*> & mols )
 					bSphereAdded[j] = true;
 				}
 			}
-			
 		}
 	}
 } 	// end generateInterMolPolList
 
-/*#########################################################*/
-/*#########################################################*/
-// prepare a list of spheres per molecule
-// for gradient polarization
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * prepare a list of spheres per molecule for gradient polarization
+ ******************************************************************/
 void
 CMolecule::generateIntraMolPolList( vector<CMolecule*> & mols  )
 {
@@ -192,11 +173,11 @@ CMolecule::generateIntraMolPolList( vector<CMolecule*> & mols  )
 	}
 }  // end generateIntraMolPolList
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * checkGradSpheres a function to check the gradient of the spheres
+ ******************************************************************/
 bool
 CMolecule::checkGradSpheres( const vector<CMolecule*> & mols, int j, int m, int km )
 {
@@ -219,16 +200,14 @@ CMolecule::checkGradSpheres( const vector<CMolecule*> & mols, int j, int m, int 
 			if( m==i && km == ki ) return true;
 		}
 	}
-	
 	return false;
 }		// end checkGradSpheres
 
-/*#########################################################*/
-/*#########################################################*/
-//
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Write the molecules out to an PQR file
+ ******************************************************************/
 void
 CMolecule::writeMolsPQR( const char * fname, const vector<CMolecule*> & mols )
 {
@@ -276,13 +255,11 @@ CMolecule::writeMolsPQR( const char * fname, const vector<CMolecule*> & mols )
 	fout.close(  );
 } 	// end writeMolsPQR
 
-
-/*#########################################################*/
-/*#########################################################*/
-//
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Write the molecules out to an XYZR file
+ ******************************************************************/
 void
 CMolecule::writeMolsXYZR( const char * fname, const vector<CMolecule*> & mols )
 {
@@ -329,11 +306,11 @@ CMolecule::writeMolsXYZR( const char * fname, const vector<CMolecule*> & mols )
 	fout.close(  );
 } 	// end writeMolsPQR
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Save the configuration into a file, fname.
+ ******************************************************************/
 void
 CMolecule::saveConfig( const char * fname, const vector<CMolecule*> & mols )
 {
@@ -375,16 +352,13 @@ m_bKappa(false), m_bAggregateM(false), m_molcells( molcell )
 	m_rcen = rcen;
 	vector<CPnt> cens_r = cens;
 	resetPos( cens_r, rcen ); // reset centers with respect to the center of geometry
-	
 	m_chg  = chg;
 	m_cpos = cpos;
 	resetPos( m_cpos, rcen );
-	
 	m_maxR = computeMaxRadius( cens_r, radii );
 	
 	vector<int> clabel;
 	assignCharges( cens_r, radii, m_cpos, clabel );
-	
 	//create solvent-exposed expansion centers
 	m_nks = cens_r.size(  );
 	m_k.resize( m_nks );
@@ -393,10 +367,6 @@ m_bKappa(false), m_bAggregateM(false), m_molcells( molcell )
 	
 	for( int ki = 0; ki < getNKS( ); ki++ )
 		rad2[ki] = radii[ki]*radii[ki]*1.0;
-	
-	// setup cells
-	//	for( int ci=0; ci<m_molcells.size( ); ci++ )
-	//		m_cellCens.push_back(m_molcells[ci].getCen());
 	
 	int ki, tid;
 #pragma omp parallel shared( rad2 ) private(ki, tid)
@@ -430,13 +400,12 @@ m_bKappa(false), m_bAggregateM(false), m_molcells( molcell )
 	cout <<" ==========================================" <<endl;
 } // end CMolecule
 
-/*#########################################################*/
-/*#########################################################*/
-/////////////////////////////////////////////////////////////
-// for self-polarization
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * create a molecule from scratch with just sphere centers and radii
+ use for self-polarization
+ ******************************************************************/
 CMolecule::CMolecule( CPnt rcen, const vector<CPnt> &cens, const vector<double> &radii,
 					 const vector<double> &chg, const vector<CPnt> &cpos, double idiel,
 					 vector<REAL*> &iMats, REAL intraRcutoff,
@@ -460,19 +429,16 @@ m_molcells( molcell )
 	vector<CPnt> cens_r = cens;
 	resetPos( cens_r, rcen );
 	m_maxR = computeMaxRadius( cens_r, radii );
-	
 	m_chg  = chg;
 	m_cpos = cpos;
 	resetPos( m_cpos, rcen );
 	
 	vector<int> clabel;
 	assignCharges( cens_r, radii, m_cpos, clabel );
-	
 	//create solvent-exposed expansion centers
 	m_nks = cens_r.size(  );
 	m_k.resize( m_nks );
-	
-	// setup cells
+	// setup cells.  Not used
 	for( int ci=0; ci<m_molcells.size( ); ci++ )
 		m_cellCens.push_back(m_molcells[ci].getCen());
 	
@@ -484,7 +450,7 @@ m_molcells( molcell )
 		{
 			
 #ifdef __OMP
-			int tid = omp_get_thread_num(  ); // !! ALBAUGH
+			int tid = omp_get_thread_num(  ); 
 #endif
 			
 			vector<CPnt> posAssigned, allPosKi( m_cpos.size( ));
@@ -503,18 +469,14 @@ m_molcells( molcell )
 	
 	m_id = N_MOL;
 	N_MOL++;
-	
-	
 	cout <<"Molecule "<<N_MOL-1<<" constructed."<<endl;
 } 	// CMolecule selfpol
 
-/*#########################################################*/
-/*#########################################################*/
-// using pointers to imat
-// read in F, H, SPx
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * CMolecule constructor using pointers to imat, read in F, H, SPx
+ ******************************************************************/
 CMolecule::CMolecule( int moltype, CPnt rcen,
 					 const vector<CPnt> &cens, const vector<double> &radii,
 					 const vector<double> &chg, const vector<CPnt> &cpos, double idiel,
@@ -537,13 +499,11 @@ m_molcells( molcell )
 {
 	assert( iMats.size( ) == cens.size());
 	m_rot.reset( CQuat( ), m_p);
-	
 	// set geometry
 	m_rcen = rcen;
 	vector<CPnt> cens_r = cens;
 	resetPos( cens_r, rcen );
 	m_maxR = computeMaxRadius( cens_r, radii );
-	
 	m_chg  = chg;
 	m_cpos = cpos;
 	resetPos( m_cpos, rcen );
@@ -554,14 +514,12 @@ m_molcells( molcell )
 	{ m_chg_sum += chg[i]; }
 	cout << "Total charge " << endl;
 	cout << m_chg_sum << endl;
-	
 	vector<int> clabel;
 	assignCharges( cens_r, radii, m_cpos, clabel );
 	
 	//create solvent-exposed expansion centers
 	m_nks = cens_r.size(  );
 	m_k.resize( m_nks );
-	
 	// setup cells
 	for( int ci=0; ci<m_molcells.size( ); ci++ )
 		m_cellCens.push_back(m_molcells[ci].getCen());
@@ -574,7 +532,6 @@ m_molcells( molcell )
 		{
 			vector<CPnt> posAssigned, allPosKi( m_cpos.size( ));
 			vector<double> chgAssigned;
-			
 			// extract charge and positions
 			extractCharges( ki, cens_r[ki], m_cpos, m_chg,
 						   clabel, posAssigned, chgAssigned, allPosKi );
@@ -595,13 +552,12 @@ m_molcells( molcell )
 	N_MOL++;
 } 	// end CMolecule with pointers to Imat
 
-/*#########################################################*/
-/*#########################################################*/
-// Function that calls on many others during the
-// initialization of BDnafion to clean things up
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * GenerateAll: Function that calls on many others during the
+  initialization of BDnafion to clean things up
+ ******************************************************************/
 void
 CMolecule::generateAll( const vector<CPnt> &scens, const vector<double> &srad,
 					   vector<vector<CPnt> > &SPxes, vector<int> &nSPx,
@@ -682,14 +638,13 @@ CMolecule::generateMolTypeIntraPolLists( const vector<CPnt> &cens,
 	}//end-kj
 }	// end generateMolTypeIntraPolLists
 
-/*#########################################################*/
-/*#########################################################*/
-// generate a temporary molecule just to compute
-// quantities for each moltype
-// note: rcen, cens, cpos are in labframe
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * CMolecule computeMolTypeValues: generate a temporary molecule 
+ just to compute quantities for each moltype
+  note: rcen, cens, cpos are in labframe
+ ******************************************************************/
 void
 CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 								const vector<double> &radii, const vector<double> &chg,
@@ -712,13 +667,11 @@ CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 	vector<CPnt> cpos_r = cpos;
 	resetPos( cens_r, rcen );
 	resetPos( cpos_r, rcen );
-	
 	vector<int> clabel;
 	assignCharges( cens_r, radii, cpos_r, clabel );
 	
 	//create solvent-exposed expansion centers
 	int nks = cens_r.size(  );
-	
 	// create expcenters
 	vector<CSolExpCenter*> KS( nks );
 	
@@ -727,7 +680,6 @@ CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 	{
 		vector<CPnt> posAssigned, allPosKi( cpos_r.size( ));
 		vector<double> chgAssigned;
-		
 		// extract charge and positions
 		extractCharges( ki, cens_r[ki], cpos_r, chg, clabel,
 					   posAssigned, chgAssigned, allPosKi );
@@ -738,9 +690,7 @@ CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 								   &( qSolvedFself[ki][0] ), &(qSolvedHself[ki][0]),
 								   &( totalFself[ki] ), &(totalHself[ki]));
 	}
-	
 	// initialise expansions' scale and order
-	//
 	LFs_intraSelf_far.resize( nks );
 	LHs_intraSelf_far.resize( nks );
 	LFs_intraSelf.resize( nks );
@@ -757,12 +707,10 @@ CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 	
 	// perform xforms to get local expansions from self values
 	// 'xform' means re-expansion ( S. Liu )
-	
-#pragma omp parallel for // !! ALBAUGH
+#pragma omp parallel for
 	for( int ki=0; ki<nks; ki++ )
 	{
 		CLocalExpan tLF, tLH;
-		
 		CSolExpCenter* pKi = KS[ki];
 		CPnt cen_ki = pKi->getCen(  );
 		REAL ri = pKi->getRad(  );
@@ -777,23 +725,19 @@ CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 			const CSolExpCenter *pKj = KS[kj];
 			const CPnt cen_kj = pKj->getCen(  );
 			const REAL rj = pKj->getRad(  );
-			
 			// generate xform
 			const CPnt P = cen_ki - cen_kj; // use absolute, not pbc distance for intra
 			const REAL rho = P.norm(  );
 			const REAL sepdist = rho-ri-rj;
-			
 			assert( sepdist  > 5 );
 			// assume that far field will always be using CXFormA
-			int pF = N_POLES; //CXFormBase::computeOrder( rho, pKj->getTQFself( ), rj);
-			int pH = N_POLES; //CXFormBase::computeOrder( rho, pKj->getTQHself( ), rj);
+			int pF = N_POLES;
+			int pH = N_POLES;
 			
 			CXFormAIntra XA( *pKj, *pKi );
 			XA.reset( P, pH, pF );
-			
 			XA.xformF( pKj->getFself( ), tLF, true);
 			XA.xformH( pKj->getHself( ), tLH, true);
-			
 			*( LFs_intraSelf_far[ki] ) += tLF;
 			*( LHs_intraSelf_far[ki] ) += tLH;
 			
@@ -802,7 +746,6 @@ CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 		// then add contributions due to near field
 		*( LFs_intraSelf[ki] ) = *(LFs_intraSelf_far[ki]);
 		*( LHs_intraSelf[ki] ) = *(LHs_intraSelf_far[ki]);
-		
 		plist = intraPolLists_near[ki];
 		
 		for( int k=0; k<plist.size( ); k++ )
@@ -812,12 +755,10 @@ CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 			const CSolExpCenter *pKj = KS[kj];
 			const CPnt cen_kj = pKj->getCen(  );
 			const REAL rj = pKj->getRad(  );
-			
 			// generate xform
 			const CPnt P = cen_ki - cen_kj; // use absolute, not pbc distance for intra
 			const REAL rho = P.norm(  );
 			const REAL sepdist = rho-ri-rj;
-			
 			if( sepdist > 0 )
 			{
 				if(  useXFormN(sepdist )  )
@@ -830,10 +771,8 @@ CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 				{
 					int pF = N_POLES;
 					int pH = N_POLES;
-					
 					CXFormAIntra XA( *pKj, *pKi );
 					XA.reset( P, pH, pF );
-					
 					XA.xformF( pKj->getFself( ), tLF, true);
 					XA.xformH( pKj->getHself( ), tLH, true);
 				}
@@ -849,18 +788,14 @@ CMolecule::computeMolTypeValues( CPnt rcen, const vector<CPnt> &cens,
 			*( LHs_intraSelf[ki] ) += tLH;
 		} // end k
 	}// end-ki
-	// for( int ki=0; ki<nks; ki++ )         delete KS[ki]; // why seg fault? later
-	
 	return;
 }		//end computeMolTypeValues
 
-/*#########################################################*/
-/*#########################################################*/
-/////////////////////////////////////////////////////////////
-// for queries - only need H
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * CMolecule constructor for queries - only need H
+ ******************************************************************/
 CMolecule::CMolecule( CPnt rcen, const vector<CPnt> &cens, const vector<double> &radii,
 					 const vector<CMulExpan*> Hself, const vector<CMolCell> &molcell  )
 : m_rot( false ), m_p(N_POLES), m_idiel(1.0),
@@ -877,24 +812,15 @@ m_molcells( molcell )
 	m_nks = cens_r.size(  );
 	m_k.resize( m_nks );
 	
-#pragma omp parallel // !! ALBAUGH
+#pragma omp parallel 
 	{
-#pragma omp for // !! ALBAUGH
+#pragma omp for 
 		for( int ki = 0; ki < getNKS( ); ki++ )
 		{
 #ifdef __OMP
-			int tid = omp_get_thread_num(  ); // !! ALBAUGH
-			// printf( "Thread %d ki = %d\n", tid, ki );
+			int tid = omp_get_thread_num(  );
 #endif
-			
-			/* might need in future?
-			 vector<CPnt> SPx, SPdum, NPdum;
-			 vector<int> neigh;
-			 int SPExSize;
-			 findNeighbors( ki, cens_r, radii, neigh );
-			 getXFormSpherePoints( cens_r, radii, rad2, SPdum, NPdum,
-			 neigh, ki, SPx, SPExSize, NUM_POINTS_X );
-			 */
+
 			m_k[ki] = new CSolExpCenter( ki, cens_r[ki], radii[ki], Hself[ki] );
 		}
 	}//endparallel
@@ -906,6 +832,11 @@ m_molcells( molcell )
 	cout <<" ==========================================" <<endl;
 }	// end CMolecule only with H
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * CMolecule destructor
+ ******************************************************************/
 CMolecule::~CMolecule(  )
 {
 	// delete centers
@@ -947,11 +878,11 @@ CMolecule::generateMolSPX( const vector<CPnt> &scens,const vector<double> &srad,
 	}
 }	// emd generateMolSPX
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Generate the exposed charges on the molecule from FH
+ ******************************************************************/
 void
 CMolecule::generateMolExposedChargesFH( const vector<CMulExpan*> Fself,
 									   const vector<CMulExpan*> Hself,
@@ -980,11 +911,11 @@ CMolecule::generateMolExposedChargesFH( const vector<CMulExpan*> Fself,
 	}
 }	//end generateMolExposedChargesFH
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Generate cells for a system, but not working
+ ******************************************************************/
 void
 CMolecule::generateMolCells( const vector<CPnt> & scens_,const vector<double> &srad,
 							CPnt rcen, vector<CMolCell> &molcells )
@@ -1036,15 +967,6 @@ CMolecule::generateMolCells( const vector<CPnt> & scens_,const vector<double> &s
 		assert( key < molcells.size( ) ) ;
 		molcells[key].addSphere(  ki  );
 	}
-	
-	// debug
-	/*	for( int c=0; c<8; c++ )
-	 {
-	 cout <<" --- cell "<<c<<" "<<rcen + molcells[c].getCen(  )
-	 <<" "<<molcells[c].getSphereListSize()<<endl;
-	 vector<int> spherelist = molcells[c].getSphereList(  );
-	 }
-	 */
 }	//end generateMolCells
 
 
@@ -1115,7 +1037,6 @@ CMolecule::getSpherePoints( const vector<CPnt> &cens, const vector<double> &radi
 			SPE.push_back( p );
 		}
 	}
-	
 	return;
 }	// end getSpherePoints
 
@@ -1135,7 +1056,6 @@ CMolecule::getXFormSpherePoints( const vector<CPnt> &cens, const vector<double> 
 {
 	SPx.clear(  );
 	vector<CPnt> SPEx;
-	
 	int N;
 	const int minimumPoints = 200;
 	const double cutoff = 1.5;
@@ -1210,24 +1130,21 @@ CMolecule::assignCharges( const vector<CPnt> &cens, const vector<double> &radii,
 	return;
 }	// end assignCharges
 
-/*#########################################################*/
-/*#########################################################*/
-// use rotated centers ( getCenRot )
-// just generate pol-lists and update bInterXForm,
-// do not generate inter-xforms, intermap - xforms
-// will be computed on the fly
-// this function will generate inter-molecular
-// polarization list ( S. Liu )
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * use rotated centers ( getCenRot )
+ // just generate pol-lists and update bInterXForm,
+ // do not generate inter-xforms, intermap - xforms
+ // will be computed on the fly
+ // this function will generate inter-molecular
+ // polarization list ( S. Liu )
+ ******************************************************************/
 bool
 CMolecule::generateInterXFormsForPolarize_LowMemory( vector<CMolecule*> & mols )
 {
 	const int nmol = mols.size(  );
-	
 	if( nmol == 1 )   return true;
-	
 	if ( m_bInfinite )
 	{
 		cout<<"cannot handle infinite yet for multicenters : "<<endl;
@@ -1235,7 +1152,6 @@ CMolecule::generateInterXFormsForPolarize_LowMemory( vector<CMolecule*> & mols )
 	}
 	
 	int i_max = ( m_bInfinite ? m_unit : nmol );
-	
 	// clear away old pol lists if they exist
 	for( int i=0; i<nmol; i++ )
 	{
@@ -1290,8 +1206,6 @@ CMolecule::generateInterXFormsForPolarize_LowMemory( vector<CMolecule*> & mols )
 						cout <<P.norm(  )<<" "<<ri<<" "<<rj<<" "<<" "<<sepdist<<endl;
 						return false;
 					}
-					//		  assert( sepdist > 0 );
-					
 					if(   sepdist < m_interactRcutoff  )
 					{
 						// update interact list ( reexpandDTA but don't polarize )
@@ -1316,22 +1230,19 @@ CMolecule::generateInterXFormsForPolarize_LowMemory( vector<CMolecule*> & mols )
 			}//i
 		}//kj
 	}//j
-	
 	generateInterMolPolList( mols );
 	generateIntraMolPolList( mols );
-	
 	return true;
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// this function will do the first round of mutual
-// polarization, using F and H values
-// from self-polarization to calculate new F and H
-// multipole expansion coefficient ( S. Liu )
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *this function will do the first round of mutual
+  polarization, using F and H values
+  from self-polarization to calculate new F and H
+  multipole expansion coefficient ( S. Liu )
+ ******************************************************************/
 REAL
 CMolecule::recomputeFromSelfVal_LowMemory( const vector<CMolecule*> & mols, int i, int ki, bool bUpdateFarField )
 {
@@ -1362,11 +1273,12 @@ CMolecule::recomputeFromSelfVal_LowMemory( const vector<CMolecule*> & mols, int 
 	return dev;
 } // end recomputeFromSelfVal_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Solve for the self polarization with low memory, solve for surface
+ charges
+ ******************************************************************/
 REAL
 CMolecule::recompute_LowMemory( const vector<CMolecule*> & mols,
 							   int i, int ki, bool bUpdateFarField )
@@ -1391,11 +1303,12 @@ CMolecule::recompute_LowMemory( const vector<CMolecule*> & mols,
 	return dev;
 } // end recompute_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Solve for the self polarization with low memory, solve for surface
+ charges
+ ******************************************************************/
 REAL
 CMolecule::recompute_LowMemory( int ki, bool bUpdateFarField )
 {
@@ -1406,12 +1319,11 @@ CMolecule::recompute_LowMemory( int ki, bool bUpdateFarField )
 	return dev;
 }	// end recompute_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-// reexpand intra and inter centers
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * reexpand intra and inter centers
+ ******************************************************************/
 void
 CMolecule::reexpand_LowMemory( const vector<CMolecule*> & mols,
 							  int i, int ki, bool bUpdateFarField )
@@ -1432,12 +1344,22 @@ CMolecule::reexpand_LowMemory( const vector<CMolecule*> & mols,
 	}
 }	// end reexpand_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-// reexpand intra and inter centers
-/*#########################################################*/
-/*#########################################################*/
+/******************************************************************/
+/******************************************************************/
+/**
+ * reexpand intra centers
+ ******************************************************************/
+void
+CMolecule::reexpand_LowMemory( int ki, bool bUpdateFarField )
+{
+	reexpandIntra_Near_LowMemory( ki, CLocalExpan( CRange( ),m_k[ki]->getLScale()) );
+}	// end reexpand_LowMemory
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * reexpand intra and inter centers
+ ******************************************************************/
 void
 CMolecule::reexpandFromSelfVal_LowMemory( const vector<CMolecule*> & mols,
 										 int i, int ki, bool bUpdateFarField )
@@ -1451,25 +1373,12 @@ CMolecule::reexpandFromSelfVal_LowMemory( const vector<CMolecule*> & mols,
 	m_k[ki]->getLFS(  ) = m_k[ki]->getLF_intraSelf();
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// reexpand intra centers
-/*#########################################################*/
-/*#########################################################*/
-
-void
-CMolecule::reexpand_LowMemory( int ki, bool bUpdateFarField )
-{
-	reexpandIntra_Near_LowMemory( ki, CLocalExpan( CRange( ),m_k[ki]->getLScale()) );
-}	// end reexpand_LowMemory
-
-/*#########################################################*/
-/*#########################################################*/
-// reexpand m_LS ( from SELECTED external centers )
-// memory saving version - generate xform on the fly
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * reexpand m_LS ( from SELECTED external centers )
+  memory saving version - generate xform on the fly
+ ******************************************************************/
 void
 CMolecule::reexpandLSFromList_LowMemory( const vector<CMolecule*> & mols, int i, int ki )
 {
@@ -1503,12 +1412,11 @@ CMolecule::reexpandLSFromList_LowMemory( const vector<CMolecule*> & mols, int i,
 	m_rot.rotateWithXi( LSrot, pKi->getLS( ), 1, m_p, false);
 }	// end reexpandLSFromList_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-//generate LS from Hselfrot
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * generate LS from Hselfrot
+ ******************************************************************/
 void
 CMolecule::reexpandLSFromSelfVal_LowMemory( const vector<CMolecule*> & mols, int i, int ki )
 {
@@ -1562,18 +1470,14 @@ CMolecule::reexpandLSFromSelfVal_LowMemory( const vector<CMolecule*> & mols, int
 #endif
 		LSrot += tL;
 	}
-	
 	m_rot.rotateWithXi( LSrot, getKS(ki ).getLS(), 1, pKi->getOrder(), false);
-	
 } // end reexpandLSFromSelfVal_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-//debug only
-//generate LS from Hselfrot
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * debug only: generate LS from Hselfrot
+ ******************************************************************/
 void
 CMolecule::reexpandLSFromSelfVal_debug( const vector<CMolecule*> & mols,
 									   int i, int ki, int j, int kj )
@@ -1622,12 +1526,12 @@ CMolecule::reexpandLSFromSelfVal_debug( const vector<CMolecule*> & mols,
 	
 }	// end reexpandLSFromSelfVal_debug
 
-/*#########################################################*/
-/*#########################################################*/
-// reexpand LFS and LHS of near spheres using latest values
-/*#########################################################*/
-/*#########################################################*/
 
+/*/******************************************************************/
+/******************************************************************/
+/**
+ * reexpand LFS and LHS of near spheres using latest values
+ ******************************************************************/
 void
 CMolecule::reexpandIntra_Near_LowMemory( int ki, const CLocalExpan &LH0 )
 {
@@ -1641,7 +1545,6 @@ CMolecule::reexpandIntra_Near_LowMemory( int ki, const CLocalExpan &LH0 )
 	pKi->getLFS(  ).reset(  CRange(pKi->getOrder() ) );
 	pKi->getLHS(  ).reset(  CRange(pKi->getOrder() ) );
 	pKi->getLHS(  )+= LH0;
-	
 	const  vector<int> plist = pKi->getIntraPolList_near(  );
 	
 	for( int k=0; k<plist.size( ); k++ )
@@ -1651,7 +1554,6 @@ CMolecule::reexpandIntra_Near_LowMemory( int ki, const CLocalExpan &LH0 )
 		const CSolExpCenter *pKj = m_k[kj];
 		CPnt cen_kj = pKj->getCen(  );
 		REAL rj = pKj->getRad(  );
-		
 		// generate xform
 		CPnt P = cen_ki - cen_kj; // use absolute not pbc distance for intra
 		REAL rho = P.norm(  );
@@ -1661,8 +1563,7 @@ CMolecule::reexpandIntra_Near_LowMemory( int ki, const CLocalExpan &LH0 )
 		{
 			if(  useXFormN(sepdist ) )
 			{
-				// note that here is using CXFormNIntra,
-				// which will do the re-expansion
+				// note that here is using CXFormNIntra, which will do the re-expansion
 				// numerically, rather than analytically ( S. Liu )
 				CXFormNIntra::xformFH( *m_k[kj], *m_k[ki], tLF, tLH, P );
 				pKi->getLFS(  ) += tLF;
@@ -1688,17 +1589,15 @@ CMolecule::reexpandIntra_Near_LowMemory( int ki, const CLocalExpan &LH0 )
 			pKi->getLHS(  ) += tLH;
 		}
 	} // end kj
-	
 	return;
 }	// end reexpandIntra_Near_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-// Precompute the sum of the products of
-// dT( i,j )*A(i) for all molecules ( i = 0 -> N_MOL)
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Precompute the sum of the products of
+ // dT( i,j )*A(i) for all molecules ( i = 0 -> N_MOL)
+ ******************************************************************/
 void
 CMolecule::prepareDTA_LowMemory( const vector<CMolecule*> & mols,
 								int j, vector<CGradExpan> &tG )
@@ -1717,7 +1616,6 @@ CMolecule::prepareDTA_LowMemory( const vector<CMolecule*> & mols,
 	{
 		int i   = interMolPolList[k].mid(  );
 		int ki  = interMolPolList[k].kid(  );
-		
 		CSolExpCenter* pKi = mols[i]->getpKS( ki );
 		CPnt cen_ki = mols[i]->getRCen(  ) + pKi->getCenRot();
 		
@@ -1727,9 +1625,7 @@ CMolecule::prepareDTA_LowMemory( const vector<CMolecule*> & mols,
 		for( int h=0; h<plist.size( ); h++ )
 		{
 			int m  = plist[h].mid(  );
-			
 			if ( j != m )  continue; // only consider when m = j
-			
 			// generate xform
 			int km = plist[h].kid(  );
 			
@@ -1743,7 +1639,6 @@ CMolecule::prepareDTA_LowMemory( const vector<CMolecule*> & mols,
 			XA.xformH( mols[m]->getKS(km ).getHrot(), tG2, true);
 			tG[k] += tG2;
 		}// end h
-		
 	}//end k-inter
 	
 	//==========================================================
@@ -1797,23 +1692,21 @@ CMolecule::prepareDTA_LowMemory( const vector<CMolecule*> & mols,
 	return;
 }	// end prepareDTA_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-// Precompute the sum of the products of dT( i,j )*A(i)
-// for all molecules ( i = 0 -> N_MOL)
-// spheres in mol_j; i.e. i == j =>
-// del_( j,kj )T(i,ki <- m,km) = del_(i,ki)T(i,ki <- m,km)
-// 1 ) only for i=j case
-// 2 ) using selfH values
-// 3 ) include interactlist because we need it for force
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Precompute the sum of the products of dT( i,j )*A(i)
+ // for all molecules ( i = 0 -> N_MOL)
+ // spheres in mol_j; i.e. i == j =>
+ // del_( j,kj )T(i,ki <- m,km) = del_(i,ki)T(i,ki <- m,km)
+ // 1 ) only for i=j case
+ // 2 ) using selfH values
+ // 3 ) include interactlist because we need it for force
+ ******************************************************************/
 void
 CMolecule::prepareDTA_iself_LowMemory( const vector<CMolecule*> & mols, int i, int ki )
 {
 	CGradExpan tG2, tG;
-	
 	CSolExpCenter* pKi = mols[i]->getpKS( ki );
 	CPnt cen_ki = mols[i]->getRCen(  ) + pKi->getCenRot();
 	tG.reset(     pKi->getOrder( )  );
@@ -1860,14 +1753,12 @@ CMolecule::prepareDTA_iself_LowMemory( const vector<CMolecule*> & mols, int i, i
 	return;
 }	// end prepareDTA_iself_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-// debug
-// Precompute the sum of the products of
-// dT( i,j )*A(i) for all molecules ( i = 0 -> N_MOL)
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * debug: Precompute the sum of the products of
+  dT( i,j )*A(i) for all molecules ( i = 0 -> N_MOL)
+ ******************************************************************/
 void
 CMolecule::prepareDTAintra_LowMemory( const vector<CMolecule*> & mols,
 									 int j, vector<CGradExpan> &tG )
@@ -1912,13 +1803,12 @@ CMolecule::prepareDTAintra_LowMemory( const vector<CMolecule*> & mols,
 	return;
 }	// end prepareDTAintra_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-//this function will do the re-expansion of F and H's
-//gradients (S. Liu)
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * this function will do the re-expansion of F and H's
+ //gradients (S. Liu)
+ ******************************************************************/
 void
 CMolecule::reexpandGrad_LowMemory( const vector<CMolecule*> & mols,
 								  const CGradExpan &tG_DTA, CGradExpan &tG,
@@ -1929,7 +1819,6 @@ CMolecule::reexpandGrad_LowMemory( const vector<CMolecule*> & mols,
 	CSolExpCenter* pKi = mols[i]->getpKS( ki );
 	CPnt cen_ki = mols[i]->getRCen(  ) + pKi->getCenRot();
 	CGradExpan tGrot = tG_DTA;
-	
 	vector<CFullSphereID> plist;
 	CGradExpan tG2;
 	
@@ -1968,11 +1857,11 @@ CMolecule::reexpandGrad_LowMemory( const vector<CMolecule*> & mols,
 	return;
 } // end reexpandGrad_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to reexpand the intramolecular gradient
+ ******************************************************************/
 void
 CMolecule::reexpandIntraGrad_LowMemory( const vector<CMolecule*> & mols,
 									   CGradExpan &tGF, CGradExpan &tGH,
@@ -2011,7 +1900,6 @@ CMolecule::reexpandIntraGrad_LowMemory( const vector<CMolecule*> & mols,
 		assert (  checkGradSpheres(mols, j, i, km ) );
 		
 		const CSolExpCenter *pKm = m_k[km];
-		
 		// generate xform
 		CPnt cen_km = pKm->getCen(  );
 		REAL rm = pKm->getRad(  );
@@ -2047,17 +1935,15 @@ CMolecule::reexpandIntraGrad_LowMemory( const vector<CMolecule*> & mols,
 			tGH += tLGH;
 		}
 	}	// end h
-	
 	return;
 }	// end reexpandIntraGrad_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-// this function will calculate gradients of F and H
-// iteratively (S. Liu)
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * this function will calculate gradients of F and H
+  iteratively (S. Liu)
+ ******************************************************************/
 double
 CMolecule::recomputeGrad_LowMemory( const vector<CMolecule*> & mols, const CGradExpan &tG_DTA,
 								   int i, int ki, int j, bool bUpdateFarField,  vector<CGradExpan> &tGFs,
@@ -2066,12 +1952,10 @@ CMolecule::recomputeGrad_LowMemory( const vector<CMolecule*> & mols, const CGrad
 {
 	CGradExpan LGF, LGH, LGH2;
 	REAL dev;
-	
 	reexpandGrad_LowMemory( mols, tG_DTA, LGH, i, ki, j,
 						   bUpdateFarField, tGHrots, gHmap );
 	
 	if( j==i ) m_k[ki]->getgLHN() = LGH;
-	
 	reexpandIntraGrad_LowMemory( mols, LGF, LGH2, i, ki, j,
 								bUpdateFarField, tGFs, tGHs, gHmap );
 	
@@ -2083,7 +1967,6 @@ CMolecule::recomputeGrad_LowMemory( const vector<CMolecule*> & mols, const CGrad
 	assert( key < tGHrots.size( ));
 	dev   = m_k[ki]->solveSurfaceGradient( j, tGFs[key],
 										  tGHs[key], tGHrots[key], LGF, LGH );
-	
 #if __DEBUGDIE__
 	CGradExpan gh = tGHs[key];
 	if(  fabs(gh[0][0] ) >= MAXMONOPOLE || fabs(gh[1][0]) >= MAXMONOPOLE
@@ -2101,17 +1984,16 @@ CMolecule::recomputeGrad_LowMemory( const vector<CMolecule*> & mols, const CGrad
 	return dev;
 }  // end recomputeGrad_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Compute the interaction potential of centers for low memory
+ ******************************************************************/
 REAL
 CMolecule::interactCenters_LowMemory( CMolecule* moli, CMolecule* molj )
 {
 	REAL pot = 0.0;
 	int dummyP = 1;
-	
 	int i = moli->getID(  );
 	int j = molj->getID(  );
 	CPnt rcen_i = moli->getRCen(  );
@@ -2139,35 +2021,22 @@ CMolecule::interactCenters_LowMemory( CMolecule* moli, CMolecule* molj )
 			CXFormA XA( *pKj,*pKi );
 			XA.reset( P, minp );
 			bJ2I = minp < pi2j;
-			
-			//	  if(  bJ2I  ) // add to ki's local expansion if it's cheaper (transform pKj)
-			//	    {
-			// for debug purpose, S. Liu
-			// cout << "bFor is true"<<endl;
 			XA.xformH(  pKj->getH( ), tL, true);
 			Lki += tL;
-			//	    }
-			//	  else // otherwise, transform pKi
-			//	    {
-			//  cout << "bFor is false"<<endl;
-			//	      XA.xformH(  pKi->getH( ), tL, false);
-			
-			//	      pot += inprod( pKj->getH( ), tL);
-			//	    }
+	    }
 		}// end-kj
 		pot += inprod( pKi->getH( ), Lki);
 	}//end-ki
-	
 	return pot;
 }	// end interactCenters_LowMemory
 
-/*#########################################################*/
-/*#########################################################*/
-// Iteratively solve for MP of all molecules until converged
-// this function will perform self-polarization (S. Liu)
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Iteratively solve for MP of all molecules until converged
+  this function will perform self-polarization (S. Liu)
+ ******************************************************************/
 void
 CMolecule::polarize_self( bool bPot, int farFieldFreq )
 {
@@ -2176,12 +2045,11 @@ CMolecule::polarize_self( bool bPot, int farFieldFreq )
 	double  dev = 0.0;
 	int ct;
 	const int MAX_POL_ROUNDS_SELF = 1000;
-	
 	m_total = m_nks;
 	REAL itot = 1.0/m_total;
 	cout <<"m_total = "<<m_total<<endl;
 	
-	if( m_nks == 1 )
+	if( m_nks == 1 )	// if there is only one sphere, then do it w. low memory
 	{
 		dev = recompute_LowMemory( 0, true );
 		ct = 1;
@@ -2191,12 +2059,10 @@ CMolecule::polarize_self( bool bPot, int farFieldFreq )
 			ct++;
 		}
 	}
-	
 	else
 	{
 		double start = read_timer(  );
 		int NKis = getNKS(  );
-		
 		int ki, tid;
 		REAL maxdev = 0.0, maxdev_new;
 		
@@ -2204,7 +2070,6 @@ CMolecule::polarize_self( bool bPot, int farFieldFreq )
 		for( ki=0; ki < NKis; ki++ )
 		{
 			REAL dev_ki = 0;
-			
 			dev_ki = recompute_LowMemory( ki, true ); // update far field for first round
 			dev += ( getKS(ki ).getRad()*getKS(ki).getRad()) * dev_ki;
 			if( maxdev < dev_ki )
@@ -2213,7 +2078,7 @@ CMolecule::polarize_self( bool bPot, int farFieldFreq )
 		
 		ct = 1; // no. of molecule iterations
 		printf( "After 1st round : ct %d maxdev %e total dev: %e avg %e\n",
-			   ct, maxdev, dev, itot*dev );
+					 ct, maxdev, dev, itot*dev );
 		
 		while (  maxdev > MAX_POLAR_DEV_SQR && ct < MAX_POL_ROUNDS_SELF )
 		{
@@ -2231,14 +2096,12 @@ CMolecule::polarize_self( bool bPot, int farFieldFreq )
 					dev_ki = recompute_LowMemory( ki, true );
 					count ++;
 				}
-				
 				if( maxdev_new < dev_ki  ) maxdev_new = dev_ki;
 				dev += ( getKS(ki ).getRad()*getKS(ki).getRad()) * dev_ki;
 			} // endki
 			
 			printf( "%d ) count %d maxdev: %e dev: %e avg: %e\n",ct, count, maxdev_new, dev, dev*itot);
 			maxdev = maxdev_new;
-			
 			ct++;
 			
 			if ( ct == MAX_POL_ROUNDS_SELF )
@@ -2246,7 +2109,6 @@ CMolecule::polarize_self( bool bPot, int farFieldFreq )
 				cout << "Polarization does not converge!!! dev="
 				<< dev << " avg " << itot*dev<<" maxdev "<<maxdev <<" ct "<< ct << endl;
 			}
-			
 			double vm, rss;
 		}//endwhile
 		
@@ -2261,42 +2123,35 @@ CMolecule::polarize_self( bool bPot, int farFieldFreq )
 		return;
 } // end polarize_self
 
-/*#########################################################*/
-/*#########################################################*/
-// Iteratively solve for MP of all molecules until converged
-// only update farfield infrequently
-// this function will do mutual polarization (S. Liu)
-//************** BD SIMULATION PARALLELIZATION HERE *************
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Iteratively solve for MP of all molecules until converged
+  only update farfield infrequently
+  this function will do mutual polarization (S. Liu)
+ ******************************************************************/
 void
 CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFreq )
 {
-	
 	int nmol = mols.size(  );
 	const int i_max = ( m_bInfinite ? m_unit : nmol );
 	
 	//////////// ONE MOLECULE ////////////
 	if( i_max == 1  )     return;
-	
 	//////////// MULTIPLE  MOLECULES ////////////
 	double  dev = 0.0;
 	int ct, mtotal=0;
 	REAL itot;
 	vector<double> maxdevs( i_max, 0.0 );
-	
 	double start = read_timer(  );
 	
-#pragma omp parallel // !! ALBAUGH
+#pragma omp parallel 
 	{
-		
 		// if centers will be polarized: update Hrot using self polarized values
-#pragma omp for schedule( dynamic ) // !! ALBAUGH
+#pragma omp for schedule( dynamic ) 
 		for( int i = 0; i < i_max; i++ )
 		{
 			if(  ! mols[i]->getbInterXForm( ) ) continue;
-			
 			mols[i]->rotateRotCoeff(  );
 			for( int ki=0; ki < mols[i]->getNKS( ); ki++ )
 			{
@@ -2304,9 +2159,8 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 					mols[i]->getKS( ki ).rotateHself();
 			}
 		}
-		
 		// first round; use self values
-#pragma omp for reduction( +:dev ) reduction(+:mtotal) schedule(dynamic) // !! ALBAUGH
+#pragma omp for reduction( +:dev ) reduction(+:mtotal) schedule(dynamic)
 		for ( int i = 0; i < i_max; i++ )
 		{
 			REAL dmol_i = 0.0;
@@ -2324,7 +2178,6 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 				}// end if-bxform, ki loop
 			dev += dmol_i;
 		} //end i-loop
-		
 	}//endparallel
 	
 	MAXDEV = 0.0;
@@ -2336,42 +2189,30 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 	
 	ct = 1; // no. of molecule iterations
 	double e1 = read_timer(  );
-	
 	itot = ( mtotal > 0 ? 1.0/mtotal : 0 );
-	
 	while (  dev*itot > MAX_POLAR_DEV_SQR && ct < MAX_POL_ROUNDS )
 	{
-		
 		dev = 0.0;
 		maxdevs.assign( i_max, 0.0 );
 		int count=0;
-		
-#pragma omp parallel for reduction( +:dev ) schedule(dynamic) // !! ALBAUGH
+#pragma omp parallel for reduction( +:dev ) schedule(dynamic) 
 		for ( int i = 0; i < i_max; i++ )
 		{
-			REAL dmol_i = 0.0;
-			
-			
+			REAL dmol_i = 0.0;			
 			if(  mols[i]->getbInterXForm( ) )
 			{
 				for( int ki=0; ki < mols[i]->getNKS( ); ki++ )
-				{
-					
+				{					
 					if(  mols[i]->getKS(ki ).IsEmptyInterPolList() ) continue;
-					
 					REAL dev_ki = mols[i]->getKS( ki ).getDev();
-					
-					
+										
 					if( dev_ki > 0.1*MAXDEV )
 					{
 						dev_ki = mols[i]->recompute_LowMemory( mols, i, ki, false );
 						count++;
 					}// endif-dev
-					
-					
 					if( maxdevs[i] < dev_ki ) maxdevs[i]  = dev_ki;
 					dmol_i += dev_ki;
-					
 				}//end ki loop
 			}
 			dev += dmol_i;
@@ -2379,35 +2220,22 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 		
 		MAXDEV=0.0;
 		for( int i=0; i<i_max; i++ ) if (maxdevs[i] > MAXDEV) MAXDEV = maxdevs[i];
-		
-		//Incrementing  indices
-		ct ++ ;
+		ct ++ ;		//Incrementing  indices
 	} // end-while
 	
-	
 	double end = read_timer(  );
-	
-	//added by S. Liu for debug
-	//   cout << "Ready for gradient mutual polarization"<<endl;
-	
 	if ( bPot ) return;
-	
 	
 	//--------------------------------------------------------------------
 	// Solving for gradient ( dH_j )
 	double startg = read_timer(  );
 	
-#pragma omp parallel for schedule( dynamic ) // !! ALBAUGH
+#pragma omp parallel for schedule( dynamic )
 	for ( int j = 0; j < i_max; j++ )
 	{
-		
-		//for debug ( S. Liu )
-		//       cout << "molecule index"<<j<<endl;
 		double startj = read_timer(  );
-		
 		vector<CFullSphereID> interMolPolList = mols[j]->getInterMolPolList(  );
 		int j_intersize = interMolPolList.size(  );
-		
 		// if molecule j has no inter polarization neighbors,
 		// compute DTA for j's spheres that have interaction neighbor
 		if(  j_intersize == 0 )
@@ -2421,22 +2249,17 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 				}
 			}
 		}
-		
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		// start polarizing grad if there are ext. spheres nearby
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		else
 		{
-			//for debug ( S. Liu )
-			//      cout<< "there are ext"<<endl;
-			
 			vector<int> intraMolPolList = mols[j]->getIntraMolPolList(  );
 			int j_intrasize = intraMolPolList.size(  );
 			int j_size = j_intersize + j_intrasize;
 			vector<REAL> d( j_size );
 			itot =1.0/double( j_size );
-			
-			//      prepare DTA[i,ki] = sum_m,km(  del_j(T_ki,km ) * H_km )
+
 #ifdef __NOGRADPOL__
 			vector<CGradExpan> tGe;
 			prepareDTAintra_LowMemory( mols, j, tGe ); // debug!
@@ -2445,13 +2268,9 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 			prepareDTA_LowMemory( mols, j, tG );
 #endif
 			// polarize inter and intra( j ) spheres wrt molecule j
-			
 			//===============================================
 			vector<CGradExpan> tGHs(  j_size  ), tGFs( j_size ), tGHrots( j_size );
 			map<CFullSphereID, int, classCompareCFullSphereID> gHmap;
-			
-			//for debug ( S. Liu )
-			//      cout<< "polarize inter and intra"<<endl;
 			int k = 0;
 			// reset gradients that will be used
 			for ( k=0; k < j_intersize; k++ ) // inter
@@ -2470,10 +2289,7 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 				
 				gHmap[CFullSphereID( i,ki )] = k;
 			}	// end k
-			
-			
-			//for debug ( S. Liu )
-			//      cout<< "point 1"<<endl;
+
 			for ( int h=0; h < j_intrasize; h++,k++ ) // intra
 			{
 				const int kj  = intraMolPolList[h];
@@ -2487,10 +2303,7 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 				tGHrots[k].setScale(  mscale  );
 				gHmap[CFullSphereID( j,kj )] = k;
 			}	// end h
-			
-			//for debug ( S. Liu )
-			//      cout<< "point 2"<<endl;
-			
+
 			REAL dev = 0.0;
 			
 #ifndef __NOGRADPOL__
@@ -2506,7 +2319,6 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 			for ( int h=0; h < j_intrasize; h++, k++ ) // intra
 			{
 				int kj  = intraMolPolList[h];
-				
 #ifdef __NOGRADPOL__
 				mols[j]->getKS( kj ).getgLHN() = tGe[h];// debug bypass grad polarization
 #else
@@ -2515,34 +2327,24 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 				dev += d[k];
 #endif
 			}	// end h
-			
-			
-			//      printf( "%d ) dev: %e avg: %e\n",ct,  dev, dev*itot);
-			
+
 #ifndef __NOGRADPOL__
 			ct = 1;
 			k = 0;
 			int i   = interMolPolList[k].mid(  );
 			int ki  = interMolPolList[k].kid(  );
-			//for debug ( S. Liu )
-			//      cout<< "point 3"<<endl;
-			
-			
+
 			while ( dev*itot > MAX_POLAR_DEV_SQR && ct < MAX_POL_ROUNDS )
 			{
-				//for debug ( S. Liu )
-				//      cout<< "ct ="<<ct<<endl;
 				dev -= d[k];
 				d[k] = mols[i]->recomputeGrad_LowMemory( mols, tG[k], i, ki, j,
 														false,tGFs, tGHs, tGHrots, gHmap );
 				dev += d[k];
-				
 				//Incrementing indices
 				k++;
 				if( k==j_size )
 				{
 					k = 0;
-					//      printf( "%d ) dev: %e avg: %e\n",ct,  dev, dev*itot);
 					ct++;
 				}
 				if( k < j_intersize ) // read from intermollist
@@ -2556,11 +2358,7 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 					ki  = intraMolPolList[k-j_intersize];
 				}
 			}//end while
-			
-			
-			// double endj = read_timer(  );
-			//      cout <<"Time taken to polarize grad"<<j<<" "<<endj-startj<<endl;
-			
+
 			// save a copy of gH for mol j's spheres ( to be used in force/torque )
 			for ( int h=0; h < j_intrasize; h++, k++ ) // intra
 			{
@@ -2570,7 +2368,6 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 				mols[j]->getKS( kj ).getGH() = tGHs[key];
 			}
 #endif
-			
 			// compute gLHN for mol j's spheres with interactlist but not polarized
 			vector<int> intraMolInteractionList = mols[j]->getIntraMolInteractOnlyList(  );
 			for( int h=0; h < intraMolInteractionList.size( ); h++ )
@@ -2580,15 +2377,7 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 			}
 		}// endif-inter=0
 	}//end-delj
-	
-	
-	/* //~~~~~~~~~~~~~~ expensive step!!! ignore if not used for torque ~~~~~~~~~~~~~~~~
-	 // ~~~~~~~~~~~~~~~~~~compute sphere's gradient wrt own molecule on grid points ~~~~
-	 for ( int i = 0; i < i_max; i++ )
-	 for( int ki=0; ki < mols[i]->getNKS( ); ki++ )
-	 mols[i]->getpKS( ki )->computeExposedSurfaceGradientH(i);
-	 */
-	
+
 #if __DEBUGDIE__
 	// debug
 	double max = 100;
@@ -2597,10 +2386,8 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 		for ( int ki=0; ki<mols[i]->getNKS( ); ki++ )
 		{
 			CSolExpCenter KS=mols[i]->getKS( ki );
-			
 			CGradExpan gLHN = KS.getgLHN(  );
 			bool bLS = false, bgLHN=false;
-			
 			if( !mols[i]->getKS(ki ).IsEmptyInterPolList() )
 			{
 				CLocalExpan LS = KS.getLS(  );
@@ -2617,7 +2404,6 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 					cout <<"gLHN > max"<<endl; bgLHN = true;
 				}
 			}
-			
 			if( bLS || bgLHN )
 			{
 				CMolecule::writeMolsPQR( "died.L.pqr", mols );
@@ -2626,9 +2412,7 @@ CMolecule::polarize_mutual( vector<CMolecule*> & mols, bool bPot, int farFieldFr
 		}
 	}
 #endif
-	
 	double endg = read_timer(  );
-	
 	return;
 }	// end polarize_mutual
 
@@ -2705,11 +2489,11 @@ CMolecule::extractCharges( int ki, CPnt cenKi, const vector<CPnt> &cpos,
 		allPosKi[i] = cpos[i] - cenKi;
 }	// end extractCharges
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Write out multipole expansions to file
+ ******************************************************************/
 void
 CMolecule::writeMolExpansions( char* runname ) const
 {

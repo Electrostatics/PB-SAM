@@ -83,8 +83,9 @@ public:
 			\param fname a character string of a contact file 
 			\param mol1type an ID of the first molecule for contact
 			\param molcontact a vector of molecular contacts for the first molecule */		
-	static void readMolContactWithDist( const char* fname, int &mol1type, 
-																		 vector<CMolContact> &molcontact  );
+//	static void readMolContactWithDist( const char* fname, int &mol1type,
+//																		 vector<CMolContact> &molcontact  );
+
 	//!  The CMolContact IsDocked function
 	/*! The function that determines whether or not two molecules have docked
 			\param mol1 a CMolecule for the first mol that may be in contact

@@ -38,12 +38,12 @@ CSystem::initConstants( double kappa, double sdiel, double temp,
 /******************************************************************//**
 *  deletes any static array on heap
 ******************************************************************/
-void 
-CSystem::deleteConstants(  )
-{
-	CMolecule::deleteConstants(  );
+//void
+//CSystem::deleteConstants(  )
+//{
+//	CMolecule::deleteConstants(  );
 	return;
-}	// end deleteConstants
+//}	// end deleteConstants
 
 /******************************************************************/
 /******************************************************************//**

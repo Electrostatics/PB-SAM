@@ -49,15 +49,14 @@ public:
 	virtual void xformH( const CMulExpan & Min, CLocalExpan & Mout, bool bFor ) {};
 	virtual void xformH( const CExpan & Min, CGradExpan & Gout, bool bFor ) {};
 	virtual void xformH( const CTriExpan & Gin, CTriExpan & Gout, bool bFor ) {};
-	
 	virtual int getOrder(  ) const {};
 	
 protected:
 	CPnt m_P;
 };
 
-//!  The CMolecule class
-/*!	The class that contains all details for a molecule object  */
+//!  The CXFormA class
+/*!	The class that contains all details for an abstract object  */
 class CXFormA : public CXFormBase
 {
 public:
@@ -71,10 +70,8 @@ public:
 	virtual void xformH( const CMulExpan & Min, CLocalExpan & Mout, bool bFor );
 	virtual void xformH( const CExpan & Min, CGradExpan & Gout, bool bFor );
 	virtual void xformH( const CTriExpan & Gin, CTriExpan & Gout, bool bFor );
-	
 	virtual int getOrder(  ) const { return m_pH; }
 	virtual void decOrderH(  ) {};
-
 	
 protected:
 	CRotCoeff m_rot;
@@ -84,13 +81,11 @@ protected:
 private:
 	void sphToCart( CGradExpan & Gin );
 	const CMulExpan *m_pM1, *m_pM2;
-	
 	CPnt m_R[3];
-	
 };
 
-//!  The CMolecule class
-/*!	The class that contains all details for a molecule object  */
+//!  The CXFormAIntra class
+/*!	The class that contains all details for an intramolecular abstract object  */
 class CXFormAIntra : public CXFormA
 {
 public: 
@@ -111,8 +106,8 @@ private:
 	int m_pF;
 };
 
-//!  The CMolecule class
-/*!	The class that contains all details for a molecule object  */
+//!  The CXFormN class
+/*!	The class that contains all details for a numerical transform object  */
 class CXFormN : public CXFormBase
 {
 public:
@@ -141,8 +136,8 @@ protected:
 	bool m_resetI, m_resetJ;
 };
 
-//!  The CMolecule class
-/*!	The class that contains all details for a molecule object  */
+//!  The CXFormNIntra class
+/*!	The class that contains all details for a intramolecular numerical transform object  */
 class CXFormNIntra : public CXFormN
 {
 public:
@@ -158,7 +153,6 @@ public:
 	static void xformGFH( const CSolExpCenter &source, const CSolExpCenter &target, 
 											 CTriExpan & LGFout, CTriExpan & LGHout, CPnt P );
 	
-	
 	void xformF( const CMulExpan & Min, CLocalExpan & Mout, bool bFor );
 	virtual void xformF( const CTriExpan & Gin, CTriExpan & Gout, bool bFor ) ;
 	
@@ -166,7 +160,6 @@ private:
 	const vector<double> &m_qSolvedF1, &m_qSolvedF2;
 	const vector<CPnt>  &m_gSolvedF1, &m_gSolvedF2;
 	const REAL *m_tQF1, *m_tQF2,*m_tGF1, *m_tGF2; 
-	
 };
 
 #endif

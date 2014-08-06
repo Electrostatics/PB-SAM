@@ -4,11 +4,12 @@ bool CMolecule::m_bInfinite = false;
 double CMolContactRigid::angleTolerance;
 double CMolContactRigid::maxC2CDist2 = DBL_MIN; 
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * getC2CDist2 function to obtain the center to center distance 
+ squared between two molecules
+ ******************************************************************/
 REAL
 CMolecule::getC2CDist2( const CMolecule *mol1, const CMolecule *mol2 )
 {
@@ -16,11 +17,12 @@ CMolecule::getC2CDist2( const CMolecule *mol1, const CMolecule *mol2 )
 	return ( CSystem::pbcPos(mol1->getRCen( ) - mol2->getRCen() ) ).normsq();
 } // end getC2CDist2
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * getC2CDist function to obtain the center to center distance between
+ two molecules
+ ******************************************************************/
 REAL 
 CMolecule::getC2CDist( const CMolecule *mol1, const CMolecule *mol2 )
 {
@@ -28,11 +30,12 @@ CMolecule::getC2CDist( const CMolecule *mol1, const CMolecule *mol2 )
 	return ( CSystem::pbcPos(mol1->getRCen( ) - mol2->getRCen() ) ).norm();
 } // end getC2CDist
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * getS2SCDist function to obtain the center distance between 2
+ molecules with rotations included
+ ******************************************************************/
 REAL 
 CMolecule::getS2SDist( const CMolecule *mol1, int ki, const CMolecule *mol2, int kj )
 {
@@ -41,22 +44,24 @@ CMolecule::getS2SDist( const CMolecule *mol1, int ki, const CMolecule *mol2, int
 													 - mol2->getRCen(  ) - mol2->getKS(kj).getCenRot() ).norm() );
 } // end getS2SDist
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * getSepDist function to compute the distance between two 
+ molecules
+ ******************************************************************/
 REAL 
 CMolecule::getSepDist( const CMolecule *mol1,const CMolecule *mol2 )
 {
 	return getC2CDist( mol1, mol2 ) - mol1->getMaxR() - mol2->getMaxR();
 }	// end getSepDist
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * getSepDist function to compute the distance between two
+ molecules
+ ******************************************************************/
 REAL 
 CMolecule::getSepDist( const CMolecule *mol1, int ki, const CMolecule *mol2, int kj )
 {
@@ -65,11 +70,11 @@ CMolecule::getSepDist( const CMolecule *mol1, int ki, const CMolecule *mol2, int
 	- mol2->getKS( kj ).getRad();
 } // end getSepDist
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Determine if rotating a molecule will make it collide with others
+ ******************************************************************/
 bool 
 CMolecule::willRotCollide( const vector<CMolecule*> &mols, CQuat dQ ) const
 {
@@ -77,128 +82,41 @@ CMolecule::willRotCollide( const vector<CMolecule*> &mols, CQuat dQ ) const
 	const int nmol = mols.size(  );
 	const CPnt rcen_i = getRCen(  );
 	const CQuat Q =  dQ * getOrient(  ); // Order of multiplying matters!
-	
 	vector<CPnt> testCenRot( nks );
 	
 	for( int ki=0; ki<nks; ki++ )
 		testCenRot[ki] = Q * getKS( ki ).getCen();
 	
-	//#pragma omp parallel	 !! YAP
+	for( int j=0; j<nmol; j++ )
 	{
-		for( int j=0; j<nmol; j++ )
+		if(j==m_id || getSepDist(this, mols[j]) > 0) continue;
+		
+		CPnt rcen_j = mols[j]->getRCen(  );
+		
+		for( int ki=0; ki<nks; ki++ )
 		{
-			if(j==m_id || getSepDist(this, mols[j]) > 0) continue; 
+			double ri = getKS( ki ).getRad();
+			CPnt cki = rcen_i + testCenRot[ki];
 			
-			CPnt rcen_j = mols[j]->getRCen(  ); 
-			
-			for( int ki=0; ki<nks; ki++ )
+			for( int kj=0; kj<mols[j]->getNKS( ); kj++)
 			{
-				double ri = getKS( ki ).getRad();
-				CPnt cki = rcen_i + testCenRot[ki];
-				
-				//#pragma omp for  !! YAP
-				for( int kj=0; kj<mols[j]->getNKS( ); kj++)
-				{
-					double allowedOverlap = 0.0;
-					if(  ri  + mols[j]->getKS(kj ).getRad() 
-						 - CSystem::pbcPos( cki - rcen_j 
-															 - mols[j]->getKS( kj ).getCenRot() ).norm()
-						 > allowedOverlap  )
-						return true;
-				}// end kj ( parallel )
-			}//end ki
-		}// end j
-	}//end parallel
-	
-	return false; 
+				double allowedOverlap = 0.0;
+				if(  ri  + mols[j]->getKS(kj ).getRad()
+					 - CSystem::pbcPos( cki - rcen_j
+														 - mols[j]->getKS( kj ).getCenRot() ).norm()
+					 > allowedOverlap  )
+					return true;
+			}// end kj ( parallel )
+		}//end ki
+	}// end j
+	return false;
 }	// end willRotCollide
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
-#ifdef __CELL__
-bool 
-CMolecule::willRotCollide_cell( const vector<CMolecule*> &mols, 
-															 CQuat dQ ) const
-{
-	const int nks = getNKS(  );
-	const int nmol = mols.size(  );
-	const CPnt rcen_i = getRCen(  );
-	const CQuat Q =  dQ * getOrient(  ); // Order of multiplying matters!
-	
-	const vector<CMolCell> &molcelli = getMolCells(  ); 
-	const vector<CPnt> &cellCensi = getCellCens(  ); 
-	
-	
-	vector<CPnt> testCenRot( nks );
-	vector<CPnt> testCellCenRot( molcelli.size( ) ); 
-	
-	for( int ci=0; ci<molcelli.size( ); ci++)    
-		testCellCenRot[ci] = Q * molcelli[ci].getCen();
-	for( int ki=0; ki<nks; ki++ )    testCenRot[ki] = Q * getKS(ki).getCen();
-	
-	//#pragma omp parallel		!! YAP
-	{
-		for( int j=0; j<nmol; j++ )
-		{
-			if(j==m_id || getSepDist(this, mols[j]) > 0) continue; 
-			
-			const vector<CMolCell> &molcellj = mols[j]->getMolCells(  ); 
-			const vector<CPnt> &cellCensj = mols[j]->getCellCens(  ); 
-			
-			const CPnt rcen_j = mols[j]->getRCen(  );
-			
-			for( int ci=0; ci<cellCensi.size( ); ci++)
-			{
-				CPnt p_ci = rcen_i + testCellCenRot[ci]; 
-				double rad_ci = molcelli[ci].getRad(  );
-				
-				for( int cj=0; cj<cellCensj.size( ); cj++)
-				{
-					CPnt p_cj = rcen_j + cellCensj[cj]; 
-					double rad_sum = rad_ci + molcellj[cj].getRad(  );
-					
-					if(  CSystem::pbcPos(p_ci - p_cj ).normsq() > rad_sum*rad_sum ) 
-						continue;
-					
-					// if cells overlap, then check each continuent sphere
-					vector<int> sphereListI = molcelli[ci].getSphereList(  );
-					vector<int> sphereListJ = molcellj[cj].getSphereList(  );
-					
-					for( int k=0; k<molcelli[ci].getSphereListSize( ); k++)		
-					{
-						int ki = sphereListI[k];
-						double ri = getKS( ki ).getRad();
-						CPnt cki = rcen_i + testCenRot[ki];
-						
-						for( int h=0; h<molcellj[cj].getSphereListSize( ); h++)
-						{
-							int kj =  sphereListJ[h];
-							double allowedOverlap = 0.0;
-
-							if(  ri  + mols[j]->getKS(kj ).getRad() 
-								 - CSystem::pbcPos( cki - rcen_j - 
-																	 mols[j]->getKS( kj ).getCenRot() ).norm()
-								 > allowedOverlap  )
-								return true;
-						}//end kj
-					}// end ki
-				}//end cj
-			}//end ci
-		}// end j
-	}//end parallel
-	
-	return false; 
-}	// end willRotCollide_cell
-#endif
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to determine if molecules have collided
+ ******************************************************************/
 bool 
 CMolecule::isCollided( const vector<CMolecule*> &mols ) const
 {
@@ -212,7 +130,6 @@ CMolecule::isCollided( const vector<CMolecule*> &mols ) const
 		
 		for( int ki=0; ki<nks; ki++ )
 		{
-			//#pragma omp parallel for 		//	!! YAP!
 			for( int kj=0; kj<mols[j]->getNKS( ); kj++)
 			{
 				double allowedOverlap = 0.0;
@@ -231,87 +148,12 @@ CMolecule::isCollided( const vector<CMolecule*> &mols ) const
 	return false; 
 } // end isCollided
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
-#ifdef __CELL__
-// don't use : has bug
-// for one, cell positions are not correct when restarting
-bool
-CMolecule::isCollided_cell( const vector<CMolecule*> &mols ) const
-{
-	const int nks = getNKS(  );
-	const int nmol = mols.size(  );
-	const CPnt rcen_i = getRCen(  );
-	
-	const vector<CMolCell> &molcelli = getMolCells(  ); 
-	const vector<CPnt> &cellCensi = getCellCens(  ); 
-	
-	for( int j=0; j<nmol; j++ )
-	{
-		if(j==m_id || getSepDist(this, mols[j]) > 0) continue;;	// !! ALB
-		//if( mols[j]->getID( )==m_id || getSepDist(this, mols[j]) > 0) 
-		//	continue;	// !! LISA
-		
-		const vector<CMolCell> &molcellj = mols[j]->getMolCells(  ); 
-		const vector<CPnt> &cellCensj = mols[j]->getCellCens(  ); 
-		
-		const CPnt rcen_j = mols[j]->getRCen(  );
-		
-		for( int ci=0; ci<cellCensi.size( ); ci++)
-		{
-			CPnt p_ci = rcen_i + cellCensi[ci]; 
-			double rad_ci = molcelli[ci].getRad(  );
-			
-			for( int cj=0; cj<cellCensj.size( ); cj++)
-			{
-				CPnt p_cj = rcen_j + cellCensj[cj]; 
-				double rad_sum = rad_ci + molcellj[cj].getRad(  );
-				
-				if(  CSystem::pbcPos(p_ci - p_cj ).normsq() > rad_sum*rad_sum ) continue;
-				
-				// if cells overlap, then check each continuent sphere
-				const vector<int> &sphereListI = molcelli[ci].getSphereList(  );
-				const vector<int> &sphereListJ = molcellj[cj].getSphereList(  );
-				
-				for( int k=0; k<molcelli[ci].getSphereListSize( ) ; k++)		
-				{		  
-					int ki = sphereListI[k];
-					
-					double ri = getKS( ki ).getRad();
-					CPnt cki = rcen_i + getKS( ki ).getCenRot();
-					
-					for( int h=0; h<sphereListJ.size( ); h++)
-					{
-						int kj = 	sphereListJ[h];
-						
-						double allowedOverlap = 0;
-
-						if(  ri  + mols[j]->getKS(kj ).getRad() 
-							 - CSystem::pbcPos( cki - rcen_j 
-																 - mols[j]->getKS( kj ).getCenRot() ).norm()
-							 > allowedOverlap  )
-							return true;
-					}//end kj
-				}// end ki
-			}//end cj
-		}//end ci
-	}// end j
-	
-	return false; 
-} // end isCollided_cell
-#endif
-
-/*#########################################################*/
-/*#########################################################*/
-// static function
-// finds the closest surface point SP[minID] to P
-// if dot product = negative -> antiparallel = inside
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * IsInsideSurface function: finds the closest surface point SP[minID] to P
+  if dot product = negative -> antiparallel = inside
+ ******************************************************************/
 bool 
 CMolecule::IsInsideSurface( CPnt P, const vector<CPnt> &SP, const vector<CPnt> &NP )
 {
@@ -331,11 +173,12 @@ CMolecule::IsInsideSurface( CPnt P, const vector<CPnt> &SP, const vector<CPnt> &
 	return (  dot( SP[minID]- P,  NP[minID]  )  > 0.0 ); 
 } // end IsInsideSurface
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to check whether a point is outside of the bounds of 
+ all the molecules of the system
+ ******************************************************************/
 bool
 CMolecule::OutsideAllBoundaries( const vector<CMolecule*> & mols, CPnt P )
 {
@@ -356,24 +199,15 @@ CMolecule::OutsideAllBoundaries( const vector<CMolecule*> & mols, CPnt P )
 			}
 		}
 	}
-	
-	// more stringent criteria for inside points that are not part of spheres 
-	// for( int i=0; i<mols.size( ) && bOut ; i++) 
-	// 		bOut = !( mols[i]->IsInsideSurface(CPnt P) );	
 	return bOut;
 }	// end OutsideAllBoundaries
 
-/*#########################################################*/
-/*#########################################################*/
-//member function
-/*#########################################################*/
-/*#########################################################*/
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to determine whether a point is inside the molecular 
+ surface or not
+ ******************************************************************/
 bool 
 CMolecule::IsInsideSurface( CPnt P ) const 
 {
@@ -388,7 +222,6 @@ CMolecule::IsInsideSurface( CPnt P ) const
 			minID = i;
 		}
 	}
-	
 	return (  dot( m_SP[minID]- P,  m_NP[minID]  )  > 0.0 ); 
 }	// end OutsideAll
 
@@ -425,17 +258,13 @@ CMolecule::computeMaxRadius( const vector<CPnt> &cpos )
 	}
 } // end computeMaxRadius
 
-/*#########################################################*/
-/*#########################################################*/
-/////////////////////////////////////////////////////////////
-// full xform is not available 
-// - have to generate xform for non-pol neigbors
-// //this function will compute total 
-// interaction energy ( S. Liu )
-/////////////////////////////////////////////////////////////
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * full xform is not available: - have to generate xform for 
+ non-pol neigbors. this function will compute total
+ interaction energy ( S. Liu )
+ ******************************************************************/
 REAL 
 CMolecule::computeTotalIntEnergy( const vector<CMolecule*> & mols )
 {
@@ -444,10 +273,9 @@ CMolecule::computeTotalIntEnergy( const vector<CMolecule*> & mols )
 	
 	REAL pot = 0.0;
 	int dummyP = 1;
-	
 	cout <<"COMPUTING TOTAL INTERACTION ENERGY ..."<<endl;
 	
-#pragma omp parallel for reduction( +:pot ) // !! ALBAUGH 
+#pragma omp parallel for reduction( +:pot )  
 	for ( int i = 0; i < i_max; i++ )
 	{
 		for ( int j = i+1; j < i_max; j++ )
@@ -455,55 +283,48 @@ CMolecule::computeTotalIntEnergy( const vector<CMolecule*> & mols )
 			REAL c2cdist = ( mols[i]->getRCen( ) - mols[j]->getRCen() ).norm();
 			bool bAggI = mols[i]->isAggregateM(  );
 			bool bAggJ = mols[j]->isAggregateM(  );
-			
 			cout <<"mols i: "<<i<<" j: "<<j<<"-> ";
 			
-			// Commented out by S. Liu
-			//      if(  c2cdist < mols[i]->getMaxR( ) + mols[j]->getMaxR()  
-			//      			||  !( bAggI || bAggJ )  )
-			//	{
-			cout <<"interactCenters"<<endl;
-			double deltaE = interactCenters_LowMemory( mols[i], mols[j] );
-			cout <<"this pair interaction energy is:"<<deltaE<<endl;
-			pot += interactCenters_LowMemory( mols[i], mols[j] );
-			//	}
-			// Commented out by S. Liu
-			/*      
-			 else 
-			 {	
-			 if( bAggI )
-			 {
-			 if( bAggJ )
-			 {
-			 cout <<"interactMols"<<endl;
-			 pot +=interactMols( mols[i], mols[j] );
-			 }
-			 else
-			 {
-			 cout <<"interactMolWithCenters mol "<<i<<" centers "<<j<<endl;
-			 pot += interactMolWithCenters( mols[i], mols[j] );
-			 }
-			 }	  
-			 else
-			 {
-			 cout <<"interactMolWithCenters mol "<<j<<" centers "<<i<<endl;
-			 pot += interactMolWithCenters( mols[j], mols[i] );
-			 }
-			 }
-			 */
+			if(  c2cdist < mols[i]->getMaxR( ) + mols[j]->getMaxR()
+				 ||  !( bAggI || bAggJ )  )
+			{
+				cout <<"interactCenters"<<endl;
+				double deltaE = interactCenters_LowMemory( mols[i], mols[j] );
+				cout <<"this pair interaction energy is:"<<deltaE<<endl;
+				pot += interactCenters_LowMemory( mols[i], mols[j] );
+			}
+			else
+			{
+				if( bAggI )
+				{
+					if( bAggJ )
+					{
+						cout <<"interactMols"<<endl;
+						pot +=interactMols( mols[i], mols[j] );
+					}
+					else
+					{
+						cout <<"interactMolWithCenters mol "<<i<<" centers "<<j<<endl;
+						pot += interactMolWithCenters( mols[i], mols[j] );
+					}
+				}
+				else
+				{
+					cout <<"interactMolWithCenters mol "<<j<<" centers "<<i<<endl;
+					pot += interactMolWithCenters( mols[j], mols[i] );
+				}
+			}
 		}
 	}
 	return pot;
 }	// end computeTotalIntEnergy
 
-/*#########################################################*/
-/*#########################################################*/
-// moli = as a molecule
-// molj = as centers
-// creates xforms on the fly
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * interactMolWithCenters computs the potential of moli = as a 
+ molecule, molj = as centers creates xforms on the fly
+ ******************************************************************/
 REAL 
 CMolecule::interactMolWithCenters( CMolecule* moli, CMolecule* molj )
 {
@@ -538,24 +359,21 @@ CMolecule::interactMolWithCenters( CMolecule* moli, CMolecule* molj )
 			XA.xformH(  pKj->getH( ), tL, true);
 			Li += tL;
 		}
-		
 		else // otherwise, transform moli 
 		{
 			XA.xformH(  moli->getMolM( ), tL, false);
 			pot += inprod( pKj->getH( ), tL);
 		}
 	}// end-kj
-	
 	pot += inprod( moli->getMolM( ), Li);
-	
 	return pot;
 } // end interactMolWithCenters
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute molecular interactions
+ ******************************************************************/
 REAL
 CMolecule::interactMols( CMolecule* moli, CMolecule* molj )
 {
@@ -581,14 +399,15 @@ CMolecule::interactMols( CMolecule* moli, CMolecule* molj )
 		xform.xformH(  moli->getMolM( ), tL, false); 
 		pot = inprod( molj->getMolM( ), tL);
 	}
-	
 	return pot;
 }	// end interactMols
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Compute the potential in a position in space for a single molecule
+ system
+ ******************************************************************/
 REAL
 CMolecule::computePotInSpace( CMolecule mol, CPnt P )
 {
@@ -619,10 +438,12 @@ CMolecule::computePotInSpace( CMolecule mol, CPnt P )
 	return pot;
 } // end computePotInSpace
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Compute the potential in a position in space for a many molecule
+ system
+ ******************************************************************/
 REAL
 CMolecule::computePotInSpace( const vector<CMolecule*> & mols, CPnt P )
 {
@@ -659,11 +480,11 @@ CMolecule::computePotInSpace( const vector<CMolecule*> & mols, CPnt P )
 	return pot;
 } // end computePotInSpace
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the potential
+ ******************************************************************/
 const REAL
 CMolecule::computePot(  ) const 
 {
@@ -679,13 +500,12 @@ CMolecule::computePot(  ) const
 	return pot;
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// this function will compute force and torque 
-// on a specific molecule ( S. Liu )
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * this function will compute force and torque
+  on a specific molecule ( S. Liu )
+ ******************************************************************/
 void
 CMolecule::computeMol_Force_and_Torque( CPnt &force, CPnt &torque ) const 
 {
@@ -705,47 +525,38 @@ CMolecule::computeMol_Force_and_Torque( CPnt &force, CPnt &torque ) const
 		//torque += m_k[ki]->computeTorqueOn_0( m_id ); 
 		// (2) ->HACK torque dominated by (1)
 	}
-	
 	// convert to labframe  
 	force  = conj( m_orient ) * force; 
 	torque = conj( m_orient ) * torque;
-	
 	return;
 }	// end computeMol_Force_and_Torque
 
-/*#########################################################*/
-/*#########################################################*/
-// this function will compute forces and torques 
-// for all molecules ( S. Liu )
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * this function will compute forces and torques
+  for all molecules ( S. Liu )
+ ******************************************************************/
 bool
 CMolecule::computeForces( vector<CMolecule*> & mols, 
 												 vector<CPnt> & force, vector<CPnt> & torque )
 {
 	if( mols.size( ) == 1 ) return true;
-	
 	bool bInterXFS =  CMolecule::generateInterXFormsForPolarize_LowMemory( mols );
-
 	if( ! bInterXFS  ) 
 	{
 		cout <<"error in generateInterXFormsForPolarize_LowMemory"<<endl; 
 		return false;
 	} 
-
 	CMolecule::polarize_mutual( mols,!m_bGrad, 1000 );
-	
 	//Compute forces and torques
 	int i_max = (m_bInfinite ? m_unit : N_MOL);
 	
 	force.clear(  ); force.resize(i_max);
 	torque.clear(  ); torque.resize(i_max);
-	
 	for ( int i = 0; i < i_max; i++ )   
 	{
 		mols[i]->computeMol_Force_and_Torque( force[i],torque[i] );
-		
 #if __DEBUGDIE__
 		double f = force[i].norm(  );
 		if( fabs(f ) > 5 || isnan(f) ) 
@@ -760,16 +571,16 @@ CMolecule::computeForces( vector<CMolecule*> & mols,
 	return true;
 } // end computeForces
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the multipole expansion
+ ******************************************************************/
+void
 CMolecule::computeMolMultipole(  )
 {
 	m_molM.reset( CRange(0,N_POLES ) );
 	m_molM.setScale( 1.0/m_maxR );
-	
 	m_molTQ = 0.0;
 	// currently using doing M2M numerically
 	for( int ki=0; ki < getNKS( ); ki++)
@@ -781,21 +592,19 @@ CMolecule::computeMolMultipole(  )
 		
 		for( int k=0; k<pKi->getSPExSize( ); k++)
 			m_molM += CMExpan( Q[k], CartToSph(SP[k]+cen ), m_bKappa, N_POLES, m_maxR);
-		
 		// also compute total charge for determine xform pole order
 		m_molTQ += pKi->getTQH(  );
 	}  
 	return;
 }	// end computeMolMultipole
 
-/*#########################################################*/
-/*#########################################################*/
-// to worth the effort, only aggregate if 
-// molecule has more than 2 spheres,
-// and well-separated from at least ONE other molecule
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * to worth the effort, only aggregate if
+  molecule has more than 2 spheres,
+  and well-separated from at least ONE other molecule
+ ******************************************************************/
 void 
 CMolecule::aggregateMolMultipoles_Conditional( vector<CMolecule*> & mols )
 {
@@ -813,12 +622,11 @@ CMolecule::aggregateMolMultipoles_Conditional( vector<CMolecule*> & mols )
 	}
 }	// end aggregateMolMultipoles_Conditional
 
-/*#########################################################*/
-/*#########################################################*/
-// aggregate all
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * aggregate all
+ ******************************************************************/
 void 
 CMolecule::aggregateMolMultipoles( vector<CMolecule*> & mols )
 {
@@ -831,13 +639,11 @@ CMolecule::aggregateMolMultipoles( vector<CMolecule*> & mols )
 	
 }	// end aggregateMolMultipoles
 
-/*#########################################################*/
-/*#########################################################*/
-// Compute the maximal distance between 
-// a point and a set of points
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Compute the maximal distance between a point and a set of points
+ ******************************************************************/
 REAL 
 CMolecule::maxDist( const CPnt & pnt, const vector<CPnt> & pts )
 {
@@ -852,11 +658,11 @@ CMolecule::maxDist( const CPnt & pnt, const vector<CPnt> & pts )
 	return sqrt( max );
 } 	// end maxDist
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Rotate function to rotate a molecule by the quaternion dQ
+ ******************************************************************/
 void 
 CMolecule::rotate( const CQuat & dQ )
 {
@@ -872,22 +678,22 @@ CMolecule::rotate( const CQuat & dQ )
 	
 }	// end rotate
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to rotate the rotation coefficients
+ ******************************************************************/
 void
 CMolecule::rotateRotCoeff(  )
 {
 	m_rot.reset( m_orient, m_p );
 }	// end rotateRotCoeff
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to print out the molecule configurations
+ ******************************************************************/
 void 
 CMolecule::printMolConfig( const CMolecule *mol, char* fname )
 {
@@ -901,83 +707,11 @@ CMolecule::printMolConfig( const CMolecule *mol, char* fname )
 	}
 }	// end printMolConfig
 
-/*#########################################################*/
-/*#########################################################*/
-// contacts using rigid body criterion
-/*#########################################################*/
-/*#########################################################*/
-
-void
-CMolecule::readMolContactRigid( const char* fname, int &mol1type, 
-															 vector<CMolContactRigid> &molcontactlist, double addDist )
-{
-	cout <<"Reading molcontact file "<<fname<<endl;
-	
-	// Filehandling
-	molcontactlist.clear(  );
-	ifstream fin( fname );
-	if ( !fin.is_open( ) )
-	{
-		cout << "Could not open file " << fname << endl;
-		exit( 0 );
-	}
-	
-	int mol2type, ndef;
-	fin >> mol1type; 
-	fin >> ndef;
-	
-	double rideal,rideal2;
-	double  o1Ax, o1Ay, o1Az, o2Ax, o2Ay, o2Az;// with P
-	double  o1Bx, o1By, o1Bz, o2Bx, o2By, o2Bz;// z-orient
-	
-	while ( !fin.eof( ) )
-	{
-		fin >> mol2type; // what the partner molecule should be
-		if( fin.eof( ) ) break;
-		fin >>rideal
-		>>o1Ax>>o1Ay>>o1Az
-		>>o2Ax>>o2Ay>>o2Az
-		>>o1Bx>>o1By>>o1Bz
-		>>o2Bx>>o2By>>o2Bz;
-		rideal2 = ( rideal+addDist )*(rideal+addDist);
-		
-		if(   rideal2 > CMolContactRigid::maxC2CDist2    ) 
-			CMolContactRigid::maxC2CDist2 = rideal2;
-		molcontactlist.push_back( CMolContactRigid(mol2type, rideal2, 
-																							 CPnt( o1Ax,o1Ay,o1Az ), CPnt(o1Bx,o1By,o1Bz),
-																							 CPnt( o2Ax,o2Ay,o2Az ), CPnt(o2Bx,o2By,o2Bz) ) );  
-	}
-	
-	cout <<"mol definitions read "<<molcontactlist.size(  )<<endl;
-	fin.close(  );
-}	// end readMolContactRigid
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
-void
-CMolecule::initMolContactRigid( vector<CMolecule*> &mols, 
-															 int mol1type, vector<CMolContactRigid> &molcontactlist )
-{
-	for( int i=0; i<mols.size( ); i++)
-	{
-		if( mol1type != mols[i]->getMolType( ) ) 
-		{
-			cout <<"MOLTYPE DIFFERENT!"<<mol1type <<" "
-			<<mols[i]->getMolType(  )<<endl;
-			exit( 1 );//continue;
-		}		
-		mols[i]->setMolContactList(  molcontactlist  );   
-	}
-}	// end initMolContactRigid
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to update the status of the docking
+ ******************************************************************/
 bool
 CMolecule::updateDockStatus( vector<CMolecule*> &mols, bool bDebug, int n )
 {
@@ -998,11 +732,11 @@ CMolecule::updateDockStatus( vector<CMolecule*> &mols, bool bDebug, int n )
 	return bAnyDocked;
 }	// end updateDockStatus
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to check if any molecules have docked
+ ******************************************************************/
 bool
 CMolecule::checkDocked( CMolecule* moli,  CMolecule* molj, bool bDebug  )
 {
@@ -1013,16 +747,12 @@ CMolecule::checkDocked( CMolecule* moli,  CMolecule* molj, bool bDebug  )
 		return false;
 	
 	P.normalize(  );
-	
 	for( int ii=0; ii<moli->getNDockSides( ); ii++)
 	{
 		CMolContactRigid molcon = moli->getMolContactRigid( ii );
-		
 		//-------------------------
 		// needs retool for multiple mol types
 		int jj = moli->getReciprocalSide( ii );
-		//if(  molj->getBDocked(jj ) ) continue;
-		//-------------------------
 		
 		if( c2cdist2 > molcon.getRideal2( ) ) 
 		{
@@ -1031,44 +761,36 @@ CMolecule::checkDocked( CMolecule* moli,  CMolecule* molj, bool bDebug  )
 		
 		CQuat Q1 = moli->getOrient(  );
 		CQuat Q2 = molj->getOrient(  );
-		
 		if(  dot(Q1*molcon.getVec1A( ), P)  < CMolContactRigid::angleTolerance ) 
 		{
 			continue;
 		} 
-		
 		if(  dot(Q2*molcon.getVec2A( ), P)  < CMolContactRigid::angleTolerance ) 
 		{
 			continue;
-			//return false;
 		}
-		//      cout <<" 2AP ";
 		if(  dot(Q1*molcon.getVec1B( ), Q2*molcon.getVec2B() )  
 			 < CMolContactRigid::angleTolerance  )  
 		{
 			continue;
 		} 
-		
 		moli->setBDocked( ii, true );
 		molj->setBDocked( jj, true );
-		
 		moli->addDockedNeigh( molj->getID( ) );
 		molj->addDockedNeigh( moli->getID( ) );
-		
 		if( bDebug )
 			cout <<"DOCKED: "<< moli->getID(  ) <<" "
 			<<molj->getID(  )<<" "<<" mode: "<<ii<<endl;	    
 		return true;
-	}//end-ii
-	
+	}//end-ii	
 	return false;
 }	// end checkDocked
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Debug version to check if molecules have docked
+ ******************************************************************/
 bool
 CMolecule::checkDocked_debug( CMolecule* moli,  CMolecule* molj, bool bDebug  )
 {
@@ -1076,21 +798,15 @@ CMolecule::checkDocked_debug( CMolecule* moli,  CMolecule* molj, bool bDebug  )
 	double c2cdist2 = P.normsq(  );
 	
 	if( c2cdist2 >  CMolContactRigid::maxC2CDist2  ) return false;
-	
 	P.normalize(  );
 	
 	for( int ii=0; ii<moli->getNDockSides( ); ii++)
 	{
-		CMolContactRigid molcon = moli->getMolContactRigid( ii );
-		
+		CMolContactRigid molcon = moli->getMolContactRigid( ii );		
 		//-------------------------
 		// needs retool for multiple mol types
 		int jj = moli->getReciprocalSide( ii );
-		//if(  molj->getBDocked(jj ) ) continue;
-		//-------------------------
-		
-		bool bc2cdist = c2cdist2 > molcon.getRideal2(  );    
-		
+		bool bc2cdist = c2cdist2 > molcon.getRideal2(  );    		
 		CQuat Q1 = moli->getOrient(  );
 		CQuat Q2 = molj->getOrient(  );
 		bool b1AP = dot( Q1*molcon.getVec1A( ), P) < CMolContactRigid::angleTolerance;
@@ -1106,25 +822,22 @@ CMolecule::checkDocked_debug( CMolecule* moli,  CMolecule* molj, bool bDebug  )
 		
 		moli->setBDocked( ii, true );
 		molj->setBDocked( jj, true );
-		
 		moli->addDockedNeigh( molj->getID( ) );
 		molj->addDockedNeigh( moli->getID( ) );
 		
 		if( bDebug )
 			cout <<"DOCKED: "<< moli->getID(  ) <<" "
 			<<molj->getID(  )<<" "<<" mode: "<<ii<<endl;	    
-		
 		return true;
 	}//end-ii
-	
 	return false;
 }	// end checkDocked_debug
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Update stats for docking
+ ******************************************************************/
 void 
 CMolecule::updateDockStatistics( const vector<CMolecule*> &mols, 
 																char* runname, int n, double t,
@@ -1132,9 +845,7 @@ CMolecule::updateDockStatistics( const vector<CMolecule*> &mols,
 {
 	const int nmol = mols.size(  ); 
 	const int nbin = nmol;
-	
 	char fname[MAX_CHARNUM];
-	
 	vector<bool> bCounted( nmol, false );
 	vector<int> histogram( nbin,0 ); 
 	bool bError = false;
@@ -1144,12 +855,9 @@ CMolecule::updateDockStatistics( const vector<CMolecule*> &mols,
 		int size = 0;
 		updateSpecies( mols, i, bCounted, size );
 		if( size == 0  ) continue; // already counted
-		
 		assert( size <= nbin );
-		
 		histogram[ size-1 ]++;    
 	}
-	
 	//------------------------------------------
 	// prints out molecules that have docked
 	vector<CMolecule*> dockedMols;
@@ -1168,13 +876,14 @@ CMolecule::updateDockStatistics( const vector<CMolecule*> &mols,
 	}// endif
 }	// end updateDockStatistics
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to update the information on docking species
+ ******************************************************************/
 void
-CMolecule::updateSpecies( const vector<CMolecule*> &mols, int j, vector<bool> &bCounted, int & size )
+CMolecule::updateSpecies( const vector<CMolecule*> &mols, int j,
+												 vector<bool> &bCounted, int & size )
 {
 	if( bCounted[j] ) return;
 	
@@ -1187,47 +896,9 @@ CMolecule::updateSpecies( const vector<CMolecule*> &mols, int j, vector<bool> &b
 		int m = dockedNeigh[n];
 		updateSpecies( mols, m, bCounted, size );
 	}
-	
 	return;
 }	// end updateSpecies
 
-/*#########################################################*/
-/*#########################################################*/
-//// member functions ////
-/*#########################################################*/
-/*#########################################################*/
-
-/*#########################################################*/
-/*#########################################################*/
-// reset at every timestep ( if we don't have 
-// any retaining docking forces )
-/*#########################################################*/
-/*#########################################################*/
-
-void
-CMolecule::resetDockStatus(  )
-{
-	m_dockedNeigh.clear(  );
-	m_bDocked.assign( getNDockSides( ), false);
-} // end resetDockStatus
-
-/*#########################################################*/
-/*#########################################################*/
-// Old code, commented out!
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
-/*
- void 
- CMolecule::getTestCenRot( const CMolecule *mol, CQuat dQ, vector<CPnt> &testCenRot ) 
- {
- testCenRot.resize(  mol->getNKS( ) );
- CQuat Q =  dQ * mol->getOrient(  ); // Order of multiplying matters!
- for( int ki=0; ki<mol->getNKS( ); ki++)
- testCenRot[ki] = Q * mol->getKS( ki ).getCen();
- }
- */
 
 /*#########################################################*/
 /*#########################################################*/
@@ -1237,14 +908,84 @@ CMolecule::resetDockStatus(  )
 /*#########################################################*/
 /*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * reset at every timestep ( if we don't have
+  any retaining docking forces )
+ ******************************************************************/
+void
+CMolecule::resetDockStatus(  )
+{
+	m_dockedNeigh.clear(  );
+	m_bDocked.assign( getNDockSides( ), false);
+} // end resetDockStatus
+
+
+/******************************************************************/
+/******************************************************************/
+/**
+ * read in molcontacts
+ ******************************************************************/
 /*
- // read in molcontacts
+void
+CMolecule::readMolContact( const char* fname, int &mol1type, vector<CMolContact> &molcontactlist )
+{
+	cout <<"Reading molcontact file "<<fname<<endl;
+	cout <<"Using sepdist criteria = "<<CContact::SEPDIST<<endl;
+	
+	ifstream fin( fname );
+	if ( !fin.is_open( ) )
+	{
+		cout << "Could not open file " << fname << endl;
+		exit( 0 );
+	}
+	int mol2type, ndef;
+	fin >> mol1type;
+	fin >> ndef;
+	int npair, ncontact;
+	int line = 2;
+	int tnpair=0;
+	while ( true )
+	{
+		fin >> mol2type; // what the partner molecule should be
+		if( fin.eof( ) ) break;
+		fin >> ncontact; // number of contacts for docked criteria
+		fin >> npair; // number of contact pairs
+		line += 3;
+		tnpair += npair;
+		
+		vector<CContact> clist;
+		for( int n=0; n<npair;n++ )
+		{
+			int k1,k2;
+			fin >>k1>>k2;
+			clist.push_back( CContact(k1, k2 ) );
+		}
+		if( clist.size( ) == npair)
+		{
+			line += npair;
+			molcontactlist.push_back(  CMolContact(mol2type,ncontact,clist ) );
+		}
+	}
+	cout <<"mol definitions read "<<molcontactlist.size(  )<<endl;
+	fin.close(  );
+}
+
+ /******************************************************************/
+/******************************************************************/
+/**
+ * contacts using rigid body criterion
+ ******************************************************************/
+/*
  void
- CMolecule::readMolContact( const char* fname, int &mol1type, vector<CMolContact> &molcontactlist )
+ CMolecule::readMolContactRigid( const char* fname, int &mol1type,
+ vector<CMolContactRigid> &molcontactlist, double addDist )
  {
  cout <<"Reading molcontact file "<<fname<<endl;
- cout <<"Using sepdist criteria = "<<CContact::SEPDIST<<endl;
  
+ // Filehandling
+ molcontactlist.clear(  );
  ifstream fin( fname );
  if ( !fin.is_open( ) )
  {
@@ -1253,154 +994,54 @@ CMolecule::resetDockStatus(  )
  }
  
  int mol2type, ndef;
- fin >> mol1type; 
+ fin >> mol1type;
  fin >> ndef;
- int npair, ncontact;
- int line = 2;
- int tnpair=0;
- while ( true )
- {      
- fin >> mol2type; // what the partner molecule should be
- if( fin.eof( ) ) break;
+ double rideal,rideal2;
+ double  o1Ax, o1Ay, o1Az, o2Ax, o2Ay, o2Az;// with P
+ double  o1Bx, o1By, o1Bz, o2Bx, o2By, o2Bz;// z-orient
  
- fin >> ncontact; // number of contacts for docked criteria
- fin >> npair; // number of contact pairs
- line += 3;
- tnpair += npair;
- 
- //      cout <<"def "<< molcontactlist.size(  )<<" "<<mol2type<<" "<<ncontact<<" "<<npair<<endl;
- vector<CContact> clist;
- for( int n=0; n<npair;n++ )
- {
- int k1,k2;
- 
- fin >>k1>>k2; 
- clist.push_back( CContact(k1, k2 ) );
- }
- 
- if( clist.size( ) == npair) 
- {
- line += npair;
- //  cout <<"Last pair = "<<clist.back(  ).getID1()<<" "<<clist.back().getID2()<<endl;
- molcontactlist.push_back(  CMolContact(mol2type,ncontact,clist ) );
- }
- //if( molcontactlist.size( ) == ndef) break;
- }
- 
- // assert( line ==  2+ndef*(npair+3 ) );  
- //  cout <<    line <<" "<<2+ndef*3+tnpair<<endl;
- cout <<"mol definitions read "<<molcontactlist.size(  )<<endl;
- fin.close(  );
- }
- 
- void
- CMolecule::readMolContactWithDist( const char* fname, int &mol1type, vector<CMolContact> &molcontactlist )
- {
- cout <<"Reading molcontact file "<<fname<<endl;
- 
- 
- ifstream fin( fname );
- if ( !fin.is_open( ) )
- {
- cout << "Could not open file " << fname << endl;
- exit( 0 );
- }
- 
- int mol2type, ndef;
- fin >> mol1type; 
- fin >> ndef;
- int npair, ncontact;
- int line = 2;
- int tnpair=0;
  while ( !fin.eof( ) )
- {      
+ {
  fin >> mol2type; // what the partner molecule should be
  if( fin.eof( ) ) break;
- fin >> ncontact; // number of contacts for docked criteria
- fin >> npair; // number of contact pairs
- line += 3;
- tnpair += npair;
+ fin >>rideal
+ >>o1Ax>>o1Ay>>o1Az
+ >>o2Ax>>o2Ay>>o2Az
+ >>o1Bx>>o1By>>o1Bz
+ >>o2Bx>>o2By>>o2Bz;
+ rideal2 = ( rideal+addDist )*(rideal+addDist);
  
- //      cout <<"def "<< molcontactlist.size(  )<<" "<<mol2type<<" "<<ncontact<<" "<<npair<<endl;
- vector<CContact> clist;
- for( int n=0; n<npair;n++ )
- {
- int k1,k2;
- double dist;
- fin >>k1>>k2>>dist; 
- clist.push_back( CContact(k1, k2, dist ) );
- //cout <<"CONTACT "<<k1<<" "<<k2<<" "<<dist<<endl;
+ if(   rideal2 > CMolContactRigid::maxC2CDist2    )
+ CMolContactRigid::maxC2CDist2 = rideal2;
+ molcontactlist.push_back( CMolContactRigid(mol2type, rideal2,
+ CPnt( o1Ax,o1Ay,o1Az ), CPnt(o1Bx,o1By,o1Bz),
+ CPnt( o2Ax,o2Ay,o2Az ), CPnt(o2Bx,o2By,o2Bz) ) );
  }
  
- if( clist.size( ) == npair) 
- {
- line += npair;
- //  cout <<"Last pair = "<<clist.back(  ).getID1()<<" "<<clist.back().getID2()<<endl;
- molcontactlist.push_back(  CMolContact(mol2type,ncontact,clist ) );
- }
- //if( molcontactlist.size( ) == ndef) break;
- }
- 
- // assert( line ==  2+ndef*(npair+3 ) );  
- //  cout <<    line <<" "<<2+ndef*3+tnpair<<endl;
  cout <<"mol definitions read "<<molcontactlist.size(  )<<endl;
  fin.close(  );
- }
- 
- void
- CMolecule::initMolContact( vector<CMolecule*> &mols, int mol1type, vector<CMolContact> &molcontactlist )
- {
- for( int i=0; i<mols.size( ); i++)
- {
- if( mol1type != mols[i]->getMolType( ) ) 
- {
- cout <<"MOLTYPE DIFFERENT!"<<mol1type <<" "<<mols[i]->getMolType(  )<<endl;
- exit( 1 );//continue;
- }
- 
- mols[i]->setMolContactList(  molcontactlist  );
- //mols[i]->resetDockStatus(  );    
- }
- }
+ }	// end readMolContactRigid
  */
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *
+ ******************************************************************/
+/*void
+CMolecule::initMolContactRigid( vector<CMolecule*> &mols,
+															 int mol1type, vector<CMolContactRigid> &molcontactlist )
+{
+	for( int i=0; i<mols.size( ); i++)
+	{
+		if( mol1type != mols[i]->getMolType( ) )
+		{
+			cout <<"MOLTYPE DIFFERENT!"<<mol1type <<" "
+			<<mols[i]->getMolType(  )<<endl;
+			exit( 1 );
+		}
+		mols[i]->setMolContactList(  molcontactlist  );
+	}
+}	// end initMolContactRigid
 
-/*
- void
- CMolecule::initMaxOverlap( const char* fname )
- {
- //const double dOverlap = 100.0;
- const double dOverlap = 0.0;
- 
- MAXSPHERE_OVERLAP.clear(  );
- int ki;
- double maxov;
- ifstream fin( fname );
- if( !fin )
- {
- cout <<"Error reading maxoverlap:  cannot open "<<fname<<endl;
- exit( 1 );
- }
- cout <<"Reading maxoverlap from "<<fname<<endl;
- 
- while( true )
- {
- fin >>ki>> maxov;
- if(  fin.eof( ) ) break;
- 
- #ifdef __DIFF__
- MAXSPHERE_OVERLAP.push_back( maxov + dOverlap );
- #else
- MAXSPHERE_OVERLAP.push_back( 0.0 );
- #endif
- 
- MAXSPHERE_OVERLAP.push_back( 0.0 );                                                                                                  
- 
- // cout <<ki<<" " <<maxov<<endl;
- }
- 
- cout <<"read "<<MAXSPHERE_OVERLAP.size(  )<<" overlaps"<<endl;
- 
- }
- */
-
+*/

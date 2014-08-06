@@ -50,8 +50,21 @@ public:
 						const vector<vector<int> >&neigh, 
 						const vector< vector<int> > &intraPolLists_near , 
 						const vector<CMolCell> &molcell = vector<CMolCell>( 0 ));
-	
-	CMolecule( CPnt rcen, const vector<CPnt> &cens, const vector<double> &radii, 
+	//! CMolecule constructor for Self polarization
+	/*!	This constructor is called for self polarization calculations
+	 \param rcen an XYZ coordinate for the center of geom of the molecule
+	 \param cens a vector of XYZ coordinates of CG spheres
+	 \param radii a vector of floating point radii of CG spheres
+	 \param CH a vector of floating point of point charges in the molecule
+	 \param POS a vector of coordinates for each point charge
+	 \param idiel a floating point of the dielectric of the molecule
+	 \param iMats a vector of interaction matrices for each sphere w/in the mol
+	 \param SPxes a vector of transforms for the CG spheres in the molecule
+	 \param nSPx a vector of indices for the transforms of the CG spheres
+	 \param neighs a vector of neighbor lists
+	 \param intraPolLists_near a vector of spheres that are considered close
+	 \param molcell a vector of molecule cells - by default created empty.  */
+	CMolecule( CPnt rcen, const vector<CPnt> &cens, const vector<double> &radii,
 						const vector<double> &CH, 
 						const vector<CPnt> &POS, double idiel,  vector<REAL*> &iMats, 
 						REAL intraRcutoff, 
@@ -82,15 +95,13 @@ public:
 	CMolecule( CPnt rcen, const vector<CPnt> &cens, const vector<double> &radii, 
 						const vector<CMulExpan*> Hself, 
 						const vector<CMolCell> &molcell = vector<CMolCell>( 0 ));
-	
 	~CMolecule(  );
-	
 	
 	static void initConstants( REAL kappa, REAL sdiel );
 	static void initMutualConstants( const vector<CMolecule*> & mols, 
 																	REAL interRCutoff, REAL interactRCutoff, bool bGrad );
 	static void resetMolSystem(  );
-	static void deleteConstants(  );
+	//static void deleteConstants(  );
 	
 	static void aggregateMolMultipoles( vector<CMolecule*> & mols );
 	static void aggregateMolMultipoles_Conditional( vector<CMolecule*> & mols );
@@ -176,6 +187,11 @@ public:
 																				int i, int ki, bool bUpdateFarField );
 	double recompute_LowMemory( const vector<CMolecule*> & mols, int i, 
 														 int ki, bool bUpdateFarField );
+	//!  The CMolecule recompute_LowMemory function
+	/*!	Function to Solve for the self polarization with low memory, 
+	 solve for surface charges
+	 \param ki an integer of the sphere of interest
+	 \param bUpdateFarField a boolean of whether or not to update the far field freq */
 	double recompute_LowMemory( int ki, bool bUpdateFarField );
 	
 	double recomputeGrad_LowMemory( const vector<CMolecule*> & mols, 
@@ -186,8 +202,18 @@ public:
 	
 	void reexpand_LowMemory( const vector<CMolecule*> & mols, 
 													int i, int ki, bool bUpdateFarField );
+
+	//!  The CMolecule reexpand_LowMemory function
+	/*!	Function to reexpand intra and inter centers
+	 \param ki an integer of the sphere of interest
+	 \param bUpdateFarField a boolean of whether or not to update the far field freq */
 	void reexpand_LowMemory( int ki, bool bUpdateFarField );
 	void reexpandLSFromList_LowMemory( const vector<CMolecule*>& mols, int i, int ki );
+
+	//!  The CMolecule reexpandIntra_Near_LowMemory function
+	/*!	Function to LFS and LHS of near spheres using latest values
+	 \param ki an integer of the sphere of interest
+	 \param LH0 a local expansion */
 	void reexpandIntra_Near_LowMemory( int ki, const CLocalExpan &LH0 );
 	
 	void reexpandFromSelfVal_LowMemory( const vector<CMolecule*> & mols, 
@@ -290,12 +316,8 @@ public:
 
 	static void saveConfig( const char * fname, const vector<CMolecule*> & mols );
 
-	
 	static void writeMolsPQR( const char * fname, const vector<CMolecule*> & mols );
 	static void writeMolsXYZR( const char * fname, const vector<CMolecule*> & mols );
-	
-
-
 	
 	void computeMolExposedSurfaceChargesH(  );
 	void computeMolExposedSurfaceChargesF(  );
@@ -314,7 +336,9 @@ public:
 	a designated sphere tolerance and set it to the object member maxR 
 			\param cpos a vector of XYZ coordinates of the point charges   */	
 	void computeMaxRadius( const vector<CPnt> &cpos );
-	
+	//!  The CMolecule writeMolExpansions function
+	/*!	Function to write out the multipole molecule expansions
+	 \param runname a character pointer of the system runname   */
 	void writeMolExpansions( char* runname ) const;
 	
 	void computeMol_Force_and_Torque( CPnt &force, CPnt &torque ) const ;
@@ -347,12 +371,10 @@ public:
 	bool isCollided_cell( const vector<CMolecule*> &mols ) const ;
 	
 	//docking
-	//  static void initMaxOverlap( const char* fname );
-	
-	static void initMolContactRigid( vector<CMolecule*> &mols, int mol1type, 
-																	vector<CMolContactRigid> &molcontact );
-	static void readMolContactRigid( const char* fname, int &mol1type, 
-																	vector<CMolContactRigid> &molcontact, double addDist );
+//	static void initMolContactRigid( vector<CMolecule*> &mols, int mol1type,
+//																	vector<CMolContactRigid> &molcontact );
+//	static void readMolContactRigid( const char* fname, int &mol1type,
+//																	vector<CMolContactRigid> &molcontact, double addDist );
 	
 	static bool checkDocked( CMolecule* mol1,  CMolecule* molj, bool bDebug  );
 	static bool checkDocked_debug( CMolecule* mol1,  CMolecule* molj, bool bDebug  );
@@ -363,7 +385,14 @@ public:
 	static void updateSpecies( const vector<CMolecule*> &mols, 
 														int j, vector<bool> &bCounted, int & size );
 
+	//!  The CMolecule polarize_self function
+	/*!	Function to run self polarization
+	 \param bPot a boolean for whether or not to run self polarization
+	 \param farFieldFreq an integer of the far field frequency */
 	void polarize_self( bool bPot, int farFieldFreq );
+	//!  The CMolecule polarize_self function
+	/*!	Function to run self polarization, with far field frequency of 1
+	 \param bPot a boolean for whether or not to run self polarization */
 	void polarize_self( bool bPot ) { polarize_self(bPot, 1); }
 	
 	/////////////////////////////
@@ -446,7 +475,7 @@ protected:
 	REAL m_intraRcutoff;											//!< 
 	CRotCoeff m_rot;													//!< overall rotation of molecule
 	CQuat m_orient;														//!< 
-	bool m_bKappa;														//!< 
+	bool m_bKappa;														//!<
 	bool m_bBuried;														//!< 
 	bool m_bAggregateM;												//!< 
 	bool m_bInterXForm;												//!< 
@@ -457,7 +486,7 @@ protected:
 	
 	map<CSphereIDPair, int, classCompareCSphereIDPair> m_intramap;
 	
-	vector<CSolExpCenter*> m_k;		//!< this contains information about F&H exps, LF, LHN re-expansions( S. Liu )
+	vector<CSolExpCenter*> m_k;								//!< this contains information about F&H exps, LF, LHN re-expansions( S. Liu )
 	CMulExpan m_molM;													//!<
 	REAL m_molTQ;															//!<
 	REAL m_moldev;														//!<
@@ -555,9 +584,6 @@ private:
 	static double m_total;
 	
 };	// end CMolecule
-
-
-//inline bool useXFormN( REAL sepdist ){	return ( sepdist < MINSEPDIST  );}	
 
 #endif
 

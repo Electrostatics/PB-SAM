@@ -122,15 +122,29 @@ public:
 				  double idiel, bool bKappa, const vector<double> &allchg,
 				  const vector<CPnt> &allpos,
 				  const vector<double> &chgAssigned, const vector<CPnt> &posAssigned );
-	
+	//! CSolExpCenter class constructor
+	/*!	This constructor is used for generating SELFPOL
+	 \param ki an integer of the CG sphere of interest
+	 \param cen an XYZ vector of the sphere of interest
+	 \param rad a floating point of radius the spbere of interest
+	 \param SPx a vector of the expansion points for sphere ki
+	 \param nSPx an integer of the number of expansion points for ki
+	 \param neigh a vector of integers indicating the IDs of the neighboring CG spheres
+	 \param intraPolList_near a list of the CG spheres considered near
+	 \param idiel a floating point of the interior dielectric
+	 \param bKappa a boolean of whether or not an inverse debye length is given
+	 \param allchg a vector of all floating point charges in the molecule
+	 \param allpos a vector of XYZ positions of point charges WRT to ki CG sphere
+	 \param chgAssigned	a vector of all floating point charges within sphere ki
+	 \param posAssigned	a vector of coords of all floating point charges within sphere ki 
+	 \param iMat a vector of Imatrices for setting up the self polarization  */
 	CSolExpCenter( int ki, CPnt cen, double rad,
 				  const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
 				  const vector<int> &intraPolList_near,
 				  double idiel, bool bKappa, const vector<double> &allchg,
 				  const vector<CPnt> &allpos,
 				  const vector<double> &chgAssigned, const vector<CPnt> &posAssigned,
-				  REAL* iMat );
-	
+				  REAL* iMat );	
 	//! CSolExpCenter class constructor
 	/*!	This constructor
 	 \param ki an integer of the CG sphere of interest
@@ -146,19 +160,19 @@ public:
 	 \param allpos a vector of XYZ positions of point charges WRT to ki CG sphere
 	 \param chgAssigned	a vector of all floating point charges within sphere ki
 	 \param posAssigned	a vector of coords of all floating point charges within sphere ki
-	 \param iMat
-	 \param Fself
-	 \param Hself
-	 \param LF_intraSelf
-	 \param LH_intraSelf
-	 \param LF_intraSelf_far
-	 \param LH_intraSelf_far
-	 \param qSolvedFself
-	 \param qSolvedHself
-	 \param totalFself
-	 \param totalHself
-	 \param orient
-	 \param rot
+	 \param iMat  a vector of Imatrices
+	 \param Fself an object of coefficients solved for with self polarization
+	 \param Hself an object of coefficients solved for with self polarization
+	 \param LF_intraSelf a local expansion object from self pol
+	 \param LH_intraSelf a local expansion object from self pol
+	 \param LF_intraSelf_far a local expansion object from self pol
+	 \param LH_intraSelf_far a local expansion object from self pol
+	 \param qSolvedFself a floating point of q from F
+	 \param qSolvedHself a floating point of q from H
+	 \param totalFself a floating point of the sum of F self-pol coefficients
+	 \param totalHself a floating point of the sum of H self-pol coefficients
+	 \param orient a quaternion of the expansion's orientation
+	 \param rot a RotCoeff object of the expansion's rotation coefficients
 	 \param bGrad a boolean indicating whether or not to compute the gradient */
 	CSolExpCenter( int ki, CPnt cen, double rad,
 				  const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
@@ -205,6 +219,8 @@ public:
 												vector<double> &qSolvedF, vector<double> &qSolvedH,
 												double &totalF, double &totalH, int p );
 	
+	//! CSolExpCenter solveSurfaceCharges function
+	/*!	This function is */
 	double solveSurfaceCharges(  );
 	double solveSurfaceCharges( const CMulExpan &Finit,
 							   const CMulExpan &Hinit, bool bRotateH );
@@ -368,24 +384,99 @@ private:
 	void cal_DVFixed(  );
 	void getSurfaceChargesH( const vector<CPnt> &SPx, vector<double> &qS );
 	void getSurfaceChargesF( const vector<CPnt> &SPx, vector<double> &qS );
+
+	//! CSolExpCenter revertF function
+	/*!	This function reverts the F matrix by multiplying it by (1/(2l+1))
+	 \param F a vector of F constants
+	 \param p the number of poles
+	 \param D an int for the number of dimensions */
 	void revertF( double * F, int p, int D ) const ;
+	//! CSolExpCenter revertF function
+	/*!	This function reverts the H matrix by multiplying it by (ihat_n(kr)/(2n+1))
+	 \param H a vector of H constants
+	 \param p the number of poles
+	 \param D an int for the number of dimensions */
 	void revertH( double * H, int p, int D ) const ;
 	
 	double solveFH_N( const vector<double> &LH,
 					 const vector<double>  &LF, int pm, int pn );
+	//! CSolExpCenter solveFH function
+	/*!	This function iteratively solves for F, H using D, V separately
+	 conjugation taken into account in IMAT
+	 I think this is the core function for doing mutual polarization
+	 In general, what function 'solveFH' did is to calculate F and H
+	 iteratively with given input of F, H, LF and LH.
+	 It has called function applyMM, which can be found in file 'lautil.cpp',
+	 to do matrix vector products. So the job 'solveFH' has done is to
+	 solve linear equations in 4a and 4b in 2013 JCTC paper of THG and Enghui Yap.
+	 
+	 Note that 'solveFH' is not only used for solving multiple expansion of
+	 surface charge density like F and H, but also the gradients of multiple
+	 Add a comment to this line expansions, such as equation 11a and 11b in 2013
+	 JCTC paper of THG and Enghui Yap. ( S. Liu )
+	 \param F a vector of F constants
+	 \param H a vector of H constants
+	 \param LF a vector of local f constants
+	 \param LH a vector of local H constants
+	 \param pm the number of poles 
+	 \param pn the number of poles
+	 \param D an int for the number of dimensions */
 	double solveFH( vector<double> &F, vector<double>  &H,
 				   const vector<double> &LF, const vector<double>  &LH,
 				   int pm, int pn, int D ) const;
+	//! CSolExpCenter compute_FHbase function
+	/*!	This function computes hbase and fbase to incorporate LF, LH
+	 \param LF pointer to a vector of local f constants
+	 \param LH pointer to a vector of local H constants
+	 \param fbase pointer to a vector of base local f constants
+	 \param hbase pointer to a vector of base local H constants
+	 \param pm the number of poles  */
 	void compute_FHbase( const double* LH, const double *LF, double* fbase,
 						double *hbase, int pm ) const;
+	//! CSolExpCenter compute_FHbase3 function
+	/*!	This function computes hbase and fbase to incorporate LF, LH
+	 \param LF pointer to a vector of local f constants
+	 \param LH pointer to a vector of local H constants
+	 \param fbase pointer to a vector of base local f constants
+	 \param hbase pointer to a vector of base local H constants
+	 \param pm the number of poles  */
 	void compute_FHbase3( const double* LH, const double *LF, double* fbase,
 						 double *hbase, int pm ) const;
-	void compute_fx( double *x, const double *fbase, const double *F,
+	//! CSolExpCenter compute_fx function
+	/*!	This function computes fbase to incorporate into fx
+	 \param fx pointer to a vector of f expansion constants
+	 \param fbase pointer to a vector of base local f constants
+	 \param F pointer to a vector of f constants	
+	 \param H pointer to a vector of h constants	 
+	 \param hbase pointer to a vector of base local H constants
+	 \param p the number of poles 
+	 \param D an int for the number of dimensions  */
+	void compute_fx( double *fx, const double *fbase, const double *F,
 					const double *H, int p, int D ) const;
-	void compute_hx( double *x, const double *hbase, const double *F,
+	//! CSolExpCenter compute_hx function
+	/*!	This function computes hbase to incorporate into hx
+	 \param hx pointer to a vector of h expansion constants
+	 \param hbase pointer to a vector of base local h constants
+	 \param F pointer to a vector of f constants
+	 \param H pointer to a vector of h constants
+	 \param hbase pointer to a vector of base local H constants
+	 \param p the number of poles
+	 \param D an int for the number of dimensions  */
+	void compute_hx( double *hx, const double *hbase, const double *F,
 					const double *H, int p, int D ) const;
-	
+	//! CSolExpCenter computeDev function
+	/*!	This function computes the deviation between 2 matrices
+	 \param M1 a pointer to matrix 1
+	 \param M2 a pointer to matrix 2
+	 \param p the number of poles
+	 \param D an int for the number of dimensions  */
 	static double computeDev( const double *M1, const double *M2, int p, int D );
+	//! CSolExpCenter computeDev2 function
+	/*!	This function computes the deviation between 2 matrices
+	 \param M1 a pointer to matrix 1
+	 \param M2 a pointer to matrix 2
+	 \param p the number of poles
+	 \param D an int for the number of dimensions  */
 	static double computeDev2( const double *M1, const double *M2, int p, int D );
 	
 	// utilities
@@ -398,7 +489,6 @@ private:
 	void checkSolveDifferenceDirichlet(  );
 	void checkSolveDifferenceVonNeumann(  );
 	
-
 	static double & getYY( double * YY, int n, int m, int l, int s )
 	{return YY[ IDK( l,s ) + id[n] + m];}
 	
@@ -418,8 +508,8 @@ private:
 	vector<CPnt> m_gSolvedF;
 	vector<CPnt> m_gSolvedH;
 	REAL* m_IMat;									//!< The integral matrix computed using the quadrature method in IMat
-	double m_Dfix[_PSQ_];						//!< A vector of coefficients for fixed constants
-	double m_Vfix[_PSQ_];						//!<  
+	double m_Dfix[_PSQ_];						//!< A vector of coefficients for fixed constants in EQ 14a
+	double m_Vfix[_PSQ_];						//!< A vector of coefficients for fixed constants in EQ 14b
 	REAL m_totalH;								//!< The sum of the H values 
 	REAL m_totalF;
 	REAL m_maxgH;
@@ -464,11 +554,13 @@ private:
 #endif
 };	// end class CSolExpCenter : public CExpCenter
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * ExpCenter function setOrder a function that sets the order of the
+ expansion and increases or decreases it accordingly
+ ******************************************************************/
 inline void
 CExpCenter::setOrder( const int p, const CRotCoeff &rot )
 {

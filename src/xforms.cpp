@@ -4,9 +4,10 @@
 #include "molecule.h"
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * CXFormA constructor
+ ******************************************************************/
 CXFormA::CXFormA( const CMulExpan & M1, const CMulExpan & M2, bool bGrad )  
 : m_pM1( &M1 ), m_pM2(&M2) , m_pH(1) ,  m_transH(bGrad), m_rot(bGrad)
 {
@@ -16,9 +17,10 @@ CXFormA::CXFormA( const CMulExpan & M1, const CMulExpan & M2, bool bGrad )
 }	// end CXFormA
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ *  CXFormA constructor
+ ******************************************************************/
 CXFormA::CXFormA( const CSolExpCenter & C1, const CSolExpCenter & C2, bool bGrad )  
 : m_pM1( C1.getpH( )), m_pM2(C2.getpH()), m_pH(1) , m_transH(bGrad), m_rot(bGrad)
 {
@@ -28,9 +30,10 @@ CXFormA::CXFormA( const CSolExpCenter & C1, const CSolExpCenter & C2, bool bGrad
 }	// end CXFormA
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * CXformA initialize rotation and translation coefficients
+ ******************************************************************/
 void
 CXFormA::initConstants(  )
 {
@@ -38,14 +41,10 @@ CXFormA::initConstants(  )
 	CTransCoeff::initConstants(  );
 }	// initConstants
 
-/*#########################################################*/
-/*#########################################################*/
-// Initialize to a MtoL transform by the vector P.
-/*#########################################################*/
-/*#########################################################*/
 /******************************************************************/
-/******************************************************************//**
-
+/******************************************************************/
+/**
+ *  Initialize to a MtoL transform by the vector P.
 ******************************************************************/
 void 
 CXFormA::reset( const CPnt & P, int p )
@@ -71,23 +70,18 @@ CXFormA::reset( const CPnt & P, int p )
 	else 
 	{
 		REAL irst = ir/sint, irct = ir*cost;
-		
 		m_R[0] = CPnt( sint*cosp, irct*cosp, -irst*sinp );
 		m_R[1] = CPnt( sint*sinp, irct*sinp, irst*cosp );
 		m_R[2] = CPnt( cost, -ir*sint, 0.0 );
 	}
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// Compute the derivatives of the transformed MP coeffs
-// (  d_T(i,j ).A(j) )  
-/*#########################################################*/
-/*#########################################################*/
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Compute the derivatives of the transformed MP coeffs
+  (  d_T(i,j ).A(j) )
+ ******************************************************************/
 void 
 CXFormA::xformH( const CExpan & Min, CGradExpan & Gout, bool bFor )
 {
@@ -120,15 +114,11 @@ CXFormA::xformH( const CExpan & Min, CGradExpan & Gout, bool bFor )
 	sphToCart( Gout );
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// Transform the MP coeffs
-/*#########################################################*/
-/*#########################################################*/
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Transform the MP coeffs
+ ******************************************************************/
 void 
 CXFormA::xformH( const CMulExpan & Min, CLocalExpan & Mout, bool bFor )
 {
@@ -142,15 +132,11 @@ CXFormA::xformH( const CMulExpan & Min, CLocalExpan & Mout, bool bFor )
 	m_rot.rotate( tL, Mout,  1, m_pH, false );
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// Transform the MP coeff triplet ( for T.d_A )
-// Why use TriExpan and not CGradExpan? 
-/*#########################################################*/
-/*#########################################################*/
 /******************************************************************/
-/******************************************************************//**
-
+/******************************************************************/
+/**
+ *  Transform the MP coeff triplet ( for T.d_A )
+  Why use TriExpan and not CGradExpan?
 ******************************************************************/
 void 
 CXFormA::xformH( const CTriExpan & Gin, CTriExpan & Gout, bool bFor )
@@ -170,15 +156,11 @@ CXFormA::xformH( const CTriExpan & Gin, CTriExpan & Gout, bool bFor )
 	Gout[2] = CExpan( tL[2].getVector( ), tL[0].getRange(), tL[0].getScale()); 
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// Transform spherical to cartesian coords
-/*#########################################################*/
-/*#########################################################*/
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Transform spherical to cartesian coords
+ ******************************************************************/
 void
 CXFormA::sphToCart( CGradExpan & G )
 {
@@ -210,9 +192,10 @@ CXFormA::sphToCart( CGradExpan & G )
 }
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * XFormAIntra constructor
+ ******************************************************************/
 CXFormAIntra::CXFormAIntra( const CSolExpCenter & C1, const CSolExpCenter & C2 )  
 : CXFormA( C1, C2 ), m_transF(false)
 {
@@ -222,9 +205,10 @@ CXFormAIntra::CXFormAIntra( const CSolExpCenter & C1, const CSolExpCenter & C2 )
 }
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * XFormAIntra reset function.  Function to reset number of poles
+ ******************************************************************/
 void
 CXFormAIntra::reset( const CPnt & P, int pH, int pF )
 {
@@ -242,16 +226,12 @@ CXFormAIntra::reset( const CPnt & P, int pH, int pF )
 	m_transF.reset( S.rho( ), 0.0, pF);
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// Transform the MP coeff triplet ( for T.d_A )
-// Why use TriExpan and not CGradExpan? 
-/*#########################################################*/
-/*#########################################################*/
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Transform the MP coeff triplet ( for T.d_A )
+  Why use TriExpan and not CGradExpan?
+ ******************************************************************/
 void 
 CXFormAIntra::xformF( const CTriExpan & Gin, CTriExpan & Gout, bool bFor )
 {
@@ -271,10 +251,10 @@ CXFormAIntra::xformF( const CTriExpan & Gin, CTriExpan & Gout, bool bFor )
 }
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
-// Transform the MP coeffs with kappa = 0
+/******************************************************************/
+/**
+ * Transform the MP coeffs with kappa = 0
+ ******************************************************************/
 void 
 CXFormAIntra::xformF( const CMulExpan & Min, CLocalExpan & Mout, bool bFor )
 {
@@ -291,10 +271,10 @@ CXFormAIntra::xformF( const CMulExpan & Min, CLocalExpan & Mout, bool bFor )
 /////////////////////////////////////////////////////////////////
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
-// Constructors
+/******************************************************************/
+/**
+ * CXFormN : Numerical Transforms constructor
+ ******************************************************************/
 CXFormN::CXFormN( const CSolExpCenter &C1, const CSolExpCenter &C2 )
 : m_reset( false ), m_qSolvedH1(C1.getQSolvedH()),  m_qSolvedH2(C2.getQSolvedH()), 
 m_gSolvedH1( C1.getGSolvedH( )), m_gSolvedH2(C2.getGSolvedH())
@@ -321,15 +301,11 @@ m_gSolvedH1( C1.getGSolvedH( )), m_gSolvedH2(C2.getGSolvedH())
 	m_d2.resize( m_SPExSize1  );
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// Functions
-/*#########################################################*/
-/*#########################################################*/
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Reset numerical transform positions and poles
+ ******************************************************************/
 void
 CXFormN::reset( const CPnt & P, int p )
 {
@@ -337,20 +313,15 @@ CXFormN::reset( const CPnt & P, int p )
 	m_P = P;
 	m_resetI = false;
 	m_resetJ = false;
-	
 	return;
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// get qsolvedExposed directly from CSolExpcenter
-// Note : Min is not used - we get qsolvedH directly
-/*#########################################################*/
-/*#########################################################*/
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Compute the transform of H, get qsolvedExposed directly from CSolExpcenter
+  Note : Min is not used - we get qsolvedH directly
+ ******************************************************************/
 void 
 CXFormN::xformH( const CMulExpan & Min, CLocalExpan & Lout, bool bFor )
 {
@@ -383,15 +354,11 @@ CXFormN::xformH( const CMulExpan & Min, CLocalExpan & Lout, bool bFor )
 	return;
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// Note : Gin is not used - we get gsolvedH directly
-/*#########################################################*/
-/*#########################################################*/
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Note : Gin is not used - we get gsolvedH directly
+ ******************************************************************/
 void 
 CXFormN::xformH( const CTriExpan & Gin, CTriExpan & Gout, bool bFor )
 {
@@ -426,9 +393,10 @@ CXFormN::xformH( const CTriExpan & Gin, CTriExpan & Gout, bool bFor )
 }
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Compute the number of poles for the transform
+ ******************************************************************/
 int 
 CXFormBase::computeOrder( REAL rho, REAL sourceTQ, REAL sourceScale )
 {
@@ -440,14 +408,14 @@ CXFormBase::computeOrder( REAL rho, REAL sourceTQ, REAL sourceScale )
 	
 	if( p < 1  ) p = 1;
 	if( p > N_POLES  ) p = N_POLES;
-	
 	return p;
 }
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * CXFormNIntra constructor
+ ******************************************************************/
 CXFormNIntra::CXFormNIntra( const CSolExpCenter &C1, const CSolExpCenter &C2 )
 : CXFormN( C1, C2 ),   m_qSolvedF1( C1.getQSolvedF()), m_qSolvedF2(C2.getQSolvedF()),
 m_gSolvedF1( C1.getGSolvedF( )),m_gSolvedF2(C2.getGSolvedF())
@@ -460,10 +428,10 @@ m_gSolvedF1( C1.getGSolvedF( )),m_gSolvedF2(C2.getGSolvedF())
 }
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
-//Min not used
+/******************************************************************/
+/**
+ * Compute the transform of F
+ ******************************************************************/
 void 
 CXFormNIntra::xformF( const CMulExpan & Min, CLocalExpan & Lout, bool bFor ) 
 {
@@ -481,7 +449,6 @@ CXFormNIntra::xformF( const CMulExpan & Min, CLocalExpan & Lout, bool bFor )
 		p = computeOrder( rho, *m_tQF1, m_scale1 );
 		Lout = CLocalExpan( m_qSolvedF1, m_d2, p, false, m_scale2 );
 	}
-	
 	// Transform I( 2 ) to J(1)
 	else
 	{
@@ -493,21 +460,19 @@ CXFormNIntra::xformF( const CMulExpan & Min, CLocalExpan & Lout, bool bFor )
 		p = computeOrder( rho, *m_tQF2, m_scale2 );
 		Lout = CLocalExpan( m_qSolvedF2, m_d1, p, false, m_scale1 );
 	}
-	
 	return;
 }
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
-//Min not used
+/******************************************************************/
+/**
+ * Compute the transform of H
+ ******************************************************************/
 void 
 CXFormNIntra::xformF( const CTriExpan & Gin, CTriExpan & Gout, bool bFor ) 
 {
 	int p;
 	REAL rho = m_P.norm(  );
-	
 	
 	// Transform J( 1 ) to I(2)
 	if( bFor )
@@ -520,7 +485,6 @@ CXFormNIntra::xformF( const CTriExpan & Gin, CTriExpan & Gout, bool bFor )
 		p = computeOrder( rho, *m_tGF1, m_scale1 );
 		Gout = CGradExpan( &(m_gSolvedF1[0] ), m_d2, p, false, m_scale2, false);
 	}
-	
 	// Transform I( 2 ) to J(1)
 	else
 	{
@@ -532,14 +496,14 @@ CXFormNIntra::xformF( const CTriExpan & Gin, CTriExpan & Gout, bool bFor )
 		p = computeOrder( rho, *m_tGF2, m_scale2 );
 		Gout = CGradExpan( &(m_gSolvedF2[0] ), m_d1, p, false, m_scale1, false);
 	}
-	
 	return;
 }
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Compute the transform of FH
+ ******************************************************************/
 void 
 CXFormNIntra::xformFH( const CSolExpCenter &source, const CSolExpCenter &target, 
 											CLocalExpan & LFout, CLocalExpan & LHout, CPnt P ) 
@@ -549,6 +513,11 @@ CXFormNIntra::xformFH( const CSolExpCenter &source, const CSolExpCenter &target,
 					source.getTQF(  ),source.getTQH());
 } 
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Compute the transform of FH
+ ******************************************************************/
 void 
 CXFormNIntra::xformFH( const CSolExpCenter &source, const CSolExpCenter &target, 
 											CLocalExpan & LFout, CLocalExpan & LHout, CPnt P, 
@@ -575,15 +544,14 @@ CXFormNIntra::xformFH( const CSolExpCenter &source, const CSolExpCenter &target,
 	LFout = CLocalExpan( qSolvedF, d, p, false, scaleT );
 	p = computeOrder( rho, tQH, scaleS );
 	LHout = CLocalExpan( qSolvedH, d, p, true,  scaleT );
-	
-	
 	return;
 }
 
 /******************************************************************/
-/******************************************************************//**
-
-******************************************************************/
+/******************************************************************/
+/**
+ * Compute the gradient of FH
+ ******************************************************************/
 void 
 CXFormNIntra::xformGFH( const CSolExpCenter &source, const CSolExpCenter &target, 
 											 CTriExpan & LGFout, CTriExpan & LGHout, CPnt P ) 
@@ -607,183 +575,6 @@ CXFormNIntra::xformGFH( const CSolExpCenter &source, const CSolExpCenter &target
 	LGFout = CGradExpan( gSolvedF, d, p, false, scaleT, false ); 
 	p = computeOrder( rho, tGH, scaleS );
 	LGHout = CGradExpan( gSolvedH, d, p, true,  scaleT, false );
-	
 	return;
 }
-
-/*#########################################################*/
-/*#########################################################*/
-// Was commented out in EH's code
-/*#########################################################*/
-/*#########################################################*/
-
-/*
-/////////////////////////
-// reexpand monopole only ( works for inter only because of pbc! ) 
-
-void 
-CXFormBase::xformHrotMono( const CSolExpCenter &source, const CSolExpCenter &target, 
-		       CLocalExpan &Mout )
-{
-  Mout = CLExpan(  source.getHrotMono( ), 
-		  CartToSph(  CSystem::pbcPos(target.getCenRot( )-source.getCenRot()) ), 
-		  target.getbKappa(  ),
-		  1,
-		  target.getLScale(  ));
-
-}
-
-// convert Hrot_monopole to local gradient
-void 
-CXFormBase::xformHrotMonoG( const CSolExpCenter &source, const CSolExpCenter &target, 
-			   CTriExpan &Mout )
-{
-  double Q  = source.getHrotMono(  );
-  xformHrotMonoG( source,target,Mout,Q );
-}
-
-
-// works for inter only ( due to pbc )
-void 
-CXFormBase::xformHrotMonoG( const CSolExpCenter &source, const CSolExpCenter &target, 
-			   CTriExpan &Mout, double Q )
-{
-  CSpPnt sp = CartToSph(  CSystem::pbcPos(target.getCenRot( )-source.getCenRot()) );
-  bool bKappa =  target.getbKappa(  );
-  double scale = target.getLScale(  );
-
-  double r = sp.rho(  );
-  double fact = -( CMolecule::KAPPA * r + 1 ) / r;
-  double fx, fy, fz;
-  if(  fabs(sp.theta( )) < 1e-5) 
-    { fx = 0.0, fy = 1.0/r; fz = 0.0;} 
-  else
-    {
-      REAL sint = sin( sp.theta( ));
-      REAL cost = cos( sp.theta( ));
-      REAL cosp = cos( sp.phi( ));
-      REAL sinp = sin( sp.phi( )); 
-      fx = sint*cosp; fy = cost * cosp / r; fz = - sint * sinp / r;
-    }
-
-  Mout[0] = CLExpan(  Q * fact * fx, sp, bKappa,1,scale ); 
-  Mout[1] = CLExpan(  Q * fact * fy, sp, bKappa,1,scale ); 
-  Mout[2] = CLExpan(  Q * fact * fz, sp, bKappa,1,scale ); 
-}
-
-// convert multipole gradient to local gradient
-void 
-CXFormBase::xformGHrotMono( const CSolExpCenter &source, const CSolExpCenter &target, 
-			   CTriExpan &Mout )
-{
-  CPnt gH = source.getGHMono(  );
-  xformGHrotMono( source, target, Mout, gH );
-}
-// convert multipole gradient to local gradient
-void 
-CXFormBase::xformGHrotMono( const CSolExpCenter &source, const CSolExpCenter &target, 
-			   CTriExpan &Mout, CPnt gH )
-{
-  CSpPnt sp = CartToSph(  CSystem::pbcPos(target.getCenRot( )-source.getCenRot()) );
-  bool bKappa =  target.getbKappa(  );
-  double scale = target.getLScale(  );
-
-  Mout[0] = CLExpan(  gH.x( ), sp, bKappa,1,scale); 
-  Mout[1] = CLExpan(  gH.y( ), sp, bKappa,1,scale); 
-  Mout[2] = CLExpan(  gH.z( ), sp, bKappa,1,scale); 
-}
-*/
-
-/*
-void
-CXFormAIntra::incOrderH(  )
-{
-assert( m_pH < N_POLES );
-
-//  m_p++;//???
-m_pH++;
-m_transH.incOrder(  );
-if ( m_rot.getOrder( ) < m_pH) m_rot.incOrder();
-
-}
-*/
-
-/* not working yet
-void
-CXFormAIntra::decOrderH(  )
-{
-assert ( m_p > 1 );
-
-m_p--;
-
-m_transH.decOrder(  );
-m_rot.decOrder(  );
-
-}
-*/
-
-/*
-void CXFormAIntra::setOrderF( int p )
-{
-assert( p >= 1 && p <= N_POLES );
-if ( m_pF < p )  
-while ( m_pF < p )
-incOrderF(  );
-else if ( m_pF > p )
-{
-cout <<"does not do dec yet "<<endl; exit( 1 );
-}
-
-}
-*/
-/*
-void CXFormAIntra::setOrderH( int p )
-{
-assert( p >= 1 && p <= N_POLES );
-if ( m_pH < p )  
-while ( m_pH < p )
-incOrderH(  );
-else if ( m_pH > p )
-{
-cout <<"does not do dec yet "<<endl; exit( 1 );
-}
-
-}
-*/
-/*
-void
-CXFormAIntra::incOrderF(  )
-{
-assert( m_pF < N_POLES );
-
-//  m_p++;//???
-m_pF++;
-m_transF.incOrder(  );
-if ( m_rot.getOrder( ) < m_pF) m_rot.incOrder();
-
-}
-*/
-
-/*
-// Constructors
-CXFormN::CXFormN( const CSolExpCenter &C1, const CMolecule &M2, REAL scale )
-: m_reset( false )
-{
-
-m_SPx1      = &( C1.getSPx( )[0]);
-m_SPExSize1 = C1.getSPExSize(  );
-m_qSolvedH1  = &(  C1.getQSolvedH( )[0] );
-m_scale1    = C1.getLScale(  );
-m_tQH1       = &( C1.getTQH( )); 
-
-m_SPx2      = NULL;
-m_SPExSize2 = 0;
-m_qSolvedH2  = NULL;
-m_scale2  = scale;
-m_tQH2       = NULL; 
-
-m_d2.resize( m_SPExSize1  );
-
-}
-*/
 

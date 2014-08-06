@@ -4,7 +4,6 @@
 #include "lautil.h"
 #include "readutil.h"
 
-// create static variables
 double CExpCenter::m_sdiel;
 double CExpCenter::m_kappa;
 
@@ -21,14 +20,6 @@ int CSolExpCenter::idk[_PSQH_];
 	const int SOLVE_MAX_CT = 20;
 #endif
 
-/*#########################################################*/
-/*#########################################################*/
-////////////////////////////////////////////////
-// CExpCenter
-////////////////////////////////////////////////
-/*#########################################################*/
-/*#########################################################*/
-
 /******************************************************************/
 /******************************************************************/
 /**
@@ -44,17 +35,11 @@ CExpCenter::initConstants( double sdiel, double kappa )
 	CRExpan::initConstants( kappa );
 }	// end initConstants
 
-/*#########################################################*/
-/*#########################################################*/
-// member functions
-/*#########################################################*/
-/*#########################################################*/
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *   Constructor for ExpCenter class
+ ******************************************************************/
 CExpCenter::CExpCenter(  )
 		: m_cen( CPnt(0,0,0 )), m_cenRot(CPnt(0,0,0)),  m_rad(0.0), m_idiel(1.0), 
 		m_bKappa( false ), m_lscale(1.0),m_mscale(1.0)
@@ -63,11 +48,11 @@ CExpCenter::CExpCenter(  )
 	m_H = m_E;
 }	// end CExpCenter(  )
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Constructor for ExpCenter class
+ ******************************************************************/
 CExpCenter::CExpCenter( int ki, CPnt cen, double rad )
 		: m_cen( cen ), m_cenRot(cen), m_rad(rad),m_lscale(rad), m_mscale(1.0/m_rad),
 		m_p( N_POLES ), m_id(ki)
@@ -89,17 +74,16 @@ CExpCenter::CExpCenter( int ki, CPnt cen, double rad, double idiel, bool bKappa,
 	setFixedCharges(  ); 
 } // end CExpCenter(  ..  )
 
-/*#########################################################*/
-/*#########################################################*/
-// generate m_E, m_H
-// m_E, m_rE strictly not neccessary because 
-// we depend on m_Efix and m_Lfix of CSolvent centers
-// to represent fixed charges that get 
-// subsequently incorporated into m_H
-// useful only as initial guess for H=E -- to delete this later ???
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * generate m_E, m_H
+  m_E, m_rE strictly not neccessary because
+  we depend on m_Efix and m_Lfix of CSolvent centers
+  to represent fixed charges that get
+  subsequently incorporated into m_H
+  useful only as initial guess for H=E -- to delete this later
+ ******************************************************************/
 void
 CExpCenter::setFixedCharges(  )
 {
@@ -118,26 +102,24 @@ CExpCenter::setFixedCharges(  )
 	m_LS.setScale(  m_lscale  );
 } // end setFixedCharges
 
-/*#########################################################*/
-/*#########################################################*/
-//Computes interaction energy of center with ext potential
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Computes interaction energy of center with ext potential
+ ******************************************************************/
 const REAL 
 CExpCenter::computePot(  ) const
 {
 	return  inprod( getH( ),  getLS());
 }	// end computePot(  )
 
-/*#########################################################*/
-/*#########################################################*/
-// force in original reference frame 
-// to convert to labframerotate by conj( m_orient ) 
-// this will compute force on a specific sphere ( S. Liu )
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * force in original reference frame to convert to labframerotate 
+ by conj( m_orient ) this will compute force on a 
+ specific sphere ( S. Liu )
+ ******************************************************************/
 const CPnt
 CSolExpCenter::computeForceOn_0(  ) const
 {
@@ -167,12 +149,11 @@ CSolExpCenter::computeForceOn_0(  ) const
 	return force;
 }	// end computeForceOn_0
 
-/*#########################################################*/
-/*#########################################################*/
-// assignment operator overloading ( S. Liu )
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * assignment operator overloading ( S. Liu )
+ ******************************************************************/
 CExpCenter & 
 CExpCenter::operator=( const CExpCenter &M )
 {
@@ -185,7 +166,6 @@ CExpCenter::operator=( const CExpCenter &M )
 	m_lscale = M.m_lscale;
 	m_mscale = M.m_mscale;
 
-	//m_L = M.m_L;
 	m_E = M.m_E;
 	m_H = M.m_H;
 
@@ -231,14 +211,13 @@ CSolExpCenter::initConstants( double sdiel, double kappa )
 return;
 }	// end initConstants
 
-/*#########################################################*/
-/*#########################################################*/
-// prepare response matrix IMAT
-// making use of symmetry in Ynm*Yls
-// taken into account conjugation of Ynm with sNeg mNeg
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * prepare response matrix IMAT making use of symmetry in Ynm*Yls
+  taken into account conjugation of Ynm with sNeg mNeg
+ ******************************************************************/
 void 
 CSolExpCenter::build_IMat( const vector<CPnt> &SPE, 
 				const vector<CPnt> &SPB, REAL* IMat )
@@ -363,11 +342,7 @@ CSolExpCenter::build_IMat( const vector<CPnt> &SPE,
 	free( Ylsr_Ynmr );  
 	free( Ylsr_Ynmi ); 
 	free( Ylsi_Ynmr ); 
-	free( Ylsi_Ynmi ); 
-
-	//printMat( IMat );
-	//cout <<"ImatE completed ... "<<endl;
-
+	free( Ylsi_Ynmi );
 	return;
 } // end build_IMat
 
@@ -405,11 +380,12 @@ m_bRead( false ), m_bOwnMat(true)
 //	cal_DVFixed(  );
 }	// end CSolExpCenter
 
-/*#########################################################*/
-/*#########################################################*/
-// read in pointer to imat
-/*#########################################################*/
-/*#########################################################*/
+
+/******************************************************************/
+/******************************************************************/
+/**
+ *  read in pointer to imat, for selfpolarization!
+ ******************************************************************/
 CSolExpCenter::CSolExpCenter( int ki, CPnt cen, double rad,
 							 const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
 							 const vector<int> &intraPolList_near,
@@ -426,11 +402,12 @@ m_intraPolList_near( intraPolList_near ), m_IMat(iMat), m_bRead(false), m_bOwnMa
 	cal_DVFixed(  );
 } // end CSolExpCenter
 
-/*#########################################################*/
-/*#########################################################*/
-// read in pointer to imat, and copy expansions
-/*#########################################################*/
-/*#########################################################*/
+/******************************************************************/
+/******************************************************************/
+/**
+ * CSolExpCenter constructor to read in pointer to imat, and 
+ copy expansions
+ ******************************************************************/
 CSolExpCenter::CSolExpCenter( int ki, CPnt cen, double rad,
 							 const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
 							 const vector<int> &intraPolList_near,
@@ -462,12 +439,11 @@ m_bRead( true ), m_bOwnMat(false), m_bGrad(bGrad)
 	cal_DVFixed(  );
 }	// end CSolExpCenter
 
-/*#########################################################*/
-/*#########################################################*/
-// for preparing various moltype quantities
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  CSolExpCenter constructor for preparing various moltype quantities
+ ******************************************************************/
 CSolExpCenter::CSolExpCenter( int ki, CPnt cen, double rad,
 							 const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
 							 const vector<int> &intraPolList_near,
@@ -487,11 +463,11 @@ m_totalHself( totalHself )
 	m_F = *m_Fself;
 } // end CSolExpCenter
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * CSolExpCenter constructor
+ ******************************************************************/
 CSolExpCenter::CSolExpCenter( int ki, CPnt cen, double rad, const CMulExpan *Hself,
 							 const vector<CPnt> &SPx, const int &nSPx, const vector<int> &intraPolList_near )
 : CExpCenter( ki, cen, rad ),
@@ -599,12 +575,12 @@ CSolExpCenter::setFixedCharges( const vector<double> &allchg,
 	m_LHS = CLocalExpan( CRange(0, m_p ), m_lscale);
 }
 
-/*#########################################################*/
-/*#########################################################*/
-// init after system size ( nmol ) is known
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  init after system size ( nmol ) is known
+ ******************************************************************/
 void
 CSolExpCenter::initGradient( int nmol )
 {
@@ -637,34 +613,33 @@ CSolExpCenter::initSurfaceCharges(  )
 		m_totalF = 0;
 }	// end initSurfaceCharges
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to solve surface charges for self-polarization
+ ******************************************************************/
 double
 CSolExpCenter::solveSurfaceCharges(  )
 {
 	solveSurfaceCharges( m_F, m_H, false );
 }	// end solveSurfaceCharges
 
-/*#########################################################*/
-/*#########################################################*/
-// calculates the surface charges iteratively using y=Ax
-// based on molecule in initial orientation
-//( i.e. LH must be rotated by to
-//initial position by -rot, and keep
-// a copy of H ( as Hrot ) to polarize other spheres
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  calculates the surface charges iteratively using y=Ax
+  based on molecule in initial orientation
+ ( i.e. LH must be rotated by to initial position by -rot, and keep
+ a copy of H ( as Hrot ) to polarize other spheres
+ ******************************************************************/
 double
 CSolExpCenter::solveSurfaceCharges( const CMulExpan &Finit,
 								   const CMulExpan &Hinit, bool bRotateH )
 {
 	double devH;
 	const int len = m_p * m_p;
-	
 	vector<double> F = Finit.getVector( m_p );
 	vector<double> H = Hinit.getVector( m_p );
 	
@@ -674,9 +649,6 @@ CSolExpCenter::solveSurfaceCharges( const CMulExpan &Finit,
 	m_H = CMulExpan( H, CRange(0, m_p ), m_mscale);
 	if( bRotateH )
 		m_rot->rotateWithXi( m_H,m_Hrot , 1, m_p, true ); // rotate for mutual pol; not self pol
-	
-	//   cout <<"F"<<m_F<<endl;
-	// cout <<"H"<<m_H<<endl;
 	m_dev = devH;
 	
 	// also recalculate qsolved ( exposed surface charges )
@@ -685,11 +657,14 @@ CSolExpCenter::solveSurfaceCharges( const CMulExpan &Finit,
 	return devH;
 }	// end solveSurfaceCharges
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  calculates the surface gradient iteratively using y=Ax
+ based on molecule in initial orientation
+ ( i.e. LH must be rotated by to initial position by -rot, and keep
+ a copy of H ( as Hrot ) to polarize other spheres
+ ******************************************************************/
 double
 CSolExpCenter::solveSurfaceGradient( int j, CGradExpan &gF, CGradExpan &gH, CGradExpan &gHrot,
 									const CGradExpan & LGF_j, const CGradExpan & LGH_j )
@@ -974,8 +949,7 @@ CSolExpCenter::computeIntegralB( double * Yrr,double * Yri,double * Yir,double *
 void
 CSolExpCenter::build_IMatE(  )
 {
-	cout <<"building ImatE  ... "<<endl;
-	
+	cout <<"building ImatE  ... "<<endl;	
 	const int npe = m_SPE.size(  );
 	const int npb = m_SPB.size(  );
 	
@@ -1121,31 +1095,24 @@ CSolExpCenter::cal_DVFixed(  )
 	return;
 }	// end cal_DVFixed
 
-/*#########################################################*/
-/*#########################################################*/
-// iteratively solves for F, H using D, V separately
-// conjugation taken into account in IMAT
-// I think this is the core function for doing mutual polarization
-// In general, what function 'solveFH' did
-// is to calculate F and H
-// iteratively with given input of F, H, LF and LH.
-// It has called function applyMM, which can
-// be found in file 'lautil.cpp',
-// to do matrix vector products.
-// So the job 'solveFH' has done is to
-// solve linear equations in 4a and 4b
-// in 2013 JCTC paper of THG and Enghui Yap.
-//
-// Note that 'solveFH' is not only used
-// for solving multiple expansion of
-// surface charge density like F and H,
-// but also the gradients of multiple
-// Add a comment to this line
-// expansions, such as equation 11a and 11b in 2013
-// JCTC paper of THG and Enghui Yap. ( S. Liu )
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  iteratively solves for F, H using D, V separately
+  conjugation taken into account in IMAT
+  I think this is the core function for doing mutual polarization
+  In general, what function 'solveFH' did is to calculate F and H
+  iteratively with given input of F, H, LF and LH.
+  It has called function applyMM, which can be found in file 'lautil.cpp',
+  to do matrix vector products. So the job 'solveFH' has done is to
+  solve linear equations in 4a and 4b in 2013 JCTC paper of THG and Enghui Yap.
+ 
+  Note that 'solveFH' is not only used for solving multiple expansion of
+  surface charge density like F and H, but also the gradients of multiple
+  Add a comment to this line expansions, such as equation 11a and 11b in 2013
+  JCTC paper of THG and Enghui Yap. ( S. Liu )
+ ******************************************************************/
 double
 CSolExpCenter::solveFH( vector<double> &F, vector<double>  &H,
 					   const vector<double> &LF, const vector<double>  &LH,
@@ -1155,7 +1122,6 @@ CSolExpCenter::solveFH( vector<double> &F, vector<double>  &H,
 	const int p2 = pm*pm;
 	const int mlen = D*pm*pm; // nm
 	const int nlen = D*pn*pn; // ls
-	
 	const int expectedLength = p2*D;
 	assert(  F.size( ) == expectedLength);
 	assert(  H.size( ) == expectedLength);
@@ -1172,7 +1138,6 @@ CSolExpCenter::solveFH( vector<double> &F, vector<double>  &H,
 	
 	// initialize old value ( just H since we choose to use it for convergence )
 	oldH = H; outerOldH = H;
-	
 	// start polarizing
 	double dev, dev_h, dev_f;
 	
@@ -1185,7 +1150,6 @@ CSolExpCenter::solveFH( vector<double> &F, vector<double>  &H,
 	applyMMat( m_IMat, &(hx[0] ), &(H[0]), 1.0, 0.0, p2, D, p2);
 	revertH( &(H[0] ), pm, D);
 	dev_h = computeDev( &(oldH[0] ), &(H[0]), pm,D); oldH = H;
-	
 	dev = dev_h;
 	
 	int ct = 1;
@@ -1199,7 +1163,6 @@ CSolExpCenter::solveFH( vector<double> &F, vector<double>  &H,
 		applyMMat( m_IMat, &(hx[0] ), &(H[0]), 1.0, 0.0, p2, D, p2);
 		revertH( &(H[0] ), pm, D);
 		dev_h = computeDev( &(oldH[0] ), &(H[0]), pm,D); oldH = H;
-		
 		dev = dev_h;
 		ct++;
 	}
@@ -1209,11 +1172,11 @@ CSolExpCenter::solveFH( vector<double> &F, vector<double>  &H,
 	return devH;
 } // end solveFH
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to revert the F matrix by multiplying it by (1/(2l+1))
+ ******************************************************************/
 void
 CSolExpCenter::revertF( double * F, int p, int D ) const
 {
@@ -1228,11 +1191,11 @@ CSolExpCenter::revertF( double * F, int p, int D ) const
 	}
 }	// end revertF
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to revert the H matrix by multiplying it by (ihat_n(kr)/(2n+1))
+ ******************************************************************/
 void
 CSolExpCenter::revertH( double * H, int p, int D ) const
 {
@@ -1247,11 +1210,13 @@ CSolExpCenter::revertH( double * H, int p, int D ) const
 	}
 } // end revertH
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute hbase and fbase to incorporate LF, LH 
+ using equations 14a and 14b
+ ******************************************************************/
 void
 CSolExpCenter::compute_FHbase( const double* LH, const double *LF,
 							  double* fbase,double* hbase, int pm ) const
@@ -1269,61 +1234,17 @@ CSolExpCenter::compute_FHbase( const double* LH, const double *LF,
 			hbase[k] = m_Dfix[k] + cLH2 * LH[k] + cLF2 * LF[k];
 		}
 	}
-	
 	return;
 }	// end compute_FHbase
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
-void
-CSolExpCenter::compute_fx( double *fx, const double *fbase, const double *F,
-						  const double *H, int p, int D ) const
-{
-	for( int d=0, k=0; d<D; d++ )
-	{
-		for( int n=0; n<p; n++ )
-		{
-			const double cH1 = m_constH1[n];
-			const double cF1 = m_constF1[n];
-			for( int mm=0; mm<2*n+1; mm++, k++ )
-				fx[k] = fbase[k] +  cH1 * H[k] + cF1 * F[k];
-		}
-	}
-}	// end compute_fx
-
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
-void
-CSolExpCenter::compute_hx( double *hx, const double *hbase, const double *F,
-						  const double *H, int p, int D ) const
-{
-	for( int d=0, k=0; d<D; d++ )
-	{
-		for( int n=0; n<p; n++ )
-		{
-			const double cH2 = m_constH2[n];
-			const double cF2 = m_constF2[n];
-			for( int mm=0; mm<2*n+1; mm++, k++ )
-				hx[k] = hbase[k] +  cH2 * H[k] + cF2 * F[k];
-		}
-	}
-}	// end compute_hx
-
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute hbase and fbase to incorporate LF, LH
+ ******************************************************************/
 void
 CSolExpCenter::compute_FHbase3( const double* LH, const double *LF,
-							   double* fbase,double* hbase, int pm ) const
+															 double* fbase,double* hbase, int pm ) const
 {
 	for( int d=0, k=0; d<3; d++ )
 	{
@@ -1341,16 +1262,58 @@ CSolExpCenter::compute_FHbase3( const double* LH, const double *LF,
 			}
 		}
 	}
-	
 	return;
 }	// end compute_FHbase3
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute fx, from EQ14b
+ ******************************************************************/
+void
+CSolExpCenter::compute_fx( double *fx, const double *fbase, const double *F,
+						  const double *H, int p, int D ) const
+{
+	for( int d=0, k=0; d<D; d++ )
+	{
+		for( int n=0; n<p; n++ )
+		{
+			const double cH1 = m_constH1[n];
+			const double cF1 = m_constF1[n];
+			for( int mm=0; mm<2*n+1; mm++, k++ )
+				fx[k] = fbase[k] +  cH1 * H[k] + cF1 * F[k];
+		}
+	}
+}	// end compute_fx
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute hx, from EQ14a
+ ******************************************************************/
+void
+CSolExpCenter::compute_hx( double *hx, const double *hbase, const double *F,
+						  const double *H, int p, int D ) const
+{
+	for( int d=0, k=0; d<D; d++ )
+	{
+		for( int n=0; n<p; n++ )
+		{
+			const double cH2 = m_constH2[n];
+			const double cF2 = m_constF2[n];
+			for( int mm=0; mm<2*n+1; mm++, k++ )
+				hx[k] = hbase[k] +  cH2 * H[k] + cF2 * F[k];
+		}
+	}
+}	// end compute_hx
+
+
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the deviation between two matrices
+ ******************************************************************/
 REAL
 CSolExpCenter::computeDev( const double *M1, const double *M2, int p, int D )
 {
@@ -1378,8 +1341,7 @@ CSolExpCenter::computeDev( const double *M1, const double *M2, int p, int D )
 					k+=2;
 				}
 				
-				REAL s;
-				
+				REAL s;				
 				if ( fabs(tM1.real( )) < PREC_LIMIT &&
 					fabs( tM1.imag( )) < PREC_LIMIT)
 				{
@@ -1415,11 +1377,11 @@ CSolExpCenter::computeDev( const double *M1, const double *M2, int p, int D )
 	return sum;
 }	// end computeDev
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute the deviation between two matrices
+ ******************************************************************/
 REAL
 CSolExpCenter::computeDev2( const double *M1, const double *M2, int p, int D )
 {
@@ -1458,11 +1420,11 @@ CSolExpCenter::computeDev2( const double *M1, const double *M2, int p, int D )
 	return totdiff / ( 4*totsum ) / double(D);
 } // end computeDev2
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the gradient on the solvent exposed surfaces
+ ******************************************************************/
 void
 CSolExpCenter::computeExposedSurfaceGradientFH( const CGradExpan &gF,
 											   const CGradExpan &gH )
@@ -1502,11 +1464,11 @@ CSolExpCenter::computeExposedSurfaceGradientFH( const CGradExpan &gF,
 		m_maxgH = total_gHz;
 } // end computeExposedSurfaceGradientFH
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the exposed surface charges from F and H
+ ******************************************************************/
 void
 CSolExpCenter::computeExposedSurfaceChargesFH(  )
 {
@@ -1532,11 +1494,11 @@ CSolExpCenter::computeExposedSurfaceChargesFH(  )
 	//  assert( fabs(m_totalH ) < 1e6 );
 }	// end computeExposedSurfaceChargesFH
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the exposed surface charges from F and H
+ ******************************************************************/
 void
 CSolExpCenter::computeExposedSurfaceChargesFH_( const vector<CPnt> &SPx,
 											   const CMulExpan & F, const CMulExpan & H,
@@ -1617,11 +1579,11 @@ CSolExpCenter::computeExposedSurfaceChargesF(  )
 
 }	// end computeExposedSurfaceChargesF
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Get the surface charges on a given exp center's sphere from H
+ ******************************************************************/
 void
 CSolExpCenter::getSurfaceChargesH( const vector<CPnt> &SP, vector<double> &qS )
 {
@@ -1638,11 +1600,11 @@ CSolExpCenter::getSurfaceChargesH( const vector<CPnt> &SP, vector<double> &qS )
 	}
 }	// getSurfaceChargesH
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Get the surface charges on a given exp center's sphere from F
+ ******************************************************************/
 void
 CSolExpCenter::getSurfaceChargesF( const vector<CPnt> &SP, vector<double> &qS )
 {
@@ -1657,13 +1619,13 @@ CSolExpCenter::getSurfaceChargesF( const vector<CPnt> &SP, vector<double> &qS )
 		
 		qS[h] = inprod_unitScale( m_F, YI ) * m_dA ; // charge = surface charge * area
 	}
-}	// emd getSurfaceChargesF
+}	// end getSurfaceChargesF
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Compute the torque on a given solexpcenter
+ ******************************************************************/
 const CPnt
 CSolExpCenter::computeTorqueOn_0( int i ) const
 {
@@ -1686,11 +1648,12 @@ CSolExpCenter::computeTorqueOn_0( int i ) const
 	return m_dA * torque;
 }	// end computeTorqueOn_0
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
+/******************************************************************/
+/******************************************************************/
+/**
+ * Check to see if a given index is on the interpolarization list
 
+ ******************************************************************/
 bool
 CSolExpCenter::isOnInterPolList( int j, int kj ) const
 {
@@ -1702,24 +1665,23 @@ CSolExpCenter::isOnInterPolList( int j, int kj ) const
 	return false;
 }
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * rotate the position of ki's rotated center wrt rcen
+ ******************************************************************/
 void
 CSolExpCenter::rotateCenters(  )
 {
-	// rotate the position of ki's rotated center wrt rcen
 	m_cenRot = *m_orient * m_cen;
 	return;
 }	// end rotateCenters
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Rotate the H with rotation contained in solexpcenter
+ ******************************************************************/
 void
 CSolExpCenter::rotateHself(  )
 {
@@ -1730,11 +1692,11 @@ CSolExpCenter::rotateHself(  )
 	return;
 }	// end rotateHself
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Rotate the given H with XI
+ ******************************************************************/
 #ifdef __NOPOL_UNCHANGED__
 void
 CSolExpCenter::rotateCurrentH(  )
@@ -1745,11 +1707,11 @@ CSolExpCenter::rotateCurrentH(  )
 	return;
 }
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * rotateGH rotate a grad expansion with the gH in the exp center
+ ******************************************************************/
 CGradExpan
 CSolExpCenter::rotateGH(  ) const
 {
@@ -1760,11 +1722,11 @@ CSolExpCenter::rotateGH(  ) const
 
 #endif
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * The CSolExpCenter = operator
+ ******************************************************************/
 CSolExpCenter&
 CSolExpCenter::operator=( const CSolExpCenter &M )
 {
@@ -1778,14 +1740,12 @@ CSolExpCenter::operator=( const CSolExpCenter &M )
 	m_F = M.m_F;
 }	//end CSolExpCenter::operator=
 
-/*#########################################################*/
-/*#########################################################*/
-//====================
-// utility functions
-//====================
-/*#########################################################*/
-/*#########################################################*/
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  A print of the Y matrix
+ ******************************************************************/
 //#ifdef __DEBUG
 void
 CSolExpCenter::printY( double *Y )
@@ -1813,11 +1773,11 @@ CSolExpCenter::printY( double *Y )
 	}// n
 }	// end printY
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  A print of the Y matrix
+ ******************************************************************/
 void
 CSolExpCenter::printYFull( double *Y )
 {
@@ -1836,11 +1796,11 @@ CSolExpCenter::printYFull( double *Y )
 	}// nm
 }	// end printYFull
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * A print of the Y matrix
+ ******************************************************************/
 void
 CSolExpCenter::testY( double *Y1, double *Y2 ) const
 {
@@ -1867,11 +1827,11 @@ CSolExpCenter::testY( double *Y1, double *Y2 ) const
 	}// n
 }	// end testY
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * A print of the Y matrix
+ ******************************************************************/
 void
 CSolExpCenter::testYFull( double *Y1, double *Y2 ) const
 {
@@ -1897,11 +1857,11 @@ CSolExpCenter::testYFull( double *Y1, double *Y2 ) const
 	}
 }	// end testYFull
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Printing the matrices of a solvent exposed center
+ ******************************************************************/
 void
 CSolExpCenter::printMat( double *mat )
 {
@@ -1919,11 +1879,11 @@ CSolExpCenter::printMat( double *mat )
 	return;
 }	// end printMat
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Printing the matrices of a solvent exposed center
+ ******************************************************************/
 void
 CSolExpCenter::printMat( const vector<double> &mat )
 {
@@ -1952,12 +1912,11 @@ CSolExpCenter::printMat( const vector<double> &mat )
 
 #ifdef __DEBUG__
 
-/*#########################################################*/
-/*#########################################################*/
-// DEBUG: : check results using Dirichlet BC
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * DEBUG: : check results using Dirichlet BC
+ ******************************************************************/
 void
 CSolExpCenter::checkSolveDifferenceDirichlet(  )
 {
@@ -2027,12 +1986,11 @@ CSolExpCenter::checkSolveDifferenceDirichlet(  )
 	return;
 } // end checkSolveDifferenceDirichlet
 
-/*#########################################################*/
-/*#########################################################*/
-// debugging: check results using Von Neumann BC
-/*#########################################################*/
-/*#########################################################*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * debugging: check results using Von Neumann BC
+ ******************************************************************/
 void
 CSolExpCenter::checkSolveDifferenceVonNeumann(  )
 {

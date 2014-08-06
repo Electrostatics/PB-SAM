@@ -4,20 +4,9 @@
 #include <map>
 #include <iostream>
 
-/*###############################################################################
- * #
- * # File: hash.h
- * #
- * # Date: June 2013
- * #
- * # Description:
- * #
- * # Author: EH Yap, L Felberg
- * #
- * # Copyright ( c )
- * #
- * ################################################################################*/
-
+//! CSphereID class
+/*!	This class is a class containing information about the 
+ sphere's ID number. */
 class CSphereID
 {
 	public:
@@ -26,11 +15,9 @@ class CSphereID
 		int is;
 };	// end CSphereID
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+//! CSphereIDPair class
+/*!	This class is a class containing information about two
+ sphere's ID numbers. */
 class CSphereIDPair
 {
 	public:
@@ -38,11 +25,12 @@ class CSphereIDPair
 		int is, js;
 };	// end CSphereIDPair
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+//! classCompareCSphereIDPair class
+/*!	This class is a class containing information about the
+ relationship between two sphere's ID objects. Returns
+ true if the first one is smaller.  False if the second 
+ one is smaller.  And otherwise compares the objects first 
+ spheres. */
 struct classCompareCSphereIDPair
 { 
 	bool operator(  ) (const CSphereIDPair & lhs, 
@@ -57,11 +45,9 @@ struct classCompareCSphereIDPair
 	}//end-operator
 };	// end classCompareCSphereIDPair
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+//! CFullSphereID class
+/*!	This class is a class containing all ID information about
+ a sphere. */
 class CFullSphereID
 {
 	public:
@@ -71,11 +57,9 @@ class CFullSphereID
 		int im, is;
 };	// end CFullSphereID
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+//! CFullSphereIDPair class
+/*!	This class is a class containing all ID information about
+ a pair of spheres. */
 class CFullSphereIDPair
 {
 	public:
@@ -85,11 +69,12 @@ class CFullSphereIDPair
 		int im, is, jm, js;
 };	// end CFullSphereIDPair
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+//! classCompareCFullSphereIDPair class
+/*!	This class is a class containing information about the
+ relationship between two sphere's ID objects. Returns
+ true if the first one is smaller.  False if the second
+ one is smaller.  And otherwise compares the objects first
+ spheres. */
 struct classCompareCFullSphereIDPair
 { 
 	bool operator(  ) (const CFullSphereIDPair & lhs, 
@@ -112,11 +97,12 @@ struct classCompareCFullSphereIDPair
 		}//end-operator
 };	// end classCompareCFullSphereIDPair
 
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-/*#########################################################*/
-
+//! classCompareCFullSphereID class
+/*!	This class is a class containing information about the
+ relationship between two sphere's ID objects. Returns
+ true if the first one is smaller.  False if the second
+ one is smaller.  And otherwise compares the objects first
+ spheres.  */
 struct classCompareCFullSphereID
 { 
 	bool operator(  ) (const CFullSphereID & lhs, 
