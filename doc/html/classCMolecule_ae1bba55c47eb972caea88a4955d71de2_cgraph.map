@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classCRotCoeff.html#aa52111e9c4cb2949dfae960437742536" title="CRotCoeff::reset" alt="" coords="251,5,373,32"/>
+<area shape="rect" id="node7" href="$util_8h.html#acb5dee8f2390b15de14c17e1893a1816" title="resetPos function" alt="" coords="275,56,349,83"/>
+<area shape="rect" id="node9" href="$classCMolecule.html#a9a0a5da46546f7ab6f9cca56a9ff7fc9" title="The CMolecule computeMaxRadius function." alt="" coords="208,107,416,133"/>
+<area shape="rect" id="node11" href="$classCMolecule.html#a7e7066984d8a4520a7e990ebefe60fa5" title="CMolecule::getNKS" alt="" coords="243,157,381,184"/>
+<area shape="rect" id="node13" href="$classCMolecule.html#a56e3bfcd1e8524f39635e6e185c2960d" title="The CMolecule getSpherePoints function." alt="" coords="218,208,406,235"/>
+<area shape="rect" id="node5" href="$classCRotCoeff.html#a4668070c3eacacf17be98bc2fb348287" title="CRotCoeff::isSingular" alt="" coords="465,5,615,32"/>
+<area shape="rect" id="node15" href="$util_8h.html#af8b263bb80bb3a76271a7f57d5057df3" title="CSpPnt SphToCart." alt="" coords="497,208,583,235"/>
+<area shape="rect" id="node17" href="$classCSpPnt.html#af6364f003b923aa77c880869d27caa64" title="The CSpPnt class print rho." alt="" coords="670,157,765,184"/>
+<area shape="rect" id="node19" href="$classCSpPnt.html#a4b48e7760135fc768ab6911a328194ba" title="The CSpPnt class print theta." alt="" coords="665,208,770,235"/>
+<area shape="rect" id="node21" href="$classCSpPnt.html#af4f411d4a656dfec7c5a69ba065dbe1d" title="The CSpPnt class print phi." alt="" coords="671,259,764,285"/>
+</map>

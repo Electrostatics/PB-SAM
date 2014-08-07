@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classCMolContactRigid.html#ae381883be793600d1fc11c81dc74fdf1" title="CMolContactRigid::getMol2Type" alt="" coords="246,5,458,32"/>
+<area shape="rect" id="node5" href="$classCMolContactRigid.html#ad6c2b934b146e28d638dd62e1f995523" title="CMolContactRigid::getVec1A" alt="" coords="255,56,449,83"/>
+<area shape="rect" id="node7" href="$classCMolContactRigid.html#a92620b3712c8a59694639c5e902ca75d" title="CMolContactRigid::getVec2A" alt="" coords="255,107,449,133"/>
+<area shape="rect" id="node9" href="$classCMolContactRigid.html#ae2f3041dfeec1686175045a4cb03b787" title="CMolContactRigid::getVec1B" alt="" coords="255,157,449,184"/>
+<area shape="rect" id="node11" href="$classCMolContactRigid.html#a2211724bff497420b175ef5a10d327ae" title="CMolContactRigid::getVec2B" alt="" coords="255,208,449,235"/>
+<area shape="rect" id="node13" href="$classCMolContactRigid.html#a115825a49dcd54046c6789d8f02f1442" title="CMolContactRigid::getRideal2" alt="" coords="253,259,451,285"/>
+<area shape="rect" id="node15" href="$classCMolContactRigid.html#a8e6b786c49419d110becc2e13899fec2" title="CMolContactRigid::getBDocked" alt="" coords="247,309,457,336"/>
+</map>

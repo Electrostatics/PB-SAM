@@ -1,0 +1,39 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classCMolecule.html#a7298bb623ab24af1cc5d71cb4995fe7f" title="CMolecule::reexpandLSFrom\lList_LowMemory" alt="" coords="201,415,391,457"/>
+<area shape="rect" id="node58" href="$classCMolecule.html#aceefea9d0402920dd1d97b50fc5922d2" title="The CMolecule reexpandIntra_Near_LowMemory function." alt="" coords="211,909,381,950"/>
+<area shape="rect" id="node5" href="$classCMolecule.html#a6ac4d18c0f8a8feeec455eab8c23c7c9" title="CMolecule::getpKS" alt="" coords="475,31,610,57"/>
+<area shape="rect" id="node7" href="$classCMolecule.html#afd397d1dafbdb90c8d00df1b2a4a51d2" title="CMolecule::getRCen" alt="" coords="471,81,615,108"/>
+<area shape="rect" id="node9" href="$classCExpCenter.html#a69ce8d87ba63324aa16349019e6b71d4" title="CExpCenter::getCenRot" alt="" coords="460,132,625,159"/>
+<area shape="rect" id="node11" href="$classCExpCenter.html#adc18426f677b5984a468101ebfeefef6" title="CExpCenter::getRad" alt="" coords="471,705,615,732"/>
+<area shape="rect" id="node13" href="$classCExpCenter.html#a18e5340638fc144dfa255cef7d5214d9" title="CExpCenter::getOrder" alt="" coords="467,756,619,783"/>
+<area shape="rect" id="node15" href="$classCExpCenter.html#a30c3a26e0dc5bc9c2d84d366200243e5" title="CExpCenter::getLScale" alt="" coords="713,635,873,661"/>
+<area shape="rect" id="node17" href="$classCSolExpCenter.html#a61a341e0ae9325bf33e27aed01dd748c" title="CSolExpCenter::getInterPolList" alt="" coords="440,335,645,361"/>
+<area shape="rect" id="node19" href="$classCSolExpCenter.html#adce98ad1dd45ff4382715e6281edf70b" title="CSolExpCenter::IsEmptyInter\lPolList" alt="" coords="445,386,641,427"/>
+<area shape="rect" id="node21" href="$classCSystem.html#a29136721e5abd3ee40781adbee13d9e0" title="The CSystem pbcPos function." alt="" coords="478,233,607,260"/>
+<area shape="rect" id="node29" href="$classCXFormBase.html#a8c5d7b2304e9fb04d5d3020743639c24" title="CXFormBase::computeOrder" alt="" coords="698,1051,889,1077"/>
+<area shape="rect" id="node31" href="$classCPnt.html#ab92f2e6cc3891ff6a00eddb483b854ab" title="The CPnt norm function." alt="" coords="749,807,838,833"/>
+<area shape="rect" id="node33" href="$classCSolExpCenter.html#a327f1f62a10a5e49b2683188bd558e4f" title="CSolExpCenter::getTQH" alt="" coords="459,655,626,681"/>
+<area shape="rect" id="node35" href="$classCExpCenter.html#aff64017f498b93ed212c674865f95f40" title="CExpCenter::getHrot" alt="" coords="470,503,615,529"/>
+<area shape="rect" id="node37" href="$classCRotCoeff.html#a109f259f6c38c7fc050a9524dbae6bae" title="CRotCoeff rotateWithXi function." alt="" coords="460,183,625,209"/>
+<area shape="rect" id="node56" href="$classCExpCenter.html#aba7d7d3c0f0b49e28d66f96621be677e" title="CExpCenter::getLS" alt="" coords="475,553,611,580"/>
+<area shape="rect" id="node23" href="$classCPnt.html#a5867d45fc05ae371116367067eb23f48" title="The CSpPnt class print x." alt="" coords="760,461,827,488"/>
+<area shape="rect" id="node25" href="$classCPnt.html#ac9283f60e70f312ee1784de6c6ea5aec" title="The CSpPnt class print y." alt="" coords="760,360,827,387"/>
+<area shape="rect" id="node27" href="$classCPnt.html#a37d139ebe50234ab753472b896c7d17c" title="The CSpPnt class print z." alt="" coords="760,411,827,437"/>
+<area shape="rect" id="node39" href="$classCExpan.html#a8603cbb7c8f67972e825d583711d59fd" title="CExpan::getRange" alt="" coords="727,309,860,336"/>
+<area shape="rect" id="node41" href="$classCRange.html#a88c073347df45fa05a0e88fd91021d2b" title="CRange::p2" alt="" coords="942,259,1034,285"/>
+<area shape="rect" id="node43" href="$classCExpan.html#aa36e147d92fd44b430f8962b2f358e8d" title="CExpan::setScale" alt="" coords="729,5,857,32"/>
+<area shape="rect" id="node45" href="$classCExpan.html#a849c5d81bbc37ea52dd660d5950f264c" title="CExpan::getScale" alt="" coords="729,56,857,83"/>
+<area shape="rect" id="node47" href="$classCExpan.html#aa4ce064fc22518c150cabbbe15bba67f" title="CExpan::setRange" alt="" coords="727,259,860,285"/>
+<area shape="rect" id="node52" href="$classCRotCoeff.html#a4668070c3eacacf17be98bc2fb348287" title="CRotCoeff::isSingular" alt="" coords="718,107,869,133"/>
+<area shape="rect" id="node54" href="$util_8h.html#a751f3ac0c157ff6967eaf2673ce1527e" title="CQuat conj." alt="" coords="770,157,817,184"/>
+<area shape="rect" id="node49" href="$classCRange.html#a300319aff8dd27fefc004b6c724b4655" title="CRange::p1" alt="" coords="942,692,1034,719"/>
+<area shape="rect" id="node60" href="$classCExpCenter.html#a84f867868f8eb0785e95561f26cd0194" title="CExpCenter::getCen" alt="" coords="471,1076,615,1103"/>
+<area shape="rect" id="node63" href="$classCSolExpCenter.html#a10c772e491d527515883892857f39d85" title="CSolExpCenter::getLFS" alt="" coords="461,1177,624,1204"/>
+<area shape="rect" id="node65" href="$classCExpan.html#a8a6140fec725f418de3895bbf954e830" title="CExpan::reset" alt="" coords="740,1101,847,1128"/>
+<area shape="rect" id="node70" href="$classCSolExpCenter.html#ac6a6b9105b3a11bd1833ab065f02caa2" title="CSolExpCenter::getLHS" alt="" coords="460,857,625,884"/>
+<area shape="rect" id="node72" href="$classCSolExpCenter.html#ae5d390d58340cf2a325e1af732749466" title="CSolExpCenter::getIntraPol\lList_near" alt="" coords="451,909,635,950"/>
+<area shape="rect" id="node75" href="$classCXFormNIntra.html#a94bfabcffcda5ed3b64c046d75ea198a" title="CXFormNIntra::xformFH" alt="" coords="459,1025,626,1052"/>
+<area shape="rect" id="node85" href="$classCSolExpCenter.html#aa56891d92865c4fdc947b21351064c46" title="CSolExpCenter::getTQF" alt="" coords="460,975,625,1001"/>
+<area shape="rect" id="node77" href="$classCSolExpCenter.html#a25760cb1d325b99f3bd80cb1d5c0b117" title="CSolExpCenter::getSPx" alt="" coords="711,949,875,976"/>
+<area shape="rect" id="node79" href="$classCSolExpCenter.html#a16443b8957561090a95c0e7c5731ea35" title="CSolExpCenter::getSPExSize" alt="" coords="694,1000,893,1027"/>
+</map>

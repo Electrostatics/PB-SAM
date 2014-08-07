@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classCMolContact.html#a5cfd765a36e20400b4e8253c4d4e6c03" title="CMolContact::getMol2Type" alt="" coords="221,5,403,32"/>
+<area shape="rect" id="node5" href="$classCMolContact.html#a8968fa6a7e0d1203da63110a4a512c9d" title="CMolContact::getNContact" alt="" coords="221,56,403,83"/>
+<area shape="rect" id="node7" href="$classCMolContact.html#a5cc9aba009ea8af719a2c6d709b48fe2" title="CMolContact::getBDocked" alt="" coords="223,107,401,133"/>
+<area shape="rect" id="node9" href="$classCMolContact.html#adab54c1e41dd41799524b60752e1d78f" title="CMolContact::getContactList" alt="" coords="216,157,408,184"/>
+</map>

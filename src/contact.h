@@ -2,6 +2,7 @@
 #define _CONTACT_H_
 #include <vector>
 #include "util.h"
+#include "molecule.h"
 
 using namespace std;
 
@@ -19,6 +20,8 @@ public:
 	 atoms when in contact */
 	CContact(int id1, int id2, REAL dist=SEPDIST) : 
 	m_id1(id1),m_id2(id2),m_dist(dist) {}
+
+	static void setSepDist( REAL dist ) {SEPDIST = dist;} 
 	
 	// functions to print various part of class object
   int getID1() const {return m_id1;}

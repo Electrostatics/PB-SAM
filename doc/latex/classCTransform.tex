@@ -1,0 +1,273 @@
+\hypertarget{classCTransform}{\section{C\-Transform Class Reference}
+\label{classCTransform}\index{C\-Transform@{C\-Transform}}
+}
+
+
+{\ttfamily \#include $<$transform.\-h$>$}
+
+
+
+Inheritance diagram for C\-Transform\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTransform__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCTransform_aaca4e7da74c5e112f0668574f59b142c}{C\-Transform} (const double $\ast$mat, int pm, int pn, double scale)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCTransform}{C\-Transform} constructor. \end{DoxyCompactList}\item 
+void \hyperlink{classCTransform_adf0193b42b9f1795f8a17fceefbfa427}{output\-Row} (int mm) const 
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCTransform}{C\-Transform} output\-Row function. \end{DoxyCompactList}\item 
+void \hyperlink{classCTransform_a01467c37d6e3398be562c74516a1290e}{output\-Column} (int nn) const 
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCTransform}{C\-Transform} output\-Column function. \end{DoxyCompactList}\item 
+void \hyperlink{classCTransform_a33b3e751b4e0704a25c1b1086dbcaed5}{output} () const 
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCTransform}{C\-Transform} output function. \end{DoxyCompactList}\item 
+int \hyperlink{classCTransform_a8bd382c6cd79bb036f63d3469e5c586e}{get\-\_\-pm} () const 
+\item 
+int \hyperlink{classCTransform_a0c82963d5c30d77d66e9d4c46851e80f}{get\-\_\-pn} () const 
+\item 
+\hyperlink{classCExpan}{C\-Expan} \hyperlink{classCTransform_ae78cdbedd47c2f795f5ae43dd3f47bb4}{get\-Col\-Expan} (int nn) const 
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCTransform}{C\-Transform} get\-Col\-Expan function. \end{DoxyCompactList}\item 
+void \hyperlink{classCTransform_ad2787bd2e2007722952cc766047ad850}{set\-Matrix} (const double $\ast$mat, int pm, int pn)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCTransform}{C\-Transform} set\-Matrix function. \end{DoxyCompactList}\item 
+void \hyperlink{classCTransform_a316b9e554734130d5154d19e38887cef}{apply} (const \hyperlink{classCExpan}{C\-Expan} \&Ein, \hyperlink{classCExpan}{C\-Expan} \&Eout) const 
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCTransform}{C\-Transform} apply function. \end{DoxyCompactList}\item 
+void \hyperlink{classCTransform_a986c0b58c44e47823f6811eeb4b5d096}{apply} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&Ein, \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&Eout) const 
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCTransform}{C\-Transform} apply function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classCTransform_a3acf3a68d49e7535a4dd40a8a754def1}{m\-\_\-scale}
+\item 
+int \hyperlink{classCTransform_ad94510961771c7528f770330f2e66ad2}{m\-\_\-pm}
+\item 
+int \hyperlink{classCTransform_aed813830606385011019c96b53cee18c}{m\-\_\-pn}
+\item 
+vector$<$ vector$<$ double $>$ $>$ \hyperlink{classCTransform_ac57b548a5882b9da492184c88dbe364c}{m\-\_\-mat}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{classCTransform_a027f402dfdf090fb7f0620739b778622}{operator$<$$<$} (ostream \&out, const \hyperlink{classCTransform}{C\-Transform} T)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCTransform}{C\-Transform} $<$$<$ operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classCTransform}{C\-Transform} class
+
+The class that contains all details for all expansion transforms The transform is an pm$^\wedge$2 x pn$^\wedge$2 matrix transforming an expansion of maximum order pn to an expansion of maximum order pm 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCTransform_aaca4e7da74c5e112f0668574f59b142c}{\index{C\-Transform@{C\-Transform}!C\-Transform@{C\-Transform}}
+\index{C\-Transform@{C\-Transform}!CTransform@{C\-Transform}}
+\subsubsection[{C\-Transform}]{\setlength{\rightskip}{0pt plus 5cm}C\-Transform\-::\-C\-Transform (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{mat, }
+\item[{int}]{pm, }
+\item[{int}]{pn, }
+\item[{double}]{scale}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_aaca4e7da74c5e112f0668574f59b142c}
+
+
+The \hyperlink{classCTransform}{C\-Transform} constructor. 
+
+Creates a transform object with given inputs 
+\begin{DoxyParams}{Parameters}
+{\em mat} & a pointer to a matrix that performs transforms \\
+\hline
+{\em pm} & an int of the original number of poles \\
+\hline
+{\em pn} & an int of the new desired number of poles \\
+\hline
+{\em scale} & a floating point of the scale of the transform \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCTransform_a316b9e554734130d5154d19e38887cef}{\index{C\-Transform@{C\-Transform}!apply@{apply}}
+\index{apply@{apply}!CTransform@{C\-Transform}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Transform\-::apply (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan} \&}]{Ein, }
+\item[{{\bf C\-Expan} \&}]{Eout}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_a316b9e554734130d5154d19e38887cef}
+
+
+The \hyperlink{classCTransform}{C\-Transform} apply function. 
+
+Applies a transform to Ein to create Eout 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTransform_a316b9e554734130d5154d19e38887cef_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTransform_a986c0b58c44e47823f6811eeb4b5d096}{\index{C\-Transform@{C\-Transform}!apply@{apply}}
+\index{apply@{apply}!CTransform@{C\-Transform}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Transform\-::apply (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{Ein, }
+\item[{{\bf C\-Tri\-Expan} \&}]{Eout}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_a986c0b58c44e47823f6811eeb4b5d096}
+
+
+The \hyperlink{classCTransform}{C\-Transform} apply function. 
+
+Applies a transform to a tricoeff object 
+
+Reimplemented in \hyperlink{classCLtoLTransformFull_a94f06010f02e569eb05bea892ab0ac59}{C\-Lto\-L\-Transform\-Full}, and \hyperlink{classCLtoMTransformFull_a33fc7534a1f9a6db9f55353f12df96dd}{C\-Lto\-M\-Transform\-Full}.
+
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTransform_a986c0b58c44e47823f6811eeb4b5d096_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTransform_a8bd382c6cd79bb036f63d3469e5c586e}{\index{C\-Transform@{C\-Transform}!get\-\_\-pm@{get\-\_\-pm}}
+\index{get\-\_\-pm@{get\-\_\-pm}!CTransform@{C\-Transform}}
+\subsubsection[{get\-\_\-pm}]{\setlength{\rightskip}{0pt plus 5cm}int C\-Transform\-::get\-\_\-pm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_a8bd382c6cd79bb036f63d3469e5c586e}
+\hypertarget{classCTransform_a0c82963d5c30d77d66e9d4c46851e80f}{\index{C\-Transform@{C\-Transform}!get\-\_\-pn@{get\-\_\-pn}}
+\index{get\-\_\-pn@{get\-\_\-pn}!CTransform@{C\-Transform}}
+\subsubsection[{get\-\_\-pn}]{\setlength{\rightskip}{0pt plus 5cm}int C\-Transform\-::get\-\_\-pn (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_a0c82963d5c30d77d66e9d4c46851e80f}
+\hypertarget{classCTransform_ae78cdbedd47c2f795f5ae43dd3f47bb4}{\index{C\-Transform@{C\-Transform}!get\-Col\-Expan@{get\-Col\-Expan}}
+\index{get\-Col\-Expan@{get\-Col\-Expan}!CTransform@{C\-Transform}}
+\subsubsection[{get\-Col\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Expan} C\-Transform\-::get\-Col\-Expan (
+\begin{DoxyParamCaption}
+\item[{int}]{nn}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_ae78cdbedd47c2f795f5ae43dd3f47bb4}
+
+
+The \hyperlink{classCTransform}{C\-Transform} get\-Col\-Expan function. 
+
+Outputs the an expansion object of the nnth col of the transform 
+\begin{DoxyParams}{Parameters}
+{\em nn} & an int of the desired col number \\
+\hline
+\end{DoxyParams}
+\hypertarget{classCTransform_a33b3e751b4e0704a25c1b1086dbcaed5}{\index{C\-Transform@{C\-Transform}!output@{output}}
+\index{output@{output}!CTransform@{C\-Transform}}
+\subsubsection[{output}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Transform\-::output (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_a33b3e751b4e0704a25c1b1086dbcaed5}
+
+
+The \hyperlink{classCTransform}{C\-Transform} output function. 
+
+Outputs thetransform 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{classCTransform_a33b3e751b4e0704a25c1b1086dbcaed5_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTransform_a01467c37d6e3398be562c74516a1290e}{\index{C\-Transform@{C\-Transform}!output\-Column@{output\-Column}}
+\index{output\-Column@{output\-Column}!CTransform@{C\-Transform}}
+\subsubsection[{output\-Column}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Transform\-::output\-Column (
+\begin{DoxyParamCaption}
+\item[{int}]{nn}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_a01467c37d6e3398be562c74516a1290e}
+
+
+The \hyperlink{classCTransform}{C\-Transform} output\-Column function. 
+
+Outputs the nnth col of the transform 
+\begin{DoxyParams}{Parameters}
+{\em nn} & an int of the desired col number \\
+\hline
+\end{DoxyParams}
+\hypertarget{classCTransform_adf0193b42b9f1795f8a17fceefbfa427}{\index{C\-Transform@{C\-Transform}!output\-Row@{output\-Row}}
+\index{output\-Row@{output\-Row}!CTransform@{C\-Transform}}
+\subsubsection[{output\-Row}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Transform\-::output\-Row (
+\begin{DoxyParamCaption}
+\item[{int}]{mm}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_adf0193b42b9f1795f8a17fceefbfa427}
+
+
+The \hyperlink{classCTransform}{C\-Transform} output\-Row function. 
+
+Outputs the mnth row of the transform 
+\begin{DoxyParams}{Parameters}
+{\em mn} & an int of the desired row number \\
+\hline
+\end{DoxyParams}
+\hypertarget{classCTransform_ad2787bd2e2007722952cc766047ad850}{\index{C\-Transform@{C\-Transform}!set\-Matrix@{set\-Matrix}}
+\index{set\-Matrix@{set\-Matrix}!CTransform@{C\-Transform}}
+\subsubsection[{set\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Transform\-::set\-Matrix (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{mat, }
+\item[{int}]{pm, }
+\item[{int}]{pn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTransform_ad2787bd2e2007722952cc766047ad850}
+
+
+The \hyperlink{classCTransform}{C\-Transform} set\-Matrix function. 
+
+Resets the current transform with given inputs 
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classCTransform_a027f402dfdf090fb7f0620739b778622}{\index{C\-Transform@{C\-Transform}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!CTransform@{C\-Transform}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{out, }
+\item[{const {\bf C\-Transform}}]{T}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classCTransform_a027f402dfdf090fb7f0620739b778622}
+
+
+The \hyperlink{classCTransform}{C\-Transform} $<$$<$ operator. 
+
+Prints out a transform 
+
+\subsection{Member Data Documentation}
+\hypertarget{classCTransform_ac57b548a5882b9da492184c88dbe364c}{\index{C\-Transform@{C\-Transform}!m\-\_\-mat@{m\-\_\-mat}}
+\index{m\-\_\-mat@{m\-\_\-mat}!CTransform@{C\-Transform}}
+\subsubsection[{m\-\_\-mat}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$vector$<$double$>$ $>$ C\-Transform\-::m\-\_\-mat\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCTransform_ac57b548a5882b9da492184c88dbe364c}
+\hypertarget{classCTransform_ad94510961771c7528f770330f2e66ad2}{\index{C\-Transform@{C\-Transform}!m\-\_\-pm@{m\-\_\-pm}}
+\index{m\-\_\-pm@{m\-\_\-pm}!CTransform@{C\-Transform}}
+\subsubsection[{m\-\_\-pm}]{\setlength{\rightskip}{0pt plus 5cm}int C\-Transform\-::m\-\_\-pm\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCTransform_ad94510961771c7528f770330f2e66ad2}
+\hypertarget{classCTransform_aed813830606385011019c96b53cee18c}{\index{C\-Transform@{C\-Transform}!m\-\_\-pn@{m\-\_\-pn}}
+\index{m\-\_\-pn@{m\-\_\-pn}!CTransform@{C\-Transform}}
+\subsubsection[{m\-\_\-pn}]{\setlength{\rightskip}{0pt plus 5cm}int C\-Transform\-::m\-\_\-pn\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCTransform_aed813830606385011019c96b53cee18c}
+\hypertarget{classCTransform_a3acf3a68d49e7535a4dd40a8a754def1}{\index{C\-Transform@{C\-Transform}!m\-\_\-scale@{m\-\_\-scale}}
+\index{m\-\_\-scale@{m\-\_\-scale}!CTransform@{C\-Transform}}
+\subsubsection[{m\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}double C\-Transform\-::m\-\_\-scale\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCTransform_a3acf3a68d49e7535a4dd40a8a754def1}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{transform_8h}{transform.\-h}\end{DoxyCompactItemize}

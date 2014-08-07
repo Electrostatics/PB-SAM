@@ -2023,7 +2023,6 @@ CMolecule::interactCenters_LowMemory( CMolecule* moli, CMolecule* molj )
 			bJ2I = minp < pi2j;
 			XA.xformH(  pKj->getH( ), tL, true);
 			Lki += tL;
-	    }
 		}// end-kj
 		pot += inprod( pKi->getH( ), Lki);
 	}//end-ki

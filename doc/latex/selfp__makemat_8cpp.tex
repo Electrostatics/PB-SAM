@@ -1,0 +1,210 @@
+\hypertarget{selfp__makemat_8cpp}{\section{selfp\-\_\-makemat.\-cpp File Reference}
+\label{selfp__makemat_8cpp}\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}}
+}
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$cfloat$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$ctime$>$}\\*
+{\ttfamily \#include \char`\"{}molecule.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}system.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}readutil.\-h\char`\"{}}\\*
+Include dependency graph for selfp\-\_\-makemat.\-cpp\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{selfp__makemat_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{selfp__makemat_8cpp_afbfd2193cd1d498fe80a7619bfa6e1f9}{F\-A\-C\-T2}~5.\-604586e2
+\begin{DoxyCompactList}\small\item\em ( C\-O\-U\-L\-\_\-\-K$\ast$\-I\-Kb\-T ) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{selfp__makemat_8cpp_a354cc57f2f3f73d6baa7a6a2527872af}{main\-\_\-self\-Polarize} (int argc, char $\ast$$\ast$argv)
+\item 
+int \hyperlink{selfp__makemat_8cpp_aad401d0363e30dfec6166becfadacc08}{main\-\_\-make\-Imat} (int argc, char $\ast$$\ast$argv)
+\item 
+int \hyperlink{selfp__makemat_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{selfp__makemat_8cpp_ab17941aedd94e728c485e36b9f84b4c0}{A\-V\-O\-G\-A\-D\-R\-O\-\_\-\-N\-U\-M} = 6.\-0221415e23
+\begin{DoxyCompactList}\small\item\em Avogadro's number. \end{DoxyCompactList}\item 
+const double \hyperlink{selfp__makemat_8cpp_a5fc6ff936d89171ee04d7e817cf9275e}{E\-L\-E\-C\-T\-\_\-\-C\-H\-G} = 1.\-60217646e-\/19
+\begin{DoxyCompactList}\small\item\em The charge of 1 electron in coulombs. \end{DoxyCompactList}\item 
+const double \hyperlink{selfp__makemat_8cpp_a86748902c7ca961e8818b9be8aad379f}{P\-E\-R\-M\-I\-T\-T\-I\-V\-I\-T\-Y\-\_\-\-V\-A\-C} = 8.\-854187817e-\/12
+\begin{DoxyCompactList}\small\item\em the permittivity in a vacuum \end{DoxyCompactList}\item 
+const double \hyperlink{selfp__makemat_8cpp_a89714678b44231c75a8f8eac6d006257}{K\-B} = 1.\-3806503e-\/23
+\begin{DoxyCompactList}\small\item\em Boltzmann's const. \end{DoxyCompactList}\item 
+const double \hyperlink{selfp__makemat_8cpp_a40a9648e326d9227617ef07a5c890b5c}{A\-N\-G\-S\-T\-R\-O\-M} = 1e-\/10
+\begin{DoxyCompactList}\small\item\em Angstrom to meter conversion. \end{DoxyCompactList}\item 
+const double \hyperlink{selfp__makemat_8cpp_ac841901adaff32ee098e167c6eaf0747}{L\-I\-T\-R\-E} = 1e-\/3
+\begin{DoxyCompactList}\small\item\em Litres in k\-L. \end{DoxyCompactList}\item 
+const double \hyperlink{selfp__makemat_8cpp_ae9e73b1793d1d3ace20df51a586b8ab0}{T\-E\-M\-P} = 298.\-15
+\begin{DoxyCompactList}\small\item\em System temperature in kelvin. \end{DoxyCompactList}\item 
+const double \hyperlink{selfp__makemat_8cpp_a1cfb59050ae04db2869ea29b219d7f5e}{S\-D\-I\-E\-L} = 78
+\begin{DoxyCompactList}\small\item\em solvent dielectric constant \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{selfp__makemat_8cpp_afbfd2193cd1d498fe80a7619bfa6e1f9}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!F\-A\-C\-T2@{F\-A\-C\-T2}}
+\index{F\-A\-C\-T2@{F\-A\-C\-T2}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{F\-A\-C\-T2}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-A\-C\-T2~5.\-604586e2}}\label{selfp__makemat_8cpp_afbfd2193cd1d498fe80a7619bfa6e1f9}
+
+
+( C\-O\-U\-L\-\_\-\-K$\ast$\-I\-Kb\-T ) 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{selfp__makemat_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!main@{main}}
+\index{main@{main}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{selfp__makemat_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+M\-A\-I\-N 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{selfp__makemat_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{selfp__makemat_8cpp_aad401d0363e30dfec6166becfadacc08}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!main\-\_\-make\-Imat@{main\-\_\-make\-Imat}}
+\index{main\-\_\-make\-Imat@{main\-\_\-make\-Imat}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{main\-\_\-make\-Imat}]{\setlength{\rightskip}{0pt plus 5cm}int main\-\_\-make\-Imat (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{selfp__makemat_8cpp_aad401d0363e30dfec6166becfadacc08}
+main\-\_\-make\-Imat 
+\begin{DoxyParams}{Parameters}
+{\em flag} & for i\-Matrix computation \\
+\hline
+{\em an} & integer for the number of O\-M\-P threads \\
+\hline
+{\em the} & salt concentration in Moles \\
+\hline
+{\em the} & pqr filename for molecule \\
+\hline
+\end{DoxyParams}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{selfp__makemat_8cpp_aad401d0363e30dfec6166becfadacc08_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{selfp__makemat_8cpp_a354cc57f2f3f73d6baa7a6a2527872af}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!main\-\_\-self\-Polarize@{main\-\_\-self\-Polarize}}
+\index{main\-\_\-self\-Polarize@{main\-\_\-self\-Polarize}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{main\-\_\-self\-Polarize}]{\setlength{\rightskip}{0pt plus 5cm}int main\-\_\-self\-Polarize (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{selfp__makemat_8cpp_a354cc57f2f3f73d6baa7a6a2527872af}
+main\-\_\-self\-Polarize 
+\begin{DoxyParams}{Parameters}
+{\em flag} & for self-\/polarization \\
+\hline
+{\em an} & integer for the number of O\-M\-P threads \\
+\hline
+{\em the} & salt concentration in Moles \\
+\hline
+{\em the} & pqr filename for molecule \\
+\hline
+{\em imat} & path a path to the interaction matrices \\
+\hline
+{\em the} & name of the selfpolarization run \\
+\hline
+{\em the} & interior dielectric (optional) \\
+\hline
+\end{DoxyParams}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{selfp__makemat_8cpp_a354cc57f2f3f73d6baa7a6a2527872af_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{selfp__makemat_8cpp_a40a9648e326d9227617ef07a5c890b5c}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!A\-N\-G\-S\-T\-R\-O\-M@{A\-N\-G\-S\-T\-R\-O\-M}}
+\index{A\-N\-G\-S\-T\-R\-O\-M@{A\-N\-G\-S\-T\-R\-O\-M}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{A\-N\-G\-S\-T\-R\-O\-M}]{\setlength{\rightskip}{0pt plus 5cm}const double A\-N\-G\-S\-T\-R\-O\-M = 1e-\/10}}\label{selfp__makemat_8cpp_a40a9648e326d9227617ef07a5c890b5c}
+
+
+Angstrom to meter conversion. 
+
+\hypertarget{selfp__makemat_8cpp_ab17941aedd94e728c485e36b9f84b4c0}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!A\-V\-O\-G\-A\-D\-R\-O\-\_\-\-N\-U\-M@{A\-V\-O\-G\-A\-D\-R\-O\-\_\-\-N\-U\-M}}
+\index{A\-V\-O\-G\-A\-D\-R\-O\-\_\-\-N\-U\-M@{A\-V\-O\-G\-A\-D\-R\-O\-\_\-\-N\-U\-M}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{A\-V\-O\-G\-A\-D\-R\-O\-\_\-\-N\-U\-M}]{\setlength{\rightskip}{0pt plus 5cm}const double A\-V\-O\-G\-A\-D\-R\-O\-\_\-\-N\-U\-M = 6.\-0221415e23}}\label{selfp__makemat_8cpp_ab17941aedd94e728c485e36b9f84b4c0}
+
+
+Avogadro's number. 
+
+\hypertarget{selfp__makemat_8cpp_a5fc6ff936d89171ee04d7e817cf9275e}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!E\-L\-E\-C\-T\-\_\-\-C\-H\-G@{E\-L\-E\-C\-T\-\_\-\-C\-H\-G}}
+\index{E\-L\-E\-C\-T\-\_\-\-C\-H\-G@{E\-L\-E\-C\-T\-\_\-\-C\-H\-G}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{E\-L\-E\-C\-T\-\_\-\-C\-H\-G}]{\setlength{\rightskip}{0pt plus 5cm}const double E\-L\-E\-C\-T\-\_\-\-C\-H\-G = 1.\-60217646e-\/19}}\label{selfp__makemat_8cpp_a5fc6ff936d89171ee04d7e817cf9275e}
+
+
+The charge of 1 electron in coulombs. 
+
+\hypertarget{selfp__makemat_8cpp_a89714678b44231c75a8f8eac6d006257}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!K\-B@{K\-B}}
+\index{K\-B@{K\-B}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{K\-B}]{\setlength{\rightskip}{0pt plus 5cm}const double K\-B = 1.\-3806503e-\/23}}\label{selfp__makemat_8cpp_a89714678b44231c75a8f8eac6d006257}
+
+
+Boltzmann's const. 
+
+\hypertarget{selfp__makemat_8cpp_ac841901adaff32ee098e167c6eaf0747}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!L\-I\-T\-R\-E@{L\-I\-T\-R\-E}}
+\index{L\-I\-T\-R\-E@{L\-I\-T\-R\-E}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{L\-I\-T\-R\-E}]{\setlength{\rightskip}{0pt plus 5cm}const double L\-I\-T\-R\-E = 1e-\/3}}\label{selfp__makemat_8cpp_ac841901adaff32ee098e167c6eaf0747}
+
+
+Litres in k\-L. 
+
+\hypertarget{selfp__makemat_8cpp_a86748902c7ca961e8818b9be8aad379f}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!P\-E\-R\-M\-I\-T\-T\-I\-V\-I\-T\-Y\-\_\-\-V\-A\-C@{P\-E\-R\-M\-I\-T\-T\-I\-V\-I\-T\-Y\-\_\-\-V\-A\-C}}
+\index{P\-E\-R\-M\-I\-T\-T\-I\-V\-I\-T\-Y\-\_\-\-V\-A\-C@{P\-E\-R\-M\-I\-T\-T\-I\-V\-I\-T\-Y\-\_\-\-V\-A\-C}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{P\-E\-R\-M\-I\-T\-T\-I\-V\-I\-T\-Y\-\_\-\-V\-A\-C}]{\setlength{\rightskip}{0pt plus 5cm}const double P\-E\-R\-M\-I\-T\-T\-I\-V\-I\-T\-Y\-\_\-\-V\-A\-C = 8.\-854187817e-\/12}}\label{selfp__makemat_8cpp_a86748902c7ca961e8818b9be8aad379f}
+
+
+the permittivity in a vacuum 
+
+\hypertarget{selfp__makemat_8cpp_a1cfb59050ae04db2869ea29b219d7f5e}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!S\-D\-I\-E\-L@{S\-D\-I\-E\-L}}
+\index{S\-D\-I\-E\-L@{S\-D\-I\-E\-L}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{S\-D\-I\-E\-L}]{\setlength{\rightskip}{0pt plus 5cm}const double S\-D\-I\-E\-L = 78}}\label{selfp__makemat_8cpp_a1cfb59050ae04db2869ea29b219d7f5e}
+
+
+solvent dielectric constant 
+
+\hypertarget{selfp__makemat_8cpp_ae9e73b1793d1d3ace20df51a586b8ab0}{\index{selfp\-\_\-makemat.\-cpp@{selfp\-\_\-makemat.\-cpp}!T\-E\-M\-P@{T\-E\-M\-P}}
+\index{T\-E\-M\-P@{T\-E\-M\-P}!selfp_makemat.cpp@{selfp\-\_\-makemat.\-cpp}}
+\subsubsection[{T\-E\-M\-P}]{\setlength{\rightskip}{0pt plus 5cm}const double T\-E\-M\-P = 298.\-15}}\label{selfp__makemat_8cpp_ae9e73b1793d1d3ace20df51a586b8ab0}
+
+
+System temperature in kelvin. 
+

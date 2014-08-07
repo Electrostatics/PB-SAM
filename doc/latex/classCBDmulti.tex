@@ -1,0 +1,177 @@
+\hypertarget{classCBDmulti}{\section{C\-B\-Dmulti Class Reference}
+\label{classCBDmulti}\index{C\-B\-Dmulti@{C\-B\-Dmulti}}
+}
+
+
+{\ttfamily \#include $<$B\-Dmulti.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCBDmulti_a2091db088b9a6a1a6ec2b7c6c5d8996f}{C\-B\-Dmulti} (int Np1, int Np2, const vector$<$ char $\ast$ $>$ \&molfnames1, const vector$<$ char $\ast$ $>$ \&molfnames2, \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} idiel)
+\item 
+\hyperlink{classCBDmulti_adab1c621face82806068b94f89d1417d}{$\sim$\-C\-B\-Dmulti} ()
+\item 
+void \hyperlink{classCBDmulti_a635ea038d73100f6945a69a7cfaf5f66}{reset\-Lattice} ()
+\item 
+void \hyperlink{classCBDmulti_ad3f1d4ade11ecb178d99125ba81fefe5}{restart\-Config} (char $\ast$configname)
+\item 
+double \hyperlink{classCBDmulti_a62bd0bcd8a4e060e63093d318f0b39c1}{run\-First\-Dock\-Time} (double maxtime, char $\ast$fname)
+\item 
+\hyperlink{classCMolecule}{C\-Molecule} $\ast$ \hyperlink{classCBDmulti_ae22be9dc35b7e0c97f778d917f12d56b}{get\-Mol} (int i)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classCBDmulti_ab02b45910f422bc234e90ba4f5cfb7c3}{init\-Constants} (int n\-Mol\-Type)
+\item 
+static void \hyperlink{classCBDmulti_aa78e69e7897bef6e00108079323b3fb4}{add\-Mol\-Contact} (int mol1type, const vector$<$ \hyperlink{classCMolContact}{C\-Mol\-Contact} $>$ \&molcontactlist)
+\item 
+static \hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCBDmulti_ae70695a83936614ba8b8ec9cd8f2728e}{get\-Rand\-Vec} (\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} std)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \hyperlink{classCMolecule}{C\-Molecule} $\ast$ $>$ \hyperlink{classCBDmulti_a1648f5007c6c0e3458e11e65f266bc9e}{m\-\_\-mols}
+\item 
+vector$<$ vector$<$ \hyperlink{classCPnt}{C\-Pnt} $>$ $>$ \hyperlink{classCBDmulti_a59241b29096bb88713aba753b0e0142c}{m\-\_\-\-S\-Pxes}
+\item 
+vector$<$ \hyperlink{classCMolCell}{C\-Mol\-Cell} $>$ \hyperlink{classCBDmulti_a477fcf39d8a1fe28e14dbc1580b4a250}{m\-\_\-molcells}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCBDmulti_a2091db088b9a6a1a6ec2b7c6c5d8996f}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!C\-B\-Dmulti@{C\-B\-Dmulti}}
+\index{C\-B\-Dmulti@{C\-B\-Dmulti}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{C\-B\-Dmulti}]{\setlength{\rightskip}{0pt plus 5cm}C\-B\-Dmulti\-::\-C\-B\-Dmulti (
+\begin{DoxyParamCaption}
+\item[{int}]{Np1, }
+\item[{int}]{Np2, }
+\item[{const vector$<$ char $\ast$ $>$ \&}]{molfnames1, }
+\item[{const vector$<$ char $\ast$ $>$ \&}]{molfnames2, }
+\item[{{\bf R\-E\-A\-L}}]{idiel}
+\end{DoxyParamCaption}
+)}}\label{classCBDmulti_a2091db088b9a6a1a6ec2b7c6c5d8996f}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{classCBDmulti_a2091db088b9a6a1a6ec2b7c6c5d8996f_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCBDmulti_adab1c621face82806068b94f89d1417d}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!$\sim$\-C\-B\-Dmulti@{$\sim$\-C\-B\-Dmulti}}
+\index{$\sim$\-C\-B\-Dmulti@{$\sim$\-C\-B\-Dmulti}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{$\sim$\-C\-B\-Dmulti}]{\setlength{\rightskip}{0pt plus 5cm}C\-B\-Dmulti\-::$\sim$\-C\-B\-Dmulti (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCBDmulti_adab1c621face82806068b94f89d1417d}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCBDmulti_aa78e69e7897bef6e00108079323b3fb4}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!add\-Mol\-Contact@{add\-Mol\-Contact}}
+\index{add\-Mol\-Contact@{add\-Mol\-Contact}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{add\-Mol\-Contact}]{\setlength{\rightskip}{0pt plus 5cm}void C\-B\-Dmulti\-::add\-Mol\-Contact (
+\begin{DoxyParamCaption}
+\item[{int}]{mol1type, }
+\item[{const vector$<$ {\bf C\-Mol\-Contact} $>$ \&}]{molcontactlist}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classCBDmulti_aa78e69e7897bef6e00108079323b3fb4}
+\hypertarget{classCBDmulti_ae22be9dc35b7e0c97f778d917f12d56b}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!get\-Mol@{get\-Mol}}
+\index{get\-Mol@{get\-Mol}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{get\-Mol}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Molecule}$\ast$ C\-B\-Dmulti\-::get\-Mol (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCBDmulti_ae22be9dc35b7e0c97f778d917f12d56b}
+\hypertarget{classCBDmulti_ae70695a83936614ba8b8ec9cd8f2728e}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!get\-Rand\-Vec@{get\-Rand\-Vec}}
+\index{get\-Rand\-Vec@{get\-Rand\-Vec}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{get\-Rand\-Vec}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf C\-Pnt} C\-B\-Dmulti\-::get\-Rand\-Vec (
+\begin{DoxyParamCaption}
+\item[{{\bf R\-E\-A\-L}}]{std}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{classCBDmulti_ae70695a83936614ba8b8ec9cd8f2728e}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{classCBDmulti_ae70695a83936614ba8b8ec9cd8f2728e_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCBDmulti_ab02b45910f422bc234e90ba4f5cfb7c3}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!init\-Constants@{init\-Constants}}
+\index{init\-Constants@{init\-Constants}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{init\-Constants}]{\setlength{\rightskip}{0pt plus 5cm}void C\-B\-Dmulti\-::init\-Constants (
+\begin{DoxyParamCaption}
+\item[{int}]{n\-Mol\-Type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classCBDmulti_ab02b45910f422bc234e90ba4f5cfb7c3}
+\hypertarget{classCBDmulti_a635ea038d73100f6945a69a7cfaf5f66}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!reset\-Lattice@{reset\-Lattice}}
+\index{reset\-Lattice@{reset\-Lattice}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{reset\-Lattice}]{\setlength{\rightskip}{0pt plus 5cm}void C\-B\-Dmulti\-::reset\-Lattice (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classCBDmulti_a635ea038d73100f6945a69a7cfaf5f66}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCBDmulti_a635ea038d73100f6945a69a7cfaf5f66_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCBDmulti_ad3f1d4ade11ecb178d99125ba81fefe5}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!restart\-Config@{restart\-Config}}
+\index{restart\-Config@{restart\-Config}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{restart\-Config}]{\setlength{\rightskip}{0pt plus 5cm}void C\-B\-Dmulti\-::restart\-Config (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{configname}
+\end{DoxyParamCaption}
+)}}\label{classCBDmulti_ad3f1d4ade11ecb178d99125ba81fefe5}
+\hypertarget{classCBDmulti_a62bd0bcd8a4e060e63093d318f0b39c1}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!run\-First\-Dock\-Time@{run\-First\-Dock\-Time}}
+\index{run\-First\-Dock\-Time@{run\-First\-Dock\-Time}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{run\-First\-Dock\-Time}]{\setlength{\rightskip}{0pt plus 5cm}double C\-B\-Dmulti\-::run\-First\-Dock\-Time (
+\begin{DoxyParamCaption}
+\item[{double}]{maxtime, }
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}}\label{classCBDmulti_a62bd0bcd8a4e060e63093d318f0b39c1}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCBDmulti_a62bd0bcd8a4e060e63093d318f0b39c1_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classCBDmulti_a477fcf39d8a1fe28e14dbc1580b4a250}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!m\-\_\-molcells@{m\-\_\-molcells}}
+\index{m\-\_\-molcells@{m\-\_\-molcells}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{m\-\_\-molcells}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf C\-Mol\-Cell}$>$ C\-B\-Dmulti\-::m\-\_\-molcells}}\label{classCBDmulti_a477fcf39d8a1fe28e14dbc1580b4a250}
+\hypertarget{classCBDmulti_a1648f5007c6c0e3458e11e65f266bc9e}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!m\-\_\-mols@{m\-\_\-mols}}
+\index{m\-\_\-mols@{m\-\_\-mols}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{m\-\_\-mols}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf C\-Molecule}$\ast$$>$ C\-B\-Dmulti\-::m\-\_\-mols}}\label{classCBDmulti_a1648f5007c6c0e3458e11e65f266bc9e}
+\hypertarget{classCBDmulti_a59241b29096bb88713aba753b0e0142c}{\index{C\-B\-Dmulti@{C\-B\-Dmulti}!m\-\_\-\-S\-Pxes@{m\-\_\-\-S\-Pxes}}
+\index{m\-\_\-\-S\-Pxes@{m\-\_\-\-S\-Pxes}!CBDmulti@{C\-B\-Dmulti}}
+\subsubsection[{m\-\_\-\-S\-Pxes}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$vector$<${\bf C\-Pnt}$>$ $>$ C\-B\-Dmulti\-::m\-\_\-\-S\-Pxes}}\label{classCBDmulti_a59241b29096bb88713aba753b0e0142c}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{BDmulti_8h}{B\-Dmulti.\-h}\item 
+\hyperlink{BDmulti_8cpp}{B\-Dmulti.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classCMolecule.html#ab17972b75961018a4166a6a5b72bf7f1" title="CMolecule::writeMolsPQR" alt="" coords="246,56,423,83"/>
+<area shape="rect" id="node11" href="$util_8h.html#aa1d26866fab397a6e6346c7e9de15ecc" title="read_timer function" alt="" coords="293,157,376,184"/>
+<area shape="rect" id="node13" href="$classCMolecule.html#a36ba3e10e6bfbc2bcef45c0985525116" title="CMolecule::saveConfig" alt="" coords="255,107,414,133"/>
+<area shape="rect" id="node5" href="$classCPnt.html#a5867d45fc05ae371116367067eb23f48" title="The CSpPnt class print x." alt="" coords="487,5,553,32"/>
+<area shape="rect" id="node7" href="$classCPnt.html#ac9283f60e70f312ee1784de6c6ea5aec" title="The CSpPnt class print y." alt="" coords="487,56,553,83"/>
+<area shape="rect" id="node9" href="$classCPnt.html#a37d139ebe50234ab753472b896c7d17c" title="The CSpPnt class print z." alt="" coords="487,107,553,133"/>
+<area shape="rect" id="node15" href="$classCQuat.html#a783b34fbc307fbb00fd112c8441b0f30" title="CQuat::imag" alt="" coords="472,208,568,235"/>
+<area shape="rect" id="node20" href="$classCQuat.html#a7f18efa604d788a39bb6726de6546ce2" title="CQuat::real" alt="" coords="475,157,565,184"/>
+</map>

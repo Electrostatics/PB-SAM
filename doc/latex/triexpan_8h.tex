@@ -1,0 +1,143 @@
+\hypertarget{triexpan_8h}{\section{triexpan.\-h File Reference}
+\label{triexpan_8h}\index{triexpan.\-h@{triexpan.\-h}}
+}
+{\ttfamily \#include \char`\"{}expansion.\-h\char`\"{}}\\*
+Include dependency graph for triexpan.\-h\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{triexpan_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{triexpan_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classCTriExpan}{C\-Tri\-Expan}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classCTriExpan}{C\-Tri\-Expan} class. \end{DoxyCompactList}\item 
+class \hyperlink{classCGradExpan}{C\-Grad\-Expan}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{triexpan_8h_a8f7ba505b67b68b4f24c567a9ac3d1c4}{inprod\-\_\-unit\-Scale} (const \hyperlink{classCExpan}{C\-Expan} \&M1, const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&M2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{triexpan_8h_ab4474d855cad0782c65a3066d366b46d}{inprod} (const \hyperlink{classCMulExpan}{C\-Mul\-Expan} \&M1, const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&M2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{triexpan_8h_a8e124621a3ce0c71a23287968eb83f33}{inprod} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&M1, const \hyperlink{classCLocalExpan}{C\-Local\-Expan} \&M2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{triexpan_8h_ad813a2b432680bed12a9ae458ac2666d}{cross} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&G1, const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&G2)
+\item 
+\hyperlink{classCTriExpan}{C\-Tri\-Expan} \hyperlink{triexpan_8h_a522fbb3365db1caccb7f624e764fbdd9}{operator$\ast$} (const \hyperlink{classCExpan}{C\-Expan} E, const \hyperlink{classCPnt}{C\-Pnt} p)
+\begin{DoxyCompactList}\small\item\em end copy\-\_\-p \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{triexpan_8h_ad813a2b432680bed12a9ae458ac2666d}{\index{triexpan.\-h@{triexpan.\-h}!cross@{cross}}
+\index{cross@{cross}!triexpan.h@{triexpan.\-h}}
+\subsubsection[{cross}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} cross (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{G1, }
+\item[{const {\bf C\-Tri\-Expan} \&}]{G2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{triexpan_8h_ad813a2b432680bed12a9ae458ac2666d}
+Compute the cross product between two tri expansions 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{triexpan_8h_ad813a2b432680bed12a9ae458ac2666d_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{triexpan_8h_ab4474d855cad0782c65a3066d366b46d}{\index{triexpan.\-h@{triexpan.\-h}!inprod@{inprod}}
+\index{inprod@{inprod}!triexpan.h@{triexpan.\-h}}
+\subsubsection[{inprod}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} inprod (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Mul\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Tri\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{triexpan_8h_ab4474d855cad0782c65a3066d366b46d}
+Compute the inner product of 1 expansion times each component of a tri expansion with a scale given by the tri expansion 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{triexpan_8h_ab4474d855cad0782c65a3066d366b46d_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{triexpan_8h_a8e124621a3ce0c71a23287968eb83f33}{\index{triexpan.\-h@{triexpan.\-h}!inprod@{inprod}}
+\index{inprod@{inprod}!triexpan.h@{triexpan.\-h}}
+\subsubsection[{inprod}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} inprod (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Local\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{triexpan_8h_a8e124621a3ce0c71a23287968eb83f33}
+Compute the inner product of a local expansion times each component of a tri expansion with a scale given by the tri expansion 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{triexpan_8h_a8e124621a3ce0c71a23287968eb83f33_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{triexpan_8h_a8f7ba505b67b68b4f24c567a9ac3d1c4}{\index{triexpan.\-h@{triexpan.\-h}!inprod\-\_\-unit\-Scale@{inprod\-\_\-unit\-Scale}}
+\index{inprod\-\_\-unit\-Scale@{inprod\-\_\-unit\-Scale}!triexpan.h@{triexpan.\-h}}
+\subsubsection[{inprod\-\_\-unit\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} inprod\-\_\-unit\-Scale (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Tri\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{triexpan_8h_a8f7ba505b67b68b4f24c567a9ac3d1c4}
+Compute the inner product of 1 expansion times each component of a tri expansion with a scale of 1.\-0 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{triexpan_8h_a8f7ba505b67b68b4f24c567a9ac3d1c4_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{triexpan_8h_a522fbb3365db1caccb7f624e764fbdd9}{\index{triexpan.\-h@{triexpan.\-h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!triexpan.h@{triexpan.\-h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Tri\-Expan} operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan}}]{E, }
+\item[{const {\bf C\-Pnt}}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{triexpan_8h_a522fbb3365db1caccb7f624e764fbdd9}
+
+
+end copy\-\_\-p 
+
+
+\begin{DoxyItemize}
+\item Create a triexpansion by multiplying each part of cartesian coordinates p, by E an expansion object. 
+\end{DoxyItemize}
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{triexpan_8h_a522fbb3365db1caccb7f624e764fbdd9_cgraph}
+\end{center}
+\end{figure}
+
+
