@@ -1,0 +1,62 @@
+This is the directory containing the test code for PB-SAM. The code is more complex and requires more setup than the original analytical version.  The test directory contains the following subdirectories:
+
+	1BRS/config
+	1BRS/DATA_s5i1
+	1BRS/msms
+	1BRS/PREP_findContacts
+	1BRS/PREP_makeSpheres
+	1BRS/PREP_makeSpheres_noContact
+
+And the following steps should be run in order to create a BD simulation, whether it be Nam or Multi.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Extract chains from PDBs.We start off with the complex of barnase with barstar (PDB code 1BRS). This gives us		-  1BRS_chainA.pdb (barnase) 		-  1BRS_chainD.pdb (barstar) 
+
+2. Convert each chain from PDB to PQR format.  This can be done with pdb2pqr (Dolinsky, Nielsen et al. 2004; Dolinsky, Czodrowski et al. 2007), either via the web server http://nbcr-222.ucsd.edu/pdb2pqr_1.8/, or locally with rupdb2pqr.py (http://www.poissonboltzmann.org/pdb2pqr/d/downloads). 
+
+3. Generate solvent excluded molecular surface (SES)  This is done with MSMS (Sanner, Olson et al. 1996) – two ways available: 	(i) via Python Molecular Viewer (from MGLtools http://mgltools.scripps.edu): 	Load .pqr file, click menu->compute->compute molecular surface, and choose probe radius = 1.5 Å, density = 3.0, high density = 3.0. To save, click menu->compute->save molecular surface, and enter desired filename.	(ii) via the standalone MSMS (also from http://mgltools.scripps.edu): 		$ ./pdb_to_xyzr 1BRS_chainA.pdb > 1BRS_chainA.xyzr 		$ ./msms.yourplatform -if 1BRS_chainA.xyzr -probe_radius 1.5 -density 3.0 -hdensity 3.0 -no_area -of 1BRS_chainA.p1.5d3
+You would get four output files: 1BRS_chainA.p1.5d3.face, 1BRS_chainA.p1.5d3.vert, 1BRS_chainD.p1.5d3.face, 1BRS_chainD.p1.5d3.vert. Only the .vert files will be used subsequently.
+
+4. Make spheres. Go to 1BRS/PREP_makeSpheres[_noContact] and submit *.pbs.  The noContact option should be used for running a system without docking. The program makesphere reads in (i) atoms in pqr format (PQRFILE) and (ii) the corresponding molecular surface (VERTFILE), and finds a minimal set of spheres (i.e. centers) that could encompass all the atoms. Two tolerance values specify how far the sphere surface can protrude from the SES: TOLIP for interface atoms (hence smaller value for better sphere resolution) and TOLSP for the rest of the atoms. The interface is determined from the binding partner chain (CONTACTPQRFILE). The resulting centers (.cen) files have the format [cenx, ceny, cenz, radius], which are then converted back to PQR format using cen2pqr.pl.
+
+5.  Combine atom and center pqr files Finally, combine the atom and center pqr files$ cd 1BRS/config$ cat ../PREP_makeSpheres/centers_chainA_ca_p1.5d3_s5i1.pqr 1BRS_chainA.pqr > 1BRS_chainA_p1.5d3_s5i1.pqr $ cat ../PREP_makeSpheres/centers_chainD_ca_p1.5d3_s5i1.pqr 1BRS_chainD.pqr > 1BRS_chainD_p1.5d3_s5i1.pqrThe files 1BRS_chainA_p1.5d3_s5i1.pqr and 1BRS_chainD_p1.5d3_s5i1.pqr will be the input files for the PBSAM program.6. Defining Docking Criteria. This portion is currently somewhat manual. There are many possible ways to define a docked complex. In the 1BRS case we wanted to adhere closely to the atomistic docking criteria of (Gabdoulline and Wade 1997). We have mapped Wade’s contact atoms to atom members in the PQR files for chain A and D.  Then we run *.qsub to map those onto CG spheres.  This generates a *.log file as follows:
+	Centers1: 164
+	Centers2: 153
+	atom contacts read 8
+	36 1.75558 126 1.6612  3.41678
+	163 1.6612 116 1.824  3.4852
+	108 1.6612 58 1.824  3.4852
+	59 1.824 89 1.6612  3.4852
+	133 1.824 146 1.721  3.545
+	152 1.6612 145 1.721  3.3822
+	76 1.824 114 1.6612  3.4852
+	55 1.824 131 1.6612  3.4852
+	Final Sphere List : 8
+	36 126
+	163 116
+	108 58
+	59 89
+	133 146
+	152 145
+	76 114
+	55 131
+
+We manually extract the sphere listand create a new file, e.g. contactdef_c2.dat, see below. (! Remarks in # are for info only, must be removed in actual file)
+
+	0 # mol1type	1 # ndef	1 # mol2type	2 # ncontact	8 # npair	56 43 # sphere1 sphere2	36 126
+	163 116
+	108 58
+	59 89
+	133 146
+	152 145
+	76 114
+	55 131
+
+	mol1type : molecule id of protein corresponding to the first column of the contact pairs. The molecule ids are assigned during the dynamic runs, in the order that they are read in. In the 1BRS case, barnase m_id = 0 and barstar = 1.	ndef : number of interface definitions. A protein can potentially have multiple interfaces with different proteins of same or different species. For 1BRS, there is only 1 interface.	Within each interface definition, we have		- mol2type : molecule id of protein corresponding to the second column of the contact pairs.		- ncontact :numberofcontactspairsthatmustbesatisfiedtobeconsidereddocked. For 1BRS we follow Wade’s criterion and set this to two.		- npair : total number of contacts pairs to be checked
+
+7. Integral computationNow we pre-compute the surface integral matrices, one for each sphere in chain A and chain D. Go to $PBSAMHOME/Example_1BRS/DATA_s5i1/makeIMat/IMAT_P30_250k. Scripts for generating the matrices are available in folders chainA and chainD for running pbsam in parallel using openmp. The outputs are integral matrix files labeled imat.sp[i].out.bin, where i = 0 to Nsphere-
+
+8. Self-polarization computationNow we pre-compute the reactive and effective multipoles, F and H for each chain in isolation (i.e. self-polarization). Go to1BRS/DATA_s5i1/DATA_SELFPOL/IMAT_250k_based/SOLEXP_p30/salt_i0.05. Scripts for computing the multipoles are available in folders chainA and chainD for running pbsam in parallel using openmp. The outputs are integral matrix files labeled 1BRS_A_s5i1_i0.05_p30.0.[i].F/H.exp, where i = 0 to Nsphere-1.9. Running BDnam
+BDnam is a Brownian dynamic simulation in which two molecules are simulated. The first molecule read in is positioned at the origin and the second molecule is mobile. Each run proceeds until the second molecule docks or ‘escapes’ beyond a stipulated radius. For details see (Northrup, Allison et al. 1984).A sample script is located in 1BRS/DATA_s5i1/DATA_nam, nam.pbs, along with a list of input parameters.10. Running BDmultiBDmulti is a Brownian dynamic simulation in which multiple molecules (two species) are simulated in a periodic box.A sample script is located in 1BRS/DATA_s5i1/DATA_multi multi.pbs, along with a list of input parameters.
