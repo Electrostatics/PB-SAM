@@ -19,7 +19,7 @@ FC_OBJS      =      $(FC_C:.cpp=.o)
 
 ## Makesphere ##
 
-MS_C =  spheres.cpp spheres_contact.cpp readutil.cpp \
+MS_C =  spheres.cpp readutil.cpp \
 					 makesphere.cpp expansion.cpp
 MS_OBJS      =      $(MS_C:.cpp=.o)
 
@@ -53,9 +53,9 @@ bdm: $(BDM_OBJS) Makefile
 	mv bdm $(BIN)
 
 bdnam: $(BDNAM_OBJS) Makefile
-	rm -f $(BIN)/bdnam
-	$(CC) $(CFLAGS) $(PARAMS) $(BDNAM_OBJS) $(LINK) -o bdnam
-	mv bdnam $(BIN)
+	rm -f $(BIN)/bdnam_10
+	$(CC) $(CFLAGS) $(PARAMS) $(BDNAM_OBJS) $(LINK) -o bdnam_10
+	mv bdnam_10 $(BIN)
 
 findContacts:  $(FC_OBJS)	 Makefile
 	rm -f ../bin/findContacts

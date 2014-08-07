@@ -1,0 +1,40 @@
+\hypertarget{memory_8h}{\section{memory.\-h File Reference}
+\label{memory_8h}\index{memory.\-h@{memory.\-h}}
+}
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include $<$ios$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+Include dependency graph for memory.\-h\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{memory_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{memory_8h_a53bf00b939fe0e94c0ffb23aacb97758}{process\-\_\-mem\-\_\-usage} (double \&vm\-\_\-usage, double \&resident\-\_\-set)
+\begin{DoxyCompactList}\small\item\em The process\-\_\-mem\-\_\-usage function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{memory_8h_a53bf00b939fe0e94c0ffb23aacb97758}{\index{memory.\-h@{memory.\-h}!process\-\_\-mem\-\_\-usage@{process\-\_\-mem\-\_\-usage}}
+\index{process\-\_\-mem\-\_\-usage@{process\-\_\-mem\-\_\-usage}!memory.h@{memory.\-h}}
+\subsubsection[{process\-\_\-mem\-\_\-usage}]{\setlength{\rightskip}{0pt plus 5cm}void process\-\_\-mem\-\_\-usage (
+\begin{DoxyParamCaption}
+\item[{double \&}]{vm\-\_\-usage, }
+\item[{double \&}]{resident\-\_\-set}
+\end{DoxyParamCaption}
+)}}\label{memory_8h_a53bf00b939fe0e94c0ffb23aacb97758}
+
+
+The process\-\_\-mem\-\_\-usage function. 
+
+process\-\_\-mem\-\_\-usage function
+
+\hyperlink{memory_8h_a53bf00b939fe0e94c0ffb23aacb97758}{process\-\_\-mem\-\_\-usage( double \&, double \& )} -\/ takes two doubles by reference, attempts to read the system-\/dependent data for a process' virtual memory size and resident set size, and return the results in K\-B.
+
+On failure, returns 0.\-0, 0.\-0 page\-\_\-size\-\_\-kb 

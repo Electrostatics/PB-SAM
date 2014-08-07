@@ -1,0 +1,211 @@
+\hypertarget{expansion_8h}{\section{expansion.\-h File Reference}
+\label{expansion_8h}\index{expansion.\-h@{expansion.\-h}}
+}
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include \char`\"{}util.\-h\char`\"{}}\\*
+Include dependency graph for expansion.\-h\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{expansion_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{expansion_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classCRange}{C\-Range}
+\item 
+class \hyperlink{classCExpan}{C\-Expan}
+\item 
+class \hyperlink{classCMulExpan}{C\-Mul\-Expan}
+\item 
+class \hyperlink{classCLocalExpan}{C\-Local\-Expan}
+\item 
+class \hyperlink{classCSHExpan}{C\-S\-H\-Expan}
+\item 
+class \hyperlink{classCRExpan}{C\-R\-Expan}
+\item 
+class \hyperlink{classCMExpan}{C\-M\-Expan}
+\item 
+class \hyperlink{classCLExpan}{C\-L\-Expan}
+\item 
+class \hyperlink{classCRExpanConstructor}{C\-R\-Expan\-Constructor$<$ T $>$}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{expansion_8h_ac23f9c13c5d07d9ce386f7a830c35e5a}{N\-\_\-\-P\-O\-L\-E\-S}~30
+\item 
+\#define \hyperlink{expansion_8h_a598ca4bcb37316a8e42b252ee8abbef4}{P\-R\-E\-C\-\_\-\-L\-I\-M\-I\-T}~( 1e-\/30 )
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCExpan}{C\-Expan} \hyperlink{expansion_8h_acf0203c0850da84b035f9727dd1689f6}{operator$\ast$} (\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} s, const \hyperlink{classCExpan}{C\-Expan} \&M)
+\item 
+\hyperlink{classCExpan}{C\-Expan} \hyperlink{expansion_8h_a96b9ccf674ed9f587710c4a11e30b5f6}{operator+} (const \hyperlink{classCExpan}{C\-Expan} \&M1, const \hyperlink{classCExpan}{C\-Expan} \&M2)
+\item 
+\hyperlink{classCExpan}{C\-Expan} \hyperlink{expansion_8h_a299abce888a9c221b9a345a560e6880f}{operator-\/} (const \hyperlink{classCExpan}{C\-Expan} \&M1, const \hyperlink{classCExpan}{C\-Expan} \&M2)
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{expansion_8h_a5b8852acff77a8c6c5a167d050c7cee2}{inprod\-\_\-unit\-Scale} (const \hyperlink{classCExpan}{C\-Expan} \&E1, const \hyperlink{classCExpan}{C\-Expan} \&E2)
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{expansion_8h_a020c55be9514911fc8ecde0a8d81a919}{inprod} (const \hyperlink{classCMulExpan}{C\-Mul\-Expan} \&M, const \hyperlink{classCLocalExpan}{C\-Local\-Expan} \&L)
+\item 
+double \hyperlink{expansion_8h_aacbd0c587a1f8b6c7f69bb7d2ea3c6e0}{operator$\ast$} (const \hyperlink{classCExpan}{C\-Expan} \&M1, const \hyperlink{classCExpan}{C\-Expan} \&M2)
+\item 
+bool \hyperlink{expansion_8h_a35fefc436ee691468cdc7390ec783400}{Is\-Scale\-Equal} (const \hyperlink{classCExpan}{C\-Expan} \&M1, const \hyperlink{classCExpan}{C\-Expan} \&M2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{expansion_8h_ac23f9c13c5d07d9ce386f7a830c35e5a}{\index{expansion.\-h@{expansion.\-h}!N\-\_\-\-P\-O\-L\-E\-S@{N\-\_\-\-P\-O\-L\-E\-S}}
+\index{N\-\_\-\-P\-O\-L\-E\-S@{N\-\_\-\-P\-O\-L\-E\-S}!expansion.h@{expansion.\-h}}
+\subsubsection[{N\-\_\-\-P\-O\-L\-E\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-\_\-\-P\-O\-L\-E\-S~30}}\label{expansion_8h_ac23f9c13c5d07d9ce386f7a830c35e5a}
+\hypertarget{expansion_8h_a598ca4bcb37316a8e42b252ee8abbef4}{\index{expansion.\-h@{expansion.\-h}!P\-R\-E\-C\-\_\-\-L\-I\-M\-I\-T@{P\-R\-E\-C\-\_\-\-L\-I\-M\-I\-T}}
+\index{P\-R\-E\-C\-\_\-\-L\-I\-M\-I\-T@{P\-R\-E\-C\-\_\-\-L\-I\-M\-I\-T}!expansion.h@{expansion.\-h}}
+\subsubsection[{P\-R\-E\-C\-\_\-\-L\-I\-M\-I\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-R\-E\-C\-\_\-\-L\-I\-M\-I\-T~( 1e-\/30 )}}\label{expansion_8h_a598ca4bcb37316a8e42b252ee8abbef4}
+
+
+\subsection{Function Documentation}
+\hypertarget{expansion_8h_a020c55be9514911fc8ecde0a8d81a919}{\index{expansion.\-h@{expansion.\-h}!inprod@{inprod}}
+\index{inprod@{inprod}!expansion.h@{expansion.\-h}}
+\subsubsection[{inprod}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} inprod (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Mul\-Expan} \&}]{M, }
+\item[{const {\bf C\-Local\-Expan} \&}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{expansion_8h_a020c55be9514911fc8ecde0a8d81a919}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{expansion_8h_a020c55be9514911fc8ecde0a8d81a919_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{expansion_8h_a5b8852acff77a8c6c5a167d050c7cee2}{\index{expansion.\-h@{expansion.\-h}!inprod\-\_\-unit\-Scale@{inprod\-\_\-unit\-Scale}}
+\index{inprod\-\_\-unit\-Scale@{inprod\-\_\-unit\-Scale}!expansion.h@{expansion.\-h}}
+\subsubsection[{inprod\-\_\-unit\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} inprod\-\_\-unit\-Scale (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan} \&}]{E1, }
+\item[{const {\bf C\-Expan} \&}]{E2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{expansion_8h_a5b8852acff77a8c6c5a167d050c7cee2}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{expansion_8h_a5b8852acff77a8c6c5a167d050c7cee2_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{expansion_8h_a35fefc436ee691468cdc7390ec783400}{\index{expansion.\-h@{expansion.\-h}!Is\-Scale\-Equal@{Is\-Scale\-Equal}}
+\index{Is\-Scale\-Equal@{Is\-Scale\-Equal}!expansion.h@{expansion.\-h}}
+\subsubsection[{Is\-Scale\-Equal}]{\setlength{\rightskip}{0pt plus 5cm}bool Is\-Scale\-Equal (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{expansion_8h_a35fefc436ee691468cdc7390ec783400}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{expansion_8h_a35fefc436ee691468cdc7390ec783400_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{expansion_8h_acf0203c0850da84b035f9727dd1689f6}{\index{expansion.\-h@{expansion.\-h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!expansion.h@{expansion.\-h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Expan} operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{{\bf R\-E\-A\-L}}]{s, }
+\item[{const {\bf C\-Expan} \&}]{M}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{expansion_8h_acf0203c0850da84b035f9727dd1689f6}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{expansion_8h_acf0203c0850da84b035f9727dd1689f6_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{expansion_8h_aacbd0c587a1f8b6c7f69bb7d2ea3c6e0}{\index{expansion.\-h@{expansion.\-h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!expansion.h@{expansion.\-h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}double operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{expansion_8h_aacbd0c587a1f8b6c7f69bb7d2ea3c6e0}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{expansion_8h_aacbd0c587a1f8b6c7f69bb7d2ea3c6e0_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{expansion_8h_a96b9ccf674ed9f587710c4a11e30b5f6}{\index{expansion.\-h@{expansion.\-h}!operator+@{operator+}}
+\index{operator+@{operator+}!expansion.h@{expansion.\-h}}
+\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Expan} operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{expansion_8h_a96b9ccf674ed9f587710c4a11e30b5f6}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{expansion_8h_a96b9ccf674ed9f587710c4a11e30b5f6_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{expansion_8h_a299abce888a9c221b9a345a560e6880f}{\index{expansion.\-h@{expansion.\-h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!expansion.h@{expansion.\-h}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Expan} operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{expansion_8h_a299abce888a9c221b9a345a560e6880f}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{expansion_8h_a299abce888a9c221b9a345a560e6880f_cgraph}
+\end{center}
+\end{figure}
+
+

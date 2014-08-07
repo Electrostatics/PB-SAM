@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classCTriExpan.html#a26a23540d1a6ad3547a370d10fb84a7e" title="CTriExpan::getRange" alt="" coords="211,56,359,83"/>
+<area shape="rect" id="node7" href="$classCTriExpan.html#a3fe2b894d13e1b698c3c76b82d00548c" title="CTriExpan::getScale" alt="" coords="214,5,357,32"/>
+<area shape="rect" id="node11" href="$classCXFormAIntra.html#ab39d168aca3d0a247da8a0dca88d676b" title="CXFormAIntra::xformF" alt="" coords="208,131,363,157"/>
+<area shape="rect" id="node5" href="$classCExpan.html#a8603cbb7c8f67972e825d583711d59fd" title="CExpan::getRange" alt="" coords="421,56,555,83"/>
+<area shape="rect" id="node9" href="$classCExpan.html#a849c5d81bbc37ea52dd660d5950f264c" title="CExpan::getScale" alt="" coords="424,5,552,32"/>
+<area shape="rect" id="node14" href="$classCRange.html#a88c073347df45fa05a0e88fd91021d2b" title="CRange::p2" alt="" coords="442,256,534,283"/>
+<area shape="rect" id="node16" href="$classCRotCoeff.html#a81aa02ca1487dab4a101741bae0debfb" title="CRotCoeff rotate function." alt="" coords="425,131,551,157"/>
+<area shape="rect" id="node19" href="$classCTransCoeff.html#a1d1d9ced218d76afb362aa1f7d5a27da" title="TransCoeff translate function." alt="" coords="411,205,565,232"/>
+</map>

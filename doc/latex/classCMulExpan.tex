@@ -1,0 +1,152 @@
+\hypertarget{classCMulExpan}{\section{C\-Mul\-Expan Class Reference}
+\label{classCMulExpan}\index{C\-Mul\-Expan@{C\-Mul\-Expan}}
+}
+
+
+{\ttfamily \#include $<$expansion.\-h$>$}
+
+
+
+Inheritance diagram for C\-Mul\-Expan\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{classCMulExpan__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for C\-Mul\-Expan\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=163pt]{classCMulExpan__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCMulExpan_abcef941fb90e2e5c3e220d43396dfc37}{C\-Mul\-Expan} (const double $\ast$v, const \hyperlink{classCRange}{C\-Range} \&range, double scale=1.\-0)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCMulExpan}{C\-Mul\-Expan} class constructor. \end{DoxyCompactList}\item 
+\hyperlink{classCMulExpan_a931ae750321cb051d5d374854bc8a424}{C\-Mul\-Expan} (const vector$<$ \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} $>$ M, const \hyperlink{classCRange}{C\-Range} \&range, double scale=1.\-0)
+\item 
+\hyperlink{classCMulExpan_a4256da905269df8c3f78230b69e8e3e1}{C\-Mul\-Expan} (const vector$<$ \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} $>$ \&ch, const vector$<$ \hyperlink{classCPnt}{C\-Pnt} $>$ \&pos, int p, bool b\-Kappa, \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} scale)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCMulExpan}{C\-Mul\-Expan} class constructor. \end{DoxyCompactList}\item 
+\hyperlink{classCMulExpan_ae557c77c098763a39a0c5ad266517304}{C\-Mul\-Expan} (int p=0)
+\item 
+\hyperlink{classCMulExpan_a95beaf89b77d13f7525562138d0ac2df}{C\-Mul\-Expan} (const \hyperlink{classCRange}{C\-Range} \&range, \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} scale=1.\-0)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{classCMulExpan_a020c55be9514911fc8ecde0a8d81a919}{inprod} (const \hyperlink{classCMulExpan}{C\-Mul\-Expan} \&M, const \hyperlink{classCLocalExpan}{C\-Local\-Expan} \&L)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classCMulExpan}{C\-Mul\-Expan} class
+
+The \hyperlink{classCMulExpan}{C\-Mul\-Expan} class contains information about general multipole expansion class. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCMulExpan_abcef941fb90e2e5c3e220d43396dfc37}{\index{C\-Mul\-Expan@{C\-Mul\-Expan}!C\-Mul\-Expan@{C\-Mul\-Expan}}
+\index{C\-Mul\-Expan@{C\-Mul\-Expan}!CMulExpan@{C\-Mul\-Expan}}
+\subsubsection[{C\-Mul\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}C\-Mul\-Expan\-::\-C\-Mul\-Expan (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{v, }
+\item[{const {\bf C\-Range} \&}]{range, }
+\item[{double}]{scale = {\ttfamily 1.0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCMulExpan_abcef941fb90e2e5c3e220d43396dfc37}
+
+
+The \hyperlink{classCMulExpan}{C\-Mul\-Expan} class constructor. 
+
+Initialize a \hyperlink{classCMulExpan}{C\-Mul\-Expan} object from a vector of coefficients. 
+\begin{DoxyParams}{Parameters}
+{\em p} & is an int that is a minimal number of poles. Default is zero. \\
+\hline
+{\em range} & a \hyperlink{classCRange}{C\-Range} object of the range of \\
+\hline
+\end{DoxyParams}
+\hypertarget{classCMulExpan_a931ae750321cb051d5d374854bc8a424}{\index{C\-Mul\-Expan@{C\-Mul\-Expan}!C\-Mul\-Expan@{C\-Mul\-Expan}}
+\index{C\-Mul\-Expan@{C\-Mul\-Expan}!CMulExpan@{C\-Mul\-Expan}}
+\subsubsection[{C\-Mul\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}C\-Mul\-Expan\-::\-C\-Mul\-Expan (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf R\-E\-A\-L} $>$}]{M, }
+\item[{const {\bf C\-Range} \&}]{range, }
+\item[{double}]{scale = {\ttfamily 1.0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCMulExpan_a931ae750321cb051d5d374854bc8a424}
+\hypertarget{classCMulExpan_a4256da905269df8c3f78230b69e8e3e1}{\index{C\-Mul\-Expan@{C\-Mul\-Expan}!C\-Mul\-Expan@{C\-Mul\-Expan}}
+\index{C\-Mul\-Expan@{C\-Mul\-Expan}!CMulExpan@{C\-Mul\-Expan}}
+\subsubsection[{C\-Mul\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}C\-Mul\-Expan\-::\-C\-Mul\-Expan (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf R\-E\-A\-L} $>$ \&}]{ch, }
+\item[{const vector$<$ {\bf C\-Pnt} $>$ \&}]{pos, }
+\item[{int}]{p, }
+\item[{bool}]{b\-Kappa, }
+\item[{{\bf R\-E\-A\-L}}]{scale}
+\end{DoxyParamCaption}
+)}}\label{classCMulExpan_a4256da905269df8c3f78230b69e8e3e1}
+
+
+The \hyperlink{classCMulExpan}{C\-Mul\-Expan} class constructor. 
+
+Initialize a \hyperlink{classCMulExpan}{C\-Mul\-Expan} object of a set of charges, creates an M\-Expan object. 
+\begin{DoxyParams}{Parameters}
+{\em ch} & a vector of point charges \\
+\hline
+{\em pos} & a vector of point charge X\-Y\-Z coordinates \\
+\hline
+{\em p} & is an int that is the number of poles. \\
+\hline
+{\em b\-Kappa} & a boolean of whether of not to include screened charges \\
+\hline
+{\em scale} & a length scale for the expansion\\
+\hline
+\end{DoxyParams}
+Construct a multipole expansion for a set of charges, calls M\-Expan constructor 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCMulExpan_a4256da905269df8c3f78230b69e8e3e1_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCMulExpan_ae557c77c098763a39a0c5ad266517304}{\index{C\-Mul\-Expan@{C\-Mul\-Expan}!C\-Mul\-Expan@{C\-Mul\-Expan}}
+\index{C\-Mul\-Expan@{C\-Mul\-Expan}!CMulExpan@{C\-Mul\-Expan}}
+\subsubsection[{C\-Mul\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}C\-Mul\-Expan\-::\-C\-Mul\-Expan (
+\begin{DoxyParamCaption}
+\item[{int}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCMulExpan_ae557c77c098763a39a0c5ad266517304}
+\hypertarget{classCMulExpan_a95beaf89b77d13f7525562138d0ac2df}{\index{C\-Mul\-Expan@{C\-Mul\-Expan}!C\-Mul\-Expan@{C\-Mul\-Expan}}
+\index{C\-Mul\-Expan@{C\-Mul\-Expan}!CMulExpan@{C\-Mul\-Expan}}
+\subsubsection[{C\-Mul\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}C\-Mul\-Expan\-::\-C\-Mul\-Expan (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Range} \&}]{range, }
+\item[{{\bf R\-E\-A\-L}}]{scale = {\ttfamily 1.0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCMulExpan_a95beaf89b77d13f7525562138d0ac2df}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classCMulExpan_a020c55be9514911fc8ecde0a8d81a919}{\index{C\-Mul\-Expan@{C\-Mul\-Expan}!inprod@{inprod}}
+\index{inprod@{inprod}!CMulExpan@{C\-Mul\-Expan}}
+\subsubsection[{inprod}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} inprod (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Mul\-Expan} \&}]{M, }
+\item[{const {\bf C\-Local\-Expan} \&}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classCMulExpan_a020c55be9514911fc8ecde0a8d81a919}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{expansion_8h}{expansion.\-h}\item 
+\hyperlink{expansion_8cpp}{expansion.\-cpp}\end{DoxyCompactItemize}

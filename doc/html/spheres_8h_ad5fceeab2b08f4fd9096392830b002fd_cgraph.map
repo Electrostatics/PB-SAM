@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$util_8h.html#a3daa70c1884dabb0992d5ce98e3f692a" title="normRand" alt="" coords="171,5,253,32"/>
+<area shape="rect" id="node5" href="$util_8h.html#a491783063d690a2f389e3317f44dd0b7" title="randOrient" alt="" coords="171,56,253,83"/>
+<area shape="rect" id="node7" href="$util_8h.html#a995a97713975591555fe37b5ad50745a" title="CPnt dot." alt="" coords="192,107,232,133"/>
+<area shape="rect" id="node9" href="$classCPnt.html#a5867d45fc05ae371116367067eb23f48" title="The CSpPnt class print x." alt="" coords="301,56,368,83"/>
+<area shape="rect" id="node11" href="$classCPnt.html#ac9283f60e70f312ee1784de6c6ea5aec" title="The CSpPnt class print y." alt="" coords="301,107,368,133"/>
+<area shape="rect" id="node13" href="$classCPnt.html#a37d139ebe50234ab753472b896c7d17c" title="The CSpPnt class print z." alt="" coords="301,157,368,184"/>
+</map>

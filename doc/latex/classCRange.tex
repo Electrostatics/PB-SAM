@@ -1,0 +1,229 @@
+\hypertarget{classCRange}{\section{C\-Range Class Reference}
+\label{classCRange}\index{C\-Range@{C\-Range}}
+}
+
+
+{\ttfamily \#include $<$expansion.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCRange_a12bb43c1078b3312943eb4487b216b56}{C\-Range} ()
+\item 
+\hyperlink{classCRange_a5d07db4ff572c4b5139ad1261a0ff756}{C\-Range} (int \hyperlink{classCRange_a88c073347df45fa05a0e88fd91021d2b}{p2})
+\item 
+\hyperlink{classCRange_aa3f19739b3afcbc71708458f36c5341f}{C\-Range} (int \hyperlink{classCRange_a300319aff8dd27fefc004b6c724b4655}{p1}, int \hyperlink{classCRange_a88c073347df45fa05a0e88fd91021d2b}{p2})
+\item 
+\hyperlink{classCRange_a4707c0cdf4ec6f6eb462da9a2d59957a}{C\-Range} (int \hyperlink{classCRange_a300319aff8dd27fefc004b6c724b4655}{p1}, int \hyperlink{classCRange_a88c073347df45fa05a0e88fd91021d2b}{p2}, bool b\-Rot)
+\item 
+const \hyperlink{classCRange}{C\-Range} \& \hyperlink{classCRange_a6fb1ea1d0fcafbd10537719856df18e3}{operator=} (const \hyperlink{classCRange}{C\-Range} \&R)
+\item 
+\hyperlink{classCRange_a5a9670bdf5a390163a8fe12114385a17}{C\-Range} (const \hyperlink{classCRange}{C\-Range} \&R)
+\item 
+bool \hyperlink{classCRange_aed2b0d5257a9b972c242cfc12bc1a9d0}{operator==} (const \hyperlink{classCRange}{C\-Range} \&R) const 
+\item 
+int \hyperlink{classCRange_a300319aff8dd27fefc004b6c724b4655}{p1} () const 
+\item 
+int \hyperlink{classCRange_a88c073347df45fa05a0e88fd91021d2b}{p2} () const 
+\item 
+bool \hyperlink{classCRange_a1bc4be786243482ff5b493933b9906bc}{is\-Empty} () const 
+\item 
+bool \hyperlink{classCRange_ab634198a2af9e23bc52202ed1df5ad09}{in\-Range} (int n) const 
+\item 
+void \hyperlink{classCRange_a52a80e221024456c29a2022f9566d181}{inc\-Range} ()
+\item 
+void \hyperlink{classCRange_a99e330c80b10a04916651662d28ac7ed}{dec\-Range} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classCRange}{C\-Range} \hyperlink{classCRange_af9d1231238478fa4a9edfc2ea7f81372}{makeunion} (const \hyperlink{classCRange}{C\-Range} \&R1, const \hyperlink{classCRange}{C\-Range} \&R2)
+\item 
+static \hyperlink{classCRange}{C\-Range} \hyperlink{classCRange_a589cce90cd0bc2766c3b08f7f3d1175a}{intersection} (const \hyperlink{classCRange}{C\-Range} \&R1, const \hyperlink{classCRange}{C\-Range} \&R2)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{classCRange_a928efec3b48ede05120f92a548f86b69}{operator$<$$<$} (ostream \&out, const \hyperlink{classCRange}{C\-Range} \&R)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classCRange}{C\-Range} class
+
+The \hyperlink{classCRange}{C\-Range} class contains information about a range for an expansion \mbox{[}p1,p2\mbox{]} p1 is the index of the lowest order and p2 is one larger than the index of the highest order. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCRange_a12bb43c1078b3312943eb4487b216b56}{\index{C\-Range@{C\-Range}!C\-Range@{C\-Range}}
+\index{C\-Range@{C\-Range}!CRange@{C\-Range}}
+\subsubsection[{C\-Range}]{\setlength{\rightskip}{0pt plus 5cm}C\-Range\-::\-C\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a12bb43c1078b3312943eb4487b216b56}
+\hypertarget{classCRange_a5d07db4ff572c4b5139ad1261a0ff756}{\index{C\-Range@{C\-Range}!C\-Range@{C\-Range}}
+\index{C\-Range@{C\-Range}!CRange@{C\-Range}}
+\subsubsection[{C\-Range}]{\setlength{\rightskip}{0pt plus 5cm}C\-Range\-::\-C\-Range (
+\begin{DoxyParamCaption}
+\item[{int}]{p2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a5d07db4ff572c4b5139ad1261a0ff756}
+\hypertarget{classCRange_aa3f19739b3afcbc71708458f36c5341f}{\index{C\-Range@{C\-Range}!C\-Range@{C\-Range}}
+\index{C\-Range@{C\-Range}!CRange@{C\-Range}}
+\subsubsection[{C\-Range}]{\setlength{\rightskip}{0pt plus 5cm}C\-Range\-::\-C\-Range (
+\begin{DoxyParamCaption}
+\item[{int}]{p1, }
+\item[{int}]{p2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_aa3f19739b3afcbc71708458f36c5341f}
+\hypertarget{classCRange_a4707c0cdf4ec6f6eb462da9a2d59957a}{\index{C\-Range@{C\-Range}!C\-Range@{C\-Range}}
+\index{C\-Range@{C\-Range}!CRange@{C\-Range}}
+\subsubsection[{C\-Range}]{\setlength{\rightskip}{0pt plus 5cm}C\-Range\-::\-C\-Range (
+\begin{DoxyParamCaption}
+\item[{int}]{p1, }
+\item[{int}]{p2, }
+\item[{bool}]{b\-Rot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a4707c0cdf4ec6f6eb462da9a2d59957a}
+\hypertarget{classCRange_a5a9670bdf5a390163a8fe12114385a17}{\index{C\-Range@{C\-Range}!C\-Range@{C\-Range}}
+\index{C\-Range@{C\-Range}!CRange@{C\-Range}}
+\subsubsection[{C\-Range}]{\setlength{\rightskip}{0pt plus 5cm}C\-Range\-::\-C\-Range (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Range} \&}]{R}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a5a9670bdf5a390163a8fe12114385a17}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCRange_a99e330c80b10a04916651662d28ac7ed}{\index{C\-Range@{C\-Range}!dec\-Range@{dec\-Range}}
+\index{dec\-Range@{dec\-Range}!CRange@{C\-Range}}
+\subsubsection[{dec\-Range}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Range\-::dec\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a99e330c80b10a04916651662d28ac7ed}
+\hypertarget{classCRange_a52a80e221024456c29a2022f9566d181}{\index{C\-Range@{C\-Range}!inc\-Range@{inc\-Range}}
+\index{inc\-Range@{inc\-Range}!CRange@{C\-Range}}
+\subsubsection[{inc\-Range}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Range\-::inc\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a52a80e221024456c29a2022f9566d181}
+\hypertarget{classCRange_ab634198a2af9e23bc52202ed1df5ad09}{\index{C\-Range@{C\-Range}!in\-Range@{in\-Range}}
+\index{in\-Range@{in\-Range}!CRange@{C\-Range}}
+\subsubsection[{in\-Range}]{\setlength{\rightskip}{0pt plus 5cm}bool C\-Range\-::in\-Range (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_ab634198a2af9e23bc52202ed1df5ad09}
+\hypertarget{classCRange_a589cce90cd0bc2766c3b08f7f3d1175a}{\index{C\-Range@{C\-Range}!intersection@{intersection}}
+\index{intersection@{intersection}!CRange@{C\-Range}}
+\subsubsection[{intersection}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf C\-Range} C\-Range\-::intersection (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Range} \&}]{R1, }
+\item[{const {\bf C\-Range} \&}]{R2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{classCRange_a589cce90cd0bc2766c3b08f7f3d1175a}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{classCRange_a589cce90cd0bc2766c3b08f7f3d1175a_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCRange_a1bc4be786243482ff5b493933b9906bc}{\index{C\-Range@{C\-Range}!is\-Empty@{is\-Empty}}
+\index{is\-Empty@{is\-Empty}!CRange@{C\-Range}}
+\subsubsection[{is\-Empty}]{\setlength{\rightskip}{0pt plus 5cm}bool C\-Range\-::is\-Empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a1bc4be786243482ff5b493933b9906bc}
+\hypertarget{classCRange_af9d1231238478fa4a9edfc2ea7f81372}{\index{C\-Range@{C\-Range}!makeunion@{makeunion}}
+\index{makeunion@{makeunion}!CRange@{C\-Range}}
+\subsubsection[{makeunion}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf C\-Range} C\-Range\-::makeunion (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Range} \&}]{R1, }
+\item[{const {\bf C\-Range} \&}]{R2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{classCRange_af9d1231238478fa4a9edfc2ea7f81372}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{classCRange_af9d1231238478fa4a9edfc2ea7f81372_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCRange_a6fb1ea1d0fcafbd10537719856df18e3}{\index{C\-Range@{C\-Range}!operator=@{operator=}}
+\index{operator=@{operator=}!CRange@{C\-Range}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Range}\& C\-Range\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Range} \&}]{R}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a6fb1ea1d0fcafbd10537719856df18e3}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classCRange_a6fb1ea1d0fcafbd10537719856df18e3_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCRange_aed2b0d5257a9b972c242cfc12bc1a9d0}{\index{C\-Range@{C\-Range}!operator==@{operator==}}
+\index{operator==@{operator==}!CRange@{C\-Range}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool C\-Range\-::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Range} \&}]{R}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_aed2b0d5257a9b972c242cfc12bc1a9d0}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{classCRange_aed2b0d5257a9b972c242cfc12bc1a9d0_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCRange_a300319aff8dd27fefc004b6c724b4655}{\index{C\-Range@{C\-Range}!p1@{p1}}
+\index{p1@{p1}!CRange@{C\-Range}}
+\subsubsection[{p1}]{\setlength{\rightskip}{0pt plus 5cm}int C\-Range\-::p1 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a300319aff8dd27fefc004b6c724b4655}
+\hypertarget{classCRange_a88c073347df45fa05a0e88fd91021d2b}{\index{C\-Range@{C\-Range}!p2@{p2}}
+\index{p2@{p2}!CRange@{C\-Range}}
+\subsubsection[{p2}]{\setlength{\rightskip}{0pt plus 5cm}int C\-Range\-::p2 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCRange_a88c073347df45fa05a0e88fd91021d2b}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classCRange_a928efec3b48ede05120f92a548f86b69}{\index{C\-Range@{C\-Range}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!CRange@{C\-Range}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{out, }
+\item[{const {\bf C\-Range} \&}]{R}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classCRange_a928efec3b48ede05120f92a548f86b69}
+Range output a range of polarization to output file 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{expansion_8h}{expansion.\-h}\end{DoxyCompactItemize}

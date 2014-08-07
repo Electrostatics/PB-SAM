@@ -1,0 +1,162 @@
+\hypertarget{classCSystem}{\section{C\-System Class Reference}
+\label{classCSystem}\index{C\-System@{C\-System}}
+}
+
+
+The \hyperlink{classCSystem}{C\-System} class.  
+
+
+
+
+{\ttfamily \#include $<$system.\-h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classCSystem_ac237dc9cd329e8886ab2b419596dded9}{init\-Constants} (double kappa, double sdiel, double temp, bool \hyperlink{classCSystem_ad4220c7ae13d01939b760aa998afe9f0}{b\-P\-B\-C}=false, double boxlength=D\-B\-L\-\_\-\-M\-A\-X)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCSystem}{C\-System} init\-Constants function. \end{DoxyCompactList}\item 
+static void \hyperlink{classCSystem_a730251f2318aa9f1247808773903f57a}{set\-Box\-Length} (double bl)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCSystem}{C\-System} delete\-Constants function. \end{DoxyCompactList}\item 
+static \hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCSystem_a29136721e5abd3ee40781adbee13d9e0}{pbc\-Pos} (\hyperlink{classCPnt}{C\-Pnt} p)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCSystem}{C\-System} pbc\-Pos function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{classCSystem_a26c3b08c72081eee05d8dd12010860de}{K\-A\-P\-P\-A}
+\begin{DoxyCompactList}\small\item\em A floating point of the inverse debye length. \end{DoxyCompactList}\item 
+static double \hyperlink{classCSystem_a759e213e8fc55da6be14382b90864e06}{m\-\_\-sdiel}
+\begin{DoxyCompactList}\small\item\em A floating point for the solvent dielectric. \end{DoxyCompactList}\item 
+static double \hyperlink{classCSystem_aa6fbb1e26af0341048dbdc26e6e44b44}{m\-\_\-temp}
+\begin{DoxyCompactList}\small\item\em A floating point of the system temperature. \end{DoxyCompactList}\item 
+static double \hyperlink{classCSystem_a59f4db8047443eac01a56ff40c7d1592}{B\-O\-X\-L\-E\-N\-G\-T\-H}
+\begin{DoxyCompactList}\small\item\em A floating point of the box length for P\-B\-Cs. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCSystem_ad4220c7ae13d01939b760aa998afe9f0}{b\-P\-B\-C} = false
+\begin{DoxyCompactList}\small\item\em A boolean indicating whether or not periodic boundary conds. are implemented. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classCSystem}{C\-System} class. 
+
+The class that contains all the constants for a system 
+
+\subsection{Member Function Documentation}
+\hypertarget{classCSystem_ac237dc9cd329e8886ab2b419596dded9}{\index{C\-System@{C\-System}!init\-Constants@{init\-Constants}}
+\index{init\-Constants@{init\-Constants}!CSystem@{C\-System}}
+\subsubsection[{init\-Constants}]{\setlength{\rightskip}{0pt plus 5cm}void C\-System\-::init\-Constants (
+\begin{DoxyParamCaption}
+\item[{double}]{kappa, }
+\item[{double}]{sdiel, }
+\item[{double}]{temp, }
+\item[{bool}]{b\-P\-B\-C\-\_\- = {\ttfamily false}, }
+\item[{double}]{boxlength = {\ttfamily DBL\-\_\-MAX}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classCSystem_ac237dc9cd329e8886ab2b419596dded9}
+
+
+The \hyperlink{classCSystem}{C\-System} init\-Constants function. 
+
+The function to initialize system constants 
+\begin{DoxyParams}{Parameters}
+{\em kappa} & a floating point of the inverse debye length \\
+\hline
+{\em sdiel} & a floating point for the solvent dielectric \\
+\hline
+{\em temp} & a floating point of the system temperature \\
+\hline
+{\em b\-P\-B\-C} & a boolean indicating whether or not periodic boundary conds. are implemented \\
+\hline
+{\em boxlength} & a floating point of the box length for P\-B\-Cs\\
+\hline
+\end{DoxyParams}
+init\-Constants initializes constants of the system from user input\-: \hypertarget{classCSystem_a29136721e5abd3ee40781adbee13d9e0}{\index{C\-System@{C\-System}!pbc\-Pos@{pbc\-Pos}}
+\index{pbc\-Pos@{pbc\-Pos}!CSystem@{C\-System}}
+\subsubsection[{pbc\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} C\-System\-::pbc\-Pos (
+\begin{DoxyParamCaption}
+\item[{{\bf C\-Pnt}}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classCSystem_a29136721e5abd3ee40781adbee13d9e0}
+
+
+The \hyperlink{classCSystem}{C\-System} pbc\-Pos function. 
+
+The function to move a point to its position in original image of a periodic system 
+\begin{DoxyParams}{Parameters}
+{\em p} & an X\-Y\-Z cartesian object to move \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an X\-Y\-Z object of position in first periodic box
+\end{DoxyReturn}
+deletes any static array on heap Function to wrap a cartesian coordinate into its position in the first box. 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classCSystem_a29136721e5abd3ee40781adbee13d9e0_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCSystem_a730251f2318aa9f1247808773903f57a}{\index{C\-System@{C\-System}!set\-Box\-Length@{set\-Box\-Length}}
+\index{set\-Box\-Length@{set\-Box\-Length}!CSystem@{C\-System}}
+\subsubsection[{set\-Box\-Length}]{\setlength{\rightskip}{0pt plus 5cm}static void C\-System\-::set\-Box\-Length (
+\begin{DoxyParamCaption}
+\item[{double}]{bl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{classCSystem_a730251f2318aa9f1247808773903f57a}
+
+
+The \hyperlink{classCSystem}{C\-System} delete\-Constants function. 
+
+The function to clear system constants The \hyperlink{classCSystem}{C\-System} set\-Box\-Length function
+
+The function to set the boxlength as that given from in \mbox{[}Angstroms\mbox{]} 
+\begin{DoxyParams}{Parameters}
+{\em bl} & a floating point of the boxlength to set \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classCSystem_a59f4db8047443eac01a56ff40c7d1592}{\index{C\-System@{C\-System}!B\-O\-X\-L\-E\-N\-G\-T\-H@{B\-O\-X\-L\-E\-N\-G\-T\-H}}
+\index{B\-O\-X\-L\-E\-N\-G\-T\-H@{B\-O\-X\-L\-E\-N\-G\-T\-H}!CSystem@{C\-System}}
+\subsubsection[{B\-O\-X\-L\-E\-N\-G\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}double C\-System\-::\-B\-O\-X\-L\-E\-N\-G\-T\-H\hspace{0.3cm}{\ttfamily [static]}}}\label{classCSystem_a59f4db8047443eac01a56ff40c7d1592}
+
+
+A floating point of the box length for P\-B\-Cs. 
+
+\hypertarget{classCSystem_ad4220c7ae13d01939b760aa998afe9f0}{\index{C\-System@{C\-System}!b\-P\-B\-C@{b\-P\-B\-C}}
+\index{b\-P\-B\-C@{b\-P\-B\-C}!CSystem@{C\-System}}
+\subsubsection[{b\-P\-B\-C}]{\setlength{\rightskip}{0pt plus 5cm}bool C\-System\-::b\-P\-B\-C = false\hspace{0.3cm}{\ttfamily [static]}}}\label{classCSystem_ad4220c7ae13d01939b760aa998afe9f0}
+
+
+A boolean indicating whether or not periodic boundary conds. are implemented. 
+
+\hypertarget{classCSystem_a26c3b08c72081eee05d8dd12010860de}{\index{C\-System@{C\-System}!K\-A\-P\-P\-A@{K\-A\-P\-P\-A}}
+\index{K\-A\-P\-P\-A@{K\-A\-P\-P\-A}!CSystem@{C\-System}}
+\subsubsection[{K\-A\-P\-P\-A}]{\setlength{\rightskip}{0pt plus 5cm}double C\-System\-::\-K\-A\-P\-P\-A\hspace{0.3cm}{\ttfamily [static]}}}\label{classCSystem_a26c3b08c72081eee05d8dd12010860de}
+
+
+A floating point of the inverse debye length. 
+
+\hypertarget{classCSystem_a759e213e8fc55da6be14382b90864e06}{\index{C\-System@{C\-System}!m\-\_\-sdiel@{m\-\_\-sdiel}}
+\index{m\-\_\-sdiel@{m\-\_\-sdiel}!CSystem@{C\-System}}
+\subsubsection[{m\-\_\-sdiel}]{\setlength{\rightskip}{0pt plus 5cm}double C\-System\-::m\-\_\-sdiel\hspace{0.3cm}{\ttfamily [static]}}}\label{classCSystem_a759e213e8fc55da6be14382b90864e06}
+
+
+A floating point for the solvent dielectric. 
+
+\hypertarget{classCSystem_aa6fbb1e26af0341048dbdc26e6e44b44}{\index{C\-System@{C\-System}!m\-\_\-temp@{m\-\_\-temp}}
+\index{m\-\_\-temp@{m\-\_\-temp}!CSystem@{C\-System}}
+\subsubsection[{m\-\_\-temp}]{\setlength{\rightskip}{0pt plus 5cm}double C\-System\-::m\-\_\-temp\hspace{0.3cm}{\ttfamily [static]}}}\label{classCSystem_aa6fbb1e26af0341048dbdc26e6e44b44}
+
+
+A floating point of the system temperature. 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{system_8h}{system.\-h}\item 
+\hyperlink{system_8cpp}{system.\-cpp}\end{DoxyCompactItemize}

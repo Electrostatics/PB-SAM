@@ -1,0 +1,535 @@
+\hypertarget{classCTriExpan}{\section{C\-Tri\-Expan Class Reference}
+\label{classCTriExpan}\index{C\-Tri\-Expan@{C\-Tri\-Expan}}
+}
+
+
+\hyperlink{classCTriExpan}{C\-Tri\-Expan} class.  
+
+
+
+
+{\ttfamily \#include $<$triexpan.\-h$>$}
+
+
+
+Inheritance diagram for C\-Tri\-Expan\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{classCTriExpan__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for C\-Tri\-Expan\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{classCTriExpan__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCTriExpan_ad90a00f11b5e8c8bfb16a244a81406d4}{C\-Tri\-Expan} (int p=0, \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} scale=1.\-0)
+\item 
+void \hyperlink{classCTriExpan_a6e55f787fa10d245b8a81abf6e1a2082}{rotate} (const \hyperlink{classCQuat}{C\-Quat} \&Q, int p)
+\item 
+void \hyperlink{classCTriExpan_a47cc8551e212cca521144e8f2619c42a}{inc\-Rotate} (const \hyperlink{classCQuat}{C\-Quat} \&Q)
+\item 
+void \hyperlink{classCTriExpan_ac2debbe18cecadb462b1573dcfd017cd}{output\-Complex} (\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} fact=1.\-0) const 
+\item 
+const \hyperlink{classCExpan}{C\-Expan} \& \hyperlink{classCTriExpan_a27cd9f0bf1f58b91d89d3c12c03525b2}{operator\mbox{[}$\,$\mbox{]}} (int c) const 
+\item 
+\hyperlink{classCExpan}{C\-Expan} \& \hyperlink{classCTriExpan_a1551ab9311355e9275b9204faedeee02}{operator\mbox{[}$\,$\mbox{]}} (int c)
+\item 
+\hyperlink{classCTriExpan}{C\-Tri\-Expan} \& \hyperlink{classCTriExpan_a4a1e6feaebf3ceaf75ff2c35390b2978}{operator+=} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&E)
+\item 
+\hyperlink{classCTriExpan}{C\-Tri\-Expan} \& \hyperlink{classCTriExpan_a3ab3ddc4c13f65923693417538c339a7}{operator-\/=} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&E)
+\item 
+\hyperlink{classCTriExpan}{C\-Tri\-Expan} \& \hyperlink{classCTriExpan_a916a6a734f5e00c9bad0c5fc9c32f1c5}{operator$\ast$=} (const \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} $\ast$C)
+\item 
+void \hyperlink{classCTriExpan_ab78ef5bb64df3d2d497968dfaecf0583}{set\-Range} (int p)
+\item 
+void \hyperlink{classCTriExpan_a03f02560398adc694835232d3b4e8f8b}{set\-Range} (\hyperlink{classCRange}{C\-Range} R)
+\item 
+void \hyperlink{classCTriExpan_a51f47a9ae7f19a2558400c525e1716cd}{set\-Scale} (\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} scale)
+\item 
+void \hyperlink{classCTriExpan_a2abfca44411177f675cf9de0c5d96319}{reset} (\hyperlink{classCRange}{C\-Range} R)
+\item 
+void \hyperlink{classCTriExpan_a3afaa15f79472c486cb03af999292b68}{reset} (int p=0)
+\item 
+void \hyperlink{classCTriExpan_ada91fb0b3d1a9affe583996f3ef25d35}{recip} ()
+\item 
+vector$<$ \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} $>$ \hyperlink{classCTriExpan_af35f34a4844423b37a4569e14caa04e8}{get\-One\-Vector} () const 
+\item 
+void \hyperlink{classCTriExpan_abe36fdfa4160421b9f9c4c6ae5c8818f}{set\-From\-One\-Vector} (const vector$<$ \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} $>$ \&V)
+\item 
+void \hyperlink{classCTriExpan_a4f357cf3964776ee907370e054b25740}{copy} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&G, int p)
+\item 
+void \hyperlink{classCTriExpan_a21a9c70172ba7224c77bfa53dca8a177}{copy\-\_\-p} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&G, int p)
+\item 
+\hyperlink{classCTriExpan}{C\-Tri\-Expan} \hyperlink{classCTriExpan_afbe552370cd3a3f9f65742224d86bb16}{operator=} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&E)
+\item 
+\hyperlink{classCRange}{C\-Range} \hyperlink{classCTriExpan_a26a23540d1a6ad3547a370d10fb84a7e}{get\-Range} () const 
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{classCTriExpan_a3fe2b894d13e1b698c3c76b82d00548c}{get\-Scale} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{classCTriExpan_a44e821fcef7cf9c02714d71772e7cbb9}{compute\-Dev} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&G1, const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&G2)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCExpan}{C\-Expan} \hyperlink{classCTriExpan_af8c7f3af976ff622b46ed050a1b3624d}{m\-\_\-\-M} \mbox{[}3\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{classCTriExpan_a64145b0a055e5980a76370aaebd25988}{operator$<$$<$} (ostream \&out, const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&exp)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCTriExpan_a8f7ba505b67b68b4f24c567a9ac3d1c4}{inprod\-\_\-unit\-Scale} (const \hyperlink{classCExpan}{C\-Expan} \&M1, const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&M2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCTriExpan_ab4474d855cad0782c65a3066d366b46d}{inprod} (const \hyperlink{classCMulExpan}{C\-Mul\-Expan} \&M1, const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&M2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCTriExpan_a8e124621a3ce0c71a23287968eb83f33}{inprod} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&M1, const \hyperlink{classCLocalExpan}{C\-Local\-Expan} \&M2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCTriExpan_ad813a2b432680bed12a9ae458ac2666d}{cross} (const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&G1, const \hyperlink{classCTriExpan}{C\-Tri\-Expan} \&G2)
+\item 
+\hyperlink{classCTriExpan}{C\-Tri\-Expan} \hyperlink{classCTriExpan_a522fbb3365db1caccb7f624e764fbdd9}{operator$\ast$} (const \hyperlink{classCExpan}{C\-Expan} E, const \hyperlink{classCPnt}{C\-Pnt} p)
+\begin{DoxyCompactList}\small\item\em end copy\-\_\-p \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classCTriExpan}{C\-Tri\-Expan} class. 
+
+This class is the base class for for gradients 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCTriExpan_ad90a00f11b5e8c8bfb16a244a81406d4}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!C\-Tri\-Expan@{C\-Tri\-Expan}}
+\index{C\-Tri\-Expan@{C\-Tri\-Expan}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{C\-Tri\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}C\-Tri\-Expan\-::\-C\-Tri\-Expan (
+\begin{DoxyParamCaption}
+\item[{int}]{p = {\ttfamily 0}, }
+\item[{{\bf R\-E\-A\-L}}]{scale = {\ttfamily 1.0}}
+\end{DoxyParamCaption}
+)}}\label{classCTriExpan_ad90a00f11b5e8c8bfb16a244a81406d4}
+\hyperlink{classCExpCenter}{C\-Exp\-Center} constructor. 
+\begin{DoxyParams}{Parameters}
+{\em p} & an int of the number of poles of the triexpansion \\
+\hline
+{\em scale} & a scaling factor for the expansion trio \\
+\hline
+\end{DoxyParams}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTriExpan_ad90a00f11b5e8c8bfb16a244a81406d4_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCTriExpan_a44e821fcef7cf9c02714d71772e7cbb9}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!compute\-Dev@{compute\-Dev}}
+\index{compute\-Dev@{compute\-Dev}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{compute\-Dev}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} C\-Tri\-Expan\-::compute\-Dev (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{G1, }
+\item[{const {\bf C\-Tri\-Expan} \&}]{G2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{classCTriExpan_a44e821fcef7cf9c02714d71772e7cbb9}
+Compute the deviation of the difference between 2 trio expansions 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTriExpan_a44e821fcef7cf9c02714d71772e7cbb9_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a4f357cf3964776ee907370e054b25740}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!copy@{copy}}
+\index{copy@{copy}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{G, }
+\item[{int}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a4f357cf3964776ee907370e054b25740}
+Copy the number of poles and the tri expansion to current obj 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTriExpan_a4f357cf3964776ee907370e054b25740_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a21a9c70172ba7224c77bfa53dca8a177}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!copy\-\_\-p@{copy\-\_\-p}}
+\index{copy\-\_\-p@{copy\-\_\-p}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{copy\-\_\-p}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::copy\-\_\-p (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{G, }
+\item[{int}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a21a9c70172ba7224c77bfa53dca8a177}
+Copy the number of poles and the tri expansion to current obj 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTriExpan_a21a9c70172ba7224c77bfa53dca8a177_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_af35f34a4844423b37a4569e14caa04e8}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!get\-One\-Vector@{get\-One\-Vector}}
+\index{get\-One\-Vector@{get\-One\-Vector}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{get\-One\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf R\-E\-A\-L} $>$ C\-Tri\-Expan\-::get\-One\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_af35f34a4844423b37a4569e14caa04e8}
+Function to return the vectors from each expansion in the triexpan concatenated into 1 long vector 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{classCTriExpan_af35f34a4844423b37a4569e14caa04e8_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a26a23540d1a6ad3547a370d10fb84a7e}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!get\-Range@{get\-Range}}
+\index{get\-Range@{get\-Range}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{get\-Range}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Range} C\-Tri\-Expan\-::get\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a26a23540d1a6ad3547a370d10fb84a7e}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{classCTriExpan_a26a23540d1a6ad3547a370d10fb84a7e_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a3fe2b894d13e1b698c3c76b82d00548c}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!get\-Scale@{get\-Scale}}
+\index{get\-Scale@{get\-Scale}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{get\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} C\-Tri\-Expan\-::get\-Scale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a3fe2b894d13e1b698c3c76b82d00548c}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{classCTriExpan_a3fe2b894d13e1b698c3c76b82d00548c_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a47cc8551e212cca521144e8f2619c42a}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!inc\-Rotate@{inc\-Rotate}}
+\index{inc\-Rotate@{inc\-Rotate}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{inc\-Rotate}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::inc\-Rotate (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Quat} \&}]{Q}
+\end{DoxyParamCaption}
+)}}\label{classCTriExpan_a47cc8551e212cca521144e8f2619c42a}
+rotate triexpan vectors, assume order has already been incremented elsewhere 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTriExpan_a47cc8551e212cca521144e8f2619c42a_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a916a6a734f5e00c9bad0c5fc9c32f1c5}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Tri\-Expan}\& C\-Tri\-Expan\-::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{const {\bf R\-E\-A\-L} $\ast$}]{C}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a916a6a734f5e00c9bad0c5fc9c32f1c5}
+\hypertarget{classCTriExpan_a4a1e6feaebf3ceaf75ff2c35390b2978}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{operator+=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Tri\-Expan}\& C\-Tri\-Expan\-::operator+= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{E}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a4a1e6feaebf3ceaf75ff2c35390b2978}
+\hypertarget{classCTriExpan_a3ab3ddc4c13f65923693417538c339a7}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{operator-\/=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Tri\-Expan}\& C\-Tri\-Expan\-::operator-\/= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{E}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a3ab3ddc4c13f65923693417538c339a7}
+\hypertarget{classCTriExpan_afbe552370cd3a3f9f65742224d86bb16}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!operator=@{operator=}}
+\index{operator=@{operator=}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Tri\-Expan} C\-Tri\-Expan\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{E}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_afbe552370cd3a3f9f65742224d86bb16}
+
+\begin{DoxyItemize}
+\item The triexpansion = operator 
+\end{DoxyItemize}
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTriExpan_afbe552370cd3a3f9f65742224d86bb16_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a27cd9f0bf1f58b91d89d3c12c03525b2}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Expan}\& C\-Tri\-Expan\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{c}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a27cd9f0bf1f58b91d89d3c12c03525b2}
+\hypertarget{classCTriExpan_a1551ab9311355e9275b9204faedeee02}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Expan}\& C\-Tri\-Expan\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a1551ab9311355e9275b9204faedeee02}
+\hypertarget{classCTriExpan_ac2debbe18cecadb462b1573dcfd017cd}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!output\-Complex@{output\-Complex}}
+\index{output\-Complex@{output\-Complex}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{output\-Complex}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::output\-Complex (
+\begin{DoxyParamCaption}
+\item[{{\bf R\-E\-A\-L}}]{fact = {\ttfamily 1.0}}
+\end{DoxyParamCaption}
+) const}}\label{classCTriExpan_ac2debbe18cecadb462b1573dcfd017cd}
+Output a complex number for a triexpansion class \hypertarget{classCTriExpan_ada91fb0b3d1a9affe583996f3ef25d35}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!recip@{recip}}
+\index{recip@{recip}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{recip}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::recip (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_ada91fb0b3d1a9affe583996f3ef25d35}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classCTriExpan_ada91fb0b3d1a9affe583996f3ef25d35_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a2abfca44411177f675cf9de0c5d96319}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!reset@{reset}}
+\index{reset@{reset}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::reset (
+\begin{DoxyParamCaption}
+\item[{{\bf C\-Range}}]{R}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a2abfca44411177f675cf9de0c5d96319}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTriExpan_a2abfca44411177f675cf9de0c5d96319_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a3afaa15f79472c486cb03af999292b68}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!reset@{reset}}
+\index{reset@{reset}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::reset (
+\begin{DoxyParamCaption}
+\item[{int}]{p = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a3afaa15f79472c486cb03af999292b68}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classCTriExpan_a3afaa15f79472c486cb03af999292b68_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a6e55f787fa10d245b8a81abf6e1a2082}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!rotate@{rotate}}
+\index{rotate@{rotate}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{rotate}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::rotate (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Quat} \&}]{Q, }
+\item[{int}]{p}
+\end{DoxyParamCaption}
+)}}\label{classCTriExpan_a6e55f787fa10d245b8a81abf6e1a2082}
+Rotate a triexpansion object 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTriExpan_a6e55f787fa10d245b8a81abf6e1a2082_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_abe36fdfa4160421b9f9c4c6ae5c8818f}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!set\-From\-One\-Vector@{set\-From\-One\-Vector}}
+\index{set\-From\-One\-Vector@{set\-From\-One\-Vector}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{set\-From\-One\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::set\-From\-One\-Vector (
+\begin{DoxyParamCaption}
+\item[{const vector$<$ {\bf R\-E\-A\-L} $>$ \&}]{V}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_abe36fdfa4160421b9f9c4c6ae5c8818f}
+Take one long vector and set the vectors in the expansions to 1/3 of the input vector \hypertarget{classCTriExpan_ab78ef5bb64df3d2d497968dfaecf0583}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!set\-Range@{set\-Range}}
+\index{set\-Range@{set\-Range}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{set\-Range}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::set\-Range (
+\begin{DoxyParamCaption}
+\item[{int}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_ab78ef5bb64df3d2d497968dfaecf0583}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{classCTriExpan_ab78ef5bb64df3d2d497968dfaecf0583_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a03f02560398adc694835232d3b4e8f8b}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!set\-Range@{set\-Range}}
+\index{set\-Range@{set\-Range}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{set\-Range}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::set\-Range (
+\begin{DoxyParamCaption}
+\item[{{\bf C\-Range}}]{R}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a03f02560398adc694835232d3b4e8f8b}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCTriExpan_a03f02560398adc694835232d3b4e8f8b_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCTriExpan_a51f47a9ae7f19a2558400c525e1716cd}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!set\-Scale@{set\-Scale}}
+\index{set\-Scale@{set\-Scale}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{set\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Tri\-Expan\-::set\-Scale (
+\begin{DoxyParamCaption}
+\item[{{\bf R\-E\-A\-L}}]{scale}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCTriExpan_a51f47a9ae7f19a2558400c525e1716cd}
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{classCTriExpan_a51f47a9ae7f19a2558400c525e1716cd_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classCTriExpan_ad813a2b432680bed12a9ae458ac2666d}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!cross@{cross}}
+\index{cross@{cross}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{cross}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} cross (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{G1, }
+\item[{const {\bf C\-Tri\-Expan} \&}]{G2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classCTriExpan_ad813a2b432680bed12a9ae458ac2666d}
+Compute the cross product between two tri expansions \hypertarget{classCTriExpan_ab4474d855cad0782c65a3066d366b46d}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!inprod@{inprod}}
+\index{inprod@{inprod}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{inprod}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} inprod (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Mul\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Tri\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classCTriExpan_ab4474d855cad0782c65a3066d366b46d}
+Compute the inner product of 1 expansion times each component of a tri expansion with a scale given by the tri expansion \hypertarget{classCTriExpan_a8e124621a3ce0c71a23287968eb83f33}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!inprod@{inprod}}
+\index{inprod@{inprod}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{inprod}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} inprod (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Tri\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Local\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classCTriExpan_a8e124621a3ce0c71a23287968eb83f33}
+Compute the inner product of a local expansion times each component of a tri expansion with a scale given by the tri expansion \hypertarget{classCTriExpan_a8f7ba505b67b68b4f24c567a9ac3d1c4}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!inprod\-\_\-unit\-Scale@{inprod\-\_\-unit\-Scale}}
+\index{inprod\-\_\-unit\-Scale@{inprod\-\_\-unit\-Scale}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{inprod\-\_\-unit\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} inprod\-\_\-unit\-Scale (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan} \&}]{M1, }
+\item[{const {\bf C\-Tri\-Expan} \&}]{M2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classCTriExpan_a8f7ba505b67b68b4f24c567a9ac3d1c4}
+Compute the inner product of 1 expansion times each component of a tri expansion with a scale of 1.\-0 \hypertarget{classCTriExpan_a522fbb3365db1caccb7f624e764fbdd9}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Tri\-Expan} operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Expan}}]{E, }
+\item[{const {\bf C\-Pnt}}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classCTriExpan_a522fbb3365db1caccb7f624e764fbdd9}
+
+
+end copy\-\_\-p 
+
+
+\begin{DoxyItemize}
+\item Create a triexpansion by multiplying each part of cartesian coordinates p, by E an expansion object. 
+\end{DoxyItemize}\hypertarget{classCTriExpan_a64145b0a055e5980a76370aaebd25988}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{out, }
+\item[{const {\bf C\-Tri\-Expan} \&}]{exp}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classCTriExpan_a64145b0a055e5980a76370aaebd25988}
+The printing operator for a triexpansion object 
+
+\subsection{Member Data Documentation}
+\hypertarget{classCTriExpan_af8c7f3af976ff622b46ed050a1b3624d}{\index{C\-Tri\-Expan@{C\-Tri\-Expan}!m\-\_\-\-M@{m\-\_\-\-M}}
+\index{m\-\_\-\-M@{m\-\_\-\-M}!CTriExpan@{C\-Tri\-Expan}}
+\subsubsection[{m\-\_\-\-M}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Expan} C\-Tri\-Expan\-::m\-\_\-\-M\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCTriExpan_af8c7f3af976ff622b46ed050a1b3624d}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{triexpan_8h}{triexpan.\-h}\item 
+\hyperlink{triexpan_8cpp}{triexpan.\-cpp}\end{DoxyCompactItemize}

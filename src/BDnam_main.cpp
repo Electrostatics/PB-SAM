@@ -147,11 +147,6 @@ int bdNam( int argc, char ** argv ) {
 	// Printing out the total time taken to run the simulation
 	double end = read_timer(  );
 	printf( "Program run time = %.4lf seconds\n", end-start  );
-	
-	// Deleting constants from the system
-	CSystem::deleteConstants(  );
-	
-	// ending
 	return 0;
 }	// end bdNam
 
@@ -161,7 +156,7 @@ int bdNam( int argc, char ** argv ) {
  ******************************************************************/
 int main( int argc, char ** argv ) {
 	
-	if ( argc!= 11 )
+	if ( argc!= 16 )
 	{
 		cout << "Incorrect usage: ./nam [# threads] [salt conc] ";
 		cout << " [# traj] [Dock dist] [ofname] [runname] [contact file]";

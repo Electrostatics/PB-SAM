@@ -42,7 +42,7 @@ CSystem::initConstants( double kappa, double sdiel, double temp,
 //CSystem::deleteConstants(  )
 //{
 //	CMolecule::deleteConstants(  );
-	return;
+//	return;
 //}	// end deleteConstants
 
 /******************************************************************/

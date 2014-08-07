@@ -247,18 +247,18 @@ CBDnam::run( int &scount, char* runname )
 			dO1 = ( m_Dr1*dt*IKbT*COUL_K )*torque[0];	// rotation for molecule 1
 			dO2 = ( m_Dr2*dt*IKbT*COUL_K )*torque[1];	// rotation for molecule 2
 		}
+		// if the distance is larger than f_DIST, then they are all zero
+		else {
+			dR2.zero(  );
+			dO1.zero(  );
+			dO2.zero(  );
+		}
 		
 		// Printing out dynamic data, if the step number is divisible by 1000
 		if ( scount % 500 == 0 )
 		{
 			fout << force[1] << " the torque: " << torque[1] <<endl;
 			fout<<"dt: "<<dt<<" dR2: "<<dR2<<endl;
-		}
-		// if the distance is larger than f_DIST, then they are all zero
-		else {
-			dR2.zero(  );
-			dO1.zero(  );
-			dO2.zero(  );
 		}
 		// if f_DIST is not defined then they are zero as well
 #else
@@ -355,7 +355,6 @@ CBDnam::makeMove( const CPnt & dR2, const CPnt & dO1,
 		m_rot1.identity(  );
 		m_rot2.identity(  );
 	}
-	
 	else
 	{
 		// rotate mol1
@@ -383,8 +382,7 @@ CBDnam::makeMove( const CPnt & dR2, const CPnt & dO1,
 			return STUCK;
 		}
 		
-		// rotate mol2
-		// similar method to mol1
+		// rotate mol2, similar method to mol1
 		// Initialize parameters
 		bRotated = false; c = 0;
 		
@@ -396,7 +394,6 @@ CBDnam::makeMove( const CPnt & dR2, const CPnt & dO1,
 			Q2 = CQuat( dO2_, dO2_.norm( ));
 			// Checking for collisions
 			if ( ! m_mols[1]->willRotCollide(m_mols, Q2 ) )
-				
 			{
 				m_mols[1]->rotate( Q2 );
 				bRotated = true;
@@ -435,10 +432,8 @@ CBDnam::IsDocked( CMolecule* mol1, CMolecule* mol2 ) const
 	{
 		// obtain the contact sphere number for that given criteria
 		CMolContact mcon = MOLCONTACTLIST[m1][h];
-		// if the the type of mol2 does not equal to the other type, move onto
-		// the next one ?????
 		if( mcon.getMol2Type( )!= mol2->getMolType() )  continue;
-	
+		
 		// set counter ncon for number of contacts  
 		int ncon = 0; 
 		// Set vector clist to the values in get contact

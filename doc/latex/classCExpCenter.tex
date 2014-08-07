@@ -1,0 +1,568 @@
+\hypertarget{classCExpCenter}{\section{C\-Exp\-Center Class Reference}
+\label{classCExpCenter}\index{C\-Exp\-Center@{C\-Exp\-Center}}
+}
+
+
+\hyperlink{classCExpCenter}{C\-Exp\-Center} class.  
+
+
+
+
+{\ttfamily \#include $<$expcenter.\-h$>$}
+
+
+
+Inheritance diagram for C\-Exp\-Center\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{classCExpCenter__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for C\-Exp\-Center\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCExpCenter__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCExpCenter_abd3f14d423a6a1f8404380edb34f8d7c}{C\-Exp\-Center} ()
+\item 
+\hyperlink{classCExpCenter_a91bbc8f8561e58eeab18595df4f320b4}{C\-Exp\-Center} (int ki, \hyperlink{classCPnt}{C\-Pnt} cen, double rad)
+\item 
+\hyperlink{classCExpCenter_a8272991c2429ea236f18b2ae4fe33546}{C\-Exp\-Center} (int ki, \hyperlink{classCPnt}{C\-Pnt} cen, double rad, double idiel, bool b\-Kappa, const vector$<$ double $>$ \&chg\-Assigned, const vector$<$ \hyperlink{classCPnt}{C\-Pnt} $>$ \&pos\-Assigned, \hyperlink{classCQuat}{C\-Quat} $\ast$orient=N\-U\-L\-L, \hyperlink{classCRotCoeff}{C\-Rot\-Coeff} $\ast$rot=N\-U\-L\-L)
+\item 
+void \hyperlink{classCExpCenter_a6d4be76f4a28b68eca9dcd4a778ca387}{set\-Order} (const int p, const \hyperlink{classCRotCoeff}{C\-Rot\-Coeff} \&rot)
+\item 
+void \hyperlink{classCExpCenter_a91e9e5e3ffbf36281c1b7da46aa12c75}{inc\-Order} (const \hyperlink{classCRotCoeff}{C\-Rot\-Coeff} \&rot)
+\item 
+const \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{classCExpCenter_adff5ce73777a1d3045f0609dd0e955cf}{compute\-Pot} () const 
+\item 
+const double \hyperlink{classCExpCenter_adc18426f677b5984a468101ebfeefef6}{get\-Rad} () const 
+\item 
+const \hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCExpCenter_a84f867868f8eb0785e95561f26cd0194}{get\-Cen} () const 
+\item 
+const \hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCExpCenter_a69ce8d87ba63324aa16349019e6b71d4}{get\-Cen\-Rot} () const 
+\item 
+const \hyperlink{classCQuat}{C\-Quat} \hyperlink{classCExpCenter_a069965ee754068a0f59e3b80dbb8252c}{get\-Orient} () const 
+\item 
+const int \hyperlink{classCExpCenter_a18e5340638fc144dfa255cef7d5214d9}{get\-Order} () const 
+\item 
+const double \hyperlink{classCExpCenter_a30c3a26e0dc5bc9c2d84d366200243e5}{get\-L\-Scale} () const 
+\item 
+const double \hyperlink{classCExpCenter_ab58aa40813bf06929764f6b9ae4a25d1}{get\-M\-Scale} () const 
+\item 
+const bool \hyperlink{classCExpCenter_aac86d77bd8353ccf10bb6b8f229575c7}{getb\-Kappa} () const 
+\item 
+const \hyperlink{classCMulExpan}{C\-Mul\-Expan} $\ast$const \hyperlink{classCExpCenter_a6f8eb6dfa6331e8d75a04ec7998a603c}{getp\-H} () const 
+\item 
+\hyperlink{classCMulExpan}{C\-Mul\-Expan} $\ast$const \hyperlink{classCExpCenter_a6a9a76aa4ddcbb79a4cee534f7c48d07}{getp\-H} ()
+\item 
+\hyperlink{classCMulExpan}{C\-Mul\-Expan} \& \hyperlink{classCExpCenter_a2051390bfbef8a9fd1e045cab42b99ba}{get\-H} ()
+\item 
+const \hyperlink{classCMulExpan}{C\-Mul\-Expan} \hyperlink{classCExpCenter_ad4efe45a4f948726fcfcecb975d5044d}{get\-H} () const 
+\item 
+\hyperlink{classCMulExpan}{C\-Mul\-Expan} \& \hyperlink{classCExpCenter_aff64017f498b93ed212c674865f95f40}{get\-Hrot} ()
+\item 
+const \hyperlink{classCMulExpan}{C\-Mul\-Expan} \hyperlink{classCExpCenter_aff23edad5050d0e1b80e72a90d1fbb7a}{get\-Hrot} () const 
+\item 
+const double \hyperlink{classCExpCenter_a1206c32b0699ae5eef35dd1f88cf9816}{get\-Hrot\-Mono} () const 
+\item 
+\hyperlink{classCLocalExpan}{C\-Local\-Expan} \& \hyperlink{classCExpCenter_aba7d7d3c0f0b49e28d66f96621be677e}{get\-L\-S} ()
+\item 
+const \hyperlink{classCLocalExpan}{C\-Local\-Expan} \& \hyperlink{classCExpCenter_a7269ed18262fdfff4d066fbe8521b928}{get\-L\-S} () const 
+\item 
+const \hyperlink{classCMulExpan}{C\-Mul\-Expan} \hyperlink{classCExpCenter_a1e57fde5e2b0b605633dd57a083347bd}{getr\-E} () const 
+\item 
+\hyperlink{classCGradExpan}{C\-Grad\-Expan} \& \hyperlink{classCExpCenter_a070d0724a38ffb86095a95eacb55aac1}{getg\-L\-H\-N} ()
+\item 
+const \hyperlink{classCGradExpan}{C\-Grad\-Expan} \hyperlink{classCExpCenter_a94e7b22b07e8224827c489e84d26e155}{getg\-L\-H\-N} () const 
+\item 
+\hyperlink{classCExpCenter}{C\-Exp\-Center} \& \hyperlink{classCExpCenter_a169ca7822910b6a9906b1d6050278af8}{operator=} (const \hyperlink{classCExpCenter}{C\-Exp\-Center} \&M)
+\item 
+const \hyperlink{classCRotCoeff}{C\-Rot\-Coeff} \hyperlink{classCExpCenter_a74d5d90cdcf9b6a61540b607b0269a23}{get\-Rot\-Coeff} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classCExpCenter_a4b8dab75eef2c0fee471f844a55d1af3}{init\-Constants} (double sdiel, double kappa)
+\begin{DoxyCompactList}\small\item\em \hyperlink{classCExpCenter}{C\-Exp\-Center} init\-Constants function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCExpCenter_a44ea6f7aa0c0c37c721ed35e0b702703}{set\-Fixed\-Charges} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCExpCenter_a57a81c26f40939d189a88b82c77f16e8}{m\-\_\-cen}
+\begin{DoxyCompactList}\small\item\em An xyz of the center of the molecule in the standard frame. \end{DoxyCompactList}\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{classCExpCenter_a73b0d497d54258b3ab503167ae6f7e75}{m\-\_\-cen\-Rot}
+\item 
+double \hyperlink{classCExpCenter_abc237f77679da4a21619a384e6ff4f6b}{m\-\_\-rad}
+\begin{DoxyCompactList}\small\item\em A floating point of the current C\-G sphere's radius (a$^\wedge$(I,k)) \end{DoxyCompactList}\item 
+double \hyperlink{classCExpCenter_aac9d9de905652a9d78115a1b53091bce}{m\-\_\-lscale}
+\begin{DoxyCompactList}\small\item\em A floating point of the length scale of the current sphere, defaulted to m\-\_\-rad. \end{DoxyCompactList}\item 
+double \hyperlink{classCExpCenter_a7182695f02cc43411ebc67e64258a2ec}{m\-\_\-mscale}
+\begin{DoxyCompactList}\small\item\em A floating point of another length scale, defaulted to 1/m\-\_\-rad. \end{DoxyCompactList}\item 
+double \hyperlink{classCExpCenter_a2ebe2d840aaaa9329706514fa6957efa}{m\-\_\-idiel}
+\begin{DoxyCompactList}\small\item\em A floating point of the molecule's interior dielectric constant. \end{DoxyCompactList}\item 
+bool \hyperlink{classCExpCenter_a9012e39bbe103cd93190156817b0efb4}{m\-\_\-b\-Kappa}
+\item 
+vector$<$ double $>$ \hyperlink{classCExpCenter_a834cd8238e3d5fd2b29a487d08f93978}{m\-\_\-ch}
+\item 
+vector$<$ \hyperlink{classCPnt}{C\-Pnt} $>$ \hyperlink{classCExpCenter_a6d2bc11475081445ad8838d6deb889d3}{m\-\_\-pos}
+\item 
+\hyperlink{classCLocalExpan}{C\-Local\-Expan} \hyperlink{classCExpCenter_a89612776d4a057bdd4d36a7b4e10e647}{m\-\_\-\-L\-S}
+\begin{DoxyCompactList}\small\item\em only due to external source ( selected ) \end{DoxyCompactList}\item 
+\hyperlink{classCMulExpan}{C\-Mul\-Expan} \hyperlink{classCExpCenter_a41728832a9a82eec510548f438e65734}{m\-\_\-\-E}
+\item 
+\hyperlink{classCMulExpan}{C\-Mul\-Expan} \hyperlink{classCExpCenter_a4c494c322b3272097b3b6aadfc2959f6}{m\-\_\-r\-E}
+\item 
+\hyperlink{classCMulExpan}{C\-Mul\-Expan} \hyperlink{classCExpCenter_a6cf480aad64c9baf8a126d308ca63f85}{m\-\_\-\-H}
+\begin{DoxyCompactList}\small\item\em A multipole expansion of the effective polarization charges on sphere k of the exposed surf. \end{DoxyCompactList}\item 
+\hyperlink{classCMulExpan}{C\-Mul\-Expan} \hyperlink{classCExpCenter_acfe6c4c74d9fd3069d00fef085eafbd8}{m\-\_\-\-Hrot}
+\begin{DoxyCompactList}\small\item\em A rotated M\-P\-E of the effective polarization charges on sphere k of the exposed surf. \end{DoxyCompactList}\item 
+\hyperlink{classCGradExpan}{C\-Grad\-Expan} \hyperlink{classCExpCenter_ae860d91bb83f5b31eff56694f6428e20}{m\-\_\-g\-H}
+\item 
+\hyperlink{classCGradExpan}{C\-Grad\-Expan} \hyperlink{classCExpCenter_a2ac196fbf3b2a5623553b4ecdc30cd7f}{m\-\_\-g\-L\-H\-N}
+\item 
+\hyperlink{classCQuat}{C\-Quat} $\ast$ \hyperlink{classCExpCenter_a49742562fd68129ab17aa716e6e661e8}{m\-\_\-orient}
+\begin{DoxyCompactList}\small\item\em A quaterion of the the current rotation of the molecule. \end{DoxyCompactList}\item 
+\hyperlink{classCRotCoeff}{C\-Rot\-Coeff} $\ast$ \hyperlink{classCExpCenter_a284a13e418738579f101ad9dc0af4dec}{m\-\_\-rot}
+\item 
+int \hyperlink{classCExpCenter_a2a3e3bc7c527c49e9ea4149dd33f4dba}{m\-\_\-p}
+\begin{DoxyCompactList}\small\item\em An integer of the number of poles in the expansion. \end{DoxyCompactList}\item 
+int \hyperlink{classCExpCenter_a7dcda3540f2ff0b3bfd668889ef1e95a}{m\-\_\-id}
+\begin{DoxyCompactList}\small\item\em An integer of the I\-D number of the C\-G sphere. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static double \hyperlink{classCExpCenter_a027b6ddd209098aa7f6c71f7b43367b3}{m\-\_\-sdiel}
+\begin{DoxyCompactList}\small\item\em A floating point of the solvent dielectric constant. \end{DoxyCompactList}\item 
+static double \hyperlink{classCExpCenter_aca58b7a93949d83d4b7883b54d0473e5}{m\-\_\-kappa}
+\begin{DoxyCompactList}\small\item\em A floating point of the system's inverse debye length. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classCExpCenter}{C\-Exp\-Center} class. 
+
+This class is the base class for all expansion centers 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCExpCenter_abd3f14d423a6a1f8404380edb34f8d7c}{\index{C\-Exp\-Center@{C\-Exp\-Center}!C\-Exp\-Center@{C\-Exp\-Center}}
+\index{C\-Exp\-Center@{C\-Exp\-Center}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{C\-Exp\-Center}]{\setlength{\rightskip}{0pt plus 5cm}C\-Exp\-Center\-::\-C\-Exp\-Center (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classCExpCenter_abd3f14d423a6a1f8404380edb34f8d7c}
+Constructor for Exp\-Center class \hypertarget{classCExpCenter_a91bbc8f8561e58eeab18595df4f320b4}{\index{C\-Exp\-Center@{C\-Exp\-Center}!C\-Exp\-Center@{C\-Exp\-Center}}
+\index{C\-Exp\-Center@{C\-Exp\-Center}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{C\-Exp\-Center}]{\setlength{\rightskip}{0pt plus 5cm}C\-Exp\-Center\-::\-C\-Exp\-Center (
+\begin{DoxyParamCaption}
+\item[{int}]{ki, }
+\item[{{\bf C\-Pnt}}]{cen, }
+\item[{double}]{rad}
+\end{DoxyParamCaption}
+)}}\label{classCExpCenter_a91bbc8f8561e58eeab18595df4f320b4}
+Constructor for Exp\-Center class \hypertarget{classCExpCenter_a8272991c2429ea236f18b2ae4fe33546}{\index{C\-Exp\-Center@{C\-Exp\-Center}!C\-Exp\-Center@{C\-Exp\-Center}}
+\index{C\-Exp\-Center@{C\-Exp\-Center}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{C\-Exp\-Center}]{\setlength{\rightskip}{0pt plus 5cm}C\-Exp\-Center\-::\-C\-Exp\-Center (
+\begin{DoxyParamCaption}
+\item[{int}]{ki, }
+\item[{{\bf C\-Pnt}}]{cen, }
+\item[{double}]{rad, }
+\item[{double}]{idiel, }
+\item[{bool}]{b\-Kappa, }
+\item[{const vector$<$ double $>$ \&}]{chg\-Assigned, }
+\item[{const vector$<$ {\bf C\-Pnt} $>$ \&}]{pos\-Assigned, }
+\item[{{\bf C\-Quat} $\ast$}]{orient = {\ttfamily NULL}, }
+\item[{{\bf C\-Rot\-Coeff} $\ast$}]{rot = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)}}\label{classCExpCenter_a8272991c2429ea236f18b2ae4fe33546}
+Constructor for Exp\-Center class 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCExpCenter_a8272991c2429ea236f18b2ae4fe33546_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCExpCenter_adff5ce73777a1d3045f0609dd0e955cf}{\index{C\-Exp\-Center@{C\-Exp\-Center}!compute\-Pot@{compute\-Pot}}
+\index{compute\-Pot@{compute\-Pot}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{compute\-Pot}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf R\-E\-A\-L} C\-Exp\-Center\-::compute\-Pot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classCExpCenter_adff5ce73777a1d3045f0609dd0e955cf}
+Computes interaction energy of center with ext potential 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCExpCenter_adff5ce73777a1d3045f0609dd0e955cf_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCExpCenter_aac86d77bd8353ccf10bb6b8f229575c7}{\index{C\-Exp\-Center@{C\-Exp\-Center}!getb\-Kappa@{getb\-Kappa}}
+\index{getb\-Kappa@{getb\-Kappa}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{getb\-Kappa}]{\setlength{\rightskip}{0pt plus 5cm}const bool C\-Exp\-Center\-::getb\-Kappa (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_aac86d77bd8353ccf10bb6b8f229575c7}
+\hypertarget{classCExpCenter_a84f867868f8eb0785e95561f26cd0194}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-Cen@{get\-Cen}}
+\index{get\-Cen@{get\-Cen}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-Cen}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Pnt} C\-Exp\-Center\-::get\-Cen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a84f867868f8eb0785e95561f26cd0194}
+\hypertarget{classCExpCenter_a69ce8d87ba63324aa16349019e6b71d4}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-Cen\-Rot@{get\-Cen\-Rot}}
+\index{get\-Cen\-Rot@{get\-Cen\-Rot}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-Cen\-Rot}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Pnt} C\-Exp\-Center\-::get\-Cen\-Rot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a69ce8d87ba63324aa16349019e6b71d4}
+\hypertarget{classCExpCenter_a070d0724a38ffb86095a95eacb55aac1}{\index{C\-Exp\-Center@{C\-Exp\-Center}!getg\-L\-H\-N@{getg\-L\-H\-N}}
+\index{getg\-L\-H\-N@{getg\-L\-H\-N}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{getg\-L\-H\-N}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Grad\-Expan}\& C\-Exp\-Center\-::getg\-L\-H\-N (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a070d0724a38ffb86095a95eacb55aac1}
+\hypertarget{classCExpCenter_a94e7b22b07e8224827c489e84d26e155}{\index{C\-Exp\-Center@{C\-Exp\-Center}!getg\-L\-H\-N@{getg\-L\-H\-N}}
+\index{getg\-L\-H\-N@{getg\-L\-H\-N}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{getg\-L\-H\-N}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Grad\-Expan} C\-Exp\-Center\-::getg\-L\-H\-N (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a94e7b22b07e8224827c489e84d26e155}
+\hypertarget{classCExpCenter_a2051390bfbef8a9fd1e045cab42b99ba}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-H@{get\-H}}
+\index{get\-H@{get\-H}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-H}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Mul\-Expan}\& C\-Exp\-Center\-::get\-H (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a2051390bfbef8a9fd1e045cab42b99ba}
+\hypertarget{classCExpCenter_ad4efe45a4f948726fcfcecb975d5044d}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-H@{get\-H}}
+\index{get\-H@{get\-H}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-H}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Mul\-Expan} C\-Exp\-Center\-::get\-H (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_ad4efe45a4f948726fcfcecb975d5044d}
+\hypertarget{classCExpCenter_aff64017f498b93ed212c674865f95f40}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-Hrot@{get\-Hrot}}
+\index{get\-Hrot@{get\-Hrot}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-Hrot}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Mul\-Expan}\& C\-Exp\-Center\-::get\-Hrot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_aff64017f498b93ed212c674865f95f40}
+\hypertarget{classCExpCenter_aff23edad5050d0e1b80e72a90d1fbb7a}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-Hrot@{get\-Hrot}}
+\index{get\-Hrot@{get\-Hrot}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-Hrot}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Mul\-Expan} C\-Exp\-Center\-::get\-Hrot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_aff23edad5050d0e1b80e72a90d1fbb7a}
+\hypertarget{classCExpCenter_a1206c32b0699ae5eef35dd1f88cf9816}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-Hrot\-Mono@{get\-Hrot\-Mono}}
+\index{get\-Hrot\-Mono@{get\-Hrot\-Mono}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-Hrot\-Mono}]{\setlength{\rightskip}{0pt plus 5cm}const double C\-Exp\-Center\-::get\-Hrot\-Mono (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a1206c32b0699ae5eef35dd1f88cf9816}
+\hypertarget{classCExpCenter_aba7d7d3c0f0b49e28d66f96621be677e}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-L\-S@{get\-L\-S}}
+\index{get\-L\-S@{get\-L\-S}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-L\-S}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Local\-Expan}\& C\-Exp\-Center\-::get\-L\-S (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_aba7d7d3c0f0b49e28d66f96621be677e}
+\hypertarget{classCExpCenter_a7269ed18262fdfff4d066fbe8521b928}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-L\-S@{get\-L\-S}}
+\index{get\-L\-S@{get\-L\-S}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-L\-S}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Local\-Expan}\& C\-Exp\-Center\-::get\-L\-S (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a7269ed18262fdfff4d066fbe8521b928}
+\hypertarget{classCExpCenter_a30c3a26e0dc5bc9c2d84d366200243e5}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-L\-Scale@{get\-L\-Scale}}
+\index{get\-L\-Scale@{get\-L\-Scale}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-L\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}const double C\-Exp\-Center\-::get\-L\-Scale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a30c3a26e0dc5bc9c2d84d366200243e5}
+\hypertarget{classCExpCenter_ab58aa40813bf06929764f6b9ae4a25d1}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-M\-Scale@{get\-M\-Scale}}
+\index{get\-M\-Scale@{get\-M\-Scale}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-M\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}const double C\-Exp\-Center\-::get\-M\-Scale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_ab58aa40813bf06929764f6b9ae4a25d1}
+\hypertarget{classCExpCenter_a18e5340638fc144dfa255cef7d5214d9}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-Order@{get\-Order}}
+\index{get\-Order@{get\-Order}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-Order}]{\setlength{\rightskip}{0pt plus 5cm}const int C\-Exp\-Center\-::get\-Order (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a18e5340638fc144dfa255cef7d5214d9}
+\hypertarget{classCExpCenter_a069965ee754068a0f59e3b80dbb8252c}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-Orient@{get\-Orient}}
+\index{get\-Orient@{get\-Orient}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-Orient}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Quat} C\-Exp\-Center\-::get\-Orient (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a069965ee754068a0f59e3b80dbb8252c}
+\hypertarget{classCExpCenter_a6f8eb6dfa6331e8d75a04ec7998a603c}{\index{C\-Exp\-Center@{C\-Exp\-Center}!getp\-H@{getp\-H}}
+\index{getp\-H@{getp\-H}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{getp\-H}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Mul\-Expan}$\ast$ const C\-Exp\-Center\-::getp\-H (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a6f8eb6dfa6331e8d75a04ec7998a603c}
+\hypertarget{classCExpCenter_a6a9a76aa4ddcbb79a4cee534f7c48d07}{\index{C\-Exp\-Center@{C\-Exp\-Center}!getp\-H@{getp\-H}}
+\index{getp\-H@{getp\-H}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{getp\-H}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Mul\-Expan}$\ast$ const C\-Exp\-Center\-::getp\-H (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a6a9a76aa4ddcbb79a4cee534f7c48d07}
+\hypertarget{classCExpCenter_adc18426f677b5984a468101ebfeefef6}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-Rad@{get\-Rad}}
+\index{get\-Rad@{get\-Rad}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-Rad}]{\setlength{\rightskip}{0pt plus 5cm}const double C\-Exp\-Center\-::get\-Rad (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_adc18426f677b5984a468101ebfeefef6}
+\hypertarget{classCExpCenter_a1e57fde5e2b0b605633dd57a083347bd}{\index{C\-Exp\-Center@{C\-Exp\-Center}!getr\-E@{getr\-E}}
+\index{getr\-E@{getr\-E}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{getr\-E}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Mul\-Expan} C\-Exp\-Center\-::getr\-E (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a1e57fde5e2b0b605633dd57a083347bd}
+\hypertarget{classCExpCenter_a74d5d90cdcf9b6a61540b607b0269a23}{\index{C\-Exp\-Center@{C\-Exp\-Center}!get\-Rot\-Coeff@{get\-Rot\-Coeff}}
+\index{get\-Rot\-Coeff@{get\-Rot\-Coeff}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{get\-Rot\-Coeff}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-Rot\-Coeff} C\-Exp\-Center\-::get\-Rot\-Coeff (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a74d5d90cdcf9b6a61540b607b0269a23}
+\hypertarget{classCExpCenter_a91e9e5e3ffbf36281c1b7da46aa12c75}{\index{C\-Exp\-Center@{C\-Exp\-Center}!inc\-Order@{inc\-Order}}
+\index{inc\-Order@{inc\-Order}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{inc\-Order}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Exp\-Center\-::inc\-Order (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Rot\-Coeff} \&}]{rot}
+\end{DoxyParamCaption}
+)}}\label{classCExpCenter_a91e9e5e3ffbf36281c1b7da46aa12c75}
+\hypertarget{classCExpCenter_a4b8dab75eef2c0fee471f844a55d1af3}{\index{C\-Exp\-Center@{C\-Exp\-Center}!init\-Constants@{init\-Constants}}
+\index{init\-Constants@{init\-Constants}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{init\-Constants}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Exp\-Center\-::init\-Constants (
+\begin{DoxyParamCaption}
+\item[{double}]{sdiel, }
+\item[{double}]{kappa}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classCExpCenter_a4b8dab75eef2c0fee471f844a55d1af3}
+
+
+\hyperlink{classCExpCenter}{C\-Exp\-Center} init\-Constants function. 
+
+This function is used to initialize kappa and sdiel. Also calls an initialization of the R\-Expan object constants 
+\begin{DoxyParams}{Parameters}
+{\em sdiel} & a floating point of the solvent's dielectric constant \\
+\hline
+{\em kappa} & a floating point of the inverse debye length\\
+\hline
+\end{DoxyParams}
+\hyperlink{classCExpCenter}{C\-Exp\-Center} init\-Constants for initializing constants of a solvent exposed expansion. Also calls an initialization of the R\-Expan object constants 
+
+Reimplemented in \hyperlink{classCSolExpCenter_ad653d2d896fb0afeb738948c19cfd6d2}{C\-Sol\-Exp\-Center}.
+
+\hypertarget{classCExpCenter_a169ca7822910b6a9906b1d6050278af8}{\index{C\-Exp\-Center@{C\-Exp\-Center}!operator=@{operator=}}
+\index{operator=@{operator=}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Exp\-Center} \& C\-Exp\-Center\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Exp\-Center} \&}]{M}
+\end{DoxyParamCaption}
+)}}\label{classCExpCenter_a169ca7822910b6a9906b1d6050278af8}
+assignment operator overloading ( S. Liu ) \hypertarget{classCExpCenter_a44ea6f7aa0c0c37c721ed35e0b702703}{\index{C\-Exp\-Center@{C\-Exp\-Center}!set\-Fixed\-Charges@{set\-Fixed\-Charges}}
+\index{set\-Fixed\-Charges@{set\-Fixed\-Charges}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{set\-Fixed\-Charges}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Exp\-Center\-::set\-Fixed\-Charges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a44ea6f7aa0c0c37c721ed35e0b702703}
+generate m\-\_\-\-E, m\-\_\-\-H m\-\_\-\-E, m\-\_\-r\-E strictly not neccessary because we depend on m\-\_\-\-Efix and m\-\_\-\-Lfix of C\-Solvent centers to represent fixed charges that get subsequently incorporated into m\-\_\-\-H useful only as initial guess for H=E -- to delete this later 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCExpCenter_a44ea6f7aa0c0c37c721ed35e0b702703_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCExpCenter_a6d4be76f4a28b68eca9dcd4a778ca387}{\index{C\-Exp\-Center@{C\-Exp\-Center}!set\-Order@{set\-Order}}
+\index{set\-Order@{set\-Order}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{set\-Order}]{\setlength{\rightskip}{0pt plus 5cm}void C\-Exp\-Center\-::set\-Order (
+\begin{DoxyParamCaption}
+\item[{const int}]{p, }
+\item[{const {\bf C\-Rot\-Coeff} \&}]{rot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCExpCenter_a6d4be76f4a28b68eca9dcd4a778ca387}
+Exp\-Center function set\-Order a function that sets the order of the expansion and increases or decreases it accordingly 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCExpCenter_a6d4be76f4a28b68eca9dcd4a778ca387_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classCExpCenter_a9012e39bbe103cd93190156817b0efb4}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-b\-Kappa@{m\-\_\-b\-Kappa}}
+\index{m\-\_\-b\-Kappa@{m\-\_\-b\-Kappa}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-b\-Kappa}]{\setlength{\rightskip}{0pt plus 5cm}bool C\-Exp\-Center\-::m\-\_\-b\-Kappa\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a9012e39bbe103cd93190156817b0efb4}
+\hypertarget{classCExpCenter_a57a81c26f40939d189a88b82c77f16e8}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-cen@{m\-\_\-cen}}
+\index{m\-\_\-cen@{m\-\_\-cen}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-cen}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} C\-Exp\-Center\-::m\-\_\-cen\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a57a81c26f40939d189a88b82c77f16e8}
+
+
+An xyz of the center of the molecule in the standard frame. 
+
+\hypertarget{classCExpCenter_a73b0d497d54258b3ab503167ae6f7e75}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-cen\-Rot@{m\-\_\-cen\-Rot}}
+\index{m\-\_\-cen\-Rot@{m\-\_\-cen\-Rot}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-cen\-Rot}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} C\-Exp\-Center\-::m\-\_\-cen\-Rot\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a73b0d497d54258b3ab503167ae6f7e75}
+\hypertarget{classCExpCenter_a834cd8238e3d5fd2b29a487d08f93978}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-ch@{m\-\_\-ch}}
+\index{m\-\_\-ch@{m\-\_\-ch}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-ch}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$double$>$ C\-Exp\-Center\-::m\-\_\-ch\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a834cd8238e3d5fd2b29a487d08f93978}
+\hypertarget{classCExpCenter_a41728832a9a82eec510548f438e65734}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-\-E@{m\-\_\-\-E}}
+\index{m\-\_\-\-E@{m\-\_\-\-E}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-\-E}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Mul\-Expan} C\-Exp\-Center\-::m\-\_\-\-E\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a41728832a9a82eec510548f438e65734}
+\hypertarget{classCExpCenter_ae860d91bb83f5b31eff56694f6428e20}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-g\-H@{m\-\_\-g\-H}}
+\index{m\-\_\-g\-H@{m\-\_\-g\-H}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-g\-H}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Grad\-Expan} C\-Exp\-Center\-::m\-\_\-g\-H\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_ae860d91bb83f5b31eff56694f6428e20}
+\hypertarget{classCExpCenter_a2ac196fbf3b2a5623553b4ecdc30cd7f}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-g\-L\-H\-N@{m\-\_\-g\-L\-H\-N}}
+\index{m\-\_\-g\-L\-H\-N@{m\-\_\-g\-L\-H\-N}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-g\-L\-H\-N}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Grad\-Expan} C\-Exp\-Center\-::m\-\_\-g\-L\-H\-N\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a2ac196fbf3b2a5623553b4ecdc30cd7f}
+\hypertarget{classCExpCenter_a6cf480aad64c9baf8a126d308ca63f85}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-\-H@{m\-\_\-\-H}}
+\index{m\-\_\-\-H@{m\-\_\-\-H}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-\-H}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Mul\-Expan} C\-Exp\-Center\-::m\-\_\-\-H\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a6cf480aad64c9baf8a126d308ca63f85}
+
+
+A multipole expansion of the effective polarization charges on sphere k of the exposed surf. 
+
+\hypertarget{classCExpCenter_acfe6c4c74d9fd3069d00fef085eafbd8}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-\-Hrot@{m\-\_\-\-Hrot}}
+\index{m\-\_\-\-Hrot@{m\-\_\-\-Hrot}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-\-Hrot}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Mul\-Expan} C\-Exp\-Center\-::m\-\_\-\-Hrot\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_acfe6c4c74d9fd3069d00fef085eafbd8}
+
+
+A rotated M\-P\-E of the effective polarization charges on sphere k of the exposed surf. 
+
+\hypertarget{classCExpCenter_a7dcda3540f2ff0b3bfd668889ef1e95a}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-id@{m\-\_\-id}}
+\index{m\-\_\-id@{m\-\_\-id}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}int C\-Exp\-Center\-::m\-\_\-id\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a7dcda3540f2ff0b3bfd668889ef1e95a}
+
+
+An integer of the I\-D number of the C\-G sphere. 
+
+\hypertarget{classCExpCenter_a2ebe2d840aaaa9329706514fa6957efa}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-idiel@{m\-\_\-idiel}}
+\index{m\-\_\-idiel@{m\-\_\-idiel}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-idiel}]{\setlength{\rightskip}{0pt plus 5cm}double C\-Exp\-Center\-::m\-\_\-idiel\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a2ebe2d840aaaa9329706514fa6957efa}
+
+
+A floating point of the molecule's interior dielectric constant. 
+
+\hypertarget{classCExpCenter_aca58b7a93949d83d4b7883b54d0473e5}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-kappa@{m\-\_\-kappa}}
+\index{m\-\_\-kappa@{m\-\_\-kappa}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-kappa}]{\setlength{\rightskip}{0pt plus 5cm}double C\-Exp\-Center\-::m\-\_\-kappa\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}}\label{classCExpCenter_aca58b7a93949d83d4b7883b54d0473e5}
+
+
+A floating point of the system's inverse debye length. 
+
+\hypertarget{classCExpCenter_a89612776d4a057bdd4d36a7b4e10e647}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-\-L\-S@{m\-\_\-\-L\-S}}
+\index{m\-\_\-\-L\-S@{m\-\_\-\-L\-S}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-\-L\-S}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Local\-Expan} C\-Exp\-Center\-::m\-\_\-\-L\-S\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a89612776d4a057bdd4d36a7b4e10e647}
+
+
+only due to external source ( selected ) 
+
+\hypertarget{classCExpCenter_aac9d9de905652a9d78115a1b53091bce}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-lscale@{m\-\_\-lscale}}
+\index{m\-\_\-lscale@{m\-\_\-lscale}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-lscale}]{\setlength{\rightskip}{0pt plus 5cm}double C\-Exp\-Center\-::m\-\_\-lscale\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_aac9d9de905652a9d78115a1b53091bce}
+
+
+A floating point of the length scale of the current sphere, defaulted to m\-\_\-rad. 
+
+\hypertarget{classCExpCenter_a7182695f02cc43411ebc67e64258a2ec}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-mscale@{m\-\_\-mscale}}
+\index{m\-\_\-mscale@{m\-\_\-mscale}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-mscale}]{\setlength{\rightskip}{0pt plus 5cm}double C\-Exp\-Center\-::m\-\_\-mscale\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a7182695f02cc43411ebc67e64258a2ec}
+
+
+A floating point of another length scale, defaulted to 1/m\-\_\-rad. 
+
+\hypertarget{classCExpCenter_a49742562fd68129ab17aa716e6e661e8}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-orient@{m\-\_\-orient}}
+\index{m\-\_\-orient@{m\-\_\-orient}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-orient}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Quat}$\ast$ C\-Exp\-Center\-::m\-\_\-orient\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a49742562fd68129ab17aa716e6e661e8}
+
+
+A quaterion of the the current rotation of the molecule. 
+
+\hypertarget{classCExpCenter_a2a3e3bc7c527c49e9ea4149dd33f4dba}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-p@{m\-\_\-p}}
+\index{m\-\_\-p@{m\-\_\-p}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-p}]{\setlength{\rightskip}{0pt plus 5cm}int C\-Exp\-Center\-::m\-\_\-p\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a2a3e3bc7c527c49e9ea4149dd33f4dba}
+
+
+An integer of the number of poles in the expansion. 
+
+\hypertarget{classCExpCenter_a6d2bc11475081445ad8838d6deb889d3}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-pos@{m\-\_\-pos}}
+\index{m\-\_\-pos@{m\-\_\-pos}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-pos}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf C\-Pnt}$>$ C\-Exp\-Center\-::m\-\_\-pos\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a6d2bc11475081445ad8838d6deb889d3}
+\hypertarget{classCExpCenter_abc237f77679da4a21619a384e6ff4f6b}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-rad@{m\-\_\-rad}}
+\index{m\-\_\-rad@{m\-\_\-rad}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-rad}]{\setlength{\rightskip}{0pt plus 5cm}double C\-Exp\-Center\-::m\-\_\-rad\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_abc237f77679da4a21619a384e6ff4f6b}
+
+
+A floating point of the current C\-G sphere's radius (a$^\wedge$(I,k)) 
+
+\hypertarget{classCExpCenter_a4c494c322b3272097b3b6aadfc2959f6}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-r\-E@{m\-\_\-r\-E}}
+\index{m\-\_\-r\-E@{m\-\_\-r\-E}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-r\-E}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Mul\-Expan} C\-Exp\-Center\-::m\-\_\-r\-E\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a4c494c322b3272097b3b6aadfc2959f6}
+\hypertarget{classCExpCenter_a284a13e418738579f101ad9dc0af4dec}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-rot@{m\-\_\-rot}}
+\index{m\-\_\-rot@{m\-\_\-rot}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-rot}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Rot\-Coeff}$\ast$ C\-Exp\-Center\-::m\-\_\-rot\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCExpCenter_a284a13e418738579f101ad9dc0af4dec}
+\hypertarget{classCExpCenter_a027b6ddd209098aa7f6c71f7b43367b3}{\index{C\-Exp\-Center@{C\-Exp\-Center}!m\-\_\-sdiel@{m\-\_\-sdiel}}
+\index{m\-\_\-sdiel@{m\-\_\-sdiel}!CExpCenter@{C\-Exp\-Center}}
+\subsubsection[{m\-\_\-sdiel}]{\setlength{\rightskip}{0pt plus 5cm}double C\-Exp\-Center\-::m\-\_\-sdiel\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}}\label{classCExpCenter_a027b6ddd209098aa7f6c71f7b43367b3}
+
+
+A floating point of the solvent dielectric constant. 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{expcenter_8h}{expcenter.\-h}\item 
+\hyperlink{expcenter_8cpp}{expcenter.\-cpp}\end{DoxyCompactItemize}

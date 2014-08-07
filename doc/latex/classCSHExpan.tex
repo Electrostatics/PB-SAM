@@ -1,0 +1,279 @@
+\hypertarget{classCSHExpan}{\section{C\-S\-H\-Expan Class Reference}
+\label{classCSHExpan}\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}}
+}
+
+
+{\ttfamily \#include $<$expansion.\-h$>$}
+
+
+
+Inheritance diagram for C\-S\-H\-Expan\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{classCSHExpan__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for C\-S\-H\-Expan\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{classCSHExpan__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCSHExpan_a141e091316ee9113593dfa67ebd6671a}{C\-S\-H\-Expan} ()
+\item 
+\hyperlink{classCSHExpan_a9a5e37eb917fe30ccc1431c4ade75ad4}{C\-S\-H\-Expan} (\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} theta, \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} phi, int p)
+\item 
+\hyperlink{classCSHExpan_a0d136bdf88d91c6803e01fb2647a985d}{C\-S\-H\-Expan} (\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} theta, \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} phi, int p, bool b\-Rot)
+\begin{DoxyCompactList}\small\item\em The C\-S\-H\-Coeff class constructor. \end{DoxyCompactList}\item 
+const \hyperlink{classCSHExpan}{C\-S\-H\-Expan} \& \hyperlink{classCSHExpan_a8f0538b8cc6aace440bac8e7a90d8ed2}{operator=} (const \hyperlink{classCSHExpan}{C\-S\-H\-Expan} \&M)
+\item 
+\hyperlink{classCSHExpan}{C\-S\-H\-Expan} \hyperlink{classCSHExpan_af82377d4cfa223c33e9c2ba13f66ff55}{d\-Mdt} () const 
+\item 
+\hyperlink{classCSHExpan}{C\-S\-H\-Expan} \hyperlink{classCSHExpan_a3fa07d47acb2bd13df277011d2a748b0}{d\-Mdp} () const 
+\item 
+void \hyperlink{classCSHExpan_abc73ef3972a3fe3ad67209b6bcd0afc5}{inc} ()
+\begin{DoxyCompactList}\small\item\em The C\-S\-H\-Coeff inc function. \end{DoxyCompactList}\item 
+void \hyperlink{classCSHExpan_acc1ac9eff8f656057b6490be14de09d3}{dec} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classCSHExpan_a0bc80f8710a4da0982b650089bcb94db}{init\-Constants} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{classCSHExpan}{C\-S\-H\-Expan} init\-Constants function. \end{DoxyCompactList}\item 
+static void \hyperlink{classCSHExpan_abf3a3735263858213f32f702ca8d8ea8}{special\-S\-H} (vector$<$ \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} $>$ \&S\-H, int n, \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} val)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCExpan}{C\-Expan} \hyperlink{classCSHExpan_aa1762978841609a0e44e0a67ab8c14ae}{m\-\_\-legendre}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classCSHExpan_aef64dd554e7b065b558611b26f9b29e3}{deriv\-Theta} ()
+\item 
+void \hyperlink{classCSHExpan_a89004d8e01e26b6c767477015dd8486c}{deriv\-Phi} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{classCSHExpan_acd0e3ac848f0196a389d66124601cc39}{m\-\_\-theta}
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{classCSHExpan_a57187dc86ecba1c73324e1305715cc63}{m\-\_\-phi}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The C\-S\-H\-Coeff class
+
+The C\-S\-H\-Coeff class contains information about spherical harmonics. Contains computations for E\-Q(1) of Lotan 2006 as well as bessel function calculations for equations 2 and 3 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCSHExpan_a141e091316ee9113593dfa67ebd6671a}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!C\-S\-H\-Expan@{C\-S\-H\-Expan}}
+\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{C\-S\-H\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}C\-S\-H\-Expan\-::\-C\-S\-H\-Expan (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCSHExpan_a141e091316ee9113593dfa67ebd6671a}
+\hypertarget{classCSHExpan_a9a5e37eb917fe30ccc1431c4ade75ad4}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!C\-S\-H\-Expan@{C\-S\-H\-Expan}}
+\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{C\-S\-H\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}C\-S\-H\-Expan\-::\-C\-S\-H\-Expan (
+\begin{DoxyParamCaption}
+\item[{{\bf R\-E\-A\-L}}]{theta, }
+\item[{{\bf R\-E\-A\-L}}]{phi, }
+\item[{int}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCSHExpan_a9a5e37eb917fe30ccc1431c4ade75ad4}
+\hypertarget{classCSHExpan_a0d136bdf88d91c6803e01fb2647a985d}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!C\-S\-H\-Expan@{C\-S\-H\-Expan}}
+\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{C\-S\-H\-Expan}]{\setlength{\rightskip}{0pt plus 5cm}C\-S\-H\-Expan\-::\-C\-S\-H\-Expan (
+\begin{DoxyParamCaption}
+\item[{{\bf R\-E\-A\-L}}]{theta, }
+\item[{{\bf R\-E\-A\-L}}]{phi, }
+\item[{int}]{p, }
+\item[{bool}]{b\-Rot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCSHExpan_a0d136bdf88d91c6803e01fb2647a985d}
+
+
+The C\-S\-H\-Coeff class constructor. 
+
+Initialize a C\-S\-H\-Coeff object. 
+\begin{DoxyParams}{Parameters}
+{\em p} & is an int that is a minimal number of poles. Default is zero. \\
+\hline
+{\em res} & is an in that describes the total number of residuals (poles) for the expansion. Default is N\-\_\-\-P\-O\-L\-E\-S \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an object of the C\-S\-H\-Coeff class. 
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCSHExpan_acc1ac9eff8f656057b6490be14de09d3}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!dec@{dec}}
+\index{dec@{dec}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{dec}]{\setlength{\rightskip}{0pt plus 5cm}void C\-S\-H\-Expan\-::dec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCSHExpan_acc1ac9eff8f656057b6490be14de09d3}
+\hypertarget{classCSHExpan_a89004d8e01e26b6c767477015dd8486c}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!deriv\-Phi@{deriv\-Phi}}
+\index{deriv\-Phi@{deriv\-Phi}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{deriv\-Phi}]{\setlength{\rightskip}{0pt plus 5cm}void C\-S\-H\-Expan\-::deriv\-Phi (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCSHExpan_a89004d8e01e26b6c767477015dd8486c}
+Convert the spherical harmonics expansion to its derivative with respect to phi. 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{classCSHExpan_a89004d8e01e26b6c767477015dd8486c_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCSHExpan_aef64dd554e7b065b558611b26f9b29e3}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!deriv\-Theta@{deriv\-Theta}}
+\index{deriv\-Theta@{deriv\-Theta}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{deriv\-Theta}]{\setlength{\rightskip}{0pt plus 5cm}void C\-S\-H\-Expan\-::deriv\-Theta (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCSHExpan_aef64dd554e7b065b558611b26f9b29e3}
+Convert the spherical harmonics expansion to its derivative with respect to theta. 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{classCSHExpan_aef64dd554e7b065b558611b26f9b29e3_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCSHExpan_a3fa07d47acb2bd13df277011d2a748b0}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!d\-Mdp@{d\-Mdp}}
+\index{d\-Mdp@{d\-Mdp}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{d\-Mdp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-S\-H\-Expan} C\-S\-H\-Expan\-::d\-Mdp (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classCSHExpan_a3fa07d47acb2bd13df277011d2a748b0}
+Compute the derivative of an S\-H expansion with respect to phi 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCSHExpan_a3fa07d47acb2bd13df277011d2a748b0_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCSHExpan_af82377d4cfa223c33e9c2ba13f66ff55}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!d\-Mdt@{d\-Mdt}}
+\index{d\-Mdt@{d\-Mdt}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{d\-Mdt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-S\-H\-Expan} C\-S\-H\-Expan\-::d\-Mdt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classCSHExpan_af82377d4cfa223c33e9c2ba13f66ff55}
+Convert the spherical harmonics expansion to its derivative with respect to theta. 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCSHExpan_af82377d4cfa223c33e9c2ba13f66ff55_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCSHExpan_abc73ef3972a3fe3ad67209b6bcd0afc5}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!inc@{inc}}
+\index{inc@{inc}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{inc}]{\setlength{\rightskip}{0pt plus 5cm}void C\-S\-H\-Expan\-::inc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classCSHExpan_abc73ef3972a3fe3ad67209b6bcd0afc5}
+
+
+The C\-S\-H\-Coeff inc function. 
+
+Function to increase S\-H for N\-P\-O\-L\-E\-S=m\-\_\-p+1
+
+Increase the order of a spherical harmonic expansion 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCSHExpan_abc73ef3972a3fe3ad67209b6bcd0afc5_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{classCSHExpan_a0bc80f8710a4da0982b650089bcb94db}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!init\-Constants@{init\-Constants}}
+\index{init\-Constants@{init\-Constants}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{init\-Constants}]{\setlength{\rightskip}{0pt plus 5cm}void C\-S\-H\-Expan\-::init\-Constants (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classCSHExpan_a0bc80f8710a4da0982b650089bcb94db}
+
+
+\hyperlink{classCSHExpan}{C\-S\-H\-Expan} init\-Constants function. 
+
+This function is used to initialize kappa and system constants. Calls init\-Constants for \hyperlink{classCExpan}{C\-Expan} as well 
+\begin{DoxyParams}{Parameters}
+{\em kappa} & a floating point of the inverse debye length\\
+\hline
+\end{DoxyParams}
+\hyperlink{classCSHExpan}{C\-S\-H\-Expan} init\-Constants for initializing constants of a spherical harmonics expansion. Also calls an initialization of the Expan object constants 
+
+Reimplemented from \hyperlink{classCExpan_a510850651229135cf89ff9f83a30c9d5}{C\-Expan}.
+
+\hypertarget{classCSHExpan_a8f0538b8cc6aace440bac8e7a90d8ed2}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!operator=@{operator=}}
+\index{operator=@{operator=}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf C\-S\-H\-Expan}\& C\-S\-H\-Expan\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-S\-H\-Expan} \&}]{M}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classCSHExpan_a8f0538b8cc6aace440bac8e7a90d8ed2}
+\hypertarget{classCSHExpan_abf3a3735263858213f32f702ca8d8ea8}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!special\-S\-H@{special\-S\-H}}
+\index{special\-S\-H@{special\-S\-H}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{special\-S\-H}]{\setlength{\rightskip}{0pt plus 5cm}void C\-S\-H\-Expan\-::special\-S\-H (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf R\-E\-A\-L} $>$ \&}]{S\-H, }
+\item[{int}]{n, }
+\item[{{\bf R\-E\-A\-L}}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classCSHExpan_abf3a3735263858213f32f702ca8d8ea8}
+Special spherical harmonics that are used in singular cases. 
+
+\subsection{Member Data Documentation}
+\hypertarget{classCSHExpan_aa1762978841609a0e44e0a67ab8c14ae}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!m\-\_\-legendre@{m\-\_\-legendre}}
+\index{m\-\_\-legendre@{m\-\_\-legendre}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{m\-\_\-legendre}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Expan} C\-S\-H\-Expan\-::m\-\_\-legendre}}\label{classCSHExpan_aa1762978841609a0e44e0a67ab8c14ae}
+\hypertarget{classCSHExpan_a57187dc86ecba1c73324e1305715cc63}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!m\-\_\-phi@{m\-\_\-phi}}
+\index{m\-\_\-phi@{m\-\_\-phi}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{m\-\_\-phi}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} C\-S\-H\-Expan\-::m\-\_\-phi\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCSHExpan_a57187dc86ecba1c73324e1305715cc63}
+\hypertarget{classCSHExpan_acd0e3ac848f0196a389d66124601cc39}{\index{C\-S\-H\-Expan@{C\-S\-H\-Expan}!m\-\_\-theta@{m\-\_\-theta}}
+\index{m\-\_\-theta@{m\-\_\-theta}!CSHExpan@{C\-S\-H\-Expan}}
+\subsubsection[{m\-\_\-theta}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} C\-S\-H\-Expan\-::m\-\_\-theta\hspace{0.3cm}{\ttfamily [protected]}}}\label{classCSHExpan_acd0e3ac848f0196a389d66124601cc39}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{expansion_8h}{expansion.\-h}\item 
+\hyperlink{expansion_8cpp}{expansion.\-cpp}\end{DoxyCompactItemize}
