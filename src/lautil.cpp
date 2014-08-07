@@ -70,5 +70,3 @@ void applyMMat( const double * A, const double * X, double * Y,
   cblas_dgemm(  Order, TransA, TransB, M, N, K, alpha, A, lda, X,  ldb, beta, Y, ldc );
   return;
 }
-
-

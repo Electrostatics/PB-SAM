@@ -1,79 +1,83 @@
-## COMPILE FLAGS ###
-
-CC = g++
+INCL	=   -I/usr/lib/gcc/x86_64-redhat-linux/4.4.6/include\
+            -I/share/apps/intel/composer_xe_2013.2.146/mkl/include/
+LIB	=   -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6 \
+            /share/apps/intel/composer_xe_2013.2.146/mkl/lib/intel64/libmkl_intel_lp64.so \
+            /share/apps/intel/composer_xe_2013.2.146/mkl/lib/intel64/libmkl_gnu_thread.so \
+            /share/apps/intel/composer_xe_2013.2.146/mkl/lib/intel64/libmkl_core.so 
+#            /share/apps/intel/composer_xe_2013.2.146/compiler/lib/intel64/libiomp5.so 
          
-CFLAGS = -O3 -ffast-math -funroll-loops -fopenmp -m64 -I$(MKL_HOME)/include
+#CFLAGS = -O3 -ffast-math -fopenmp -funroll-loops -fstrict-aliasing -D__LOWMEM -D__MKL  -D__OMP -D__ACCURATE__    #pbsam
+CFLAGS = -O3 -ffast-math -fopenmp  -funroll-loops -fstrict-aliasing -D__LOWMEM -D__MKL -D__OMP  -D__ACCURATE__  #BD & etc
 
-PARAMS = -D__MKL -D__OMP -D__ACCURATE__  #-D__FEXT # -D__TOOLS -D__PBC  -D__POT
+FLAGSTAT = -Wl --start-group
+ 
+#CC      = /share/apps/gcc/bin/g++47
+ CC      = /usr/bin/g++ 
+LINK	= 
 
-LINK =  -L$(MKL_HOME)/lib/intel64 -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -ldl -lpthread -lm
+#####################################33
+LIBS =  -lstdc++ -lm
 
-BIN     = ../bin
+BIN	= ../bin
 
-### OBJECT FILES ###
+PQR_C = readutil.cpp expansion.cpp cfg2pqr.cpp
 
-## FindContacts ##
+PB_C =   getmemory.cpp pdb.cpp protein.cpp expansion.cpp triexpan.cpp expcenter.cpp rotcoeff.cpp transcoeff.cpp\
+	 xforms.cpp lautil.cpp readutil.cpp molecule.cpp moldynamics.cpp  system.cpp\
+	mytest.cpp 
 
-FC_C =  expansion.cpp readutil.cpp findContacts.cpp
-FC_OBJS      =      $(FC_C:.cpp=.o)
+BDM_C =   getmemory.cpp pdb.cpp protein.cpp expansion.cpp triexpan.cpp expcenter.cpp rotcoeff.cpp transcoeff.cpp\
+	 xforms.cpp lautil.cpp readutil.cpp molecule.cpp moldynamics.cpp system.cpp\
+	contact.cpp BDmulti.cpp BDmulti_main.cpp
 
-## Makesphere ##
 
-MS_C =  spheres.cpp readutil.cpp \
-					 makesphere.cpp expansion.cpp
-MS_OBJS      =      $(MS_C:.cpp=.o)
+COMPPORE_C =   getmemory.cpp pdb.cpp protein.cpp expansion.cpp triexpan.cpp expcenter.cpp rotcoeff.cpp transcoeff.cpp\
+	 xforms.cpp lautil.cpp readutil.cpp molecule.cpp moldynamics.cpp system.cpp\
+	contact.cpp pore.cpp computeporepotential.cpp
+BDNAM_C =   getmemory.cpp pdb.cpp protein.cpp expansion.cpp triexpan.cpp expcenter.cpp rotcoeff.cpp transcoeff.cpp\
+	 xforms.cpp lautil.cpp readutil.cpp molecule.cpp moldynamics.cpp system.cpp\
+	contact.cpp BDnam.cpp BDnam_main.cpp
 
-## PB ##
-PB_C =  getmemory.cpp expansion.cpp triexpan.cpp expcenter.cpp  \
-						rotcoeff.cpp transcoeff.cpp xforms.cpp lautil.cpp  \
-						readutil.cpp molecule.cpp moldynamics.cpp 	\
-						system.cpp selfp_makemat.cpp
-PB_OBJS = $(PB_C:.cpp=.o)
+PQR_OBJS      =       $(PQR_C:.cpp=.o) 
 
-## BDM ##
-BDM_C = getmemory.cpp protein.cpp expansion.cpp triexpan.cpp expcenter.cpp  \
-                		rotcoeff.cpp transcoeff.cpp xforms.cpp	\
-						lautil.cpp readutil.cpp  \
-                		molecule.cpp moldynamics.cpp system.cpp \
-						contact.cpp BDmulti.cpp BDmulti_main.cpp
-BDM_OBJS = $(BDM_C:.cpp=.o)
+PB_OBJS      =       $(PB_C:.cpp=.o) 
 
-## BDNAM ##
-BDNAM_C =       getmemory.cpp expansion.cpp triexpan.cpp  \
-						expcenter.cpp rotcoeff.cpp transcoeff.cpp xforms.cpp 	\
-						lautil.cpp readutil.cpp molecule.cpp moldynamics.cpp system.cpp \
-                        contact.cpp BDnam.cpp BDnam_main.cpp
-BDNAM_OBJS = $(BDNAM_C:.cpp=.o)
+BDNAM_OBJS      =       $(BDNAM_C:.cpp=.o)
 
-### TARGETS ###
+BDM_OBJS      =       $(BDM_C:.cpp=.o)
+COMPPORE_OBJS =  $(COMPPORE_C:.cpp=.o)
 
-bdm: $(BDM_OBJS) Makefile
+bdm:  $(BDM_OBJS) Makefile
 	rm -f $(BIN)/bdm
-	$(CC) $(CFLAGS) $(PARAMS) $(BDM_OBJS)  -o bdm $(LINK)
+	$(CC)  $(CFLAGS) $(BDM_OBJS) $(LIB) $(LIBS) -o bdm $(LINK)
 	mv bdm $(BIN)
 
-bdnam: $(BDNAM_OBJS) Makefile
-	rm -f $(BIN)/bdnam_10
-	$(CC) $(CFLAGS) $(PARAMS) $(BDNAM_OBJS) $(LINK) -o bdnam_10
-	mv bdnam_10 $(BIN)
+bdnam:  $(BDNAM_OBJS) Makefile
+	rm -f $(BIN)/bdnam
+	$(CC)  $(CFLAGS) $(BDNAM_OBJS) $(LIB) $(LIBS) -o bdnam $(LINK)
+	mv bdnam $(BIN)
 
-findContacts:  $(FC_OBJS)	 Makefile
-	rm -f ../bin/findContacts
-	$(CC)  $(CFLAGS) -D__FC  $(FC_OBJS) $(LIB) $(LIBS) -o ../bin/findContacts
+comppore:  $(COMPPORE_OBJS) Makefile
+	rm -f $(BIN)/comppore
+	$(CC)  $(CFLAGS) $(COMPPORE_OBJS) $(LIB) $(LIBS) -o comppore $(LINK)
+	mv comppore $(BIN)
 
-makesphere:  $(MS_OBJS) Makefile
-		rm -f ../bin/makesphere
-		$(CC)  $(CFLAGS) $(MS_OBJS) $(LIB) $(LIBS) -o ../bin/makesphere
+pbsam:  $(PB_OBJS) Makefile
+	rm -f $(BIN)/pbsam
+	$(CC)    $(CFLAGS)  $(PB_OBJS) $(LIB) $(LIBS)   -o pbsam $(LINK)
+	mv pbsam $(BIN)
 
-pbsam: $(PB_OBJS) Makefile
-	rm -f $(BIN)/pbsam_30
-	$(CC) $(CFLAGS) $(PARAMS) $(PB_OBJS)  -o pbsam_30 $(LINK)
-	mv pbsam_30	 $(BIN)
+cfg2pqr:$(PQR_OBJS) Makefile
+	rm -f cfg2pqr
+	$(CC)  $(CFLAGS) $(PQR_OBJS) $(LIB) $(LIBS) -o cfg2pqr $(LINK)
+	mv cfg2pqr $(BIN)
 
 .cpp.o:
-	$(CC) $(CFLAGS) $(PARAMS) -c $<
+	$(CC) $(CFLAGS)   $(INCL)   $(LIBS) -c $<
+
 
 clean:
-	rm -rf *.o 
+	rm *.o 
 
+# DO NOT DELETE THIS LINE -- make depend depends on it.
 
