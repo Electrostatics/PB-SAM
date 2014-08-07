@@ -7,7 +7,8 @@
 
 THREAD=54
 
-EXEC=$PBSAMHOME/working_code/PBSAM_all/bin/pbsam_30
+##EXEC=$PBSAMHOME/working_code/PBSAM_all/bin/pbsam_30
+EXEC=$PBSAMHOME/old/CODE_PBSAM/bin/pbsam_30
 LOGFILE=makeMat_D.log
 
 MOLDIR=$PBSAMHOME/working_code/PBSAM_all/test/1BRS
