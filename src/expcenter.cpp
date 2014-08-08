@@ -16,138 +16,144 @@ int CSolExpCenter::idk[_PSQH_];
 #ifdef __ACCURATE__
 const double SOLVE_TOL = (1e-8);
 const int SOLVE_MAX_CT = 100;
-#else 
+#else
 const double SOLVE_TOL = (1e-6);
 const int SOLVE_MAX_CT = 20;
 #endif
 
-////////////////////////////////////////////////
-// CExpCenter
-////////////////////////////////////////////////
-// static functions
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ * CExpCenter initConstants for initializing constants of a solvent
+ exposed expansion.  Also calls an initialization of the RExpan object
+ constants
+ ******************************************************************/
+void
 CExpCenter::initConstants(double sdiel, double kappa)
 {
   m_sdiel = sdiel;
   m_kappa = kappa;
-
+	
   CRExpan::initConstants(kappa);
-
 }
 
-// member functions
+/******************************************************************/
+/******************************************************************/
+/**
+ *   Constructor for ExpCenter class
+ ******************************************************************/
 CExpCenter::CExpCenter()
-  : m_cen(CPnt(0,0,0)), m_cenRot(CPnt(0,0,0)),  m_rad(0.0), m_idiel(1.0), m_bKappa(false), m_lscale(1.0),m_mscale(1.0)
+: m_cen(CPnt(0,0,0)), m_cenRot(CPnt(0,0,0)),  m_rad(0.0), m_idiel(1.0),
+m_bKappa(false), m_lscale(1.0),m_mscale(1.0)
 {
   m_E = CMulExpan();
   m_H = m_E;
 }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Constructor for ExpCenter class
+ ******************************************************************/
 CExpCenter::CExpCenter(int ki, CPnt cen, double rad)
-  : m_cen(cen), m_cenRot(cen), m_rad(rad),m_lscale(rad), m_mscale(1.0/m_rad),
-    m_p(N_POLES), m_id(ki)
+: m_cen(cen), m_cenRot(cen), m_rad(rad),m_lscale(rad), m_mscale(1.0/m_rad),
+m_p(N_POLES), m_id(ki)
 { }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Constructor for ExpCenter class
+ ******************************************************************/
 CExpCenter::CExpCenter(int ki, CPnt cen, double rad, double idiel, bool bKappa,
-		       const vector<double> &chgAssigned, const vector<CPnt> &posAssigned, 
-		       CQuat* orient, CRotCoeff* rot)
-  : m_cen(cen), m_cenRot(cen), m_rad(rad), m_idiel(idiel), m_bKappa(bKappa), 
-    m_ch(chgAssigned), m_pos(posAssigned), m_lscale(rad), m_mscale(1.0/m_rad), m_orient(orient), m_rot(rot),
-    m_p(N_POLES), m_id(ki)
-
-{ 
-  setFixedCharges(); 
+											 const vector<double> &chgAssigned, const vector<CPnt> &posAssigned,
+											 CQuat* orient, CRotCoeff* rot)
+: m_cen(cen), m_cenRot(cen), m_rad(rad), m_idiel(idiel), m_bKappa(bKappa),
+m_ch(chgAssigned), m_pos(posAssigned), m_lscale(rad), m_mscale(1.0/m_rad), m_orient(orient), m_rot(rot),
+m_p(N_POLES), m_id(ki)
+{
+  setFixedCharges();
 }
 
-// generate m_E, m_H
-// m_E, m_rE strictly not neccessary because we depend on m_Efix and m_Lfix of CSolvent centers
-// to represent fixed charges that get subsequently incorporated into m_H
-// useful only as initial guess for H=E -- to delete this later ???
+/******************************************************************/
+/******************************************************************/
+/**
+ * generate m_E, m_H
+ m_E, m_rE strictly not neccessary because
+ we depend on m_Efix and m_Lfix of CSolvent centers
+ to represent fixed charges that get
+ subsequently incorporated into m_H
+ useful only as initial guess for H=E -- to delete this later
+ ******************************************************************/
 void
 CExpCenter::setFixedCharges()
 {
-
   // use scaled charges (values in vacuum)
   vector<REAL> scaledchg;
   double sumcharge = 0.0; // debug
   for(int i=0; i<m_ch.size(); i++)
-    {
-      scaledchg.push_back( m_ch[i]/m_idiel );
-      sumcharge += scaledchg.back();
-    }
+	{
+		scaledchg.push_back( m_ch[i]/m_idiel );
+		sumcharge += scaledchg.back();
+	}
   
   m_E  = CMulExpan(scaledchg, m_pos, N_POLES, m_bKappa, m_lscale);
   m_rE = m_E;
- 
-  //set scale for L
-  //m_L.setScale( m_lscale );
   m_LS.setScale( m_lscale );
-  //m_dL.setScale(m_lscale );
-
 }
 
-/*
-// Rotate the top level of the expansions associated with this molecule.
-void
-CExpCenter::incRotate(const CRotCoeff &rot)
-{
-  assert(m_p <= N_POLES);
-
-  rot.rotateWithXi(m_E, m_H,  m_p, m_p, true); // CHECK LATER
-  rot.rotateWithXi(m_E, m_rE, m_p, m_p, true); // CHECK LATER
-
-  // LATER
-  rot.rotateWithXi(m_TORQUEFULL[ki], m_rT[ki], m_p, m_p, true);
-  m_rT[ki].incRotate(m_orient);
-  
-}
-*/
-
-
-//Computes interaction energy of center with ext potential
-const REAL 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Computes interaction energy of center with ext potential
+ ******************************************************************/
+const REAL
 CExpCenter::computePot() const
 {
   return  inprod(getH(),  getLS());
 }
 
-// force in original reference frame 
-// to convert to labframerotate by conj(m_orient) 
-//this will compute force on a specific sphere (S. Liu)
+/******************************************************************/
+/******************************************************************/
+/**
+ * force in original reference frame to convert to labframerotate
+ by conj( m_orient ) this will compute force on a
+ specific sphere ( S. Liu )
+ ******************************************************************/
 const CPnt
 CSolExpCenter::computeForceOn_0() const
 {
   if( IsNoInteractionList()) return CPnt();
-
   CPnt force = CPnt();
   
   // spheres that had been polarized
   if( !IsEmptyInterPolList() )
-    {
-      force  -= inprod( m_H , m_gLHN); 
+	{
+		force  -= inprod( m_H , m_gLHN);
 #ifndef __NOGRADPOL__
-      force  -= inprod( m_gH, m_LS);
+		force  -= inprod( m_gH, m_LS);
 #endif
-    }
-  
+	}
   // spheres that are not polarized, but have interaction partners
   else
-    {
-      force  -= inprod( *m_Hself , m_gLHN);
-    }
+	{
+		force  -= inprod( *m_Hself , m_gLHN);
+	}
   
   if(force.norm() > 5 || isnan(force.norm()))
-    {
-      cout <<"m_H "<<m_H<<endl; 
-      cout <<"mgLHN "<<m_gLHN<<endl;
-    }
-  
-
+	{
+		cout <<"m_H "<<m_H<<endl;
+		cout <<"mgLHN "<<m_gLHN<<endl;
+	}
   return force;
 }
 
-//assignment operator overloading (S. Liu)
-CExpCenter & 
+/******************************************************************/
+/******************************************************************/
+/**
+ * assignment operator overloading ( S. Liu )
+ ******************************************************************/
+CExpCenter &
 CExpCenter::operator=(const CExpCenter &M)
 {
   m_cen = M.m_cen;
@@ -159,444 +165,447 @@ CExpCenter::operator=(const CExpCenter &M)
   m_lscale = M.m_lscale;
   m_mscale = M.m_mscale;
 
-  //m_L = M.m_L;
   m_E = M.m_E;
   m_H = M.m_H;
-
+	
   return *this;
-
 }
 
+/*#########################################################*/
 ////////////////////////////////////////////////
 // CSolExpCenter
 ////////////////////////////////////////////////
+/*#########################################################*/
 
-// static functions
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ * CSolExpCenter initConstants for initializing constants of a solvent
+ exposed expansion
+ ******************************************************************/
+void
 CSolExpCenter::initConstants(double sdiel, double kappa)
 {
-
   CExpCenter::initConstants(sdiel, kappa);
-
+	
   // compute ID, constants
   for(int l=0; l<N_POLES; l++)
-    {
-      CONST2[l] = (2*l+1) / (4.0*M_PI);
-      CONST3[l] = 1 / (double)(2*l+1);
-      id[l] =  l*(l+1)/ 2;
-
-    }
-
+	{
+		CONST2[l] = (2*l+1) / (4.0*M_PI);
+		CONST3[l] = 1 / (double)(2*l+1);
+		id[l] =  l*(l+1)/ 2;
+		
+	}
   // compute IDK: stores index of the first row of every (l,s) column
   idk[0] = 0;
   for(int l=1; l<N_POLES; l++)
-    {
-      for(int s=0; s <=l; s++)
 	{
-	  int k = id[l] + s; 
-	  idk[k] = idk[k-1] + k;
-	  //cout <<" Checking IDK: "<<l<<" "<<s<<" "<<k<<" "<<idk[k]<<endl;
+		for(int s=0; s <=l; s++)
+		{
+			int k = id[l] + s;
+			idk[k] = idk[k-1] + k;
+		}
 	}
-    }
-
   return;
 }
 
-
-// prepare response matrix IMAT
-// making use of symmetry in Ynm*Yls
-// taken into account conjugation of Ynm with sNeg mNeg
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ * prepare response matrix IMAT making use of symmetry in Ynm*Yls
+ taken into account conjugation of Ynm with sNeg mNeg
+ ******************************************************************/
+void
 CSolExpCenter::build_IMat(const vector<CPnt> &SPE, const vector<CPnt> &SPB, REAL* IMat)
 {
-
+	
   cout <<"static building Imat ... "<<endl;
-
+	
   int npe = SPE.size();
   int npb = SPB.size();
-
-  // step 1: compute integrals 
-  
+	
+  // step 1: compute integrals
   double *Ylsr_Ynmr = (double*) malloc(_PQUADH_*sizeof(double));
   double *Ylsr_Ynmi = (double*) malloc(_PQUADH_*sizeof(double));
   double *Ylsi_Ynmr = (double*) malloc(_PQUADH_*sizeof(double));
   double *Ylsi_Ynmi = (double*) malloc(_PQUADH_*sizeof(double));
   
   for(int k=0; k < _PQUADH_; k++)
-    {
-      Ylsr_Ynmr[k] = 0.0;
-      Ylsr_Ynmi[k] = 0.0;
-      Ylsi_Ynmr[k] = 0.0;
-      Ylsi_Ynmi[k] = 0.0;
-    } 
-
+	{
+		Ylsr_Ynmr[k] = 0.0;
+		Ylsr_Ynmi[k] = 0.0;
+		Ylsi_Ynmr[k] = 0.0;
+		Ylsi_Ynmi[k] = 0.0;
+	}
+	
   double start = read_timer();
   
-  if(npe <= npb) 
+  if(npe <= npb)
     computeIntegralE(Ylsr_Ynmr, Ylsr_Ynmi, Ylsi_Ynmr, Ylsi_Ynmi, SPE, SPB);
-  else  
+  else
     computeIntegralB(Ylsr_Ynmr, Ylsr_Ynmi, Ylsi_Ynmr, Ylsi_Ynmi, SPE, SPB);
-
+	
   double time1 = read_timer();
-  //  cout << "Time taken to add integrals "<<time1 - start <<endl;
-
   // step 2 : populate Imat
-  
   const int len = _PSQ_;
-
-  int k = 0;  // Imat counter (column major) 
-
+  int k = 0;  // Imat counter (column major)
   // to handle conjugation
   int sNeg = -1;
   int mNeg = -1;
-
-  for(int l=0; l<N_POLES; l++)
-    {
-      double ytemp;
 	
-      //--------------------------------
-      // s=0
-
-      for(int n=0; n<N_POLES; n++)
+  for(int l=0; l<N_POLES; l++)
 	{
-	  double fact_n = CONST2[n];
-	  for(int m=0; m<=n; m++)
-	    { 
+		double ytemp;
+		//--------------------------------
+		// s=0
+		for(int n=0; n<N_POLES; n++)
+		{
+			double fact_n = CONST2[n];
+			for(int m=0; m<=n; m++)
+	    {
 	      bool bUpper = (n<l || (n==l && m<=0) );
-	    
+				
 	      ytemp = ( bUpper? getYY(Ylsr_Ynmr, n,m,l,0) : getYY(Ylsr_Ynmr, l,0,n,m)   );
 	      IMat[k++] = fact_n * ytemp;  // RR-part
-	    
+				
 	      if(m!=0)
-		{
-		  ytemp = ( bUpper? getYY(Ylsr_Ynmi, n,m,l,0) : getYY(Ylsi_Ynmr, l,0,n,m)   );
-		  IMat[k++] = mNeg * -1.0 * fact_n * ytemp;  //IR-part
-		}
-
+				{
+					ytemp = ( bUpper? getYY(Ylsr_Ynmi, n,m,l,0) : getYY(Ylsi_Ynmr, l,0,n,m)   );
+					IMat[k++] = mNeg * -1.0 * fact_n * ytemp;  //IR-part
+				}
 	    } //m
-	}//n
-      
-      //--------------------------------
-      // s>0
-      for(int s=1; s<=l; s++)
-	{
-	  // (l,s)real columns	
-	  for(int n=0; n<N_POLES; n++)
-	    {
-	      double fact_n = CONST2[n];
-	      
-	      for(int m=0; m<=n; m++)
-		{	
-		  bool bUpper = (n<l || (n==l && m<=s) );
-		  
-		  ytemp = ( bUpper? getYY(Ylsr_Ynmr, n,m,l,s) : getYY(Ylsr_Ynmr, l,s,n,m)   );	  
-		  IMat[k++] =  2.0 * fact_n * ytemp; //   RR-part	
-		  
-		  if(m!=0) 
-		    {
-		      ytemp = ( bUpper? getYY(Ylsr_Ynmi, n,m,l,s) : getYY(Ylsi_Ynmr, l,s,n,m)   );	  
-		      IMat[k++] = mNeg * -2.0 * fact_n * ytemp; //   IR-part		    
-		    }
-		} //m
-	    }//n
-
-	  // (l,s)imag columns	
-	  for(int n=0; n<N_POLES; n++)
-	    {
-	      double fact_n = CONST2[n];
-	      
-	      for(int m=0; m<=n; m++)
+		}//n
+		
+		//--------------------------------
+		// s>0
+		for(int s=1; s<=l; s++)
 		{
-		  bool bUpper = (n<l || (n==l && m<=s) );
-
-		  ytemp = ( bUpper? getYY(Ylsi_Ynmr, n,m,l,s) : getYY(Ylsr_Ynmi, l,s,n,m)   );	  
-		  IMat[k++]   = sNeg * -2.0 * fact_n* ytemp; //   RI-part
-		  
-		  if(m!=0)
-		    {
-		      ytemp = ( bUpper? getYY(Ylsi_Ynmi, n,m,l,s) : getYY(Ylsi_Ynmi, l,s,n,m)   );	  
-		      IMat[k++] = 2.0 * fact_n * ytemp; //   II-part
-		    }
-		} //m
+			// (l,s)real columns
+			for(int n=0; n<N_POLES; n++)
+	    {
+	      double fact_n = CONST2[n];
+	      
+	      for(int m=0; m<=n; m++)
+				{
+					bool bUpper = (n<l || (n==l && m<=s) );
+					
+					ytemp = ( bUpper? getYY(Ylsr_Ynmr, n,m,l,s) : getYY(Ylsr_Ynmr, l,s,n,m)   );
+					IMat[k++] =  2.0 * fact_n * ytemp; //   RR-part
+					
+					if(m!=0)
+					{
+						ytemp = ( bUpper? getYY(Ylsr_Ynmi, n,m,l,s) : getYY(Ylsi_Ynmr, l,s,n,m)   );
+						IMat[k++] = mNeg * -2.0 * fact_n * ytemp; //   IR-part
+					}
+				} //m
 	    }//n
-	  
-	} //s
-    }//l
+			
+			// (l,s)imag columns
+			for(int n=0; n<N_POLES; n++)
+	    {
+	      double fact_n = CONST2[n];
+	      
+	      for(int m=0; m<=n; m++)
+				{
+					bool bUpper = (n<l || (n==l && m<=s) );
+					
+					ytemp = ( bUpper? getYY(Ylsi_Ynmr, n,m,l,s) : getYY(Ylsr_Ynmi, l,s,n,m)   );
+					IMat[k++]   = sNeg * -2.0 * fact_n* ytemp; //   RI-part
+					
+					if(m!=0)
+					{
+						ytemp = ( bUpper? getYY(Ylsi_Ynmi, n,m,l,s) : getYY(Ylsi_Ynmi, l,s,n,m)   );
+						IMat[k++] = 2.0 * fact_n * ytemp; //   II-part
+					}
+				} //m
+	    }//n
+			
+		} //s
+	}//l
   
   double time3 = read_timer();cout << "Time taken to prepare Imat "<<time3 - start <<endl;
   
   double vm, rss;
   process_mem_usage(vm, rss);  cout << "After integral: VM: " << vm << "; RSS: " << rss << endl;
-
-
-  free(Ylsr_Ynmr);  
-  free(Ylsr_Ynmi); 
-  free(Ylsi_Ynmr); 
-  free(Ylsi_Ynmi); 
-
-  //printMat(IMat);
-  //cout <<"ImatE completed ... "<<endl;
-  
+  free(Ylsr_Ynmr);
+  free(Ylsr_Ynmi);
+  free(Ylsi_Ynmr);
+  free(Ylsi_Ynmi);
   return;
 }
 
 
-// member functions
-//for building Imat (S. Liu)
+/******************************************************************/
+/******************************************************************/
+/**
+ *  for building Imat ( S. Liu )
+ ******************************************************************/
 CSolExpCenter::CSolExpCenter(int ki, CPnt cen, double rad, const vector<CPnt> &SPE, const vector<CPnt> &SPB,
-			     const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
+														 const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
                              const vector<int> &intraPolList_near,
-			     double idiel, bool bKappa, const vector<double> &allchg, const vector<CPnt> &allpos, 
-			     const vector<double> &chgAssigned, const vector<CPnt> &posAssigned)
-  : CExpCenter(ki, cen, rad, idiel, bKappa, chgAssigned, posAssigned), 
-    m_SPE(SPE),m_SPB(SPB), m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx), m_neigh(neigh), 
-    m_intraPolList_near(intraPolList_near),
-    m_bRead(false), m_bOwnMat(true)
-{ 
-
+														 double idiel, bool bKappa, const vector<double> &allchg, const vector<CPnt> &allpos,
+														 const vector<double> &chgAssigned, const vector<CPnt> &posAssigned)
+: CExpCenter(ki, cen, rad, idiel, bKappa, chgAssigned, posAssigned),
+m_SPE(SPE),m_SPB(SPB), m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx), m_neigh(neigh),
+m_intraPolList_near(intraPolList_near),
+m_bRead(false), m_bOwnMat(true)
+{
   printf("Sphere %d CSolExpCenter by building own IMat\n", m_id);
   initMyConstants();
   setFixedCharges(allchg, allpos);
   initSurfaceCharges();
-
-
-    {
-      printf("Building Mat for sphere %d\n ",m_id);
-      double start = read_timer();
-      char fname[80];   sprintf(fname, "imat.sp%d.out.bin", m_id); 
-      m_IMat = new REAL[_PQUAD_];
-      build_IMatE(); writeMat_Unformatted(m_IMat, N_POLES, fname);
-      double end = read_timer();
-      printf("Time taken to prepare imat [s] : %f \n", end-start);   
-    }
-
+	{
+		printf("Building Mat for sphere %d\n ",m_id);
+		double start = read_timer();
+		char fname[80];   sprintf(fname, "imat.sp%d.out.bin", m_id);
+		m_IMat = new REAL[_PQUAD_];
+		build_IMatE(); writeMat_Unformatted(m_IMat, N_POLES, fname);
+		double end = read_timer();
+		printf("Time taken to prepare imat [s] : %f \n", end-start);
+	}
+	
   cal_DVFixed();
-  
 }
 
-// read in pointer to imat
-CSolExpCenter::CSolExpCenter(int ki, CPnt cen, double rad, 
-			     const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
+/******************************************************************/
+/******************************************************************/
+/**
+ *  read in pointer to imat, for selfpolarization!
+ ******************************************************************/
+CSolExpCenter::CSolExpCenter(int ki, CPnt cen, double rad,
+														 const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
                              const vector<int> &intraPolList_near,
-			     double idiel, bool bKappa, const vector<double> &allchg, const vector<CPnt> &allpos, 
-			     const vector<double> &chgAssigned, const vector<CPnt> &posAssigned, REAL* iMat)
-  : CExpCenter(ki, cen, rad, idiel, bKappa, chgAssigned, posAssigned), 
-    m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx) , m_neigh(neigh), 
-    m_intraPolList_near(intraPolList_near), m_IMat(iMat), m_bRead(false), m_bOwnMat(false)
-{ 
-
-  //  cout <<"CSolExpCenter with read-in IMat"<<endl;
+														 double idiel, bool bKappa, const vector<double> &allchg, const vector<CPnt> &allpos,
+														 const vector<double> &chgAssigned, const vector<CPnt> &posAssigned, REAL* iMat)
+: CExpCenter(ki, cen, rad, idiel, bKappa, chgAssigned, posAssigned),
+m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx) , m_neigh(neigh),
+m_intraPolList_near(intraPolList_near), m_IMat(iMat), m_bRead(false), m_bOwnMat(false)
+{
   initMyConstants();
   setFixedCharges(allchg, allpos);
-  initSurfaceCharges(); 
+  initSurfaceCharges();
   double start = read_timer();
   cal_DVFixed();
 
-  //  printMat(m_IMat);
-  
 }
 
-// read in pointer to imat, and copy expansions
+/******************************************************************/
+/******************************************************************/
+/**
+ * CSolExpCenter constructor to read in pointer to imat, and
+ copy expansions
+ ******************************************************************/
 CSolExpCenter::CSolExpCenter(int ki, CPnt cen, double rad,
-			     const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
-			     const vector<int> &intraPolList_near,
-			     double idiel, bool bKappa, const vector<double> &allchg, const vector<CPnt> &allpos, 
-			     const vector<double> &chgAssigned, const vector<CPnt> &posAssigned, REAL* iMat,
-			     const CMulExpan *Fself, const CMulExpan *Hself,
-			     const CLocalExpan* LF_intraSelf, const CLocalExpan* LH_intraSelf,
-			     const CLocalExpan* LF_intraSelf_far, const CLocalExpan* LH_intraSelf_far,
-			     const double *qSolvedFself, const double  *qSolvedHself,
-			     const double *totalFself, const double  *totalHself,
-			     CQuat* orient, CRotCoeff* rot, bool bGrad)
- :
-  CExpCenter(ki, cen, rad, idiel, bKappa, chgAssigned, posAssigned, orient, rot),  
-  m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx), m_neigh(neigh), m_intraPolList_near(intraPolList_near), 
-  m_IMat(iMat), 
-  m_Fself(Fself), m_LF_intraSelf(LF_intraSelf), m_LH_intraSelf(LH_intraSelf),
-  m_LF_intraSelf_far(LF_intraSelf_far), m_LH_intraSelf_far(LH_intraSelf_far),
-  m_qSolvedFself(qSolvedFself), m_qSolvedHself(qSolvedHself), m_totalFself(totalFself), m_totalHself(totalHself),
-  m_bRead(true), m_bOwnMat(false), m_bGrad(bGrad)
-{ 
-  
-  assert(getSPx().size() == getSPExSize()); 
-  //     cout <<"CSolExpCenter with read-in IMat and Expansions"<<endl;
+														 const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
+														 const vector<int> &intraPolList_near,
+														 double idiel, bool bKappa, const vector<double> &allchg, const vector<CPnt> &allpos,
+														 const vector<double> &chgAssigned, const vector<CPnt> &posAssigned, REAL* iMat,
+														 const CMulExpan *Fself, const CMulExpan *Hself,
+														 const CLocalExpan* LF_intraSelf, const CLocalExpan* LH_intraSelf,
+														 const CLocalExpan* LF_intraSelf_far, const CLocalExpan* LH_intraSelf_far,
+														 const double *qSolvedFself, const double  *qSolvedHself,
+														 const double *totalFself, const double  *totalHself,
+														 CQuat* orient, CRotCoeff* rot, bool bGrad)
+:
+CExpCenter(ki, cen, rad, idiel, bKappa, chgAssigned, posAssigned, orient, rot),
+m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx), m_neigh(neigh), m_intraPolList_near(intraPolList_near),
+m_IMat(iMat),
+m_Fself(Fself), m_LF_intraSelf(LF_intraSelf), m_LH_intraSelf(LH_intraSelf),
+m_LF_intraSelf_far(LF_intraSelf_far), m_LH_intraSelf_far(LH_intraSelf_far),
+m_qSolvedFself(qSolvedFself), m_qSolvedHself(qSolvedHself), m_totalFself(totalFself), m_totalHself(totalHself),
+m_bRead(true), m_bOwnMat(false), m_bGrad(bGrad)
+{
+  assert(getSPx().size() == getSPExSize());
   initMyConstants();
   setFixedCharges(allchg, allpos);
-  m_Hself = Hself; 
-  m_H = *m_Hself;   m_F = *m_Fself; 
+  m_Hself = Hself;
+  m_H = *m_Hself;   m_F = *m_Fself;
   initSurfaceCharges();
   cal_DVFixed();
-  
 }
 
-// for preparing various moltype quantities
+/******************************************************************/
+/******************************************************************/
+/**
+ *  CSolExpCenter constructor for preparing various moltype quantities
+ ******************************************************************/
 CSolExpCenter::CSolExpCenter(int ki, CPnt cen, double rad,
-			     const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
-                             const vector<int> &intraPolList_near, 
-			     const CMulExpan *Fself, const CMulExpan *Hself,
-			     const double *qSolvedFself, const double  *qSolvedHself,
-			     const double *totalFself, const double  *totalHself)
- :
-  CExpCenter(ki, cen, rad),  
-  m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx), m_neigh(neigh), m_intraPolList_near(intraPolList_near),
-  m_Fself(Fself),
-  m_qSolvedFself(qSolvedFself), m_qSolvedHself(qSolvedHself), m_totalFself(totalFself), m_totalHself(totalHself)
-{ 
-  m_Hself = Hself; 
-  m_H = *m_Hself;   
-  m_F = *m_Fself; 
+														 const vector<CPnt> &SPx, const int &nSPx, const vector<int> &neigh,
+                             const vector<int> &intraPolList_near,
+														 const CMulExpan *Fself, const CMulExpan *Hself,
+														 const double *qSolvedFself, const double  *qSolvedHself,
+														 const double *totalFself, const double  *totalHself)
+:
+CExpCenter(ki, cen, rad),
+m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx), m_neigh(neigh), m_intraPolList_near(intraPolList_near),
+m_Fself(Fself),
+m_qSolvedFself(qSolvedFself), m_qSolvedHself(qSolvedHself), m_totalFself(totalFself), m_totalHself(totalHself)
+{
+  m_Hself = Hself;
+  m_H = *m_Hself;
+  m_F = *m_Fself;
 }
 
 
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * CSolExpCenter constructor
+ ******************************************************************/
 CSolExpCenter::CSolExpCenter(int ki, CPnt cen, double rad, const CMulExpan *Hself, const vector<CPnt> &SPx, const int &nSPx, const vector<int> &intraPolList_near)
-  : CExpCenter(ki, cen, rad),
-    m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx), m_intraPolList_near(intraPolList_near),
-    m_bRead(true), m_bOwnMat(false)
-   { 
-     m_Hself = Hself;
-     m_H = *m_Hself;
-   }
- 
- 
-void 
+: CExpCenter(ki, cen, rad),
+m_SPx(SPx), m_SPExSize(SPx.size()), m_nSPx(nSPx), m_intraPolList_near(intraPolList_near),
+m_bRead(true), m_bOwnMat(false)
+{
+	m_Hself = Hself;
+	m_H = *m_Hself;
+}
+
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Initialize constants for building Imat
+ ******************************************************************/
+void
 CSolExpCenter::initMyConstants()
 {
-  
   vector<double> bessel_K(N_POLES+1, 1.0), bessel_I(N_POLES+1, 1.0);
   vector<double> Dcoeff_F(N_POLES), Vcoeff_F(N_POLES), Dcoeff_H(N_POLES), Vcoeff_H(N_POLES);;
-
+	
   double val = m_kappa * m_rad;
   double valsqr = val*val;
   double exp_val = exp(-1.0*val);
-  double eps = m_idiel/ m_sdiel; 
-  CLExpan::BESSEL(bessel_K,val ); 
+  double eps = m_idiel/ m_sdiel;
+  CLExpan::BESSEL(bessel_K,val );
   CMExpan::BESSEL(bessel_I,val );
-
+	
   for(int n=0; n<N_POLES; n++)
-    {
-      Dcoeff_H[n] = - exp_val * bessel_K[n] ;
-      Dcoeff_F[n] = 1.0;
-
-      Vcoeff_H[n] =  exp_val * (  n * bessel_K[n] -(2*n+1)*bessel_K[n+1] );
-      Vcoeff_F[n] =  -eps * n;
-
-      // for F-eqn (based on Von Neumann)
-      m_constH1[n]  = Vcoeff_H[n];                         // H-coeff for F-eqn
-      m_constF1[n]  = Vcoeff_F[n] + (2*n+1);               // F-coeff for F-eqn
-      m_constLF1[n] = -m_rad * eps * n; // for F-eqn
-      m_constLH1[n] = m_rad * ( n*bessel_I[n] + valsqr * bessel_I[n+1] / double(2*n+3) ); 
-
-      // for H-eqn (based on Dirchlet)
-      m_constH2[n]  = Dcoeff_H[n] + (2*n+1) / bessel_I[n]; // H-coeff for H-eqn
-      m_constF2[n]  = Dcoeff_F[n];                         // F-coeff for H-eqn
-      m_constLF2[n] = m_rad; // for H-eqn
-      m_constLH2[n] = - m_rad * bessel_I[n]; 
- 
-      m_constInvH[n] = bessel_I[n] * (CONST3[n]);// bessel_I[n] * sqrt(CONST3[n]); 
-      m_constChgH[n] = CONST2[n] / bessel_I[n]; 
-   }
-     
+	{
+		Dcoeff_H[n] = - exp_val * bessel_K[n] ;
+		Dcoeff_F[n] = 1.0;
+		
+		Vcoeff_H[n] =  exp_val * (  n * bessel_K[n] -(2*n+1)*bessel_K[n+1] );
+		Vcoeff_F[n] =  -eps * n;
+		
+		// for F-eqn (based on Von Neumann)
+		m_constH1[n]  = Vcoeff_H[n];                         // H-coeff for F-eqn
+		m_constF1[n]  = Vcoeff_F[n] + (2*n+1);               // F-coeff for F-eqn
+		m_constLF1[n] = -m_rad * eps * n; // for F-eqn
+		m_constLH1[n] = m_rad * ( n*bessel_I[n] + valsqr * bessel_I[n+1] / double(2*n+3) );
+		
+		// for H-eqn (based on Dirchlet)
+		m_constH2[n]  = Dcoeff_H[n] + (2*n+1) / bessel_I[n]; // H-coeff for H-eqn
+		m_constF2[n]  = Dcoeff_F[n];                         // F-coeff for H-eqn
+		m_constLF2[n] = m_rad; // for H-eqn
+		m_constLH2[n] = - m_rad * bessel_I[n];
+		
+		m_constInvH[n] = bessel_I[n] * (CONST3[n]);// bessel_I[n] * sqrt(CONST3[n]);
+		m_constChgH[n] = CONST2[n] / bessel_I[n];
+	}
 }
-// 1. generate m_E, m_H
-// 2. set charges for each center and generate m_Efix, m_Lfix 
-void 
+
+/******************************************************************/
+/******************************************************************/
+/**
+ *  setFixedCharges function. For a given CG sphere, 1. generate m_E, m_H
+ 2. set charges for current center and generate m_Efix, m_Lfix
+ ******************************************************************/
+void
 CSolExpCenter::setFixedCharges(const vector<double> &allchg, const vector<CPnt> &allpos)
 {
-
   // assigned all fixed charges to inside/outside sphere
   // use scaled charges
   vector<double> chgIn, chgOut;
   vector<CPnt>   posIn, posOut;
   double rsq = m_rad*m_rad;
-
+	
   for(int i=0; i<allpos.size(); i++)
-    {
-      if( allpos[i].normsq() < rsq) 
 	{
-	  chgIn.push_back( allchg[i]/m_idiel );
-	  posIn.push_back( allpos[i] );
+		if( allpos[i].normsq() < rsq)
+		{
+			chgIn.push_back( allchg[i]/m_idiel );
+			posIn.push_back( allpos[i] );
+		}
+		else
+		{
+			chgOut.push_back( allchg[i]/m_idiel );
+			posOut.push_back( allpos[i] );
+		}
 	}
-      else 
-	{
-	  chgOut.push_back( allchg[i]/m_idiel );
-	  posOut.push_back( allpos[i] );
-	}
-    }
-
+	
   // generate m_Efix, m_Lfix
   m_Efix = CMulExpan(chgIn, posIn, N_POLES, m_bKappa, m_lscale);
   m_Lfix = CLocalExpan(chgOut, posOut, N_POLES, m_bKappa, m_lscale);
-
+	
   // set scale and range of m_S, LH, LF
   if(!m_bRead)
-    {
-      m_H = m_rE;
-      m_F = CMulExpan(CRange(0, m_p), m_lscale);
-    }
-
-  m_Hrot = m_H; // ???
-  //  m_rot.rotateWithXi(m_H, m_Hrot, 1, m_p, true);
-  
+	{
+		m_H = m_rE;
+		m_F = CMulExpan(CRange(0, m_p), m_lscale);
+	}
+	
+  m_Hrot = m_H;   
   m_LFS_Far = CLocalExpan(CRange(0, m_p), m_lscale);
   m_LHS_Far = CLocalExpan(CRange(0, m_p), m_lscale);
-  //m_LF = CLocalExpan(CRange(0, m_p), m_lscale);
-  //m_LH = CLocalExpan(CRange(0, m_p), m_lscale);
   m_LFS = CLocalExpan(CRange(0, m_p), m_lscale);
   m_LHS = CLocalExpan(CRange(0, m_p), m_lscale);
-
 }
 
-// init after system size (nmol) is known
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  init after system size ( nmol ) is known
+ ******************************************************************/
+void
 CSolExpCenter::initGradient(int nmol)
 {
-  
   m_maxgF = 0;
   m_maxgH = 0;
   
-  m_gSolvedF.resize(m_SPExSize); 
+  m_gSolvedF.resize(m_SPExSize);
   m_gSolvedH.resize(m_SPExSize);
+	
+  m_gLHN.reset(m_p);  m_gLHN.setScale(m_lscale);
+}
 
-  m_gLHN.reset(m_p);  m_gLHN.setScale(m_lscale); 
-  
-}
-/*
-void
-CSolExpCenter::setToSelfPolValues(bool bResetCharges)
-{
-  m_H = getHself();
-  m_F = getFself();
-  //m_rot->rotateWithXi(m_H, m_Hrot, 1, m_p, true); //no need cos no ext neigh
-  if(bResetCharges) computeExposedSurfaceChargesFH();
-}
-*/
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to initialize surface charges for self-polarization
+ ******************************************************************/
 void
 CSolExpCenter::initSurfaceCharges()
 {
-
-  m_qSolvedF.resize(m_SPExSize); 
+  m_qSolvedF.resize(m_SPExSize);
   m_qSolvedH.resize(m_SPExSize);
   
-  m_dA = 4*M_PI/double( m_nSPx );   
-
+  m_dA = 4*M_PI/double( m_nSPx );
+	
   computeExposedSurfaceChargesH(); // either read-in or initialized to rE
   if(m_bRead) computeExposedSurfaceChargesF();
   else m_totalF = 0;
-
 }
 
-double 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to solve surface charges for self-polarization
+ ******************************************************************/
+double
 CSolExpCenter::solveSurfaceCharges()
 {
   solveSurfaceCharges(m_F, m_H, false);
 }
 
-// calculates the surface charges iteratively using y=Ax
-// based on molecule in initial orientation 
-//(i.e. LH must be rotated by to initial position by -rot, and keep
-// a copy of H (as Hrot) to polarize other spheres 
-double 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  calculates the surface charges iteratively using y=Ax
+ based on molecule in initial orientation
+ ( i.e. LH must be rotated by to initial position by -rot, and keep
+ a copy of H ( as Hrot ) to polarize other spheres
+ ******************************************************************/
+double
 CSolExpCenter::solveSurfaceCharges(const CMulExpan &Finit, const CMulExpan &Hinit, bool bRotateH)
 {
   double devH;
@@ -604,1023 +613,1017 @@ CSolExpCenter::solveSurfaceCharges(const CMulExpan &Finit, const CMulExpan &Hini
   
   vector<double> F = Finit.getVector(m_p);
   vector<double> H = Hinit.getVector(m_p);
-
+	
   devH = solveFH(F, H, m_LFS.getVector(m_p), m_LHS.getVector(m_p), m_p, m_p, 1);
- 
+	
   m_F = CMulExpan(F, CRange(0, m_p), m_mscale);
   m_H = CMulExpan(H, CRange(0, m_p), m_mscale);
   if(bRotateH) m_rot->rotateWithXi(m_H,m_Hrot , 1, m_p, true); // rotate for mutual pol; not self pol
 
-  //   cout <<"F"<<m_F<<endl;
-  // cout <<"H"<<m_H<<endl;
-  
   m_dev = devH;
-
+	
   //============================================================
   // also recalculate qsolved (exposed surface charges)
   computeExposedSurfaceChargesFH();
-  
   return devH;
-  
 }
 
-
-double 
-CSolExpCenter::solveSurfaceGradient(int j, CGradExpan &gF, CGradExpan &gH, CGradExpan &gHrot,  
-				    const CGradExpan & LGF_j, const CGradExpan & LGH_j)
+/******************************************************************/
+/******************************************************************/
+/**
+ *  calculates the surface gradient iteratively using y=Ax
+ based on molecule in initial orientation
+ ( i.e. LH must be rotated by to initial position by -rot, and keep
+ a copy of H ( as Hrot ) to polarize other spheres
+ ******************************************************************/
+double
+CSolExpCenter::solveSurfaceGradient(int j, CGradExpan &gF, CGradExpan &gH, CGradExpan &gHrot,
+																		const CGradExpan & LGF_j, const CGradExpan & LGH_j)
 {
   const int len = m_p * m_p;
   
   vector<double> gF_j = gF.getOneVector();
   vector<double> gH_j = gH.getOneVector();
-
+	
   double devH = solveFH(gF_j, gH_j, LGF_j.getOneVector(), LGH_j.getOneVector(), m_p, m_p, 3);
   
   gF.setFromOneVector(gF_j);
   gH.setFromOneVector(gH_j);
   m_rot->rotateWithXi(gH, gHrot , 1, m_p, true);
   m_dev = devH;
-
+	
   computeExposedSurfaceGradientFH(gF, gH);
   
   return devH;
   
- }
+}
 
-// compute exposed surface integral directly using EXPOSED surface points
+/******************************************************************/
+/******************************************************************/
+/**
+ *  compute exposed surface integral directly using EXPOSED surface points
+ ******************************************************************/
 void
-CSolExpCenter::computeIntegralE(double * Yrr,double * Yri,double * Yir,double * Yii , 
-				     const vector<CPnt> & SPE, const vector<CPnt> & SPB)
+CSolExpCenter::computeIntegralE(double * Yrr,double * Yri,double * Yir,double * Yii ,
+																const vector<CPnt> & SPE, const vector<CPnt> & SPB)
 {
   cout <<"compute integral using exposed points"<<endl;
-
   int npe = SPE.size();
   int npb = SPB.size();
   int np = npb + npe;
-
+	
   for(int h=0; h<npe; h++)
-    {
-      double w=0; 
-      // convert the position relative to the center to spherical coordinates.
-      CSpPnt q = CartToSph(SPE[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-
-      // collect sums for (n,m) rows x (l,s) column
-      int kY=0;      
-      for(int l=0; l<N_POLES; l++)
-	for(int s=0; s<=l; s++)
-	  {
-	    double Ylsr, Ylsi;
-	    if(s==0)
-	      {
-		Ylsr = 	Y(l,0);
-		Ylsi =  0.0;	
-	      } 
-
-	    else 
-	      {
-		Ylsr = Y(l, 2*s-1);
-		Ylsi = Y(l, 2*s) ; 
-	      }
-
-	    for(int n=0; n<=l; n++)
-	      for(int m=0; m<=n; m++)
-		{
-		  if(n==l  && m > s) break;
-
-		  double Ynmr, Ynmi;
-		  if(m==0)
-		    {
-		      Ynmr = Y(n,0);
-		      Ynmi = 0.0;    
-		    }
-		  else 
-		    {
-		      Ynmr = Y(n, 2*m-1) ;
-		      Ynmi = Y(n, 2*m) ;
-		    }
-
-		  // integrate using the appropriate integration rules
-		  if(m==0 && s==0 && (n+l)%2==0) //simpson's rule
-		    {
-		      if(h > 0 && h < np)
+	{
+		double w=0;
+		// convert the position relative to the center to spherical coordinates.
+		CSpPnt q = CartToSph(SPE[h]);
+		CSHExpan Y(q.theta(), q.phi(), N_POLES);
+		// collect sums for (n,m) rows x (l,s) column
+		int kY=0;
+		for(int l=0; l<N_POLES; l++)
+			for(int s=0; s<=l; s++)
 			{
-			  if(h % 2 == 0 ) w = 2.0/3.0; // even
-			  else w = 4.0/3.0; //odd
-			}
-		      else w = 1.0/3.0;
-		    }
-		  else // rectangular 
-		      w = 1.0;
-		  
-		  Yrr[kY] += w * Ylsr*Ynmr;
-		  Yri[kY] += w * Ylsr*Ynmi;
-		  Yir[kY] += w * Ylsi*Ynmr; 
-		  Yii[kY] += w * Ylsi*Ynmi;
+				double Ylsr, Ylsi;
+				if(s==0)
+	      {
+					Ylsr = 	Y(l,0);
+					Ylsi =  0.0;
+	      }
+				else
+	      {
+					Ylsr = Y(l, 2*s-1);
+					Ylsi = Y(l, 2*s) ;
+	      }
+				
+				for(int n=0; n<=l; n++)
+					for(int m=0; m<=n; m++)
+					{
+						if(n==l  && m > s) break;
+						
+						double Ynmr, Ynmi;
+						if(m==0)
+						{
+							Ynmr = Y(n,0);
+							Ynmi = 0.0;
+						}
+						else
+						{
+							Ynmr = Y(n, 2*m-1) ;
+							Ynmi = Y(n, 2*m) ;
+						}
 
-		  kY++;
-		   
-		}//nm
-	  }//ls
-
-
-
-    }//h
-
+						// integrate using the appropriate integration rules
+						if(m==0 && s==0 && (n+l)%2==0) //simpson's rule
+						{
+							if(h > 0 && h < np)
+							{
+								if(h % 2 == 0 ) w = 2.0/3.0; // even
+								else w = 4.0/3.0; //odd
+							}
+							else w = 1.0/3.0;
+						}
+						else // rectangular
+							w = 1.0;
+						
+						Yrr[kY] += w * Ylsr*Ynmr;
+						Yri[kY] += w * Ylsr*Ynmi;
+						Yir[kY] += w * Ylsi*Ynmr;
+						Yii[kY] += w * Ylsi*Ynmi;
+						
+						kY++;
+					}//nm
+			}//ls
+	}//h
+	
   // clean up integral, using the fact that when m=s the integral is real
-  // divide the sums by to get surface integral  
+  // divide the sums by to get surface integral
   double dA = 4*M_PI / (double)(np-1);
-
+	
   for(int l=0, kY=0; l<N_POLES; l++)
     for(int s=0; s<=l; s++)
       for(int n=0; n<=l; n++)
-	for(int m=0; m<=n; m++)
-	  {
-	    if( n==l && m > s ) break;
-	    	    
-	    if( n==l && m==s )
-	      {
-		if(m==0) 
-		  {
-		    Yrr[kY] *= dA;  
-		    Yii[kY] = 0.0; 
-		  }
-		else 
-		  {
-		    Yrr[kY] *= dA;  
-		    Yii[kY] *= dA; 
-		  }
-		
-		Yri[kY]  *= dA; 
-		Yir[kY]  *= dA; 
-	      }
-	    else
-	    
-	      {
-		Yrr[kY] *= dA;  
-		Yri[kY] *= dA;
-		Yir[kY] *= dA;
-		Yii[kY] *= dA;
-	      }
-
-	    kY++;
-	    
-	  }
-  
+				for(int m=0; m<=n; m++)
+				{
+					if( n==l && m > s ) break;
+					
+					if( n==l && m==s )
+					{
+						if(m==0)
+						{
+							Yrr[kY] *= dA;
+							Yii[kY] = 0.0;
+						}
+						else
+						{
+							Yrr[kY] *= dA;
+							Yii[kY] *= dA;
+						}
+						Yri[kY]  *= dA;
+						Yir[kY]  *= dA;
+					}
+					else
+					{
+						Yrr[kY] *= dA;
+						Yri[kY] *= dA;
+						Yir[kY] *= dA;
+						Yii[kY] *= dA;
+					}
+					kY++;
+				}
 }
 
-// compute exposed surface integral indirectly using BURIED surface points
+/******************************************************************/
+/******************************************************************/
+/**
+ * compute exposed surface integral indirectly using BURIED surface points
+ ******************************************************************/
 void
-CSolExpCenter::computeIntegralB(double * Yrr,double * Yri,double * Yir,double * Yii, 
-				const vector<CPnt> & SPE, const vector<CPnt> & SPB )
+CSolExpCenter::computeIntegralB(double * Yrr,double * Yri,double * Yir,double * Yii,
+																const vector<CPnt> & SPE, const vector<CPnt> & SPB )
 {
   cout <<"compute integral using buried points"<<endl;
   int npe = SPE.size();
   int npb = SPB.size();
   int np = npb + npe;
-
+	
   for(int h=0; h<npb; h++)
-    {
-      double w=0; 
-      // convert the position relative to the center to spherical coordinates.
-      CSpPnt q = CartToSph(SPB[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-
-      // collect sums for (n,m) rows x (l,s) column
-      
-      for(int l=0, kY=0; l<N_POLES; l++)
-	for(int s=0; s<=l; s++)
-	  {
-	    double Ylsr, Ylsi;
-	    if(s==0)
-	      {
-		Ylsr = 	Y(l,0);
-		Ylsi =  0.0;	
-	      } 
-
-	    else 
-	      {
-		Ylsr = Y(l, 2*s-1);
-		Ylsi = Y(l, 2*s) ; 
-	      }
-
-	    for(int n=0; n<=l; n++)
-	      for(int m=0; m<=n; m++)
-		{
-		  if(n==l  && m > s) break;
-
-		  double Ynmr, Ynmi;
-		  if(m==0)
-		    {
-		      Ynmr = Y(n,0);
-		      Ynmi = 0.0;    
-		    }
-		  else 
-		    {
-		      Ynmr = Y(n, 2*m-1) ;
-		      Ynmi = Y(n, 2*m) ;
-		    }
-
-		  // integrate using the appropriate integration rules
-		  if(m==0 && s==0 && (n+l)%2==0) //simpson's rule
-		    {
-		      if(h > 0 && h < np)
+	{
+		double w=0;
+		// convert the position relative to the center to spherical coordinates.
+		CSpPnt q = CartToSph(SPB[h]);
+		CSHExpan Y(q.theta(), q.phi(), N_POLES);
+		
+		// collect sums for (n,m) rows x (l,s) column
+		
+		for(int l=0, kY=0; l<N_POLES; l++)
+			for(int s=0; s<=l; s++)
 			{
-			  if(h % 2 == 0 ) w = 2.0/3.0; // even
-			  else w = 4.0/3.0; //odd
-			}
-		      else w = 1.0/3.0;
-		    }
-		  else // rectangular 
-		      w = 1.0;
-		  
-		  Yrr[kY] += w * Ylsr*Ynmr;
-		  Yri[kY] += w * Ylsr*Ynmi;
-		  Yir[kY] += w * Ylsi*Ynmr; 
-		  Yii[kY] += w * Ylsi*Ynmi;
-
-		  kY++;
-		   
-		}//nm
-	  }//ls
-
-      if( h % 10000 == 0 ) cout <<"completed "<<h<<" points "<<endl;
-
-    }//h
-
-  // modify to get exposed integral      
-  // divide the sums by to get surface integral  
+				double Ylsr, Ylsi;
+				if(s==0)
+	      {
+					Ylsr = 	Y(l,0);
+					Ylsi =  0.0;
+	      }
+				
+				else
+	      {
+					Ylsr = Y(l, 2*s-1);
+					Ylsi = Y(l, 2*s) ;
+	      }
+				
+				for(int n=0; n<=l; n++)
+					for(int m=0; m<=n; m++)
+					{
+						if(n==l  && m > s) break;
+						
+						double Ynmr, Ynmi;
+						if(m==0)
+						{
+							Ynmr = Y(n,0);
+							Ynmi = 0.0;
+						}
+						else
+						{
+							Ynmr = Y(n, 2*m-1) ;
+							Ynmi = Y(n, 2*m) ;
+						}
+						
+						// integrate using the appropriate integration rules
+						if(m==0 && s==0 && (n+l)%2==0) //simpson's rule
+						{
+							if(h > 0 && h < np)
+							{
+								if(h % 2 == 0 ) w = 2.0/3.0; // even
+								else w = 4.0/3.0; //odd
+							}
+							else w = 1.0/3.0;
+						}
+						else // rectangular
+							w = 1.0;
+						
+						Yrr[kY] += w * Ylsr*Ynmr;
+						Yri[kY] += w * Ylsr*Ynmi;
+						Yir[kY] += w * Ylsi*Ynmr;
+						Yii[kY] += w * Ylsi*Ynmi;
+						
+						kY++;
+						
+					}//nm
+			}//ls
+		
+		if( h % 10000 == 0 ) cout <<"completed "<<h<<" points "<<endl;
+		
+	}//h
+	
+  // modify to get exposed integral
+  // divide the sums by to get surface integral
   double dA = 4*M_PI / (double)(np-1);
-
+	
   for(int l=0, kY=0; l<N_POLES; l++)
-    {
-      double delta = 1.0/CONST2[l];
-      for(int s=0; s<=l; s++)
-	for(int n=0; n<=l; n++)
-	  for(int m=0; m<=n; m++)
-	    {
-	      if( n==l && m > s ) break;
-	      
-	      if( n==l && m==s )
-		{
-
-		  if(m==0) 
-		    {
-		      Yrr[kY] = delta - dA*Yrr[kY];  
-		      Yii[kY] = 0.0; 
-		    }
-		  else 
-		    {
-		      Yrr[kY] = 0.5*delta - dA*Yrr[kY];  
-		      Yii[kY] = 0.5*delta - dA*Yii[kY]; 
-		    }
-
-		  Yri[kY] *= -dA;
-		  Yir[kY] *= -dA;
-		}
-	      else
-	      
-		{
-		  Yrr[kY] *= -dA;  
-		  Yri[kY] *= -dA; 
-		  Yir[kY] *= -dA; 
-		  Yii[kY] *= -dA; 
-		}
-	      kY++;
-
-	    }
-    }
-
-
+	{
+		double delta = 1.0/CONST2[l];
+		for(int s=0; s<=l; s++)
+			for(int n=0; n<=l; n++)
+				for(int m=0; m<=n; m++)
+				{
+					if( n==l && m > s ) break;
+					
+					if( n==l && m==s )
+					{
+						
+						if(m==0)
+						{
+							Yrr[kY] = delta - dA*Yrr[kY];
+							Yii[kY] = 0.0;
+						}
+						else
+						{
+							Yrr[kY] = 0.5*delta - dA*Yrr[kY];
+							Yii[kY] = 0.5*delta - dA*Yii[kY];
+						}
+						
+						Yri[kY] *= -dA;
+						Yir[kY] *= -dA;
+					}
+					else
+						
+					{
+						Yrr[kY] *= -dA;
+						Yri[kY] *= -dA;
+						Yir[kY] *= -dA;
+						Yii[kY] *= -dA;
+					}
+					kY++;
+					
+				}
+	}
+	
+	
 }
 
-// prepare response matrix IMATE
-// making use of symmetry in Ynm*Yls
-// taken into account conjugation of Ynm with sNeg mNeg
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to prepare response matrix IMatE making use of
+ symmetry in Ynm*Yls taken into account conjugation of Ynm with sNeg mNeg
+ ******************************************************************/
+void
 CSolExpCenter::build_IMatE()
 {
-
-  cout <<"building ImatE  ... "<<endl;
-
+  cout <<"building ImatE  ... "<<endl;	
   const int npe = m_SPE.size();
   const int npb = m_SPB.size();
-
-  // step 1: compute integrals 
-  
+	
+  // step 1: compute integrals
   double *Ylsr_Ynmr = (double*) malloc(_PQUADH_*sizeof(double));
   double *Ylsr_Ynmi = (double*) malloc(_PQUADH_*sizeof(double));
   double *Ylsi_Ynmr = (double*) malloc(_PQUADH_*sizeof(double));
   double *Ylsi_Ynmi = (double*) malloc(_PQUADH_*sizeof(double));
   
   for(int k=0; k < _PQUADH_; k++)
-    {
-      Ylsr_Ynmr[k] = 0.0;
-      Ylsr_Ynmi[k] = 0.0;
-      Ylsi_Ynmr[k] = 0.0;
-      Ylsi_Ynmi[k] = 0.0;
-    } 
-
+	{
+		Ylsr_Ynmr[k] = 0.0;
+		Ylsr_Ynmi[k] = 0.0;
+		Ylsi_Ynmr[k] = 0.0;
+		Ylsi_Ynmi[k] = 0.0;
+	}
+	
   double start = read_timer();
   
-  if(npe <= npb) 
+  if(npe <= npb)
     computeIntegralE(Ylsr_Ynmr, Ylsr_Ynmi, Ylsi_Ynmr, Ylsi_Ynmi, m_SPE, m_SPB);
-  else  
+  else
     computeIntegralB(Ylsr_Ynmr, Ylsr_Ynmi, Ylsi_Ynmr, Ylsi_Ynmi, m_SPE, m_SPB);
   
   double time1 = read_timer();
   cout << "Time taken to add integrals "<<time1 - start <<endl;
-
+	
   // step 2 : populate Imat
   
   const int len = _PSQ_;
   vector<REAL> fact(N_POLES);
-    
-  int k = 0;  // Imat counter (column major) 
-
+	
+  int k = 0;  // Imat counter (column major)
+	
   // to handle conjugation
   int sNeg = -1;
   int mNeg = -1;
-
-  for(int l=0; l<N_POLES; l++)
-    {
-      double ytemp;
 	
-      //--------------------------------
-      // s=0
-
-      for(int n=0; n<N_POLES; n++)
+  for(int l=0; l<N_POLES; l++)
 	{
-	  double fact_n = CONST2[n];
-
-	  for(int m=0; m<=n; m++)
-	    { 
+		double ytemp;
+		
+		//--------------------------------
+		// s=0
+		
+		for(int n=0; n<N_POLES; n++)
+		{
+			double fact_n = CONST2[n];
+			
+			for(int m=0; m<=n; m++)
+	    {
 	      bool bUpper = (n<l || (n==l && m<=0) );
-	    
+				
 	      ytemp = ( bUpper? getYY(Ylsr_Ynmr, n,m,l,0) : getYY(Ylsr_Ynmr, l,0,n,m)   );
 	      m_IMat[k++] = fact_n * ytemp;  // RR-part
-	    
+				
 	      if(m!=0)
-		{
-		  ytemp = ( bUpper? getYY(Ylsr_Ynmi, n,m,l,0) : getYY(Ylsi_Ynmr, l,0,n,m)   );
-		  m_IMat[k++] = mNeg * -1.0 * fact_n * ytemp;  //IR-part
-		}
-
+				{
+					ytemp = ( bUpper? getYY(Ylsr_Ynmi, n,m,l,0) : getYY(Ylsi_Ynmr, l,0,n,m)   );
+					m_IMat[k++] = mNeg * -1.0 * fact_n * ytemp;  //IR-part
+				}
+				
 	    } //m
-	}//n
-      
-      //--------------------------------
-      // s>0
-      for(int s=1; s<=l; s++)
-	{
-	  // (l,s)real columns	
-	  for(int n=0; n<N_POLES; n++)
+		}//n
+		
+		//--------------------------------
+		// s>0
+		for(int s=1; s<=l; s++)
+		{
+			// (l,s)real columns
+			for(int n=0; n<N_POLES; n++)
 	    {
 	      double fact_n = CONST2[n];
-
+				
 	      
 	      for(int m=0; m<=n; m++)
-		{	
-		  bool bUpper = (n<l || (n==l && m<=s) );
-		  
-		  ytemp = ( bUpper? getYY(Ylsr_Ynmr, n,m,l,s) : getYY(Ylsr_Ynmr, l,s,n,m)   );	  
-		  m_IMat[k++] =  2.0 * fact_n * ytemp; //   RR-part	
-		  
-		  if(m!=0) 
-		    {
-		      ytemp = ( bUpper? getYY(Ylsr_Ynmi, n,m,l,s) : getYY(Ylsi_Ynmr, l,s,n,m)   );	  
-		      m_IMat[k++] = mNeg * -2.0 * fact_n * ytemp; //   IR-part		    
-		    }
-		} //m
+				{
+					bool bUpper = (n<l || (n==l && m<=s) );
+					
+					ytemp = ( bUpper? getYY(Ylsr_Ynmr, n,m,l,s) : getYY(Ylsr_Ynmr, l,s,n,m)   );
+					m_IMat[k++] =  2.0 * fact_n * ytemp; //   RR-part
+					
+					if(m!=0)
+					{
+						ytemp = ( bUpper? getYY(Ylsr_Ynmi, n,m,l,s) : getYY(Ylsi_Ynmr, l,s,n,m)   );
+						m_IMat[k++] = mNeg * -2.0 * fact_n * ytemp; //   IR-part
+					}
+				} //m
 	    }//n
-
-	  // (l,s)imag columns	
-	  for(int n=0; n<N_POLES; n++)
+			
+			// (l,s)imag columns
+			for(int n=0; n<N_POLES; n++)
 	    {
 	      double fact_n = CONST2[n];
-
+				
 	      for(int m=0; m<=n; m++)
-		{
-		  bool bUpper = (n<l || (n==l && m<=s) );
-
-		  ytemp = ( bUpper? getYY(Ylsi_Ynmr, n,m,l,s) : getYY(Ylsr_Ynmi, l,s,n,m)   );	  
-		  m_IMat[k++]   = sNeg * -2.0 * fact_n* ytemp; //   RI-part
-		  
-		  if(m!=0)
-		    {
-		      ytemp = ( bUpper? getYY(Ylsi_Ynmi, n,m,l,s) : getYY(Ylsi_Ynmi, l,s,n,m)   );	  
-		      m_IMat[k++] = 2.0 * fact_n * ytemp; //   II-part
-		    }
-		} //m
+				{
+					bool bUpper = (n<l || (n==l && m<=s) );
+					
+					ytemp = ( bUpper? getYY(Ylsi_Ynmr, n,m,l,s) : getYY(Ylsr_Ynmi, l,s,n,m)   );
+					m_IMat[k++]   = sNeg * -2.0 * fact_n* ytemp; //   RI-part
+					
+					if(m!=0)
+					{
+						ytemp = ( bUpper? getYY(Ylsi_Ynmi, n,m,l,s) : getYY(Ylsi_Ynmi, l,s,n,m)   );
+						m_IMat[k++] = 2.0 * fact_n * ytemp; //   II-part
+					}
+				} //m
 	    }//n
-	  
-	} //s
-    }//l
-  
+		} //s
+	}//l
   double time3 = read_timer();cout << "Time taken to prepare Imat "<<time3 - start <<endl;
-
   double vm, rss;
   process_mem_usage(vm, rss);  cout << "After integral: VM: " << vm << "; RSS: " << rss << endl;
 
-
-  free(Ylsr_Ynmr);  
-  free(Ylsr_Ynmi); 
-  free(Ylsi_Ynmr); 
-  free(Ylsi_Ynmi); 
-
-  //cout <<"ImatE completed ... "<<endl;
-  
+  free(Ylsr_Ynmr);
+  free(Ylsr_Ynmi);
+  free(Ylsi_Ynmr);
   return;
 }
 
-
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to caclulate the fixed coefficients for dirichelet and
+ van neumann solutions. Used in EQ 14 of Yap 2010
+ ******************************************************************/
+void
 CSolExpCenter::cal_DVFixed()
 {
-
   const double eps = m_idiel/m_sdiel;
- 
+	
   for(int n=0, k=0; n<N_POLES; n++)
-    {      
-      const double Dcoeff_E =  1.0;
-      const double Dcoeff_L =  m_rad;
-      const double Vcoeff_E =  eps * (n+1);
-      const double Vcoeff_L = -eps * n * m_rad;
-
-      for(int mm=0; mm<2*n+1; mm++, k++)
 	{
-	  m_Dfix[k] = Dcoeff_E * m_Efix[k] + Dcoeff_L * m_Lfix[k];
-	  m_Vfix[k] = Vcoeff_E * m_Efix[k] + Vcoeff_L * m_Lfix[k]; 
+		const double Dcoeff_E =  1.0;
+		const double Dcoeff_L =  m_rad;
+		const double Vcoeff_E =  eps * (n+1);
+		const double Vcoeff_L = -eps * n * m_rad;
+		
+		for(int mm=0; mm<2*n+1; mm++, k++)
+		{
+			m_Dfix[k] = Dcoeff_E * m_Efix[k] + Dcoeff_L * m_Lfix[k];
+			m_Vfix[k] = Vcoeff_E * m_Efix[k] + Vcoeff_L * m_Lfix[k];
+		}
 	}
-    }
-
   return;
 }
 
-// iteratively solves for F, H using D, V separately 
-// conjugation taken into account in IMAT
-
-//I think this is the core function for doing mutual polarization
-//In general, what function 'solveFH' did is to calculate F and H 
-//iteratively with given input of F, H, LF and LH.
-//It has called function applyMM, which can be found in file 'lautil.cpp', 
-//to do matrix vector products.
-// So the job 'solveFH' has done is to solve linear equations in 4a and 4b
-//in 2013 JCTC paper of THG and Enghui Yap.
-// Note that 'solveFH' is not only used for solving multiple expansion of 
-//surface charge density like F and H, but also the gradients of multiple
-//expansions, such as equation 11a and 11b in 2013 JCTC paper of THG and Enghui Yap. (S. Liu)
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  iteratively solves for F, H using D, V separately
+ conjugation taken into account in IMAT
+ I think this is the core function for doing mutual polarization
+ In general, what function 'solveFH' did is to calculate F and H
+ iteratively with given input of F, H, LF and LH.
+ It has called function applyMM, which can be found in file 'lautil.cpp',
+ to do matrix vector products. So the job 'solveFH' has done is to
+ solve linear equations in 4a and 4b in 2013 JCTC paper of THG and Enghui Yap.
+ 
+ Note that 'solveFH' is not only used for solving multiple expansion of
+ surface charge density like F and H, but also the gradients of multiple
+ Add a comment to this line expansions, such as equation 11a and 11b in 2013
+ JCTC paper of THG and Enghui Yap. ( S. Liu )
+ ******************************************************************/
 double
 CSolExpCenter::solveFH(vector<double> &F, vector<double>  &H,
-		       const vector<double> &LF, const vector<double>  &LH, int pm, int pn, int D) const
+											 const vector<double> &LF, const vector<double>  &LH, int pm, int pn, int D) const
 {
   assert(D==1 || D==3);
   const int p2 = pm*pm;
   const int mlen = D*pm*pm; // nm
   const int nlen = D*pn*pn; // ls
-
+	
   const int expectedLength = p2*D;
   assert( F.size() == expectedLength);   assert( H.size() == expectedLength);
   
   vector<double> hbase(mlen), fbase(mlen);
   vector<double> hx(nlen), fx(nlen);
-  vector<double> oldH(mlen),oldF(mlen), outerOldH(mlen),outerOldF(mlen); 
- 
+  vector<double> oldH(mlen),oldF(mlen), outerOldH(mlen),outerOldF(mlen);
+	
   // compute hbase and fbase to incorporate LF, LH
   if(D==1) compute_FHbase(&(LH[0]), &(LF[0]), &(fbase[0]), &(hbase[0]), pm);
   else compute_FHbase3(&(LH[0]), &(LF[0]), &(fbase[0]), &(hbase[0]), pm);
   
   // initialize old value (just H since we choose to use it for convergence)
-  oldH = H; outerOldH = H; 
-  //  oldF = F; outerOldF = F; 
-
+  oldH = H; outerOldH = H;
   // start polarizing
   double dev, dev_h, dev_f;
   
   // 1st cycle
   compute_fx(&(fx[0]), &(fbase[0]), &(F[0]), &(H[0]), pn, D);
-  //applyMat(m_IMat, &(fx[0]), &(F[0]), 1.0, 0.0, mlen, nlen);
   applyMMat(m_IMat, &(fx[0]), &(F[0]), 1.0, 0.0, p2, D, p2);
   revertF(&(F[0]), pm, D);
-  //dev_f = computeDev(&(oldF[0]), &(F[0]), pm); oldF.assign(F.begin(), F.begin()+mlen);
   
   compute_hx(&(hx[0]), &(hbase[0]), &(F[0]), &(H[0]), pn, D);
-  //applyMat(m_IMat, &(hx[0]), &(H[0]), 1.0, 0.0, mlen, nlen);
   applyMMat(m_IMat, &(hx[0]), &(H[0]), 1.0, 0.0, p2, D, p2);
   revertH(&(H[0]), pm, D);
   dev_h = computeDev(&(oldH[0]), &(H[0]), pm,D); oldH = H;
-   
+	
   dev = dev_h;
- 
+	
   int ct = 1;
   while(dev > SOLVE_TOL && ct < SOLVE_MAX_CT)
-    {      
-      compute_fx(&(fx[0]), &(fbase[0]), &(F[0]), &(H[0]), pn, D);
-      //applyMat(m_IMat, &(fx[0]), &(F[0]), 1.0, 0.0, mlen, nlen);
-      applyMMat(m_IMat, &(fx[0]), &(F[0]), 1.0, 0.0, p2, D, p2);
-      revertF(&(F[0]), pm, D);
-      //dev_f = computeDev(&(oldF[0]), &(F[0]), pm); oldF.assign(F.begin(), F.begin()+mlen);
-       
-      compute_hx(&(hx[0]), &(hbase[0]), &(F[0]), &(H[0]), pn, D);
-      //applyMat(m_IMat, &(hx[0]), &(H[0]), 1.0, 0.0, mlen, nlen);
-      applyMMat(m_IMat, &(hx[0]), &(H[0]), 1.0, 0.0, p2, D, p2);
-      revertH(&(H[0]), pm, D);
-      dev_h = computeDev(&(oldH[0]), &(H[0]), pm,D); oldH = H;
-           
-      dev = dev_h;
-
-      ct++;
-    }
-
-  
+	{
+		compute_fx(&(fx[0]), &(fbase[0]), &(F[0]), &(H[0]), pn, D);
+		applyMMat(m_IMat, &(fx[0]), &(F[0]), 1.0, 0.0, p2, D, p2);
+		revertF(&(F[0]), pm, D);
+		
+		compute_hx(&(hx[0]), &(hbase[0]), &(F[0]), &(H[0]), pn, D);
+		applyMMat(m_IMat, &(hx[0]), &(H[0]), 1.0, 0.0, p2, D, p2);
+		revertH(&(H[0]), pm, D);
+		dev_h = computeDev(&(oldH[0]), &(H[0]), pm,D); oldH = H;
+		
+		dev = dev_h;
+		
+		ct++;
+	}
   // calculate deviation from old m_H, set new m_F, m_H
   double devH = computeDev2( &(outerOldH[0]), &(H[0]), pm, D);
-  //double devF = computeDev2( &(outerOldF[0]), &(F[0]), pm, D);
-  
-  
   return devH;
-
-
 }
 
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to revert the F matrix by multiplying it by (1/(2l+1))
+ ******************************************************************/
+void
 CSolExpCenter::revertF(double * F, int p, int D) const
 {
   for(int d=0, k=0; d<D; d++)
     for(int n=0; n<p; n++)
-      {
-	const double fact = (CONST3[n]);
-	for(int mm=0; mm<2*n+1; mm++, k++)
-	  F[k] *= fact; 
-      }
+		{
+			const double fact = (CONST3[n]);
+			for(int mm=0; mm<2*n+1; mm++, k++)
+				F[k] *= fact;
+		}
 }
 
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to revert the H matrix by multiplying it by (ihat_n(kr)/(2n+1))
+ ******************************************************************/
+void
 CSolExpCenter::revertH(double * H, int p, int D) const
 {
   for(int d=0, k=0; d<D; d++)
     for(int n=0; n<p; n++)
     {
       const double fact = m_constInvH[n];
-
+			
       for(int mm=0; mm<2*n+1; mm++, k++)
-	H[k] *= fact;
-    } 
+				H[k] *= fact;
+    }
 }
 
-void 
-CSolExpCenter::compute_FHbase(const double* LH, const double *LF, 
-			      double* fbase,double* hbase, int pm) const
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute hbase and fbase to incorporate LF, LH
+ using equations 14a and 14b
+ ******************************************************************/
+void
+CSolExpCenter::compute_FHbase(const double* LH, const double *LF,
+															double* fbase,double* hbase, int pm) const
 {
   for(int n=0, k=0; n<pm; n++)
-    {
-      const double cLH1 = m_constLH1[n];
-      const double cLH2 = m_constLH2[n];
-      const double cLF1 = m_constLF1[n];
-      const double cLF2 = m_constLF2[n];
-
-      for(int mm=0; mm<2*n+1; mm++, k++)
 	{
-	  fbase[k] = m_Vfix[k] + cLH1 * LH[k] + cLF1 * LF[k]; 
-	  hbase[k] = m_Dfix[k] + cLH2 * LH[k] + cLF2 * LF[k]; 
+		const double cLH1 = m_constLH1[n];
+		const double cLH2 = m_constLH2[n];
+		const double cLF1 = m_constLF1[n];
+		const double cLF2 = m_constLF2[n];
+		
+		for(int mm=0; mm<2*n+1; mm++, k++)
+		{
+			fbase[k] = m_Vfix[k] + cLH1 * LH[k] + cLF1 * LF[k];
+			hbase[k] = m_Dfix[k] + cLH2 * LH[k] + cLF2 * LF[k];
+		}
 	}
-    }
-
+	
   return;
 }
 
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute fx, from EQ14b
+ ******************************************************************/
+void
 CSolExpCenter::compute_fx(double *fx, const double *fbase, const double *F, const double *H, int p, int D) const
 {
-
+	
   for(int d=0, k=0; d<D; d++)
     for(int n=0; n<p; n++)
-      {
-	const double cH1 = m_constH1[n];
-	const double cF1 = m_constF1[n];
-	for(int mm=0; mm<2*n+1; mm++, k++)
-	  fx[k] = fbase[k] +  cH1 * H[k] + cF1 * F[k];
-      }
+		{
+			const double cH1 = m_constH1[n];
+			const double cF1 = m_constF1[n];
+			for(int mm=0; mm<2*n+1; mm++, k++)
+				fx[k] = fbase[k] +  cH1 * H[k] + cF1 * F[k];
+		}
 }
 
-
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute hx, from EQ14a
+ ******************************************************************/
+void
 CSolExpCenter::compute_hx(double *hx, const double *hbase, const double *F, const double *H, int p, int D) const
 {
   for(int d=0, k=0; d<D; d++)
     for(int n=0; n<p; n++)
-      {
-	const double cH2 = m_constH2[n];
-	const double cF2 = m_constF2[n];
-	for(int mm=0; mm<2*n+1; mm++, k++)
-	  hx[k] = hbase[k] +  cH2 * H[k] + cF2 * F[k];
-      }
+		{
+			const double cH2 = m_constH2[n];
+			const double cF2 = m_constF2[n];
+			for(int mm=0; mm<2*n+1; mm++, k++)
+				hx[k] = hbase[k] +  cH2 * H[k] + cF2 * F[k];
+		}
 }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute hbase and fbase to incorporate LF, LH
+ ******************************************************************/
 void
-CSolExpCenter::compute_FHbase3(const double* LH, const double *LF, 
-			      double* fbase,double* hbase, int pm) const
+CSolExpCenter::compute_FHbase3(const double* LH, const double *LF,
+															 double* fbase,double* hbase, int pm) const
 {
   for(int d=0, k=0; d<3; d++)
-    {
-      for(int n=0; n<pm; n++)
 	{
-	  const double cLH1 = m_constLH1[n];
-	  const double cLH2 = m_constLH2[n];
-	  const double cLF1 = m_constLF1[n];
-	  const double cLF2 = m_constLF2[n];
-	  
-	  for(int mm=0; mm<2*n+1; mm++, k++)
+		for(int n=0; n<pm; n++)
+		{
+			const double cLH1 = m_constLH1[n];
+			const double cLH2 = m_constLH2[n];
+			const double cLF1 = m_constLF1[n];
+			const double cLF2 = m_constLF2[n];
+			
+			for(int mm=0; mm<2*n+1; mm++, k++)
 	    {
-	      fbase[k] = cLH1 * LH[k] + cLF1 * LF[k]; 
-	      hbase[k] = cLH2 * LH[k] + cLF2 * LF[k]; 
+	      fbase[k] = cLH1 * LH[k] + cLF1 * LF[k];
+	      hbase[k] = cLH2 * LH[k] + cLF2 * LF[k];
 	    }
+		}
 	}
-    }
-  
   return;
 }
 
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the deviation between two matrices
+ ******************************************************************/
 REAL
 CSolExpCenter::computeDev(const double *M1, const double *M2, int p, int D)
 {
   assert(p>0);
   REAL sum = 0;
   Complex tM1,tM2;
-
+	
   int k = 0;
   for (int d = 0; d < D; d++)
     for (int n = 0; n < p; n++)
       for (int m = 0; m <= n; m++)
-	{
-	  if(m==0) 
-	    {
-	      tM1 = Complex(M1[k],0);
-	      tM2 = Complex(M2[k],0);
-	      k++;
-	    }
-	  else
-	    {
-	      tM1 = Complex(M1[k], M1[k+1]);
-	      tM2 = Complex(M2[k], M2[k+1]);
-	      k+=2;
-	    }	
-	  
-	  REAL s;
-	  
-	  if (fabs(tM1.real()) < PREC_LIMIT && fabs(tM1.imag()) < PREC_LIMIT)
-	    {	  
-	      if (fabs(tM2.real()) < PREC_LIMIT && fabs(tM2.imag()) < PREC_LIMIT)  
-		{
-		  continue;
-		}
-	      else  
-		{
-		  s = 1.0;
-		}
-	    }
-	  else 
-	    {
-	      if (fabs(tM2.real()) < PREC_LIMIT && fabs(tM2.imag()) < PREC_LIMIT)  
-		{
-		  s = 1.0;
-		}
-	      else
-		{
-		  Complex diff = (tM1 - tM2);
-		  REAL top = diff.real()*diff.real() +  diff.imag()*diff.imag();
-		  REAL bot = tM1.real()*tM1.real() +  tM1.imag()*tM1.imag() 
-		    + tM2.real()*tM2.real() +  tM2.imag()*tM2.imag();
-		  
-		  if(m!=0) s = 2* top / bot; // for m!=0 to account for m<0 conjugates
-		  else s = top / bot;
-		  //cout <<"case 4 : s = "<<s<<endl;
-		}
-	    }
-	  
-	  sum += s;
-	}
-  
+			{
+				if(m==0)
+				{
+					tM1 = Complex(M1[k],0);
+					tM2 = Complex(M2[k],0);
+					k++;
+				}
+				else
+				{
+					tM1 = Complex(M1[k], M1[k+1]);
+					tM2 = Complex(M2[k], M2[k+1]);
+					k+=2;
+				}
+				
+				REAL s;
+				
+				if (fabs(tM1.real()) < PREC_LIMIT && fabs(tM1.imag()) < PREC_LIMIT)
+				{
+					if (fabs(tM2.real()) < PREC_LIMIT && fabs(tM2.imag()) < PREC_LIMIT)
+					{
+						continue;
+					}
+					else
+					{
+						s = 1.0;
+					}
+				}
+				else
+				{
+					if (fabs(tM2.real()) < PREC_LIMIT && fabs(tM2.imag()) < PREC_LIMIT)
+					{
+						s = 1.0;
+					}
+					else
+					{
+						Complex diff = (tM1 - tM2);
+						REAL top = diff.real()*diff.real() +  diff.imag()*diff.imag();
+						REAL bot = tM1.real()*tM1.real() +  tM1.imag()*tM1.imag()
+						+ tM2.real()*tM2.real() +  tM2.imag()*tM2.imag();
+						
+						if(m!=0) s = 2* top / bot; // for m!=0 to account for m<0 conjugates
+						else s = top / bot;
+					}
+				}
+				sum += s;
+			}
   sum /= 4*p*p;
-  
   return sum;
 }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to compute the deviation between two matrices
+ ******************************************************************/
 REAL
 CSolExpCenter::computeDev2(const double *M1, const double *M2, int p, int D)
 {
-
+	
   assert(p>0);
-
+	
   REAL totdiff=0, totsum = 0;
   Complex tM1,tM2, diff;
-
+	
   for (int d = 0, k = 0; d < D; d++)
     for (int n = 0; n < p; n++)
-      {
-	tM1 = Complex(M1[k],0);
-	tM2 = Complex(M2[k],0);
-	k++;
-	
-	diff = (tM1 - tM2);
-	totdiff  += diff.real()*diff.real() +  diff.imag()*diff.imag();
-	totsum   += tM1.real()*tM1.real() +  tM1.imag()*tM1.imag() 
-	  + tM2.real()*tM2.real() +  tM2.imag()*tM2.imag();
-	
-	for (int m = 1; m <= n; m++)
-	  {
-	    tM1 = Complex(M1[k], M1[k+1]);
-	    tM2 = Complex(M2[k], M2[k+1]);
-	    k+=2;
-	    
-	    diff = (tM1 - tM2);
-	    totdiff += 2*(diff.real()*diff.real() +  diff.imag()*diff.imag());
-	    totsum  += 2*(tM1.real()*tM1.real() +  tM1.imag()*tM1.imag() 
-			  + tM2.real()*tM2.real() +  tM2.imag()*tM2.imag());
-	  }//endm
-      }//endn
+		{
+			tM1 = Complex(M1[k],0);
+			tM2 = Complex(M2[k],0);
+			k++;
+			
+			diff = (tM1 - tM2);
+			totdiff  += diff.real()*diff.real() +  diff.imag()*diff.imag();
+			totsum   += tM1.real()*tM1.real() +  tM1.imag()*tM1.imag()
+			+ tM2.real()*tM2.real() +  tM2.imag()*tM2.imag();
+			
+			for (int m = 1; m <= n; m++)
+			{
+				tM1 = Complex(M1[k], M1[k+1]);
+				tM2 = Complex(M2[k], M2[k+1]);
+				k+=2;
+				
+				diff = (tM1 - tM2);
+				totdiff += 2*(diff.real()*diff.real() +  diff.imag()*diff.imag());
+				totsum  += 2*(tM1.real()*tM1.real() +  tM1.imag()*tM1.imag()
+											+ tM2.real()*tM2.real() +  tM2.imag()*tM2.imag());
+			}//endm
+		}//endn
   
   return totdiff / (4*totsum) / double(D);
 }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the gradient on the solvent exposed surfaces
+ ******************************************************************/
 void
 CSolExpCenter::computeExposedSurfaceGradientFH(const CGradExpan &gF, const CGradExpan &gH)
 {
   REAL total_gFx = 0.0,total_gFy = 0.0, total_gFz = 0.0;
   REAL total_gHx = 0.0,total_gHy = 0.0, total_gHz = 0.0;
-
+	
   for(int h=0; h<m_SPExSize; h++)
-    {
-      CSpPnt q = CartToSph(m_SPx[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-
-      CExpan YI;
-     
-      // F
-      YI = Y * CONST2;
-      REAL gFx = inprod_unitScale(gF[0], YI) * m_dA ; 
-      REAL gFy = inprod_unitScale(gF[1], YI) * m_dA ; 
-      REAL gFz = inprod_unitScale(gF[2], YI) * m_dA ; 
-      m_gSolvedF[h] = CPnt(gFx, gFy, gFz); 
-      total_gFx += fabs(gFx); total_gFy += fabs(gFy); total_gFz += fabs(gFz);
-
-      // H
-      YI = Y * m_constChgH;
-      REAL gHx = inprod_unitScale(gH[0], YI) * m_dA ; 
-      REAL gHy = inprod_unitScale(gH[1], YI) * m_dA ; 
-      REAL gHz = inprod_unitScale(gH[2], YI) * m_dA ; 
-      m_gSolvedH[h] = CPnt(gHx, gHy, gHz); 
-      total_gHx += fabs(gHx); total_gHy += fabs(gHy); total_gHz += fabs(gHz);
-    }
-
-  m_maxgF = (total_gFx > total_gFy ? total_gFx : total_gFy); 
+	{
+		CSpPnt q = CartToSph(m_SPx[h]);
+		CSHExpan Y(q.theta(), q.phi(), N_POLES);
+		
+		CExpan YI;
+		
+		// F
+		YI = Y * CONST2;
+		REAL gFx = inprod_unitScale(gF[0], YI) * m_dA ;
+		REAL gFy = inprod_unitScale(gF[1], YI) * m_dA ;
+		REAL gFz = inprod_unitScale(gF[2], YI) * m_dA ;
+		m_gSolvedF[h] = CPnt(gFx, gFy, gFz);
+		total_gFx += fabs(gFx); total_gFy += fabs(gFy); total_gFz += fabs(gFz);
+		
+		// H
+		YI = Y * m_constChgH;
+		REAL gHx = inprod_unitScale(gH[0], YI) * m_dA ;
+		REAL gHy = inprod_unitScale(gH[1], YI) * m_dA ;
+		REAL gHz = inprod_unitScale(gH[2], YI) * m_dA ;
+		m_gSolvedH[h] = CPnt(gHx, gHy, gHz);
+		total_gHx += fabs(gHx); total_gHy += fabs(gHy); total_gHz += fabs(gHz);
+	}
+	
+  m_maxgF = (total_gFx > total_gFy ? total_gFx : total_gFy);
   if(total_gFz > m_maxgF) m_maxgF = total_gFz;
-  m_maxgH = (total_gHx > total_gHy ? total_gHx : total_gHy); 
+  m_maxgH = (total_gHx > total_gHy ? total_gHx : total_gHy);
   if(total_gHz > m_maxgH) m_maxgH = total_gHz;
-
+	
 }
-/*
-void
-CSolExpCenter::computeExposedSurfaceGradientH(const CGradExpan &gH)
-{
-  REAL total_gHx = 0.0,total_gHy = 0.0, total_gHz = 0.0;
 
-  for(int h=0; h<m_SPExSize; h++)
-    {
-      CSpPnt q = CartToSph(m_SPx[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-
-      CExpan YI;
-      YI = Y * m_constChgH;
-      REAL gHx = inprod_unitScale(gH[0], YI) * m_dA ; 
-      REAL gHy = inprod_unitScale(gH[1], YI) * m_dA ; 
-      REAL gHz = inprod_unitScale(gH[2], YI) * m_dA ; 
-      m_gSolvedH[h] = CPnt(gHx, gHy, gHz); 
-      total_gHx += fabs(gHx); total_gHy += fabs(gHy); total_gHz += fabs(gHz);
-    }
-
-  m_maxgH = (total_gHx > total_gHy ? total_gHx : total_gHy); 
-  if(total_gHz > m_maxgH) m_maxgH = total_gHz;
-
-}
-*/
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the exposed surface charges from F and H
+ ******************************************************************/
 void
 CSolExpCenter::computeExposedSurfaceChargesFH()
 {
   m_totalF = 0.0;
   m_totalH = 0.0;
-
+	
   for(int h=0; h<m_SPExSize; h++)
-    {
-      CSpPnt q = CartToSph(m_SPx[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-
-      CExpan YI;
-     
-      YI = Y * CONST2;
-      m_qSolvedF[h] = inprod_unitScale(m_F, YI) * m_dA ; // charge = surface charge * area
-      m_totalF += fabs(m_qSolvedF[h]);
-
-      YI = Y * m_constChgH;
-      m_qSolvedH[h] = inprod_unitScale(m_H, YI) * m_dA ; // charge = surface charge * area
-      m_totalH += fabs(m_qSolvedH[h]);
-    }
-
-  //  assert(fabs(m_totalH) < 1e6 );
+	{
+		CSpPnt q = CartToSph(m_SPx[h]);
+		CSHExpan Y(q.theta(), q.phi(), N_POLES);
+		
+		CExpan YI;
+		
+		YI = Y * CONST2;
+		m_qSolvedF[h] = inprod_unitScale(m_F, YI) * m_dA ; // charge = surface charge * area
+		m_totalF += fabs(m_qSolvedF[h]);
+		
+		YI = Y * m_constChgH;
+		m_qSolvedH[h] = inprod_unitScale(m_H, YI) * m_dA ; // charge = surface charge * area
+		m_totalH += fabs(m_qSolvedH[h]);
+	}
 }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Function to compute the exposed surface charges from F and H
+ ******************************************************************/
 void
 CSolExpCenter::computeExposedSurfaceChargesFH_(const vector<CPnt> &SPx, const CMulExpan & F, const CMulExpan & H,
-					      double *constH, 
-					      double nSPx, 
-					      vector<double> &qSolvedF, vector<double> &qSolvedH, 
-					      double &totalF, double &totalH, int p)
+																							 double *constH,
+																							 double nSPx,
+																							 vector<double> &qSolvedF, vector<double> &qSolvedH,
+																							 double &totalF, double &totalH, int p)
 {
   totalF = 0.0;
   totalH = 0.0;
-
+	
   int SPExSize = SPx.size();
-  qSolvedF.resize(SPExSize); 
+  qSolvedF.resize(SPExSize);
   qSolvedH.resize(SPExSize);
   
-  REAL dA = 4.0*M_PI/double( nSPx );   
+  REAL dA = 4.0*M_PI/double( nSPx );
   for(int h=0; h<SPExSize; h++)
-    {
-      CSpPnt q = CartToSph(SPx[h]);
-      CSHExpan Y(q.theta(), q.phi(), p);
-
-      CExpan YI;
-     
-      YI = Y * CONST2;
-      qSolvedF[h] = inprod_unitScale(F, YI) * dA ; // charge = surface charge * area
-      totalF += fabs(qSolvedF[h]);
-
-      YI = Y * constH;
-      qSolvedH[h] = inprod_unitScale(H, YI) * dA ; // charge = surface charge * area
-      totalH += fabs(qSolvedH[h]);
-    }
-
-  //  assert(fabs(m_totalH) < 1e6 );
+	{
+		CSpPnt q = CartToSph(SPx[h]);
+		CSHExpan Y(q.theta(), q.phi(), p);
+		
+		CExpan YI;
+		
+		YI = Y * CONST2;
+		qSolvedF[h] = inprod_unitScale(F, YI) * dA ; // charge = surface charge * area
+		totalF += fabs(qSolvedF[h]);
+		
+		YI = Y * constH;
+		qSolvedH[h] = inprod_unitScale(H, YI) * dA ; // charge = surface charge * area
+		totalH += fabs(qSolvedH[h]);
+	}
 }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to initialize H surface charges for self-polarization
+ ******************************************************************/
 void
 CSolExpCenter::computeExposedSurfaceChargesH()
 {
   m_totalH = 0.0;
-
+	
   for(int h=0; h<m_SPExSize; h++)
-    {
-      CSpPnt q = CartToSph(m_SPx[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-      CExpan YI = Y * m_constChgH;
-
-        m_qSolvedH[h] = inprod_unitScale(m_H, YI) * m_dA ; // charge = surface charge * area
-
-      m_totalH += fabs(m_qSolvedH[h]);
-    }
-
-  //  assert(fabs(m_totalH) < 1e6 );
+	{
+		CSpPnt q = CartToSph(m_SPx[h]);
+		CSHExpan Y(q.theta(), q.phi(), N_POLES);
+		CExpan YI = Y * m_constChgH;
+		
+		m_qSolvedH[h] = inprod_unitScale(m_H, YI) * m_dA ; // charge = surface charge * area
+		
+		m_totalH += fabs(m_qSolvedH[h]);
+	}
 }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  Function to initialize F surface charges for self-polarization
+ ******************************************************************/
 void
 CSolExpCenter::computeExposedSurfaceChargesF()
 {
-
+	
   m_totalF = 0.0;
-
+	
   for(int h=0; h<m_SPExSize; h++)
-    {
-      CSpPnt q = CartToSph(m_SPx[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-      CExpan YI = Y * CONST2;
-
-      m_qSolvedF[h] = inprod_unitScale(m_F, YI) * m_dA ; // charge = surface charge * area
- 
-     m_totalF += fabs(m_qSolvedF[h]);
-    }
-
-  //  assert(fabs(m_totalF) < 1e6 );
+	{
+		CSpPnt q = CartToSph(m_SPx[h]);
+		CSHExpan Y(q.theta(), q.phi(), N_POLES);
+		CExpan YI = Y * CONST2;
+		
+		m_qSolvedF[h] = inprod_unitScale(m_F, YI) * m_dA ; // charge = surface charge * area
+		
+		m_totalF += fabs(m_qSolvedF[h]);
+	}
 }
 
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Get the surface charges on a given exp center's sphere from H
+ ******************************************************************/
 void
 CSolExpCenter::getSurfaceChargesH(const vector<CPnt> &SP, vector<double> &qS)
 {
-
+	
   int np = SP.size();
   qS.resize(np);
-
+	
   for(int h=0; h<np; h++)
-    {
-      CSpPnt q = CartToSph(SP[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-      CExpan YI = Y * m_constChgH;
-
-      qS[h] = inprod_unitScale(m_H, YI) * m_dA ; // charge = surface charge * area
-    }
-
-
+	{
+		CSpPnt q = CartToSph(SP[h]);
+		CSHExpan Y(q.theta(), q.phi(), N_POLES);
+		CExpan YI = Y * m_constChgH;
+		
+		qS[h] = inprod_unitScale(m_H, YI) * m_dA ; // charge = surface charge * area
+	}
 }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Get the surface charges on a given exp center's sphere from F
+ ******************************************************************/
 void
 CSolExpCenter::getSurfaceChargesF(const vector<CPnt> &SP, vector<double> &qS)
 {
   int np = SP.size();
   qS.resize(np);
-
+	
   for(int h=0; h<np; h++)
-    {
-      CSpPnt q = CartToSph(SP[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-      CExpan YI = Y * CONST2;
-
-      qS[h] = inprod_unitScale(m_F, YI) * m_dA ; // charge = surface charge * area
-    }
-
-
+	{
+		CSpPnt q = CartToSph(SP[h]);
+		CSHExpan Y(q.theta(), q.phi(), N_POLES);
+		CExpan YI = Y * CONST2;
+		
+		qS[h] = inprod_unitScale(m_F, YI) * m_dA ; // charge = surface charge * area
+	}
 }
-/*
-void
-CSolExpCenter::getBuriedChargesH(vector<REAL> & qB) const
-{
 
-  int np = m_SPx.size() - m_SPExSize;
-  qB.resize(np);
-
-  for(int h=m_SPExSize, k=0; h<m_SPx.size(); h++, k++)
-    {
-      CSpPnt q = CartToSph(m_SPx[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-      CExpan YI = Y * m_constChgH;
-
-      qB[k] = inprod_unitScale(m_H, YI) * m_dA ; // charge = surface charge * area
-    }
-
-
-}
-void
-CSolExpCenter::getBuriedChargesF(vector<REAL> & qB) const
-{
-
-  int np = m_SPx.size() - m_SPExSize;
-  qB.resize(np);
-
-  for(int h=m_SPExSize, k=0; h<m_SPx.size(); h++, k++)
-    {
-      CSpPnt q = CartToSph(m_SPx[h]);
-      CSHExpan Y(q.theta(), q.phi(), N_POLES);
-      CExpan YI = Y *  CONST2;
-
-      qB[k] = inprod_unitScale(m_F, YI) * m_dA ; // charge = surface charge * area
-    }
-
-
-}
-*/
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * Compute the torque on a given solexpcenter
+ ******************************************************************/
 const CPnt
 CSolExpCenter::computeTorqueOn_0(int i) const
 {
   if( IsEmptyInterPolList()) return CPnt();
-
+	
   CPnt torque = CPnt();
-
+	
   for(int h=0; h<m_SPExSize; h++)
-    {
-      CSpPnt q = CartToSph(m_SPx[h]);
-      CSHExpan Y(q.theta(), q.phi(), m_p);
-      CExpan YI = Y * m_constChgH;
-
-      REAL Yh_LHN = inprod_unitScale(YI, m_LS);
-      CPnt Yh_gLHN = inprod_unitScale(YI, m_gLHN);
+	{
+		CSpPnt q = CartToSph(m_SPx[h]);
+		CSHExpan Y(q.theta(), q.phi(), m_p);
+		CExpan YI = Y * m_constChgH;
+		
+		REAL Yh_LHN = inprod_unitScale(YI, m_LS);
+		CPnt Yh_gLHN = inprod_unitScale(YI, m_gLHN);
     
-      torque -= cross(m_SPx[h], ( Yh_LHN * m_gSolvedH[h] + m_qSolvedH[h] * Yh_gLHN )  );
-    }
-
+		torque -= cross(m_SPx[h], ( Yh_LHN * m_gSolvedH[h] + m_qSolvedH[h] * Yh_gLHN )  );
+	}
   return m_dA * torque;
 }
 
-bool 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Check to see if a given index is on the interpolarization list
+ ******************************************************************/
+bool
 CSolExpCenter::isOnInterPolList(int j, int kj) const
 {
   for(int k=0; k<m_interPolList.size(); k++)
     if( m_interPolList[k].mid() == j && m_interPolList[k].kid() == kj )
-	return true;
-
+			return true;
+	
   return false;
 }
 
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ * rotate the position of ki's rotated center wrt rcen
+ ******************************************************************/
+void
 CSolExpCenter::rotateCenters()
 {
   // rotate the position of ki's rotated center wrt rcen
-  m_cenRot = *m_orient * m_cen; 
+  m_cenRot = *m_orient * m_cen;
   return;
 }
 
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Rotate the H with rotation contained in solexpcenter
+ ******************************************************************/
+void
 CSolExpCenter::rotateHself()
 {
   // for reexpand external
@@ -1630,16 +1633,25 @@ CSolExpCenter::rotateHself()
   return;
 }
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Rotate the given H with XI
+ ******************************************************************/
 #ifdef __NOPOL_UNCHANGED__
-void 
+void
 CSolExpCenter::rotateCurrentH()
 {
   // for reexpand external
-  m_rot->rotateWithXi(m_H, m_Hrot, 1, m_p, true); 
+  m_rot->rotateWithXi(m_H, m_Hrot, 1, m_p, true);
   
   return;
 }
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * rotateGH rotate a grad expansion with the gH in the exp center
+ ******************************************************************/
 CGradExpan
 CSolExpCenter::rotateGH() const
 {
@@ -1650,451 +1662,325 @@ CSolExpCenter::rotateGH() const
 
 #endif
 
-
-
-
-
-
-
+/******************************************************************/
+/******************************************************************/
+/**
+ * The CSolExpCenter = operator
+ ******************************************************************/
 CSolExpCenter&
 CSolExpCenter::operator=(const CSolExpCenter &M)
 {
   (*this).CExpCenter::operator=(M);
-
+	
   m_SPE = M.m_SPE;
   m_Lfix = M.m_Lfix;
   m_Efix = M.m_Efix;
-  //m_LH = M.m_LH;
-  //m_LF = M.m_LF;
   m_F = M.m_F;
-  
 }
 
-
-
-//====================
-// utility functions
-//====================
-
+/******************************************************************/
+/******************************************************************/
+/**
+ *  A print of the Y matrix
+ ******************************************************************/
 //#ifdef __DEBUG
-void 
-CSolExpCenter::printY(double *Y) 
+void
+CSolExpCenter::printY(double *Y)
 {
-
+	
   double out;
   for(int n=0; n<N_POLES; n++)
     for(int m=0; m<=n; m++)
-      {
-	for(int l=0; l<N_POLES; l++)
-	  for(int s=0; s<=l; s++)
-	    { 
-	      if(n > l || (n==l  && m > s)) out = 0.0;
-	      else 
 		{
-		  out = Y[ IDK(l,s) + id[n] + m];
-		  if(fabs(out)<1e-5) out = 0.0;
-		} 
-	      cout <<out<<" ";
-
-	    } //ls
-	cout<<endl;
-      }// nm
-
+			for(int l=0; l<N_POLES; l++)
+				for(int s=0; s<=l; s++)
+				{
+					if(n > l || (n==l  && m > s)) out = 0.0;
+					else
+					{
+						out = Y[ IDK(l,s) + id[n] + m];
+						if(fabs(out)<1e-5) out = 0.0;
+					}
+					cout <<out<<" ";
+					
+				} //ls
+			cout<<endl;
+		}// nm
+	
 }
-
-void 
-CSolExpCenter::printYFull(double *Y) 
+/******************************************************************/
+/******************************************************************/
+/**
+ *  A print of the Y matrix
+ ******************************************************************/
+void
+CSolExpCenter::printYFull(double *Y)
 {
-
+	
   double out;
   for(int nm=0; nm<_PSQH_; nm++)
-    {
-	for(int ls=0; ls<_PSQH_; ls++)
-	  { 
+	{
+		for(int ls=0; ls<_PSQH_; ls++)
+	  {
 	    out = Y[nm*_PSQH_+ls];
-	      // out = Y[ IDK(l,s) + id[n] + m];
-	      if(fabs(out)<1e-5) out = 0.0;
+			// out = Y[ IDK(l,s) + id[n] + m];
+			if(fabs(out)<1e-5) out = 0.0;
 	    
 	    cout <<out<<" ";
 	    
 	  } //ls
-	cout<<endl;
-    }// nm
-
+		cout<<endl;
+	}// nm
+	
 }
 
-
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ * A print of the Y matrix
+ ******************************************************************/
+void
 CSolExpCenter::testY(double *Y1, double *Y2) const
 {
   double out;
   for(int n=0; n<N_POLES; n++)
     for(int m=0; m<=n; m++)
-      {
-	for(int l=0; l<N_POLES; l++)
-	  for(int s=0; s<=l; s++)
-	    { 
-	      if(n > l || (n==l  && m > s)) out = 0.0;
-	      else 
 		{
-		  out = Y1[ IDK(l,s) + id[n] + m] + Y2[ IDK(l,s) + id[n] + m];;
-		  if(fabs(out)<1e-5) out = 0.0;
-		}
-	      cout <<out<<" ";
-
-	    } //ls
-	cout<<endl;
-      }// nm
-
+			for(int l=0; l<N_POLES; l++)
+				for(int s=0; s<=l; s++)
+				{
+					if(n > l || (n==l  && m > s)) out = 0.0;
+					else
+					{
+						out = Y1[ IDK(l,s) + id[n] + m] + Y2[ IDK(l,s) + id[n] + m];;
+						if(fabs(out)<1e-5) out = 0.0;
+					}
+					cout <<out<<" ";
+					
+				} //ls
+			cout<<endl;
+		}// nm
+	
 }
-void 
+/******************************************************************/
+/******************************************************************/
+/**
+ * A print of the Y matrix
+ ******************************************************************/
+void
 CSolExpCenter::testYFull(double *Y1, double *Y2) const
 {
   int nm = 0;
   for(int n=0; n< N_POLES; n++)
     for(int m=0; m<=n; m++, nm++)
-      {
-	int k = nm*_PSQH_;
-	cout <<n<<","<<m<<": ";
-	for(int l=0; l<N_POLES; l++)
-	  for(int s=0; s<=l; s++, k++)
-	    { 
-	      double out = Y1[k] + Y2[k];
-	      if( !(l==n && m==s) )
-		if ( fabs(out)>1e-4)
-		cout <<"("<<l<<","<<s<<") "<<out<<" ";
-
-	    } //ls
-	cout<<endl;
-      }// nm
-
+		{
+			int k = nm*_PSQH_;
+			cout <<n<<","<<m<<": ";
+			for(int l=0; l<N_POLES; l++)
+				for(int s=0; s<=l; s++, k++)
+				{
+					double out = Y1[k] + Y2[k];
+					if( !(l==n && m==s) )
+						if ( fabs(out)>1e-4)
+							cout <<"("<<l<<","<<s<<") "<<out<<" ";
+					
+				} //ls
+			cout<<endl;
+		}// nm
+	
 }
-
-void 
-CSolExpCenter::printMat(double *mat) 
+/******************************************************************/
+/******************************************************************/
+/**
+ * Printing the matrices of a solvent exposed center
+ ******************************************************************/
+void
+CSolExpCenter::printMat(double *mat)
 {
   for(int i=0; i<_PSQ_; i++)
-    {
-
-      for(int j=0; j<_PSQ_; j++)
 	{
-	  int k = j*_PSQ_+i;
-	  double out = mat[k];
-	  if(fabs(out) < 1e-5) out = 0.0;
-	  cout <<out<<" ";
+		
+		for(int j=0; j<_PSQ_; j++)
+		{
+			int k = j*_PSQ_+i;
+			double out = mat[k];
+			if(fabs(out) < 1e-5) out = 0.0;
+			cout <<out<<" ";
+		}
+		cout<<endl;
 	}
-      cout<<endl;
-    }
-
+	
   return;
 }
-
-void 
-CSolExpCenter::printMat(const vector<double> &mat) 
-{
-
-  int len = (int) sqrt( double(mat.size()));
-
-  for(int i=0; i<len; i++)
-    {
-
-      for(int j=0; j<len; j++)
-	{
-	  int k = j*len+i;
-	  double out = mat[k];
-	  if(fabs(out) < 1e-12) out = 0.0;
-	  cout <<out<<" ";
-	}
-      cout<<endl;
-    }
-
-  return;
-}
-/*
-// print out charges for debugging
-// only for 2 spheres now - id = 0, 1
+/******************************************************************/
+/******************************************************************/
+/**
+ * Printing the matrices of a solvent exposed center
+ ******************************************************************/
 void
-CSolExpCenter::printCharges()
+CSolExpCenter::printMat(const vector<double> &mat)
 {
-
-  const int np = 5000;
-
-  //also calculate charges on buried side    
-  vector<CPnt> SPBx;
-  SPBx.assign( m_SPx.begin() + m_SPExSize, m_SPx.end() );
-  vector<double> qSolvedBF, qSolvedBH; 
-  getSurfaceChargesH(SPBx, qSolvedBH);
-  getSurfaceChargesF(SPBx, qSolvedBF);
-    
-  ofstream qtfile;
-  char *fnameH, *fnameF; 
-  if(m_id == 0) {fnameH = "qSolvedH_sp0_cy1.dat"; fnameF = "qSolvedF_sp0_cy1.dat";}
-  else if (m_id == 1) {fnameH = "qSolvedH_sp1_cy1.dat";fnameF = "qSolvedF_sp1_cy1.dat";}
-  else {cout<<"error m_id "<<m_id<<endl; exit(1);}
-  
-  int freq = int (m_SPx.size()/double(np));
-
-  //output h-charges
-  qtfile.open(fnameH);
-  for(int j=0; j<m_SPExSize; j+=freq) 
-    qtfile <<j<<" "<<m_SPx[j].x()<<" "<<m_SPx[j].y()<<" "<<m_SPx[j].z()<<" "<<m_qSolvedH[j]<<endl;
-  for(int j=m_SPExSize; j<m_SPx.size(); j+=freq)
-    {
-      int k = j - m_SPExSize;
-      qtfile <<j<<" "<<m_SPx[j].x()<<" "<<m_SPx[j].y()<<" "<<m_SPx[j].z()<<" "<<qSolvedBH[k]<<endl;
-    }
-  qtfile.close();
-  
-  //output f-charges
-  qtfile.open(fnameF);
-  for(int j=0; j<m_SPExSize; j+=freq) 
-    qtfile <<j<<" "<<m_SPx[j].x()<<" "<<m_SPx[j].y()<<" "<<m_SPx[j].z()<<" "<<m_qSolvedF[j]<<endl;
-  for(int j=m_SPExSize; j<m_SPx.size(); j+=freq)
-    {
-      int k = j - m_SPExSize;
-      qtfile <<j<<" "<<m_SPx[j].x()<<" "<<m_SPx[j].y()<<" "<<m_SPx[j].z()<<" "<<qSolvedBF[k]<<endl;
-    }
-  qtfile.close();      
-  
+	
+  int len = (int) sqrt( double(mat.size()));
+	
+  for(int i=0; i<len; i++)
+	{
+		
+		for(int j=0; j<len; j++)
+		{
+			int k = j*len+i;
+			double out = mat[k];
+			if(fabs(out) < 1e-12) out = 0.0;
+			cout <<out<<" ";
+		}
+		cout<<endl;
+	}
+	
   return;
 }
-*/
+
+
 #ifdef __DEBUG__
-// debugging: check results using Dirichlet BC
+
+/******************************************************************/
+/******************************************************************/
+/**
+ * DEBUG: : check results using Dirichlet BC
+ ******************************************************************/
 void
 CSolExpCenter::checkSolveDifferenceDirichlet()
 {
-
   assert(m_kappa ==0); // for now the FACT constants are hardcoded
-  const char* fname; 
+  const char* fname;
   
   if(!m_flag)
-    {
-      if(m_id == 0) { fname = "diffD_sp0_cy1.dat";}
-      else if (m_id == 1) {fname = "diffD_sp1_cy1.dat";}
-      
-      ofstream dfile(fname);
-      
-      double avgErrorE = 0.0; 
-      double maxErrorE = 0.0;
-      double sum=0.0;
-      int ct = 0;
-      int npe = m_SPE.size();
-      int npb = m_SPB.size();
-      int freq = (npe+npb) / 10000;
-      double delta = 0.1; // cutoff for printing
-      
-      for(int h=0; h<npe; h+=freq)
 	{
-	  CSpPnt q = CartToSph(m_SPE[h]);
-	  CSHExpan Y(q.theta(), q.phi(), N_POLES);
-	  
-	  double diff=0, LHS=0, RHS=0;
-	  for(int n=0; n<N_POLES; n++)
+		if(m_id == 0) { fname = "diffD_sp0_cy1.dat";}
+		else if (m_id == 1) {fname = "diffD_sp1_cy1.dat";}
+		
+		ofstream dfile(fname);
+		double avgErrorE = 0.0;
+		double maxErrorE = 0.0;
+		double sum=0.0;
+		int ct = 0;
+		int npe = m_SPE.size();
+		int npb = m_SPB.size();
+		int freq = (npe+npb) / 10000;
+		double delta = 0.1; // cutoff for printing
+		
+		for(int h=0; h<npe; h+=freq)
+		{
+			CSpPnt q = CartToSph(m_SPE[h]);
+			CSHExpan Y(q.theta(), q.phi(), N_POLES);
+			
+			double diff=0, LHS=0, RHS=0;
+			for(int n=0; n<N_POLES; n++)
 	    {
-	      LHS += Y(n,0) * ( m_Efix(n,0) + m_F(n,0) + m_rad * ( m_Lfix(n,0) + m_LF(n,0) )  ); 
-	      RHS += Y(n,0) * ( m_H(n,0)               + m_rad * m_LH(n,0) ) ; 
+	      LHS += Y(n,0) * ( m_Efix(n,0) + m_F(n,0) + m_rad * ( m_Lfix(n,0) + m_LF(n,0) )  );
+	      RHS += Y(n,0) * ( m_H(n,0)               + m_rad * m_LH(n,0) ) ;
 	      
 	      for(int m=1; m<2*n+1; m++)
-		{
-		  LHS += 2 * Y(n,m) * (m_Efix(n,m) + m_F(n,m) + m_rad *( m_Lfix(n,m) + m_LF(n,m)) ) ; 
-		  RHS += 2 * Y(n,m) * (m_H(n,m)               + m_rad * m_LH(n,m) ) ;  
+				{
+					LHS += 2 * Y(n,m) * (m_Efix(n,m) + m_F(n,m) + m_rad *( m_Lfix(n,m) + m_LF(n,m)) ) ;
+					RHS += 2 * Y(n,m) * (m_H(n,m)               + m_rad * m_LH(n,m) ) ;
+				}
+	    }
+			
+			diff = LHS - RHS;
+			sum += fabs(LHS) + fabs(RHS);
+			avgErrorE += fabs(diff);
+			
+			if( fabs(diff) > delta )
+				dfile <<h<<" "<<diff<<" "<<m_SPE[h].x()<<" "<< m_SPE[h].y()<<" "<< m_SPE[h].z()<<endl;
+			if(fabs(diff) > maxErrorE) maxErrorE = fabs(diff);
+			
+			ct++;
 		}
-	    }    
-	  
-	  diff = LHS - RHS;
-	  sum += fabs(LHS) + fabs(RHS);
-	  avgErrorE += fabs(diff);
-	  
-	  if( fabs(diff) > delta ) 
-	    dfile <<h<<" "<<diff<<" "<<m_SPE[h].x()<<" "<< m_SPE[h].y()<<" "<< m_SPE[h].z()<<endl;
-	  if(fabs(diff) > maxErrorE) maxErrorE = fabs(diff);
-	  
-	  ct++; 	  
+		avgErrorE /= ct;
+		sum /= ct;
+		dfile.close();
+		
+		cout <<">>>>>> SOLVE: Dirchlet AvErr "<<avgErrorE<<" MaxErr "<<maxErrorE<<
+		" rel avg "<<avgErrorE/sum<<" rel max "<<maxErrorE/sum<<endl;
 	}
-  
-      avgErrorE /= ct;
-      sum /= ct;
-
-      dfile.close();
-      
-      cout <<">>>>>> SOLVE: Dirchlet AvErr "<<avgErrorE<<" MaxErr "<<maxErrorE<<
-	" rel avg "<<avgErrorE/sum<<" rel max "<<maxErrorE/sum<<endl;
-      
-    }
-  
-  /*
-  else 
-    {
-      if(m_id == 0) fname = "diff_sp0_last.dat";
-      else if (m_id == 1) fname = "diff_sp1_last.dat";
-    }
-  */
-
-
   return;
 }
 
-// debugging: check results using Von Neumann BC
+/******************************************************************/
+/******************************************************************/
+/**
+ * debugging: check results using Von Neumann BC
+ ******************************************************************/
 void
 CSolExpCenter::checkSolveDifferenceVonNeumann()
 {
-  const char* fname; 
-
+  const char* fname;
+	
   if(!m_flag)
-    {
-      if(m_id == 0) { fname = "diffV_sp0_cy1.dat";}
-      else if (m_id == 1) {fname = "diffV_sp1_cy1.dat";}
-
-      ofstream dfile(fname);
-      
-      double avgErrorE = 0.0; 
-      double maxErrorE = 0.0;
-      double sum=0.0;
-      int ct = 0;
-      int npe = m_SPE.size();
-      int npb = m_SPB.size();
-      int freq = (npe+npb) / 10000;
-      double delta = 0.1; // cutoff for printing
-      
-      const double eps =  m_idiel/ m_sdiel;
-      double FACTE_E[N_POLES],FACTL_E[N_POLES],FACTH_E[N_POLES], FACTLH_E[N_POLES];
-      
-      assert(m_kappa ==0);
-      for(int n=0; n<N_POLES; n++)
 	{
-	  FACTE_E[n]  = -eps * (n+1);
-	  FACTL_E[n]  =  eps * n * m_rad;
-	  FACTH_E[n]  = -(n+1);
-	  FACTLH_E[n] = m_rad * n; 
-	}
-      
-      for(int h=0; h<npe; h+=freq)
-	{
-	  CSpPnt q = CartToSph(m_SPE[h]);
-	  CSHExpan Y(q.theta(), q.phi(), N_POLES);
-	  
-	  double diff=0, LHS=0, RHS=0;
-	  for(int n=0; n<N_POLES; n++)
+		if(m_id == 0) { fname = "diffV_sp0_cy1.dat";}
+		else if (m_id == 1) {fname = "diffV_sp1_cy1.dat";}
+		
+		ofstream dfile(fname);
+		
+		double avgErrorE = 0.0;
+		double maxErrorE = 0.0;
+		double sum=0.0;
+		int ct = 0;
+		int npe = m_SPE.size();
+		int npb = m_SPB.size();
+		int freq = (npe+npb) / 10000;
+		double delta = 0.1; // cutoff for printing
+		
+		const double eps =  m_idiel/ m_sdiel;
+		double FACTE_E[N_POLES],FACTL_E[N_POLES],FACTH_E[N_POLES], FACTLH_E[N_POLES];
+		
+		assert(m_kappa ==0);
+		for(int n=0; n<N_POLES; n++)
+		{
+			FACTE_E[n]  = -eps * (n+1);
+			FACTL_E[n]  =  eps * n * m_rad;
+			FACTH_E[n]  = -(n+1);
+			FACTLH_E[n] = m_rad * n;
+		}
+		
+		for(int h=0; h<npe; h+=freq)
+		{
+			CSpPnt q = CartToSph(m_SPE[h]);
+			CSHExpan Y(q.theta(), q.phi(), N_POLES);
+			
+			double diff=0, LHS=0, RHS=0;
+			for(int n=0; n<N_POLES; n++)
 	    {
-	      LHS += Y(n,0) * ( FACTE_E[n]*m_Efix(n,0) + eps*n*m_F(n,0) + FACTL_E[n]*( m_Lfix(n,0) + m_LF(n,0))  ); 
-	      RHS += Y(n,0) * ( FACTH_E[n]*m_H(n,0) + FACTLH_E[n]*m_LH(n,0) ) ; 
+	      LHS += Y(n,0) * ( FACTE_E[n]*m_Efix(n,0) + eps*n*m_F(n,0) + FACTL_E[n]*( m_Lfix(n,0) + m_LF(n,0))  );
+	      RHS += Y(n,0) * ( FACTH_E[n]*m_H(n,0) + FACTLH_E[n]*m_LH(n,0) ) ;
 	      
 	      for(int m=1; m<2*n+1; m++)
-		{
-		  LHS += 2 * Y(n,m) * (FACTE_E[n]*m_Efix(n,m) + eps*n*m_F(n,m) + FACTL_E[n]*( m_Lfix(n,m) + m_LF(n,m))) ; 
-		  RHS += 2 * Y(n,m) * (FACTH_E[n]*m_H(n,m) + FACTLH_E[n]*m_LH(n,m) ) ;  
-		}
-	    }    
-	  
-	  diff = LHS - RHS; 
-	  sum += fabs(LHS) + fabs(RHS);
-	  avgErrorE += fabs(diff);
-	  
-	  if( fabs(diff) > delta ) 
-	    dfile <<h<<" "<<diff<<" "<<m_SPE[h].x()<<" "<< m_SPE[h].y()<<" "<< m_SPE[h].z()<<endl;
-	  if(fabs(diff) > maxErrorE) maxErrorE = fabs(diff);
-	  
-	  ct++; 	  
-	}
-      
-      avgErrorE /= ct;
-      sum /= ct;
-
-      dfile.close();
-      cout <<">>>>>> SOLVE: Von Neumann AvErrE "<<avgErrorE<<" MaxErrE "<<maxErrorE<< 
-	" rel avg "<<avgErrorE/sum<<" rel max "<<maxErrorE/sum<<endl;
-      
-    }
-  
-  /*
-    else 
-    {
-    if(m_id == 0) fname = "diff_sp0_last.dat";
-    else if (m_id == 1) fname = "diff_sp1_last.dat";
-    }
-  */
-  
-  return;
-}
-/*
-// debugging: check results for buried charges BC
-void
-CSolExpCenter::checkSolveDifferenceBuriedCharges()
-{
-  assert(m_kappa ==0);
-
-  const char* fnameF, *fnameH; 
-
-  if(!m_flag)
-    {
-      if(m_id == 0) { fnameF = "diffF_sp0_cy1.dat";fnameH = "diffH_sp0_cy1.dat";}
-      else if (m_id == 1) {fnameF = "diffF_sp1_cy1.dat";fnameH = "diffH_sp1_cy1.dat";}
-
-#pragma omp single nowait
-      m_flag = true;
-
-      ofstream dfileF(fnameF);
-      ofstream dfileH(fnameH);
-      int ct = 0;
-      int npe = m_SPE.size();
-      int npb = m_SPB.size();
-      int freq = (npe+npb) / 10000;
-      double delta = 0.1; // cutoff for printing
-      
-      double FACT[N_POLES];
-      
-      for(int n=0; n<N_POLES; n++)
-	FACT[n] = 2*n+1; 
-      
-      double avgErrorBF = 0.0; double maxErrorBF = 0.0;
-      double avgErrorBH = 0.0; double maxErrorBH = 0.0;
-      double sumH = 0.0; double sumF = 0.0;
-
-      for(int h=0; h<npb; h+=freq)
-	{
-	  CSpPnt q = CartToSph(m_SPB[h]);
-	  CSHExpan Y(q.theta(), q.phi(), N_POLES);
-	  CExpan YS = Y * FACT;
-	  
-	  double LHS_F=0, LHS_H=0;
-	  for(int n=0; n<N_POLES; n++)
-	    {
-	      LHS_F += m_F(n,0) * YS(n,0); 
-	      LHS_H += m_H(n,0) * YS(n,0); 
-	      for(int m=1; m<2*n+1; m++)  
-		{
-		  LHS_F += 2 * m_F(n,m) * YS(n,m); 
-		  LHS_H += 2 * m_H(n,m) * YS(n,m); 
-		}
+				{
+					LHS += 2 * Y(n,m) * (FACTE_E[n]*m_Efix(n,m) + eps*n*m_F(n,m) + FACTL_E[n]*( m_Lfix(n,m) + m_LF(n,m))) ;
+					RHS += 2 * Y(n,m) * (FACTH_E[n]*m_H(n,m) + FACTLH_E[n]*m_LH(n,m) ) ;
+				}
 	    }
-	  
-	  avgErrorBF += fabs(LHS_F);	
-	  avgErrorBH += fabs(LHS_H);	
-
-	  if( fabs(LHS_F) > delta )
-	    dfileF <<h+npe<<" "<<LHS_F<<" "<<m_SPB[h].x()<<" "<< m_SPB[h].y()<<" "<< m_SPB[h].z()<<endl;
-	  if( fabs(LHS_H) > delta )
-	    dfileH <<h+npe<<" "<<LHS_H<<" "<<m_SPB[h].x()<<" "<< m_SPB[h].y()<<" "<< m_SPB[h].z()<<endl;
-	  if(fabs(LHS_F) > maxErrorBF) maxErrorBF = fabs(LHS_F);
-	  if(fabs(LHS_H) > maxErrorBH) maxErrorBH = fabs(LHS_H);
-	  ct++; 	      
+			
+			diff = LHS - RHS;
+			sum += fabs(LHS) + fabs(RHS);
+			avgErrorE += fabs(diff);
+			
+			if( fabs(diff) > delta )
+				dfile <<h<<" "<<diff<<" "<<m_SPE[h].x()<<" "<< m_SPE[h].y()<<" "<< m_SPE[h].z()<<endl;
+			if(fabs(diff) > maxErrorE) maxErrorE = fabs(diff);
+			
+			ct++;
+		}
+		
+		avgErrorE /= ct;
+		sum /= ct;
+		
+		dfile.close();
+		cout <<">>>>>> SOLVE: Von Neumann AvErrE "<<avgErrorE<<" MaxErrE "<<maxErrorE<<
+		" rel avg "<<avgErrorE/sum<<" rel max "<<maxErrorE/sum<<endl;
 	}
-      
-      avgErrorBF /= ct; 
-      avgErrorBH /= ct; 
-      cout <<">>>>>> SOLVE: Charges: (F) AvErr "<<avgErrorBF<<" MaxErr "<<maxErrorBF<< 
-	"     (H) AvErr "<<avgErrorBH<<" MaxErr "<<maxErrorBH<< endl;
-      
-      
-      dfileF.close();
-      dfileH.close();
-      
-    }
-
-
-
   return;
 }
-*/
+
 #endif // __DEBUG

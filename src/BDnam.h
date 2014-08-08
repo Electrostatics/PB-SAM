@@ -7,15 +7,17 @@
 #include "contact.h"
 #include "system.h"
 
-#define FACT2 5.604586e2 //(COUL_K*IKbT)
-const double AVOGADRO_NUM = 6.0221415e23;
-const double ELECT_CHG = 1.60217646e-19;
-const double PERMITTIVITY_VAC = 8.854187817e-12;
-const double KB = 1.3806503e-23;
-const double ANGSTROM = 1e-10;
-const double LITRE = 1e-3;
-const double IKbT = 1.0/(KB*298.15);
-const double COUL_K = 2.30708e-18; // (1/4PI*e0) * e2 / ANGSTROM 
+#define FACT2 5.604586e2												//!<( COUL_K*IKbT )
+
+// Some importatn system constants
+const double AVOGADRO_NUM = 6.0221415e23;				//!< Avogadro's number [molecule/mol]
+const double ELECT_CHG = 1.60217646e-19;				//!< Electric charge
+const double PERMITTIVITY_VAC = 8.854187817e-12;//!< Permititvity in a vacuum
+const double KB = 1.3806503e-23;								//!< Boltzmann's constant
+const double ANGSTROM = 1e-10;									//!< Conversion of angstroms to meters
+const double LITRE = 1e-3;											//!< Coversion of kL to L
+const double IKbT = 1.0/( KB*298.15 );					//!< Beta
+const double COUL_K = 2.30708e-18;							//!< ( 1/4PI*e0 ) * e2 / ANGSTROM
 
 // SYSTEM SPECIFIC PARAMETERS
 #define b_DIST 100.0
@@ -24,17 +26,14 @@ const double COUL_K = 2.30708e-18; // (1/4PI*e0) * e2 / ANGSTROM
 
 using namespace std;
 
-// general functions
+//!  The CBDnam class
+/*! The class that contains information about a NAM run */
 class CBDnam
 {
  public:
 
   CBDnam(vector<char*> molfnames1, vector<char*> molfnames2, REAL idiel);
-  ~CBDnam() {  /*
-    for(int i=0; i<m_mols.size(); i++) delete [] m_mols[i];
-    for(int i=0; i<m_iMats.size(); i++) delete [] m_iMats[i];
-	    */
-  }
+  ~CBDnam() { }
 
   enum STATUS {ESCAPED, DOCKED, RUNNING, STUCK};
   static const char STATUS_STRING[4][10];
@@ -45,15 +44,12 @@ class CBDnam
   CMolecule* getMol(int i) {return m_mols[i];}
   static CPnt getRandVec(REAL std)
     { return std*CPnt(normRand(), normRand(), normRand()); }
-
-
  private:
   // void saveState();
   bool IsDocked(CMolecule* mol1, CMolecule* mol2) const;
   bool escaped(REAL dist) const;
   REAL compute_dt() const; 
   CBDnam::STATUS makeMove(const CPnt & dR2, const CPnt & dO1, const CPnt & dO2, REAL dt);
-  
 
   static int m_nMolType;
   static vector< vector<CMolContact> > MOLCONTACTLIST;
@@ -80,10 +76,14 @@ class CBDnam
   REAL m_Dtr;
   REAL m_Dr1, m_Dr2;
   CQuat m_rot1, m_rot2;
-
-
 };
 
+/******************************************************************/
+/******************************************************************/
+/**
+ * escaped: function that returns TRUE if the second molecule
+ has escaped the simulation and FALSE if it has not
+ ******************************************************************/
 inline bool
 CBDnam::escaped(REAL dist) const
 {

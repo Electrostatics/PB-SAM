@@ -16,36 +16,20 @@ const double LITRE = 1e-3;
 const double IKbT = 1.0/(KB*298.15);
 const double COUL_K = 2.30708e-18; // (1/4PI*e0) * e2 / ANGSTROM 
 
-// SYSTEM SPECIFIC PARAMETERS
-
 using namespace std;
 
 // general functions
 class CBDmulti
 {
  public:
-
-  /*  CBDmulti(int Np, vector<char*> molfnames, char* configfname, REAL idiel,	 
-      char* contactfile, double contactSepDist);*/
+	//!  The CBDmulti class
+	/*! The class that contains information about a BD multi run */
   CBDmulti(int Np1, int Np2, const vector<char*> &molfnames1, 
 	   const vector<char*> &molfnames2, REAL idiel);
-  //  CBDmulti(vector<char*> molfnames, REAL idiel, char* contactfile, double contactSepDist); // debug
-
-  ~CBDmulti() {  
-    /*    for(int i=0; i<m_mols.size(); i++) delete m_mols[i];
-    for(int i=0; i<m_iF.size(); i++) 
-    {
-	delete m_iF[i];
-	delete m_iH[i];
-	delete [] m_iMats[i];
-      }
-    */
-  }
+  ~CBDmulti() { }
 
   static void initConstants(int nMolType);
   static void addMolContact(int mol1type, const vector<CMolContact>&molcontactlist);
-
-
 
   void resetLattice();
   void restartConfig(char* configname);
@@ -73,16 +57,13 @@ class CBDmulti
   REAL compute_dt(double minsepdist) const; 
   void makeMove(const vector<CPnt> & dR, const vector<CPnt> & dO, REAL dt);
 
-  //void computeBondingForce(vector<CPnt> &force, vector<CPnt> &torque) const;    
-  //void computeBondingForceRigid(vector<CPnt> &force, vector<CPnt> &torque) const;    
-
   static REAL MINDIST, MAXDIST;
   
   static int m_nMolType;
   static vector< vector<CMolContact> > MOLCONTACTLIST;
 
   // moltype variables                                                                                
-  vector<REAL*> m_iMats1, m_iMats2;
+ /* vector<REAL*> m_iMats1, m_iMats2;
   vector<CMulExpan*> m_iF1,m_iH1, m_iF2,m_iH2;
   vector<vector<double> > m_qSolvedF1, m_qSolvedH1, m_qSolvedF2, m_qSolvedH2;
   vector<double> m_totalF1, m_totalH1, m_totalF2, m_totalH2;
@@ -94,14 +75,50 @@ class CBDmulti
   vector<vector<int> > m_neighs1, m_neighs2;
   vector<vector<CPnt> > m_SPxes1, m_SPxes2;
   vector<int> m_nSPx1, m_nSPx2;
-  vector< vector<int> > m_intraPolLists_near1, m_intraPolLists_near2;
+  vector< vector<int> > m_intraPolLists_near1, m_intraPolLists_near2; */
 
+	vector<REAL*> m_iMats1;												//!< A matrix of interaction matrices for molecule1
+	vector<REAL*> m_iMats2;												//!< A matrix of interaction matrices for molecule2
+	vector<CMulExpan*> m_iF1;											//!< A multipole expansion for F of molecule1
+	vector<CMulExpan*> m_iH1;											//!< A multipole expansion for H of molecule1
+	vector<CMulExpan*> m_iF2;											//!< A multipole expansion for F of molecule2
+	vector<CMulExpan*> m_iH2;											//!< A multipole expansion for H of molecule2
+	vector<vector<double> > m_qSolvedF1;					//!< A vector of solved F for molecule1
+	vector<vector<double> > m_qSolvedH1;					//!< A vector of solved H for molecule1
+	vector<vector<double> > m_qSolvedF2;					//!< A vector of solved F for molecule2
+	vector<vector<double> > m_qSolvedH2;					//!< A vector of solved H for molecule2
+	vector<double> m_totalF1;											//!< A vector of summed F for molecule1
+	vector<double> m_totalH1;											//!< A vector of summed H for molecule1
+	vector<double> m_totalF2;											//!< A vector of summed F for molecule2
+	vector<double> m_totalH2;											//!< A vector of summed H for molecule2
+	vector<CLocalExpan*> m_LFs_intraSelf1;				//!< A local expansion for F of molecule1
+	vector<CLocalExpan*> m_LHs_intraSelf1;				//!< A local expansion for H of molecule1
+	vector<CLocalExpan*> m_LFs_intraSelf_far1;		//!< A local expansion for far F of molecule1
+	vector<CLocalExpan*> m_LHs_intraSelf_far1;		//!< A local expansion for far H of molecule1
+	vector<CLocalExpan*> m_LFs_intraSelf2;				//!< A local expansion for F of molecule2
+	vector<CLocalExpan*> m_LHs_intraSelf2;				//!< A local expansion for H of molecule2
+	vector<CLocalExpan*> m_LFs_intraSelf_far2;		//!< A local expansion for far F of molecule2
+	vector<CLocalExpan*> m_LHs_intraSelf_far2;		//!< A local expansion for far H of molecule2
+	vector<CMolCell> m_molcells1;									//!< A vector of cells for molecule1
+	vector<CMolCell> m_molcells2;									//!< A vector of cells for molecule2
+	vector<vector<int> > m_neighs1;								//!< A vector of neighbors for each sphere in molecule1
+	vector<vector<int> > m_neighs2;								//!< A vector of neighbors for each sphere in molecule2
+	vector<vector<CPnt> > m_SPxes1;								//!< A vector of coordinates of exposed surface points in molecule1
+	vector<vector<CPnt> > m_SPxes2;								//!< A vector of coordinates of exposed surface points in molecule2
+	vector<int> m_nSPx1;													//!< A vector of indices of exposed surface points in molecule1
+	vector<int> m_nSPx2;													//!< A vector of indices of exposed surface points in molecule2
+	vector< vector<int> > m_intraPolLists_near1;	//!< A vector of lists of spheres considered near in molecule1
+	vector< vector<int> > m_intraPolLists_near2;	//!< A vector of lists of spheres considered near in molecule2
+	
+	
   // BD variables
-  int m_np1, m_np2;
-  vector<REAL> m_Dtr;
-  vector<REAL> m_Dr;
-  vector<CQuat> m_rots;
-  CPnt m_initialrcen1, m_initialrcen2;
-};
+	int m_np1;						//!< The number of molecules of type 1
+	int m_np2;						//!< The number of molecules of type 2
+	vector<REAL> m_Dtr;		//!< The translational diffusion coefficient
+	vector<REAL> m_Dr;		//!< The rotational diffusion coefficient
+	vector<CQuat> m_rots;	//!< The rotational orientation
+	CPnt m_initialrcen1;	//!< The xyz coord of initial read-in of molecule 1
+	CPnt m_initialrcen2;	//!< The xyz coord of initial read-in of molecule 1
+}; // end CBDmulti
 
 #endif

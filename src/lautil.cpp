@@ -39,7 +39,7 @@ void applyMat( const double * A, const double * X, double * Y,
 #include "mkl.h"
 
 // computes y = alpha*A*x + beta*y
-void applyMat( const double * A, const double * X, double * Y, 
+void applyMat( const double * A, const double * X, double * Y,
 							const double alpha, const double beta, int ma, int na )
 {
   const int N = na;
@@ -54,8 +54,8 @@ void applyMat( const double * A, const double * X, double * Y,
 }
 
 // computes Y = alpha*A*X + beta*Y
-void applyMMat( const double * A, const double * X, double * Y, 
-							 const double alpha, const double beta, int ma, int nc, int na ) 
+void applyMMat( const double * A, const double * X, double * Y,
+							 const double alpha, const double beta, int ma, int nc, int na )
 {
   const int M = ma;
   const int N = nc;
