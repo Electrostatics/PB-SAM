@@ -5,7 +5,7 @@
 #ifdef __DIFF__
 #define N_POLES 1
 #else
-#define N_POLES 30
+#define N_POLES 10
 #endif
 
 #define PREC_LIMIT (1e-30)

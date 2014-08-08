@@ -778,27 +778,10 @@ CMolecule::CMolecule(CPnt rcen, const vector<CPnt> &cens, const vector<double> &
 #pragma omp for 
    for(int ki = 0; ki < getNKS(); ki++)
      {
-       
-       //       printf("================Solvent Center %d =================\n", ki);
 #ifdef __OMP
        int tid = omp_get_thread_num();
-       //       printf("Thread %d ki = %d\n", tid, ki);
 #endif
-       
-       /* might need in future? 
-       vector<CPnt> SPx, SPdum, NPdum;
-       vector<int> neigh;
-       int SPExSize;
-       findNeighbors(ki, cens_r, radii, neigh);	
-       getXFormSpherePoints(cens_r, radii, rad2, SPdum, NPdum, neigh, ki, SPx, SPExSize, NUM_POINTS_X);
-       */
-
-       //double start = read_timer();
        m_k[ki] = new CSolExpCenter(ki, cens_r[ki], radii[ki], Hself[ki]);
-       //double end = read_timer();
-       
-       //       printf("ki %d Time taken to create solvent center [s] = %f\n", ki, end-start);
-
      }
    
  }//endparallel
@@ -2153,7 +2136,7 @@ CMolecule::polarize_self(bool bPot, int farFieldFreq)
 
   double  dev = 0.0;   
   int ct;
-  const int MAX_POL_ROUNDS_SELF = 100;
+  const int MAX_POL_ROUNDS_SELF = 200;
 
   m_total = m_nks;
   REAL itot = 1.0/m_total;  
@@ -2318,12 +2301,7 @@ CMolecule::polarize_mutual(vector<CMolecule*> & mols, bool bPot, int farFieldFre
  
  ct = 1; // no. of molecule iterations
  double e1 = read_timer();
-  
  itot = (mtotal > 0 ? 1.0/mtotal : 0);
-//  cout <<" mtotal = "<<mtotal<<" itot = "<<itot<<endl;
-//   printf("After 1st round : ct %d total dev: %e avg %e\n", ct, dev, itot*dev);
-// cout <<"Time taken to polarize 1st round[s]: "<<e1-start<<endl;
-  
  while ( dev*itot > MAX_POLAR_DEV_SQR && ct < MAX_POL_ROUNDS) 
    {             
      dev = 0.0;
@@ -2364,21 +2342,10 @@ CMolecule::polarize_mutual(vector<CMolecule*> & mols, bool bPot, int farFieldFre
 
       //Incrementing  indices	
       ct ++ ;
-      
-//       printf("%d) count %d maxdev: %e dev: %e avg: %e\n",ct, count, MAXDEV, dev, dev*itot);
-      
     } // end-while
   
  
   double end = read_timer();
-
-  //  cout <<"Time taken to polarize [s]: "<<end-start<<endl;
-  //  ", ct: "<< ct<< ", per cycle: "<<(end-start)/ double(ct)<<endl;  
-  //  printf("Potential converged : ct %d total dev: %e avg %e\n", ct, dev, itot*dev);
-
-  //added by S. Liu for debug
-//   cout << "Ready for gradient mutual polarization"<<endl;
-
  if (bPot) return;
  
   //--------------------------------------------------------------------
@@ -2544,11 +2511,6 @@ CMolecule::polarize_mutual(vector<CMolecule*> & mols, bool bPot, int farFieldFre
 		}
 	      
 	    }//end while
-	  
-	  // double endj = read_timer();
-	  //      cout <<"Time taken to polarize grad"<<j<<" "<<endj-startj<<endl;
-	  
-
 	  // save a copy of gH for mol j's spheres (to be used in force/torque)
 	  for (int h=0; h < j_intrasize; h++, k++) // intra
 	    {
@@ -2614,8 +2576,6 @@ CMolecule::polarize_mutual(vector<CMolecule*> & mols, bool bPot, int farFieldFre
 #endif  
 
   double endg = read_timer();
-  cout <<"Time taken to polarize all grad "<<endg-startg<<endl;
-
   return;
 }
 
