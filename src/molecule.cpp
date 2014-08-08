@@ -1,5 +1,4 @@
 #include "molecule.h"
-#include "protein.h"
 #include "readutil.h"
 
 #include <fstream>
@@ -2186,10 +2185,8 @@ CMolecule::polarize_self(bool bPot, int farFieldFreq)
 	  REAL dev_ki = 0; 
 
 	  dev_ki = recompute_LowMemory(ki, true); // update far field for first round
-          printf("ki=%d dev_ki= %e \n",ki,dev_ki);
 	  dev += (getKS(ki).getRad()*getKS(ki).getRad()) * dev_ki;
 	  if(maxdev < dev_ki) maxdev = dev_ki;
-	    printf("%d maxdev %e total dev: %e \n", ki, maxdev, dev);
 	}
 
       ct = 1; // no. of molecule iterations

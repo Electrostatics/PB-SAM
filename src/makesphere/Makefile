@@ -17,6 +17,12 @@ BIN     = ../bin
 FC_C =  expansion.cpp readutil.cpp findContacts.cpp
 FC_OBJS      =      $(FC_C:.cpp=.o)
 
+## Makesphere ##
+
+MS_C =  spheres.cpp readutil.cpp \
+					 makesphere.cpp expansion.cpp
+MS_OBJS      =      $(MS_C:.cpp=.o)
+
 ## PB ##
 PB_C =  getmemory.cpp expansion.cpp triexpan.cpp expcenter.cpp  \
 						rotcoeff.cpp transcoeff.cpp xforms.cpp lautil.cpp  \
@@ -25,7 +31,7 @@ PB_C =  getmemory.cpp expansion.cpp triexpan.cpp expcenter.cpp  \
 PB_OBJS = $(PB_C:.cpp=.o)
 
 ## BDM ##
-BDM_C = getmemory.cpp expansion.cpp triexpan.cpp expcenter.cpp  \
+BDM_C = getmemory.cpp protein.cpp expansion.cpp triexpan.cpp expcenter.cpp  \
                 		rotcoeff.cpp transcoeff.cpp xforms.cpp	\
 						lautil.cpp readutil.cpp  \
                 		molecule.cpp moldynamics.cpp system.cpp \
@@ -54,6 +60,10 @@ bdnam: $(BDNAM_OBJS) Makefile
 findContacts:  $(FC_OBJS)	 Makefile
 	rm -f ../bin/findContacts
 	$(CC)  $(CFLAGS) -D__FC  $(FC_OBJS) $(LIB) $(LIBS) -o ../bin/findContacts
+
+makesphere:  $(MS_OBJS) Makefile
+		rm -f ../../bin/makesphere
+		$(CC)  $(CFLAGS) $(MS_OBJS) $(LIB) $(LIBS) -o ../../bin/makesphere
 
 pbsam: $(PB_OBJS) Makefile
 	rm -f $(BIN)/pbsam_30

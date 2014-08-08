@@ -942,7 +942,6 @@ operator<<(ostream & fout, const CExpan & M)
 {
   vector<REAL>::const_iterator pS = M.m_M.begin();
 
-  cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
   for (int n = M.m_range.p1(); n < M.m_range.p2(); n++)
     {
       for (int m = 0; m < 2*n+1; m++) 
@@ -954,8 +953,6 @@ operator<<(ostream & fout, const CExpan & M)
 	}
       fout << endl;
     }
-
-  cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
   return fout;
 }
 
@@ -971,7 +968,6 @@ CExpan::output(int p1, int p2)
 void
 CExpan::outputComplex(REAL fact) const
 {
-  cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
   for (int n = m_range.p1(); n < m_range.p2(); n++)
     {
       for (int m = 0; m <=n; m++) 
@@ -983,9 +979,6 @@ CExpan::outputComplex(REAL fact) const
 	}
       cout << endl;
     }
-
-  cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-
 }
 
 
