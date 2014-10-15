@@ -318,16 +318,15 @@ void readpqr(const char * fname, vector<CPnt> & pnt, vector<REAL> & ch,
 		double x,y,z,c,r;
 		if (strncmp(&(buf[0]),"ATOM",4) == 0)
 		{
-			sscanf(&(buf[iCoord]), "%lf %lf %lf", &x, &y, &z); // position
-			strncpy(temp, &(buf[iRad]), 7); // radius
+			sscanf(&(buf[iCoord]), "%lf %lf %lf %lf %lf", &x, &y, &z, &c, &r); 
+/*			strncpy(temp, &(buf[iRad]), 7); // radius
 			temp[6] = 0;
 			if (strcmp(temp, "      ") == 0)
 				r = 0.0;
 			else
 				sscanf(temp, "%lf", &r);
-			
 			sscanf(&(buf[iCharge]), "%lf", &c); // charge
-			
+*/			
 			// read in as centers that specifies dielectric boundary
 			if (strncmp(&(buf[iCen]),"CEN",3) == 0)
 	    {

@@ -71,7 +71,11 @@ int main_selfPolarize(int argc, char ** argv)
   //////////////// // define center as center of spheres ////////////////
   const int ncen = scen.size();// no of unique spheres
   CPnt initialrcen(0,0,0);
-  for(int i=0; i<ncen; i++) initialrcen += scen[i]; initialrcen /= scen.size();
+  for(int i=0; i<ncen; i++) 
+	{
+		initialrcen += scen[i]; 
+		initialrcen /= scen.size();
+	}
   cout <<"rcen : " <<initialrcen<<" ; no. of centers:  "<<ncen<<endl;
 	
   //////////////// read in interaction matrices //////////////

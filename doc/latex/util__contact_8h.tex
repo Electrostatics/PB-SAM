@@ -1,0 +1,270 @@
+\hypertarget{util__contact_8h}{\section{util\-\_\-contact.\-h File Reference}
+\label{util__contact_8h}\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}}
+}
+{\ttfamily \#include $<$complex$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$cstdio$>$}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$sys/time.\-h$>$}\\*
+{\ttfamily \#include $<$memory$>$}\\*
+Include dependency graph for util\-\_\-contact.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{util__contact_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=287pt]{util__contact_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classCSpPnt}{C\-Sp\-Pnt}
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCSpPnt}{C\-Sp\-Pnt} class. \end{DoxyCompactList}\item 
+class \hyperlink{classCPnt}{C\-Pnt}
+\begin{DoxyCompactList}\small\item\em The \hyperlink{classCPnt}{C\-Pnt} class. \end{DoxyCompactList}\item 
+class \hyperlink{classCQuat}{C\-Quat}
+\begin{DoxyCompactList}\small\item\em The quaternion class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef double \hyperlink{util__contact_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L}
+\item 
+typedef complex$<$ \hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} $>$ \hyperlink{util__contact_8h_a0ef19d29521fc1e3356ea268ba175cfc}{Complex}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{util__contact_8h_a995a97713975591555fe37b5ad50745a}{dot} (const \hyperlink{classCPnt}{C\-Pnt} \&p1, const \hyperlink{classCPnt}{C\-Pnt} \&p2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{util__contact_8h_a491783063d690a2f389e3317f44dd0b7}{rand\-Orient} ()
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{util__contact_8h_a33c07e9b427f6ef2a832f0347547d920}{operator-\/} (const \hyperlink{classCPnt}{C\-Pnt} \&c1, const \hyperlink{classCPnt}{C\-Pnt} \&c2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{util__contact_8h_a4edc341b0ad1bcf25527dedebcd50fad}{operator+} (const \hyperlink{classCPnt}{C\-Pnt} \&c1, const \hyperlink{classCPnt}{C\-Pnt} \&c2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{util__contact_8h_a6bf4a1152989f36cdb084e617a81214b}{operator$\ast$} (\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} c, const \hyperlink{classCPnt}{C\-Pnt} \&p1)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{util__contact_8h_ab4553c75d2ac17d0539471baeb0c0237}{cross} (const \hyperlink{classCPnt}{C\-Pnt} \&p1, const \hyperlink{classCPnt}{C\-Pnt} \&p2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{util__contact_8h_a32b27b68f60ea93fc6531a5f3e483cf7}{operator-\/} (const \hyperlink{classCPnt}{C\-Pnt} \&p1)
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{util__contact_8h_ac25278586b4a84caf4098513d812d60b}{torsion} (const \hyperlink{classCPnt}{C\-Pnt} \&p1, const \hyperlink{classCPnt}{C\-Pnt} \&p2, const \hyperlink{classCPnt}{C\-Pnt} \&p3, const \hyperlink{classCPnt}{C\-Pnt} \&p4)
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{util__contact_8h_a774fe41d28888a078993d8d3384c34d8}{torsion} (const \hyperlink{classCPnt}{C\-Pnt} \&v1, const \hyperlink{classCPnt}{C\-Pnt} \&v2, const \hyperlink{classCPnt}{C\-Pnt} \&v3)
+\item 
+ostream \& \hyperlink{util__contact_8h_a5d9fde839f5480f04e4b64a9621e3370}{operator$<$$<$} (ostream \&out, const \hyperlink{classCPnt}{C\-Pnt} \&p)
+\item 
+ostream \& \hyperlink{util__contact_8h_a53a39a67bc3f52a606be1d4e71085b3f}{operator$<$$<$} (ostream \&out, const \hyperlink{classCSpPnt}{C\-Sp\-Pnt} \&p)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{util__contact_8h_af8b263bb80bb3a76271a7f57d5057df3}{Sph\-To\-Cart} (const \hyperlink{classCSpPnt}{C\-Sp\-Pnt} \&s)
+\item 
+\hyperlink{classCSpPnt}{C\-Sp\-Pnt} \hyperlink{util__contact_8h_ad05fbf75e7550a927bc817f97115f2fc}{Cart\-To\-Sph} (const \hyperlink{classCPnt}{C\-Pnt} \&c)
+\item 
+\hyperlink{classCQuat}{C\-Quat} \hyperlink{util__contact_8h_a56293e53132060601a281240804d9302}{operator$\ast$} (const \hyperlink{classCQuat}{C\-Quat} \&q1, const \hyperlink{classCQuat}{C\-Quat} \&q2)
+\item 
+\hyperlink{classCPnt}{C\-Pnt} \hyperlink{util__contact_8h_a7069e77a0dcbfde733a88ee5790e71c2}{operator$\ast$} (const \hyperlink{classCQuat}{C\-Quat} \&q, const \hyperlink{classCPnt}{C\-Pnt} \&r)
+\item 
+\hyperlink{classCQuat}{C\-Quat} \hyperlink{util__contact_8h_a751f3ac0c157ff6967eaf2673ce1527e}{conj} (const \hyperlink{classCQuat}{C\-Quat} \&q)
+\item 
+ostream \& \hyperlink{util__contact_8h_ae5d972b0a3279336dad85bd39fb826fc}{operator$<$$<$} (ostream \&fot, const \hyperlink{classCQuat}{C\-Quat} \&q)
+\item 
+\hyperlink{util_8h_a5821460e95a0800cf9f24c38915cbbde}{R\-E\-A\-L} \hyperlink{util__contact_8h_a3daa70c1884dabb0992d5ce98e3f692a}{norm\-Rand} ()
+\item 
+void \hyperlink{util__contact_8h_ad864dc450da6954264580e4318e011eb}{seed\-Rand} (int s)
+\item 
+double \hyperlink{util__contact_8h_aa1d26866fab397a6e6346c7e9de15ecc}{read\-\_\-timer} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{util__contact_8h_a0ef19d29521fc1e3356ea268ba175cfc}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!Complex@{Complex}}
+\index{Complex@{Complex}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{Complex}]{\setlength{\rightskip}{0pt plus 5cm}typedef complex$<${\bf R\-E\-A\-L}$>$ {\bf Complex}}}\label{util__contact_8h_a0ef19d29521fc1e3356ea268ba175cfc}
+\hypertarget{util__contact_8h_a5821460e95a0800cf9f24c38915cbbde}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!R\-E\-A\-L@{R\-E\-A\-L}}
+\index{R\-E\-A\-L@{R\-E\-A\-L}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{R\-E\-A\-L}]{\setlength{\rightskip}{0pt plus 5cm}typedef double {\bf R\-E\-A\-L}}}\label{util__contact_8h_a5821460e95a0800cf9f24c38915cbbde}
+
+
+\subsection{Function Documentation}
+\hypertarget{util__contact_8h_ad05fbf75e7550a927bc817f97115f2fc}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!Cart\-To\-Sph@{Cart\-To\-Sph}}
+\index{Cart\-To\-Sph@{Cart\-To\-Sph}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{Cart\-To\-Sph}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Sp\-Pnt} Cart\-To\-Sph (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Pnt} \&}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_ad05fbf75e7550a927bc817f97115f2fc}
+
+\begin{DoxyParams}{Parameters}
+{\em c} & a cartesian coordinate object to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a spherical coordinate object
+\end{DoxyReturn}
+Converting from cartesian to spherical coordinates \hypertarget{util__contact_8h_a751f3ac0c157ff6967eaf2673ce1527e}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!conj@{conj}}
+\index{conj@{conj}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{conj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Quat} conj (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Quat} \&}]{q}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a751f3ac0c157ff6967eaf2673ce1527e}
+Return complex conjugate of a quaternion \hypertarget{util__contact_8h_ab4553c75d2ac17d0539471baeb0c0237}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!cross@{cross}}
+\index{cross@{cross}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{cross}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} cross (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Pnt} \&}]{p1, }
+\item[{const {\bf C\-Pnt} \&}]{p2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_ab4553c75d2ac17d0539471baeb0c0237}
+Cross product of two vectors \hypertarget{util__contact_8h_a995a97713975591555fe37b5ad50745a}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!dot@{dot}}
+\index{dot@{dot}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{dot}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} dot (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Pnt} \&}]{p1, }
+\item[{const {\bf C\-Pnt} \&}]{p2}
+\end{DoxyParamCaption}
+)}}\label{util__contact_8h_a995a97713975591555fe37b5ad50745a}
+\hypertarget{util__contact_8h_a3daa70c1884dabb0992d5ce98e3f692a}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!norm\-Rand@{norm\-Rand}}
+\index{norm\-Rand@{norm\-Rand}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{norm\-Rand}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} norm\-Rand (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a3daa70c1884dabb0992d5ce98e3f692a}
+\hypertarget{util__contact_8h_a6bf4a1152989f36cdb084e617a81214b}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{{\bf R\-E\-A\-L}}]{c, }
+\item[{const {\bf C\-Pnt} \&}]{p1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a6bf4a1152989f36cdb084e617a81214b}
+Multiplying xyz coordinate times a scalar \hypertarget{util__contact_8h_a56293e53132060601a281240804d9302}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Quat} operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Quat} \&}]{q1, }
+\item[{const {\bf C\-Quat} \&}]{q2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a56293e53132060601a281240804d9302}
+\hypertarget{util__contact_8h_a7069e77a0dcbfde733a88ee5790e71c2}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Quat} \&}]{q, }
+\item[{const {\bf C\-Pnt} \&}]{r}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a7069e77a0dcbfde733a88ee5790e71c2}
+Multiplying quaternion by cartesian coordinates, for rotation \hypertarget{util__contact_8h_a4edc341b0ad1bcf25527dedebcd50fad}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!operator+@{operator+}}
+\index{operator+@{operator+}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Pnt} \&}]{c1, }
+\item[{const {\bf C\-Pnt} \&}]{c2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a4edc341b0ad1bcf25527dedebcd50fad}
+Adding one xyz coordinate to another \hypertarget{util__contact_8h_a33c07e9b427f6ef2a832f0347547d920}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Pnt} \&}]{c1, }
+\item[{const {\bf C\-Pnt} \&}]{c2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a33c07e9b427f6ef2a832f0347547d920}
+Subtracting one xyz coordinate from another \hypertarget{util__contact_8h_a32b27b68f60ea93fc6531a5f3e483cf7}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Pnt} \&}]{p1}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a32b27b68f60ea93fc6531a5f3e483cf7}
+Reversing the direction of a vector \hypertarget{util__contact_8h_a5d9fde839f5480f04e4b64a9621e3370}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{out, }
+\item[{const {\bf C\-Pnt} \&}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a5d9fde839f5480f04e4b64a9621e3370}
+Printing out a \hyperlink{classCPnt}{C\-Pnt} object \hypertarget{util__contact_8h_a53a39a67bc3f52a606be1d4e71085b3f}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{out, }
+\item[{const {\bf C\-Sp\-Pnt} \&}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a53a39a67bc3f52a606be1d4e71085b3f}
+Printing out a \hyperlink{classCSpPnt}{C\-Sp\-Pnt} object \hypertarget{util__contact_8h_ae5d972b0a3279336dad85bd39fb826fc}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{fot, }
+\item[{const {\bf C\-Quat} \&}]{q}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_ae5d972b0a3279336dad85bd39fb826fc}
+Print out quaternion \hypertarget{util__contact_8h_a491783063d690a2f389e3317f44dd0b7}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!rand\-Orient@{rand\-Orient}}
+\index{rand\-Orient@{rand\-Orient}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{rand\-Orient}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} rand\-Orient (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{util__contact_8h_a491783063d690a2f389e3317f44dd0b7}
+\hypertarget{util__contact_8h_aa1d26866fab397a6e6346c7e9de15ecc}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!read\-\_\-timer@{read\-\_\-timer}}
+\index{read\-\_\-timer@{read\-\_\-timer}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{read\-\_\-timer}]{\setlength{\rightskip}{0pt plus 5cm}double read\-\_\-timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_aa1d26866fab397a6e6346c7e9de15ecc}
+\hypertarget{util__contact_8h_ad864dc450da6954264580e4318e011eb}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!seed\-Rand@{seed\-Rand}}
+\index{seed\-Rand@{seed\-Rand}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{seed\-Rand}]{\setlength{\rightskip}{0pt plus 5cm}void seed\-Rand (
+\begin{DoxyParamCaption}
+\item[{int}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_ad864dc450da6954264580e4318e011eb}
+\hypertarget{util__contact_8h_af8b263bb80bb3a76271a7f57d5057df3}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!Sph\-To\-Cart@{Sph\-To\-Cart}}
+\index{Sph\-To\-Cart@{Sph\-To\-Cart}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{Sph\-To\-Cart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\-Pnt} Sph\-To\-Cart (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Sp\-Pnt} \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_af8b263bb80bb3a76271a7f57d5057df3}
+
+\begin{DoxyParams}{Parameters}
+{\em s} & a spherical coordinate object to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a cartesian coordinate object
+\end{DoxyReturn}
+Converting from spherical to cartesian coordinates \hypertarget{util__contact_8h_ac25278586b4a84caf4098513d812d60b}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!torsion@{torsion}}
+\index{torsion@{torsion}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{torsion}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} torsion (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Pnt} \&}]{p1, }
+\item[{const {\bf C\-Pnt} \&}]{p2, }
+\item[{const {\bf C\-Pnt} \&}]{p3, }
+\item[{const {\bf C\-Pnt} \&}]{p4}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_ac25278586b4a84caf4098513d812d60b}
+Returning the dihedral angle between 4 points in rad \hypertarget{util__contact_8h_a774fe41d28888a078993d8d3384c34d8}{\index{util\-\_\-contact.\-h@{util\-\_\-contact.\-h}!torsion@{torsion}}
+\index{torsion@{torsion}!util_contact.h@{util\-\_\-contact.\-h}}
+\subsubsection[{torsion}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\-E\-A\-L} torsion (
+\begin{DoxyParamCaption}
+\item[{const {\bf C\-Pnt} \&}]{v1, }
+\item[{const {\bf C\-Pnt} \&}]{v2, }
+\item[{const {\bf C\-Pnt} \&}]{v3}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{util__contact_8h_a774fe41d28888a078993d8d3384c34d8}
+Returning the dihedral angle between 3 vectors in rad 

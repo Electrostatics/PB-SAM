@@ -160,9 +160,9 @@ readpqrAtoms( const char * fname, vector<CPnt> & pnt, vector<REAL> & ch,
 		if ( strncmp(&(buf[0] ),"ATOM",4) == 0)
 		{
 			// Find the coords, charge and radius from PQR
-			sscanf( &(buf[iCoord] ), "%lf %lf %lf", &x, &y, &z); // position
-			sscanf( &(buf[iCharge] ), "%lf", &c); // charge
-			sscanf( &(buf[iRad] ), "%lf", &r);
+			sscanf( &(buf[iCoord] ), "%lf %lf %lf %lf %lf", &x, &y, &z, &c, &r); // position
+		//	sscanf( &(buf[iCharge] ), "%lf", &c); // charge
+		//	sscanf( &(buf[iRad] ), "%lf", &r);
 			
 			// Add them to current list
 			pnt.push_back( CPnt(x,y,z ));

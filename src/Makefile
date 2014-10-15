@@ -56,9 +56,9 @@ findContacts:  $(FC_OBJS)	 Makefile
 	$(CC)  $(CFLAGS) -D__FC  $(FC_OBJS) $(LIB) $(LIBS) -o ../bin/findContacts
 
 pbsam: $(PB_OBJS) Makefile
-	rm -f $(BIN)/pbsam_20
-	$(CC) $(CFLAGS) $(PARAMS) $(PB_OBJS)  -o pbsam_20 $(LINK)
-	mv pbsam_20	 $(BIN)
+	rm -f $(BIN)/pbsam_15
+	$(CC) $(CFLAGS) $(PARAMS) $(PB_OBJS)  -o pbsam_15 $(LINK)
+	mv pbsam_15	 $(BIN)
 
 .cpp.o:
 	$(CC) $(CFLAGS) $(PARAMS) -c $<

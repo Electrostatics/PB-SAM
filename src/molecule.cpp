@@ -374,6 +374,7 @@ m_molcells(molcell)
   m_chg  = chg;
   m_cpos = cpos;
   resetPos(m_cpos, rcen);
+	int chg_size = chg.size();
   vector<int> clabel;
   assignCharges(cens_r, radii, m_cpos, clabel);
 	
@@ -1900,7 +1901,7 @@ CMolecule::polarize_self(bool bPot, int farFieldFreq)
   cout<<"self polarize with farfield freq = "<< farFieldFreq<<endl;	
   double  dev = 0.0;
   int ct;
-  const int MAX_POL_ROUNDS_SELF = 200;
+  const int MAX_POL_ROUNDS_SELF = 1700;
 	
   m_total = m_nks;
   REAL itot = 1.0/m_total;
