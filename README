@@ -4,7 +4,9 @@ the linearized Poisson Boltzmann equation, as described in Yap and Head-Gordon 2
 The src directory contains source code.  To make, open the makefile, change any
 libs or includes as needed and make as follows:
 
+	For make sphere, cd makesphere, then
 		make makesphere
+	For the rest, cd ../, then
 		make findContacts
 		make pbsam_30
 	## Before making any bd, edit the file expansion.h: #define N_POLES 10 
