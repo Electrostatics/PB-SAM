@@ -1,0 +1,24 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -cwd
+#$ -o selfpol.out
+#$ -j y
+#$ -pe orte 30
+
+POLE=10
+THREAD=30
+EXEC=$PBSAMHOME/working_code/PBSAM_all/bin/pbsam_10
+
+MOLDIR=$PBSAMHOME/working_code/PBSAM_all/test/1BRS
+
+SALT_CONC=0.05
+
+PQRFILE="$MOLDIR"/config/1BRS_chainD_p1.5d3_s5i1.pqr
+
+IMATPATH="$MOLDIR/DATA_s5i1/makeIMat/IMAT_P10_250k/chainD"
+EXPNAME=1BRS_D_s5i1_i"$SALT_CONC"_p"$POLE"
+
+LOGFILE=selfpol_"$EXPNAME".log
+$EXEC spol $THREAD $SALT_CONC  $PQRFILE $IMATPATH $EXPNAME> $LOGFILE 2>&1 
+
+

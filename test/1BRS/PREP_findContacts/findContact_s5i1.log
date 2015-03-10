@@ -1,0 +1,24 @@
+Chosing centers using atom contact list ...
+../config/1BRS_chainA.pqr: Total atoms: 1730 charged atoms: 1730, net charge: 2
+../config/1BRS_chainD.pqr: Total atoms: 1403 charged atoms: 1403, net charge: -5
+Centers1: 56
+Centers2: 49
+atom contacts read 8
+50 1.824 38 1.86265  3.68665
+16 1.73395 19 1.88139  3.61534
+53 1.6612 19 0.586938  2.24814
+34 0.913924 42 1.6612  2.57512
+54 1.824 23 0.163882  1.98788
+40 2.0014 26 1.80185  3.80326
+13 1.31536 33 1.73683  3.05219
+52 1.824 47 1.6612  3.4852
+Final Sphere List : 8
+50 38
+16 19
+53 19
+34 42
+54 23
+40 26
+13 33
+52 47
+total time taken [s] 0.033889

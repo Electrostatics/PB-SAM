@@ -1,0 +1,481 @@
+Building Surface Integral Matrices ...
+EPS_SOLVENT:78 EPS_IN: 4 KAPPA: 0.0737403
+N_POLES = 10
+SPHERE TOLERANCE ( for extracting charges ) = 0
+ NUM_POINTS_I 250000 NUM_POINTS_X 10000
+ MIN SEPDIST for using CXFormN 5
+Reading PQR file /home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/PREP_makeSpheres/chainD_ca_p1.5d3_s5i1.pqr
+/home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/PREP_makeSpheres/chainD_ca_p1.5d3_s5i1.pqr: atoms: 0, net charge: 0
+rcen = [34.4481,36.3204,5.30987]
+ =============== Molecule 0================
+SPE: exposed surface points 59456 SPB: buried surf pts 190544
+SPE: exposed surface points 24873 SPB: buried surf pts 225127
+SPE: exposed surface points 24656 SPB: buried surf pts 225344
+SPE: exposed surface points 43901 SPB: buried surf pts 206099
+SPE: exposed surface points 48748 SPB: buried surf pts 201252
+SPE: exposed surface points 61559 SPB: buried surf pts 188441
+SPE: exposed surface points 123218 SPB: buried surf pts 126782
+SPE: exposed surface points 55023 SPB: buried surf pts 194977
+SPE: exposed surface points 63447 SPB: buried surf pts 186553
+SPE: exposed surface points 32243 SPB: buried surf pts 217757
+SPE: exposed surface points 24203 SPB: buried surf pts 225797
+Sphere 46 CSolExpCenter by building own IMat
+Building Mat for sphere 46
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 40 CSolExpCenter by building own IMat
+Building Mat for sphere 40
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 63464 SPB: buried surf pts 186536
+Sphere 24 CSolExpCenter by building own IMat
+Building Mat for sphere 24
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 32 CSolExpCenter by building own IMat
+Building Mat for sphere 32
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 55363 SPB: buried surf pts 194637
+SPE: exposed surface points 84349 SPB: buried surf pts 165651
+SPE: exposed surface points 55420 SPB: buried surf pts 194580
+Sphere 16 CSolExpCenter by building own IMat
+Sphere 6 CSolExpCenter by building own IMat
+Building Mat for sphere 16
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 46054 SPB: buried surf pts 203946
+Building Mat for sphere 6
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 107870 SPB: buried surf pts 142130
+SPE: exposed surface points 13010 SPB: buried surf pts 236990
+SPE: exposed surface points 10170 SPB: buried surf pts 239830
+SPE: exposed surface points 77348 SPB: buried surf pts 172652
+SPE: exposed surface points 41673 SPB: buried surf pts 208327
+Sphere 51 CSolExpCenter by building own IMat
+Building Mat for sphere 51
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 69262 SPB: buried surf pts 180738
+Sphere 17 CSolExpCenter by building own IMat
+Building Mat for sphere 17
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 51522 SPB: buried surf pts 198478
+SPE: exposed surface points 79615 SPB: buried surf pts 170385
+SPE: exposed surface points 32649 SPB: buried surf pts 217351
+SPE: exposed surface points 61112 SPB: buried surf pts 188888
+SPE: exposed surface points 54336 SPB: buried surf pts 195664
+SPE: exposed surface points 105516 SPB: buried surf pts 144484
+SPE: exposed surface points 94196 SPB: buried surf pts 155804
+Sphere 29 CSolExpCenter by building own IMat
+Building Mat for sphere 29
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 15214 SPB: buried surf pts 234786
+SPE: exposed surface points 10554 SPB: buried surf pts 239446
+SPE: exposed surface points 23706 SPB: buried surf pts 226294
+SPE: exposed surface points 50939 SPB: buried surf pts 199061
+SPE: exposed surface points 58475 SPB: buried surf pts 191525
+SPE: exposed surface points 6037 SPB: buried surf pts 243963
+SPE: exposed surface points 27755 SPB: buried surf pts 222245
+SPE: exposed surface points 16665 SPB: buried surf pts 233335
+Sphere 31 CSolExpCenter by building own IMat
+Building Mat for sphere 31
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 58895 SPB: buried surf pts 191105
+Sphere 11 CSolExpCenter by building own IMat
+Building Mat for sphere 11
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 48 CSolExpCenter by building own IMat
+Sphere 49 CSolExpCenter by building own IMat
+Building Mat for sphere 48
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 49
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 35407 SPB: buried surf pts 214593
+SPE: exposed surface points 65987 SPB: buried surf pts 184013
+SPE: exposed surface points 78026 SPB: buried surf pts 171974
+SPE: exposed surface points 9859 SPB: buried surf pts 240141
+Sphere 35 CSolExpCenter by building own IMat
+Building Mat for sphere 35
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 38 CSolExpCenter by building own IMat
+Sphere 50 CSolExpCenter by building own IMat
+Building Mat for sphere 50
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 38
+ building ImatE  ... 
+Sphere 21 CSolExpCenter by building own IMat
+compute integral using exposed points
+Sphere 4 CSolExpCenter by building own IMat
+Building Mat for sphere 4
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 39 CSolExpCenter by building own IMat
+Building Mat for sphere 39
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 28748 SPB: buried surf pts 221252
+Sphere 8 CSolExpCenter by building own IMat
+Building Mat for sphere 21
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 45 CSolExpCenter by building own IMat
+Building Mat for sphere 45
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 8
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 43 CSolExpCenter by building own IMat
+Building Mat for sphere 43
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 17687 SPB: buried surf pts 232313
+Sphere 28 CSolExpCenter by building own IMat
+Building Mat for sphere 28
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 64908 SPB: buried surf pts 185092
+Sphere 10 CSolExpCenter by building own IMat
+Sphere 14 CSolExpCenter by building own IMat
+Sphere 44 CSolExpCenter by building own IMat
+Building Mat for sphere 44
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 9 CSolExpCenter by building own IMat
+Building Mat for sphere 14
+ building ImatE  ... 
+Sphere 18 CSolExpCenter by building own IMat
+compute integral using exposed points
+Sphere 15 CSolExpCenter by building own IMat
+Sphere 33 CSolExpCenter by building own IMat
+Building Mat for sphere 15
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 33
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 10
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 91087 SPB: buried surf pts 158913
+Sphere 22 CSolExpCenter by building own IMat
+Sphere 12 CSolExpCenter by building own IMat
+Building Mat for sphere 22
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 37 CSolExpCenter by building own IMat
+Sphere 23 CSolExpCenter by building own IMat
+Building Mat for sphere 37
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 41 CSolExpCenter by building own IMat
+Building Mat for sphere 41
+ Building Mat for sphere 18
+ building ImatE  ... 
+compute integral using exposed points
+building ImatE  ... 
+compute integral using exposed points
+Sphere 5 CSolExpCenter by building own IMat
+Building Mat for sphere 9
+ building ImatE  ... 
+Building Mat for sphere 23
+ building ImatE  ... 
+compute integral using exposed points
+compute integral using exposed points
+Sphere 3 CSolExpCenter by building own IMat
+SPE: exposed surface points 43193 SPB: buried surf pts 206807
+Sphere 2 CSolExpCenter by building own IMat
+Sphere 19 CSolExpCenter by building own IMat
+Sphere 30 CSolExpCenter by building own IMat
+Sphere 0 CSolExpCenter by building own IMat
+Building Mat for sphere 30
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 26 CSolExpCenter by building own IMat
+Sphere 25 CSolExpCenter by building own IMat
+Building Mat for sphere 26
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 86531 SPB: buried surf pts 163469
+SPE: exposed surface points 63565 SPB: buried surf pts 186435
+Building Mat for sphere 3
+ Building Mat for sphere 25
+ building ImatE  ... 
+compute integral using exposed points
+building ImatE  ... 
+compute integral using exposed points
+Sphere 20 CSolExpCenter by building own IMat
+Sphere 27 CSolExpCenter by building own IMat
+Sphere 7 CSolExpCenter by building own IMat
+Building Mat for sphere 5
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 12
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 27
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 7
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 36 CSolExpCenter by building own IMat
+Building Mat for sphere 36
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 0
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 19
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 34 CSolExpCenter by building own IMat
+Sphere 47 CSolExpCenter by building own IMat
+Building Mat for sphere 47
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 34
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 45542 SPB: buried surf pts 204458
+Building Mat for sphere 20
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 2
+ building ImatE  ... 
+compute integral using exposed points
+SPE: exposed surface points 69530 SPB: buried surf pts 180470
+SPE: exposed surface points 66831 SPB: buried surf pts 183169
+Sphere 1 CSolExpCenter by building own IMat
+Sphere 42 CSolExpCenter by building own IMat
+Building Mat for sphere 42
+ building ImatE  ... 
+compute integral using exposed points
+Sphere 13 CSolExpCenter by building own IMat
+Building Mat for sphere 13
+ building ImatE  ... 
+compute integral using exposed points
+Building Mat for sphere 1
+ building ImatE  ... 
+compute integral using exposed points
+Time taken to add integrals 0.224363
+Time taken to prepare Imat 0.224521
+After integral: VM: 1378.48; RSS: 161643
+Time taken to prepare imat [s] : 0.228053 
+Time taken to add integrals 0.373238
+Time taken to prepare Imat 0.373349
+After integral: VM: 1436.48; RSS: 160227
+Time taken to prepare imat [s] : 0.375436 
+Time taken to add integrals 0.363686
+Time taken to prepare Imat 0.363824
+After integral: VM: 1430.48; RSS: 158840
+Time taken to prepare imat [s] : 0.365747 
+Time taken to add integrals 0.389067
+Time taken to prepare Imat 0.389173
+After integral: VM: 1424.47; RSS: 157433
+Time taken to prepare imat [s] : 0.391027 
+Time taken to add integrals 0.43718
+Time taken to prepare Imat 0.437283
+After integral: VM: 1418.47; RSS: 156030
+Time taken to prepare imat [s] : 0.439065 
+Time taken to add integrals 0.479429
+Time taken to prepare Imat 0.479541
+After integral: VM: 1412.46; RSS: 154655
+Time taken to prepare imat [s] : 0.482588 
+Time taken to add integrals 0.743426
+Time taken to prepare Imat 0.743504
+After integral: VM: 1406.46; RSS: 153267
+Time taken to prepare imat [s] : 0.745250 
+Time taken to add integrals 0.604454
+Time taken to prepare Imat 0.604611
+After integral: VM: 1400.46; RSS: 151966
+Time taken to prepare imat [s] : 0.606580 
+Time taken to add integrals 0.687778
+Time taken to prepare Imat 0.687863
+After integral: VM: 1394.45; RSS: 150600
+Time taken to prepare imat [s] : 0.689819 
+Time taken to add integrals 0.640313
+Time taken to prepare Imat 0.64045
+After integral: VM: 1388.45; RSS: 149296
+Time taken to prepare imat [s] : 0.642419 
+Time taken to add integrals 0.895376
+Time taken to prepare Imat 0.895488
+After integral: VM: 1382.45; RSS: 147935
+Time taken to prepare imat [s] : 0.897278 
+Time taken to add integrals 0.85837
+Time taken to prepare Imat 0.858478
+After integral: VM: 1376.44; RSS: 146616
+Time taken to prepare imat [s] : 0.860204 
+Time taken to add integrals 0.921274
+Time taken to prepare Imat 0.921355
+After integral: VM: 1370.44; RSS: 145290
+Time taken to prepare imat [s] : 0.923111 
+Time taken to add integrals 0.992182
+Time taken to prepare Imat 0.992314
+After integral: VM: 1364.43; RSS: 144012
+Time taken to prepare imat [s] : 0.994249 
+Time taken to add integrals 1.0204
+Time taken to prepare Imat 1.02048
+After integral: VM: 1358.43; RSS: 142710
+Time taken to prepare imat [s] : 1.022059 
+Time taken to add integrals 1.14401
+Time taken to prepare Imat 1.14411
+After integral: VM: 1352.43; RSS: 141438
+Time taken to prepare imat [s] : 1.146201 
+Time taken to add integrals 1.25483
+Time taken to prepare Imat 1.25495
+After integral: VM: 1346.42; RSS: 140163
+Time taken to prepare imat [s] : 1.256637 
+Time taken to add integrals 1.21725
+Time taken to prepare Imat 1.21735
+After integral: VM: 1340.42; RSS: 138956
+Time taken to prepare imat [s] : 1.219076 
+Time taken to add integrals 1.35371
+Time taken to prepare Imat 1.35381
+After integral: VM: 1334.41; RSS: 137699
+Time taken to prepare imat [s] : 1.355595 
+Time taken to add integrals 1.28344
+Time taken to prepare Imat 1.28352
+After integral: VM: 1328.41; RSS: 136520
+Time taken to prepare imat [s] : 1.285323 
+Time taken to add integrals 1.41634
+Time taken to prepare Imat 1.41642
+After integral: VM: 1322.41; RSS: 135300
+Time taken to prepare imat [s] : 1.418530 
+Time taken to add integrals 1.50941
+Time taken to prepare Imat 1.5095
+After integral: VM: 1316.4; RSS: 134106
+Time taken to prepare imat [s] : 1.511365 
+Time taken to add integrals 1.45748
+Time taken to prepare Imat 1.45765
+After integral: VM: 1310.4; RSS: 132982
+Time taken to prepare imat [s] : 1.459977 
+Time taken to add integrals 1.54441
+Time taken to prepare Imat 1.54449
+After integral: VM: 1304.39; RSS: 131295
+Time taken to prepare imat [s] : 1.546600 
+Time taken to add integrals 1.52332
+Time taken to prepare Imat 1.52339
+After integral: VM: 1296.89; RSS: 129830
+Time taken to prepare imat [s] : 1.525007 
+Time taken to add integrals 1.69878
+Time taken to prepare Imat 1.69886
+After integral: VM: 1290.88; RSS: 128633
+Time taken to prepare imat [s] : 1.700409 
+Time taken to add integrals 1.64672
+Time taken to prepare Imat 1.6468
+After integral: VM: 1284.88; RSS: 127529
+Time taken to prepare imat [s] : 1.648449 
+Time taken to add integrals 1.64833
+Time taken to prepare Imat 1.64843
+After integral: VM: 1278.88; RSS: 126367
+Time taken to prepare imat [s] : 1.650017 
+Time taken to add integrals 1.71476
+Time taken to prepare Imat 1.71485
+After integral: VM: 1272.87; RSS: 125201
+Time taken to prepare imat [s] : 1.716575 
+Time taken to add integrals 1.77215
+Time taken to prepare Imat 1.77223
+After integral: VM: 1266.87; RSS: 124055
+Time taken to prepare imat [s] : 1.773847 
+Time taken to add integrals 1.84762
+Time taken to prepare Imat 1.8477
+After integral: VM: 1260.86; RSS: 122915
+Time taken to add integrals 1.72217
+Time taken to prepare Imat 1.72224
+Time taken to prepare imat [s] : 1.849320 
+After integral: VM: 1260.86; RSS: 122916
+Time taken to prepare imat [s] : 1.723783 
+Time taken to add integrals 1.73717
+Time taken to prepare Imat 1.73749
+After integral: VM: 1248.86; RSS: 120730
+Time taken to prepare imat [s] : 1.739097 
+Time taken to add integrals 1.90836
+Time taken to prepare Imat 1.90843
+After integral: VM: 1242.85; RSS: 119611
+Time taken to prepare imat [s] : 1.910085 
+Time taken to add integrals 1.78849
+Time taken to prepare Imat 1.78861
+After integral: VM: 1236.85; RSS: 118514
+Time taken to prepare imat [s] : 1.790608 
+Time taken to add integrals 1.87368
+Time taken to prepare Imat 1.87376
+After integral: VM: 1230.84; RSS: 117408
+Time taken to prepare imat [s] : 1.875235 
+Time taken to add integrals 1.84495
+Time taken to prepare Imat 1.84502
+After integral: VM: 1224.84; RSS: 116316
+Time taken to prepare imat [s] : 1.846551 
+Time taken to add integrals 1.91917
+Time taken to prepare Imat 1.91925
+After integral: VM: 1218.84; RSS: 115194
+Time taken to prepare imat [s] : 1.920928 
+Time taken to add integrals 1.99844
+Time taken to prepare Imat 1.99852
+After integral: VM: 1212.83; RSS: 114135
+Time taken to prepare imat [s] : 2.000669 
+Time taken to add integrals 2.01789
+Time taken to prepare Imat 2.01798
+After integral: VM: 1206.83; RSS: 113051
+Time taken to prepare imat [s] : 2.019715 
+Time taken to add integrals 1.99953
+Time taken to prepare Imat 1.9996
+After integral: VM: 1200.82; RSS: 111973
+Time taken to prepare imat [s] : 2.001588 
+Time taken to add integrals 2.02992
+Time taken to prepare Imat 2.03
+After integral: VM: 1194.82; RSS: 110540
+Time taken to prepare imat [s] : 2.031933 
+Time taken to add integrals 2.13168
+Time taken to prepare Imat 2.13177
+After integral: VM: 1188.82; RSS: 109467
+Time taken to prepare imat [s] : 2.133707 
+Time taken to add integrals 2.30012
+Time taken to prepare Imat 2.3002
+After integral: VM: 1179.81; RSS: 108002
+Time taken to prepare imat [s] : 2.302363 
+Time taken to add integrals 2.27167
+Time taken to prepare Imat 2.27175
+After integral: VM: 1173.8; RSS: 106991
+Time taken to prepare imat [s] : 2.273677 
+Time taken to add integrals 2.37374
+Time taken to prepare Imat 2.37382
+After integral: VM: 1167.8; RSS: 105984
+Time taken to prepare imat [s] : 2.375441 
+Time taken to add integrals 2.42857
+Time taken to prepare Imat 2.42869
+After integral: VM: 1161.8; RSS: 105032
+Time taken to prepare imat [s] : 2.430698 
+Time taken to add integrals 2.48967
+Time taken to prepare Imat 2.48975
+After integral: VM: 1155.79; RSS: 104075
+Time taken to prepare imat [s] : 2.491323 
+Time taken to add integrals 2.57073
+Time taken to prepare Imat 2.57082
+After integral: VM: 1149.79; RSS: 103163
+Time taken to prepare imat [s] : 2.572779 
+Time taken to add integrals 2.8307
+Time taken to prepare Imat 2.83078
+After integral: VM: 1143.79; RSS: 102232
+Time taken to prepare imat [s] : 2.833138 
+Time taken to add integrals 2.8566
+Time taken to prepare Imat 2.85671
+After integral: VM: 1137.78; RSS: 101418
+Time taken to prepare imat [s] : 2.859050 
+Time taken to add integrals 3.32845
+Time taken to prepare Imat 3.32853
+After integral: VM: 1131.78; RSS: 100572
+Time taken to prepare imat [s] : 3.330426 
+Molecule constructed.
+ ==========================================
+Total Time to compute Imat [s] = 3.99267

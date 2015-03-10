@@ -1,0 +1,896 @@
+/home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/config/1BRS_chainA.pqr: Total atoms: 1730 charged atoms: 1730, net charge: 2
+/home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/config/1BRS_chainD.pqr: Total atoms: 1403 charged atoms: 1403, net charge: -5
+Atoms: 1730
+Contact Atoms: 108
+14925 surface points read!!
+estimated center from mol surface: [20.728,44.5002,12.2919]
+No. of Interface Vert Points: 1165 No. of NonInterface Vert Points: 13760
+Finding center no. 0:
+trial 0: center = [15.8219,43.0717,13.0267] bound points :606 606
+trial 1: center = [15.204,42.9802,12.0508] bound points :605 605
+trial 2: center = [14.2401,41.3065,9.99149] bound points :575 575
+trial 3: center = [15.246,43.0496,12.1724] bound points :606 606
+trial 4: center = [15.2413,43.0138,12.1223] bound points :608 608
+trial 5: center = [16.0626,43.4666,14.1092] bound points :607 607
+trial 6: center = [29.4167,49.2449,20.4201] bound points :276 276
+trial 7: center = [16.1725,43.1607,13.7854] bound points :598 598
+trial 8: center = [15.8403,43.3262,13.5932] bound points :602 602
+trial 9: center = [15.2469,43.0217,12.186] bound points :607 607
+  Chosen center : [15.2413,43.0138,12.1223] radius : 12.5687
+  0) points bounded : 608  points remaining : 1122
+Finding center no. 1:
+trial 0: center = [29.4945,49.3311,20.4141] bound points :275 275
+trial 1: center = [29.5687,49.3665,20.454] bound points :275 275
+trial 2: center = [29.6921,49.392,20.4966] bound points :270 270
+trial 3: center = [29.4221,49.249,20.3819] bound points :271 271
+trial 4: center = [12.6935,42.4684,2.72349] bound points :130 130
+trial 5: center = [13.5582,40.7058,6.8989] bound points :136 136
+trial 6: center = [29.4081,49.1652,20.351] bound points :272 272
+trial 7: center = [29.4957,49.3605,20.4609] bound points :275 275
+trial 8: center = [29.4582,49.3584,20.4565] bound points :272 272
+trial 9: center = [29.7893,49.4427,20.6029] bound points :270 270
+  Chosen center : [29.4945,49.3311,20.4141] radius : 10.292
+  1) points bounded : 275  points remaining : 847
+Finding center no. 2:
+trial 0: center = [11.1291,50.562,14.2299] bound points :82 82
+trial 1: center = [11.2222,50.6873,14.538] bound points :83 83
+trial 2: center = [13.5188,40.3526,8.0639] bound points :131 131
+trial 3: center = [36.3613,48.6515,19.7491] bound points :47 47
+trial 4: center = [13.1169,41.6232,4.50171] bound points :133 133
+trial 5: center = [13.6414,40.7991,6.09873] bound points :137 137
+trial 6: center = [13.5177,40.9952,5.75229] bound points :136 136
+trial 7: center = [13.4378,41.0869,5.43882] bound points :137 137
+trial 8: center = [29.5605,53.3585,13.763] bound points :66 66
+trial 9: center = [36.6562,48.1317,19.7884] bound points :47 47
+  Chosen center : [13.6414,40.7991,6.09873] radius : 11.404
+  2) points bounded : 137  points remaining : 710
+Finding center no. 3:
+trial 0: center = [18.0746,44.2945,16.4111] bound points :91 91
+trial 1: center = [19.3009,48.7632,25.2644] bound points :62 62
+trial 2: center = [11.732,50.6514,15.0433] bound points :82 82
+trial 3: center = [11.1411,50.6726,14.5339] bound points :82 82
+trial 4: center = [18.7445,47.35,2.80443] bound points :38 38
+trial 5: center = [11.7194,50.373,14.7744] bound points :82 82
+trial 6: center = [18.6044,47.2149,2.88223] bound points :38 38
+trial 7: center = [19.5605,34.6358,10.423] bound points :54 54
+trial 8: center = [29.6571,53.4876,13.2863] bound points :66 66
+trial 9: center = [17.8218,44.4977,15.8886] bound points :92 92
+  Chosen center : [17.8218,44.4977,15.8886] radius : 12.4104
+  3) points bounded : 92  points remaining : 618
+Finding center no. 4:
+trial 0: center = [28.6531,53.289,13.0292] bound points :65 65
+trial 1: center = [11.4062,44.0659,-5.32121] bound points :53 53
+trial 2: center = [28.7294,53.2694,13.0966] bound points :65 65
+trial 3: center = [19.5076,34.8896,10.4723] bound points :52 52
+trial 4: center = [11.0138,44.1932,-5.30218] bound points :53 53
+trial 5: center = [28.7793,53.3314,13.1528] bound points :65 65
+trial 6: center = [18.068,52.5829,26.2803] bound points :38 38
+trial 7: center = [11.4811,44.2499,-5.47534] bound points :53 53
+trial 8: center = [19.6231,34.592,10.3942] bound points :53 53
+trial 9: center = [10.4932,49.6819,13.4463] bound points :72 72
+  Chosen center : [10.4932,49.6819,13.4463] radius : 10.4379
+  4) points bounded : 72  points remaining : 546
+Finding center no. 5:
+trial 0: center = [28.1536,43.9196,21.918] bound points :24 24
+trial 1: center = [36.4145,48.1098,19.7111] bound points :47 47
+trial 2: center = [36.6288,48.1194,19.6728] bound points :47 47
+trial 3: center = [19.5259,34.6883,10.4496] bound points :52 52
+trial 4: center = [19.6565,34.3041,10.3006] bound points :51 51
+trial 5: center = [36.668,48.4145,19.6248] bound points :47 47
+trial 6: center = [18.1761,51.7414,26.363] bound points :37 37
+trial 7: center = [29.2593,53.0439,14.2231] bound points :64 64
+trial 8: center = [28.7331,53.199,13.1418] bound points :65 65
+trial 9: center = [18.4042,52.7147,26.2727] bound points :38 38
+  Chosen center : [28.7331,53.199,13.1418] radius : 8.50782
+  5) points bounded : 65  points remaining : 481
+Finding center no. 6:
+trial 0: center = [19.5988,34.5092,10.4518] bound points :54 54
+trial 1: center = [19.7387,34.6735,10.3349] bound points :51 51
+trial 2: center = [19.7965,33.2908,9.84792] bound points :48 48
+trial 3: center = [36.723,48.2667,19.7587] bound points :47 47
+trial 4: center = [19.6185,34.5725,10.3761] bound points :54 54
+trial 5: center = [24.407,41.8138,-0.960931] bound points :14 14
+trial 6: center = [18.6571,47.415,2.62993] bound points :37 37
+trial 7: center = [28.399,43.9513,22.1782] bound points :24 24
+trial 8: center = [18.6844,47.1932,2.83977] bound points :38 38
+trial 9: center = [11.8147,44.2662,-5.44185] bound points :53 53
+  Chosen center : [19.5988,34.5092,10.4518] radius : 7.97889
+  6) points bounded : 54  points remaining : 427
+Finding center no. 7:
+trial 0: center = [36.6585,48.3718,19.6584] bound points :47 47
+trial 1: center = [11.7027,44.1194,-5.29041] bound points :53 53
+trial 2: center = [18.7605,47.3072,2.80168] bound points :38 38
+trial 3: center = [27.8713,43.7646,21.4974] bound points :23 23
+trial 4: center = [11.7501,44.4005,-5.2849] bound points :53 53
+trial 5: center = [36.476,48.4769,19.7668] bound points :47 47
+trial 6: center = [36.4167,48.2508,20.104] bound points :47 47
+trial 7: center = [26.1423,39.4071,-1.0522] bound points :11 11
+trial 8: center = [28.2405,44.0168,21.8862] bound points :24 24
+trial 9: center = [24.4811,41.9013,-1.05916] bound points :14 14
+  Chosen center : [11.7027,44.1194,-5.29041] radius : 7.60366
+  7) points bounded : 53  points remaining : 374
+Finding center no. 8:
+trial 0: center = [18.2489,52.3046,26.2624] bound points :38 38
+trial 1: center = [18.4084,31.1715,5.86215] bound points :16 16
+trial 2: center = [18.7692,47.2862,2.76799] bound points :38 38
+trial 3: center = [18.1546,52.2827,26.3781] bound points :38 38
+trial 4: center = [36.3007,48.2147,19.7493] bound points :47 47
+trial 5: center = [36.478,48.0718,19.822] bound points :47 47
+trial 6: center = [18.4596,32.842,0.128693] bound points :29 29
+trial 7: center = [36.1214,48.5943,20.0665] bound points :47 47
+trial 8: center = [18.282,52.4445,26.2451] bound points :38 38
+trial 9: center = [18.2631,32.8021,0.252273] bound points :29 29
+  Chosen center : [36.3007,48.2147,19.7493] radius : 7.73389
+  8) points bounded : 47  points remaining : 327
+Finding center no. 9:
+trial 0: center = [18.2333,32.9205,0.233818] bound points :29 29
+trial 1: center = [18.0341,52.6391,26.3421] bound points :38 38
+trial 2: center = [24.3211,42.0468,-0.498852] bound points :13 13
+trial 3: center = [18.2914,32.8723,0.357175] bound points :29 29
+trial 4: center = [18.2139,52.1088,26.7797] bound points :37 37
+trial 5: center = [19.4446,52.5247,26.8572] bound points :37 37
+trial 6: center = [18.7356,47.248,2.80985] bound points :38 38
+trial 7: center = [18.6505,47.2883,2.8555] bound points :38 38
+trial 8: center = [18.0296,33.0825,-0.134037] bound points :28 28
+trial 9: center = [28.4923,43.746,21.9437] bound points :23 23
+  Chosen center : [18.0341,52.6391,26.3421] radius : 7.16244
+  9) points bounded : 38  points remaining : 289
+Finding center no. 10:
+trial 0: center = [18.4531,32.7892,0.194485] bound points :29 29
+trial 1: center = [24.5277,41.6809,-1.01701] bound points :13 13
+trial 2: center = [28.4294,43.949,22.2636] bound points :23 23
+trial 3: center = [18.2731,32.9795,0.344909] bound points :29 29
+trial 4: center = [18.6659,47.2974,2.77199] bound points :38 38
+trial 5: center = [18.7133,47.343,2.72847] bound points :38 38
+trial 6: center = [18.3607,32.8595,0.113232] bound points :29 29
+trial 7: center = [28.3423,44.0235,21.9794] bound points :24 24
+trial 8: center = [18.2823,33.1533,-0.00728094] bound points :28 28
+trial 9: center = [18.6841,47.2778,2.66106] bound points :38 38
+  Chosen center : [18.6659,47.2974,2.77199] radius : 7.28056
+  10) points bounded : 38  points remaining : 251
+Finding center no. 11:
+trial 0: center = [28.1123,43.7734,21.8872] bound points :24 24
+trial 1: center = [28.1594,43.9814,21.9727] bound points :24 24
+trial 2: center = [18.3893,32.884,0.203996] bound points :29 29
+trial 3: center = [11.4242,42.6318,3.27542] bound points :9 9
+trial 4: center = [28.1671,43.8121,21.8388] bound points :24 24
+trial 5: center = [27.8369,43.8767,21.575] bound points :23 23
+trial 6: center = [27.5834,43.8407,21.3137] bound points :24 24
+trial 7: center = [18.0762,33.2975,0.232496] bound points :28 28
+trial 8: center = [24.5153,41.8529,-0.963549] bound points :13 13
+trial 9: center = [28.1615,43.6714,21.8288] bound points :24 24
+  Chosen center : [18.3893,32.884,0.203996] radius : 6.45165
+  11) points bounded : 29  points remaining : 222
+Finding center no. 12:
+trial 0: center = [28.2122,43.9052,21.9875] bound points :24 24
+trial 1: center = [28.1389,43.5157,21.7355] bound points :23 23
+trial 2: center = [28.3981,43.9438,22.0382] bound points :24 24
+trial 3: center = [28.242,43.9136,21.9172] bound points :24 24
+trial 4: center = [28.3639,43.9205,22.1487] bound points :24 24
+trial 5: center = [24.5219,41.8951,-0.980363] bound points :13 13
+trial 6: center = [28.4548,44.0447,22.2733] bound points :23 23
+trial 7: center = [18.9836,30.9228,6.70211] bound points :12 12
+trial 8: center = [26.1577,39.3443,-1.15504] bound points :11 11
+trial 9: center = [24.1801,42.0098,-0.444758] bound points :13 13
+  Chosen center : [28.2122,43.9052,21.9875] radius : 8.26801
+  12) points bounded : 24  points remaining : 198
+Finding center no. 13:
+trial 0: center = [19.3553,30.1102,6.5428] bound points :12 12
+trial 1: center = [19.784,29.9815,6.54614] bound points :12 12
+trial 2: center = [24.1829,48.4041,12.6877] bound points :14 14
+trial 3: center = [39.4941,39.7982,21.2843] bound points :7 7
+trial 4: center = [26.185,39.315,-0.992922] bound points :11 11
+trial 5: center = [38.4117,40.7649,20.8235] bound points :7 7
+trial 6: center = [11.0009,46.38,5.7981] bound points :9 9
+trial 7: center = [24.0097,48.1681,12.3678] bound points :14 14
+trial 8: center = [18.5761,30.4433,6.51256] bound points :12 12
+trial 9: center = [23.5944,47.9928,12.1173] bound points :14 14
+  Chosen center : [24.1829,48.4041,12.6877] radius : 8.61249
+  13) points bounded : 14  points remaining : 184
+Finding center no. 14:
+trial 0: center = [21.6172,42.3835,18.1272] bound points :13 13
+trial 1: center = [24.5218,41.9876,-1.04903] bound points :12 12
+trial 2: center = [24.4237,41.8176,-0.964868] bound points :13 13
+trial 3: center = [24.3992,41.8922,-1.02017] bound points :13 13
+trial 4: center = [19.1418,29.9561,6.75826] bound points :12 12
+trial 5: center = [38.4182,40.7097,21.3874] bound points :7 7
+trial 6: center = [24.4214,41.8967,-0.94846] bound points :13 13
+trial 7: center = [22.5691,35.4125,11.0339] bound points :11 11
+trial 8: center = [21.6133,42.389,18.2816] bound points :13 13
+trial 9: center = [37.0296,42.8392,20.7604] bound points :7 7
+  Chosen center : [21.6172,42.3835,18.1272] radius : 10.0617
+  14) points bounded : 13  points remaining : 171
+Finding center no. 15:
+trial 0: center = [37.1152,42.5237,20.9001] bound points :8 8
+trial 1: center = [24.4528,41.6329,-1.08433] bound points :12 12
+trial 2: center = [22.5678,35.4413,11.0414] bound points :11 11
+trial 3: center = [24.2317,42.0342,-0.344855] bound points :13 13
+trial 4: center = [26.1705,39.5174,-1.3359] bound points :12 12
+trial 5: center = [24.4908,41.6659,-1.09064] bound points :12 12
+trial 6: center = [26.093,39.3806,-1.1315] bound points :11 11
+trial 7: center = [19.7092,29.8072,6.65715] bound points :12 12
+trial 8: center = [37.6776,40.8702,20.7504] bound points :8 8
+trial 9: center = [18.6082,30.753,6.68057] bound points :12 12
+  Chosen center : [24.2317,42.0342,-0.344855] radius : 4.13579
+  15) points bounded : 13  points remaining : 158
+Finding center no. 16:
+trial 0: center = [22.4022,35.5744,11.0557] bound points :12 12
+trial 1: center = [35.5576,44.4355,14.1338] bound points :4 4
+trial 2: center = [26.3422,39.279,-1.01064] bound points :9 9
+trial 3: center = [32.941,53.9728,14.7027] bound points :8 8
+trial 4: center = [19.203,30.7923,6.51662] bound points :12 12
+trial 5: center = [32.8677,53.8546,14.5348] bound points :8 8
+trial 6: center = [19.1068,30.7491,6.63504] bound points :12 12
+trial 7: center = [39.0419,40.2005,20.8354] bound points :7 7
+trial 8: center = [32.6299,53.796,14.0826] bound points :8 8
+trial 9: center = [10.3066,48.2311,2.37988] bound points :9 9
+  Chosen center : [22.4022,35.5744,11.0557] radius : 6.816
+  16) points bounded : 12  points remaining : 146
+Finding center no. 17:
+trial 0: center = [34.3305,53.6686,15.0899] bound points :8 8
+trial 1: center = [19.5363,30.4799,6.79912] bound points :12 12
+trial 2: center = [18.8447,53.3112,19.0351] bound points :6 6
+trial 3: center = [10.0742,44.9802,4.02805] bound points :9 9
+trial 4: center = [26.1456,39.5387,-1.35582] bound points :10 10
+trial 5: center = [26.0932,39.331,-1.05473] bound points :9 9
+trial 6: center = [19.7106,30.4602,6.73589] bound points :12 12
+trial 7: center = [27.0483,43.514,15.8407] bound points :8 8
+trial 8: center = [10.2648,45.7436,1.60821] bound points :9 9
+trial 9: center = [28.0409,34.8705,10.2267] bound points :5 5
+  Chosen center : [19.5363,30.4799,6.79912] radius : 5.6548
+  17) points bounded : 12  points remaining : 134
+Finding center no. 18:
+trial 0: center = [10.0119,49.4067,2.45129] bound points :9 9
+trial 1: center = [33.1209,53.902,14.2694] bound points :8 8
+trial 2: center = [38.4433,41.2429,21.7322] bound points :7 7
+trial 3: center = [24.9723,44.6557,17.3893] bound points :7 7
+trial 4: center = [26.0738,39.3483,-1.10329] bound points :9 9
+trial 5: center = [24.1188,28.5648,7.39256] bound points :5 5
+trial 6: center = [11.2641,49.1197,2.47572] bound points :9 9
+trial 7: center = [24.1421,33.0907,-0.698439] bound points :6 6
+trial 8: center = [23.9968,28.9596,7.30354] bound points :5 5
+trial 9: center = [18.3656,54.0646,20.6077] bound points :6 6
+  Chosen center : [10.0119,49.4067,2.45129] radius : 6.3657
+  18) points bounded : 9  points remaining : 125
+Finding center no. 19:
+trial 0: center = [24.1748,28.7477,7.31376] bound points :5 5
+trial 1: center = [28.8692,34.6695,10.049] bound points :4 4
+trial 2: center = [25.8201,42.9499,16.3589] bound points :7 7
+trial 3: center = [38.8272,40.0477,21.385] bound points :7 7
+trial 4: center = [26.3217,39.3235,-0.982844] bound points :9 9
+trial 5: center = [27.0771,44.2681,16.0813] bound points :8 8
+trial 6: center = [26.0139,39.549,-1.38205] bound points :9 9
+trial 7: center = [12.8489,30.9626,8.65504] bound points :5 5
+trial 8: center = [23.6482,39.7206,24.7529] bound points :2 2
+trial 9: center = [26.3182,39.3019,-0.895195] bound points :9 9
+  Chosen center : [26.3217,39.3235,-0.982844] radius : 3.50889
+  19) points bounded : 9  points remaining : 116
+Finding center no. 20:
+trial 0: center = [33.6292,53.7777,14.9366] bound points :8 8
+trial 1: center = [24.2399,28.8799,7.49547] bound points :5 5
+trial 2: center = [31.2285,54.634,16.7618] bound points :6 6
+trial 3: center = [36.042,40.6574,20.4573] bound points :7 7
+trial 4: center = [37.0565,42.8252,21.0397] bound points :8 8
+trial 5: center = [23.642,34.158,-1.30318] bound points :5 5
+trial 6: center = [8.24781,46.0109,-6.45162] bound points :0 0
+trial 7: center = [24.3656,33.1952,-0.488785] bound points :5 5
+trial 8: center = [37.0378,42.7871,20.9694] bound points :8 8
+trial 9: center = [36.9242,42.3679,20.7035] bound points :8 8
+  Chosen center : [33.6292,53.7777,14.9366] radius : 7.90113
+  20) points bounded : 8  points remaining : 108
+Finding center no. 21:
+trial 0: center = [28.0099,42.4232,-0.379648] bound points :5 5
+trial 1: center = [15.8564,39.8167,11.1607] bound points :6 6
+trial 2: center = [25.6488,45.8139,17.546] bound points :7 7
+trial 3: center = [24.3578,33.063,-0.467876] bound points :5 5
+trial 4: center = [38.4022,40.7487,21.4656] bound points :7 7
+trial 5: center = [18.8029,55.4861,21.1077] bound points :6 6
+trial 6: center = [18.5951,52.5315,19.3897] bound points :6 6
+trial 7: center = [14.8794,38.4747,7.81393] bound points :6 6
+trial 8: center = [24.7477,44.1919,17.4865] bound points :7 7
+trial 9: center = [22.0984,34.2009,-1.62474] bound points :4 4
+  Chosen center : [25.6488,45.8139,17.546] radius : 9.28149
+  21) points bounded : 7  points remaining : 101
+Finding center no. 22:
+trial 0: center = [19.0159,53.2784,19.4585] bound points :6 6
+trial 1: center = [24.1044,33.0366,-0.642207] bound points :5 5
+trial 2: center = [25.7032,42.5666,27.4302] bound points :2 2
+trial 3: center = [15.9427,39.4425,11.3239] bound points :7 7
+trial 4: center = [27.8765,41.6891,-0.519839] bound points :6 6
+trial 5: center = [23.821,33.3585,-0.960203] bound points :5 5
+trial 6: center = [29.0232,34.6682,10.0402] bound points :4 4
+trial 7: center = [24.2663,32.9408,-0.634241] bound points :5 5
+trial 8: center = [23.7502,33.3473,-0.98396] bound points :5 5
+trial 9: center = [28.077,42.1373,-0.390726] bound points :5 5
+  Chosen center : [15.9427,39.4425,11.3239] radius : 11.3072
+  22) points bounded : 7  points remaining : 94
+Finding center no. 23:
+trial 0: center = [24.0913,33.1124,-0.681949] bound points :6 6
+trial 1: center = [24.1607,28.7694,7.20648] bound points :5 5
+trial 2: center = [27.842,41.5082,-0.500047] bound points :5 5
+trial 3: center = [19.8813,52.9828,20.1621] bound points :6 6
+trial 4: center = [36.9983,42.7871,20.7518] bound points :8 8
+trial 5: center = [24.159,33.0866,-0.715707] bound points :6 6
+trial 6: center = [24.2327,32.8943,-0.305289] bound points :5 5
+trial 7: center = [17.9973,54.9691,20.5343] bound points :6 6
+trial 8: center = [24.0007,28.9718,7.29118] bound points :5 5
+trial 9: center = [9.73594,41.1802,14.6622] bound points :2 2
+  Chosen center : [36.9983,42.7871,20.7518] radius : 5.71379
+  23) points bounded : 8  points remaining : 86
+Finding center no. 24:
+trial 0: center = [28.272,41.8419,-0.604941] bound points :5 5
+trial 1: center = [21.9686,39.1576,-0.555118] bound points :5 5
+trial 2: center = [34.3403,39.6709,20.2847] bound points :6 6
+trial 3: center = [34.0764,39.5806,20.3191] bound points :7 7
+trial 4: center = [38.1833,43.2079,17.147] bound points :4 4
+trial 5: center = [27.9645,35.0122,10.1754] bound points :4 4
+trial 6: center = [23.7949,33.0497,-0.770146] bound points :5 5
+trial 7: center = [23.6481,34.0574,-1.27071] bound points :5 5
+trial 8: center = [24.1006,32.9789,-0.774491] bound points :6 6
+trial 9: center = [21.9656,39.149,-0.573919] bound points :5 5
+  Chosen center : [34.0764,39.5806,20.3191] radius : 3.90486
+  24) points bounded : 7  points remaining : 79
+Finding center no. 25:
+trial 0: center = [21.8596,39.2445,-0.539106] bound points :5 5
+trial 1: center = [27.6586,41.6086,-0.493053] bound points :5 5
+trial 2: center = [24.4865,28.2445,7.33749] bound points :5 5
+trial 3: center = [27.8802,41.6063,-0.543025] bound points :6 6
+trial 4: center = [24.0861,28.7345,7.38522] bound points :5 5
+trial 5: center = [28.0752,34.8217,10.208] bound points :5 5
+trial 6: center = [8.74624,40.8752,19.1872] bound points :2 2
+trial 7: center = [24.4605,28.4424,7.41884] bound points :5 5
+trial 8: center = [23.8964,33.1835,-0.757128] bound points :5 5
+trial 9: center = [27.7079,41.7732,-0.28913] bound points :5 5
+  Chosen center : [27.8802,41.6063,-0.543025] radius : 3.08585
+  25) points bounded : 6  points remaining : 73
+Finding center no. 26:
+trial 0: center = [39.6876,42.0589,15.8901] bound points :5 5
+trial 1: center = [19.1184,52.8438,20.8921] bound points :6 6
+trial 2: center = [35.4722,44.5177,14.6271] bound points :4 4
+trial 3: center = [24.043,33.0256,-0.731231] bound points :5 5
+trial 4: center = [24.0246,28.7945,7.27951] bound points :5 5
+trial 5: center = [21.937,39.1365,-0.596627] bound points :5 5
+trial 6: center = [5.79332,43.1387,-5.04088] bound points :0 0
+trial 7: center = [19.3085,54.7042,19.7806] bound points :6 6
+trial 8: center = [24.2596,28.9113,7.59401] bound points :5 5
+trial 9: center = [24.3304,43.5146,27.6532] bound points :2 2
+  Chosen center : [19.1184,52.8438,20.8921] radius : 6.75971
+  26) points bounded : 6  points remaining : 67
+Finding center no. 27:
+trial 0: center = [24.5424,28.3223,7.1828] bound points :5 5
+trial 1: center = [24.112,33.0508,-0.651308] bound points :6 6
+trial 2: center = [22.9169,43.5213,27.1634] bound points :2 2
+trial 3: center = [24.8832,33.3229,15.2182] bound points :3 3
+trial 4: center = [23.8193,40.8567,25.8096] bound points :2 2
+trial 5: center = [24.6742,43.0397,24.591] bound points :2 2
+trial 6: center = [14.6974,44.4892,15.6232] bound points :2 2
+trial 7: center = [25.1459,34.0351,14.58] bound points :3 3
+trial 8: center = [39.5689,42.3388,15.9899] bound points :5 5
+trial 9: center = [35.2458,43.9449,13.9836] bound points :4 4
+  Chosen center : [24.112,33.0508,-0.651308] radius : 3.40183
+  27) points bounded : 6  points remaining : 61
+Finding center no. 28:
+trial 0: center = [9.58748,42.5675,14.6121] bound points :2 2
+trial 1: center = [24.3795,28.4214,7.41146] bound points :5 5
+trial 2: center = [38.8852,39.421,22.1452] bound points :2 2
+trial 3: center = [23.694,37.3587,-1.62896] bound points :4 4
+trial 4: center = [27.7178,48.1716,10.742] bound points :1 1
+trial 5: center = [23.9234,28.8725,7.26353] bound points :5 5
+trial 6: center = [35.1363,44.0176,13.9399] bound points :4 4
+trial 7: center = [9.32098,38.64,20.6318] bound points :1 1
+trial 8: center = [24.2871,34.223,14.5565] bound points :3 3
+trial 9: center = [31.3575,47.3499,8.64794] bound points :1 1
+  Chosen center : [24.3795,28.4214,7.41146] radius : 3.12641
+  28) points bounded : 5  points remaining : 56
+Finding center no. 29:
+trial 0: center = [36.9726,48.163,23.6408] bound points :0 0
+trial 1: center = [26.4289,43.4579,25.5491] bound points :2 2
+trial 2: center = [24.5788,34.2924,14.4827] bound points :3 3
+trial 3: center = [12.2063,50.279,-6.36729] bound points :0 0
+trial 4: center = [22.3178,39.5076,-0.680707] bound points :4 4
+trial 5: center = [39.7939,42.3048,16.0025] bound points :5 5
+trial 6: center = [20.2995,32.2623,2.13235] bound points :1 1
+trial 7: center = [35.2401,44.2255,14.4072] bound points :4 4
+trial 8: center = [39.6631,42.3719,16.0984] bound points :5 5
+trial 9: center = [35.1075,43.9792,14.0797] bound points :4 4
+  Chosen center : [39.7939,42.3048,16.0025] radius : 3.11199
+  29) points bounded : 5  points remaining : 51
+Finding center no. 30:
+trial 0: center = [21.7629,38.4688,-0.900965] bound points :4 4
+trial 1: center = [23.4043,38.3673,-1.88441] bound points :1 1
+trial 2: center = [22.0669,39.3809,-0.671134] bound points :5 5
+trial 3: center = [25.1157,44.2091,25.049] bound points :2 2
+trial 4: center = [20.9266,28.5171,13.013] bound points :1 1
+trial 5: center = [25.4819,40.5271,25.1693] bound points :2 2
+trial 6: center = [24.168,37.6668,-1.64149] bound points :4 4
+trial 7: center = [29.8623,57.953,16.6132] bound points :0 0
+trial 8: center = [24.1746,34.531,14.353] bound points :3 3
+trial 9: center = [22.0385,38.4832,-0.881916] bound points :4 4
+  Chosen center : [22.0669,39.3809,-0.671134] radius : 3.5923
+  30) points bounded : 5  points remaining : 46
+Finding center no. 31:
+trial 0: center = [25.8715,42.3072,25.0873] bound points :2 2
+trial 1: center = [23.7356,37.3195,-1.85374] bound points :3 3
+trial 2: center = [38.0381,38.5267,21.9095] bound points :2 2
+trial 3: center = [9.17475,41.025,17.2929] bound points :2 2
+trial 4: center = [28.8482,35.1821,10.1202] bound points :4 4
+trial 5: center = [28.0012,34.9232,10.2414] bound points :5 5
+trial 6: center = [24.0533,37.8545,-1.34573] bound points :2 2
+trial 7: center = [21.7603,29.1684,10.796] bound points :1 1
+trial 8: center = [10.3752,43.488,14.3637] bound points :2 2
+trial 9: center = [12.6563,42.1511,16.4158] bound points :2 2
+  Chosen center : [28.0012,34.9232,10.2414] radius : 3.12606
+  31) points bounded : 5  points remaining : 41
+Finding center no. 32:
+trial 0: center = [25.9334,49.8054,13.2656] bound points :1 1
+trial 1: center = [14.5477,44.4866,15.783] bound points :2 2
+trial 2: center = [24.4986,37.2472,-1.54255] bound points :3 3
+trial 3: center = [24.9485,34.6824,14.9835] bound points :3 3
+trial 4: center = [35.4994,44.112,13.9787] bound points :4 4
+trial 5: center = [25.1114,34.5525,14.8134] bound points :2 2
+trial 6: center = [23.9775,34.266,13.8656] bound points :3 3
+trial 7: center = [39.0402,39.579,21.6539] bound points :2 2
+trial 8: center = [35.1792,45.1208,14.9868] bound points :3 3
+trial 9: center = [23.9943,43.7679,27.3251] bound points :2 2
+  Chosen center : [35.4994,44.112,13.9787] radius : 2.76152
+  32) points bounded : 4  points remaining : 37
+Finding center no. 33:
+trial 0: center = [38.2081,38.5194,22.3789] bound points :2 2
+trial 1: center = [37.6481,40.0639,21.938] bound points :2 2
+trial 2: center = [11.779,44.5669,13.6944] bound points :2 2
+trial 3: center = [12.0466,42.0031,15.8188] bound points :2 2
+trial 4: center = [27.0107,43.5059,11.6443] bound points :0 0
+trial 5: center = [22.739,43.6682,26.8012] bound points :2 2
+trial 6: center = [24.2892,34.2708,13.9746] bound points :3 3
+trial 7: center = [25.2542,33.1998,15.3038] bound points :3 3
+trial 8: center = [25.3445,26.9884,7.83154] bound points :2 2
+trial 9: center = [24.1936,32.7891,1.23981] bound points :0 0
+  Chosen center : [24.2892,34.2708,13.9746] radius : 4.11007
+  33) points bounded : 3  points remaining : 34
+Finding center no. 34:
+trial 0: center = [23.702,38.1101,-1.79765] bound points :2 2
+trial 1: center = [26.2092,40.7763,27.4388] bound points :2 2
+trial 2: center = [19.4035,50.7233,30.3216] bound points :0 0
+trial 3: center = [22.6544,40.8918,21.6947] bound points :2 2
+trial 4: center = [12.1921,43.6011,12.9345] bound points :2 2
+trial 5: center = [24.6233,37.0833,-1.83668] bound points :3 3
+trial 6: center = [24.3999,37.0893,-1.79211] bound points :3 3
+trial 7: center = [5.29588,42.3682,9.06174] bound points :0 0
+trial 8: center = [22.2336,51.5662,31.1804] bound points :0 0
+trial 9: center = [24.2385,36.8097,-2.09452] bound points :4 4
+  Chosen center : [24.2385,36.8097,-2.09452] radius : 3.10569
+  34) points bounded : 4  points remaining : 30
+Finding center no. 35:
+trial 0: center = [28.6498,39.4495,18.3598] bound points :1 1
+trial 1: center = [22.5203,43.0398,24.1401] bound points :2 2
+trial 2: center = [7.6185,40.1267,15.6656] bound points :2 2
+trial 3: center = [7.64066,40.8991,17.9067] bound points :2 2
+trial 4: center = [27.5917,39.4693,0.575512] bound points :0 0
+trial 5: center = [22.7855,39.903,25.8094] bound points :2 2
+trial 6: center = [37.726,38.8918,22.0926] bound points :2 2
+trial 7: center = [20.2913,28.9731,10.3389] bound points :1 1
+trial 8: center = [26.0659,41.7583,25.7614] bound points :2 2
+trial 9: center = [19.7035,28.4906,11.0577] bound points :1 1
+  Chosen center : [22.5203,43.0398,24.1401] radius : 6.63894
+  35) points bounded : 2  points remaining : 28
+Finding center no. 36:
+trial 0: center = [37.9274,39.7474,21.6756] bound points :2 2
+trial 1: center = [10.1879,42.352,16.2232] bound points :2 2
+trial 2: center = [23.2501,28.911,11.4717] bound points :1 1
+trial 3: center = [39.011,39.8765,21.9402] bound points :2 2
+trial 4: center = [21.2411,31.8878,2.00107] bound points :1 1
+trial 5: center = [25.6667,27.4232,8.54456] bound points :2 2
+trial 6: center = [20.1752,47.801,-0.577701] bound points :0 0
+trial 7: center = [10.2068,41.375,16.8811] bound points :2 2
+trial 8: center = [12.5868,35.7866,15.8018] bound points :0 0
+trial 9: center = [13.3334,34.5847,9.53323] bound points :0 0
+  Chosen center : [37.9274,39.7474,21.6756] radius : 4.32438
+  36) points bounded : 2  points remaining : 26
+Finding center no. 37:
+trial 0: center = [10.703,44.0687,15.6405] bound points :2 2
+trial 1: center = [10.433,42.2224,13.5482] bound points :2 2
+trial 2: center = [29.2886,37.8222,17.6372] bound points :2 2
+trial 3: center = [12.0437,41.6346,19.0083] bound points :2 2
+trial 4: center = [19.6488,42.0747,-0.475218] bound points :0 0
+trial 5: center = [29.7212,38.0068,17.6566] bound points :2 2
+trial 6: center = [21.4442,27.7874,10.5142] bound points :1 1
+trial 7: center = [18.0705,42.8719,6.33572] bound points :0 0
+trial 8: center = [14.3294,44.1958,14.4647] bound points :2 2
+trial 9: center = [23.5909,37.2399,0.402214] bound points :0 0
+  Chosen center : [10.703,44.0687,15.6405] radius : 9.60631
+  37) points bounded : 2  points remaining : 24
+Finding center no. 38:
+trial 0: center = [27.9509,54.8092,19.4816] bound points :0 0
+trial 1: center = [36.7528,49.7076,26.8478] bound points :0 0
+trial 2: center = [27.3625,52.0639,26.1627] bound points :0 0
+trial 3: center = [25.3714,38.0468,17.3489] bound points :2 2
+trial 4: center = [24.3667,31.3651,1.77912] bound points :0 0
+trial 5: center = [17.6496,47.4695,26.21] bound points :0 0
+trial 6: center = [20.0223,27.8945,11.4438] bound points :1 1
+trial 7: center = [25.7654,27.7029,8.50339] bound points :2 2
+trial 8: center = [24.7985,32.1273,-2.01913] bound points :1 1
+trial 9: center = [22.9496,39.0435,-3.09007] bound points :0 0
+  Chosen center : [25.3714,38.0468,17.3489] radius : 5.11492
+  38) points bounded : 2  points remaining : 22
+Finding center no. 39:
+trial 0: center = [22.6733,27.4163,11.6963] bound points :1 1
+trial 1: center = [15.4438,39.1659,24.0117] bound points :0 0
+trial 2: center = [25.4409,28.134,9.13879] bound points :2 2
+trial 3: center = [33.9859,41.9064,23.5736] bound points :0 0
+trial 4: center = [25.6701,28.0444,9.32013] bound points :2 2
+trial 5: center = [31.3053,48.6428,9.22147] bound points :1 1
+trial 6: center = [18.9641,32.1679,1.92179] bound points :1 1
+trial 7: center = [23.6628,55.1871,15.9474] bound points :0 0
+trial 8: center = [37.3078,44.7327,17.8869] bound points :2 2
+trial 9: center = [30.8377,54.3989,24.2351] bound points :0 0
+  Chosen center : [25.4409,28.134,9.13879] radius : 2.64379
+  39) points bounded : 2  points remaining : 20
+Finding center no. 40:
+trial 0: center = [41.4806,44.0035,20.1044] bound points :0 0
+trial 1: center = [36.6053,47.4357,26.2042] bound points :0 0
+trial 2: center = [22.9019,30.6169,14.8087] bound points :0 0
+trial 3: center = [6.76069,45.4272,19.4347] bound points :0 0
+trial 4: center = [39.9951,40.4159,16.9597] bound points :0 0
+trial 5: center = [12.63,31.6063,6.67051] bound points :0 0
+trial 6: center = [25.2687,28.7329,9.38106] bound points :0 0
+trial 7: center = [23.1074,27.5237,10.8812] bound points :1 1
+trial 8: center = [20.747,28.7326,12.146] bound points :1 1
+trial 9: center = [29.4686,37.4685,17.6296] bound points :2 2
+  Chosen center : [29.4686,37.4685,17.6296] radius : 2.67768
+  40) points bounded : 2  points remaining : 18
+Finding center no. 41:
+trial 0: center = [11.0852,49.725,23.7489] bound points :0 0
+trial 1: center = [13.3786,43.508,-4.814] bound points :0 0
+trial 2: center = [10.204,30.9118,8.65961] bound points :0 0
+trial 3: center = [12.8626,36.5255,-3.57035] bound points :0 0
+trial 4: center = [20.649,46.2469,3.9986] bound points :1 1
+trial 5: center = [29.2256,57.4306,17.7432] bound points :0 0
+trial 6: center = [16.6201,46.5963,0.692187] bound points :0 0
+trial 7: center = [29.2754,34.5682,9.99566] bound points :1 1
+trial 8: center = [21.0196,31.8521,3.56458] bound points :1 1
+trial 9: center = [26.2012,46.7947,22.2766] bound points :0 0
+  Chosen center : [24.114,45.789,4.264] radius : 1.6612
+  41) points bounded : 1  points remaining : 17
+Finding center no. 42:
+trial 0: center = [7.85603,54.8367,13.3877] bound points :0 0
+trial 1: center = [36.9233,44.3763,16.616] bound points :2 2
+trial 2: center = [6.70987,53.0482,15.6326] bound points :0 0
+trial 3: center = [28.2441,53.5879,20.7657] bound points :0 0
+trial 4: center = [9.98688,45.4776,-5.83517] bound points :0 0
+trial 5: center = [29.2064,56.7688,13.5373] bound points :0 0
+trial 6: center = [27.8509,47.4581,9.93697] bound points :1 1
+trial 7: center = [8.85988,50.0938,20.126] bound points :0 0
+trial 8: center = [37.275,45.007,17.5907] bound points :2 2
+trial 9: center = [19.9937,55.0047,18.6641] bound points :0 0
+  Chosen center : [36.9233,44.3763,16.616] radius : 3.92874
+  42) points bounded : 2  points remaining : 15
+Finding center no. 43:
+trial 0: center = [25.8403,31.8202,9.08216] bound points :0 0
+trial 1: center = [25.2444,25.6876,8.57724] bound points :0 0
+trial 2: center = [19.7695,32.2585,9.411] bound points :1 1
+trial 3: center = [22.1578,34.1373,-1.68289] bound points :2 2
+trial 4: center = [19.9836,29.2267,12.6221] bound points :1 1
+trial 5: center = [37.0216,40.0349,16.979] bound points :0 0
+trial 6: center = [19.6249,26.8391,6.60926] bound points :0 0
+trial 7: center = [4.69241,38.3602,6.45585] bound points :0 0
+trial 8: center = [19.6887,31.7127,0.839842] bound points :1 1
+trial 9: center = [30.3209,46.454,9.227] bound points :1 1
+  Chosen center : [22.1578,34.1373,-1.68289] radius : 3.80584
+  43) points bounded : 2  points remaining : 13
+Finding center no. 44:
+trial 0: center = [12.4308,51.1078,11.6042] bound points :0 0
+trial 1: center = [17.6011,30.4385,14.2611] bound points :0 0
+trial 2: center = [25.2111,31.7043,-1.27254] bound points :1 1
+trial 3: center = [18.1699,51.0846,7.10113] bound points :0 0
+trial 4: center = [35.6823,53.6227,22.9926] bound points :0 0
+trial 5: center = [4.80757,50.3812,13.286] bound points :0 0
+trial 6: center = [14.296,45.6299,-8.22724] bound points :0 0
+trial 7: center = [26.4573,40.9996,22.4399] bound points :0 0
+trial 8: center = [23.6426,38.2085,5.05735] bound points :0 0
+trial 9: center = [16.2103,49.3814,27.329] bound points :0 0
+  Chosen center : [24.891,31.745,-1.724] radius : 1.6612
+  44) points bounded : 1  points remaining : 12
+Finding center no. 45:
+trial 0: center = [38.5328,53.4176,18.3071] bound points :0 0
+trial 1: center = [27.2069,48.8616,26.1692] bound points :0 0
+trial 2: center = [25.4417,56.6296,14.3152] bound points :0 0
+trial 3: center = [12.6742,32.136,14.9276] bound points :0 0
+trial 4: center = [21.587,27.735,12.4805] bound points :1 1
+trial 5: center = [11.1151,48.4364,19.5636] bound points :0 0
+trial 6: center = [9.65277,45.8606,-8.13999] bound points :0 0
+trial 7: center = [37.5626,51.1725,16.3669] bound points :0 0
+trial 8: center = [33.1091,55.5137,11.7971] bound points :0 0
+trial 9: center = [22.1222,35.8931,-3.15269] bound points :0 0
+  Chosen center : [22.952,28.713,11.348] radius : 1.487
+  45) points bounded : 1  points remaining : 11
+Finding center no. 46:
+trial 0: center = [16.4996,47.0209,-3.65693] bound points :0 0
+trial 1: center = [12.0122,58.8238,16.7337] bound points :0 0
+trial 2: center = [26.2193,48.2525,26.1301] bound points :0 0
+trial 3: center = [33.5167,41.1223,25.0422] bound points :0 0
+trial 4: center = [29.2024,42.5061,25.4824] bound points :0 0
+trial 5: center = [12.3867,48.6738,3.45594] bound points :0 0
+trial 6: center = [14.2184,34.2369,5.81467] bound points :0 0
+trial 7: center = [15.746,38.0219,11.5007] bound points :0 0
+trial 8: center = [34.8965,52.0495,23.7111] bound points :0 0
+trial 9: center = [14.3489,53.5944,13.5133] bound points :0 0
+trial 10: center = [37.7928,51.4628,20.5211] bound points :0 0
+trial 11: center = [19.2356,43.687,0.244968] bound points :0 0
+trial 12: center = [22.2269,30.0239,7.60649] bound points :1 1
+  Chosen center : [23.074,28.77,7.038] radius : 1.908
+  46) points bounded : 1  points remaining : 10
+Finding center no. 47:
+trial 0: center = [17.9944,30.3602,1.19448] bound points :0 0
+trial 1: center = [27.1857,48.0092,11.3685] bound points :1 1
+trial 2: center = [11.9923,54.2828,8.82442] bound points :0 0
+trial 3: center = [28.0308,48.8201,10.469] bound points :1 1
+trial 4: center = [7.12073,50.5,4.20193] bound points :0 0
+trial 5: center = [17.7365,52.2012,5.52839] bound points :0 0
+trial 6: center = [16.3918,49.7295,22.8194] bound points :0 0
+trial 7: center = [19.4027,26.1055,6.43055] bound points :0 0
+trial 8: center = [12.1224,39.9315,19.4161] bound points :0 0
+trial 9: center = [26.454,51.5653,26.2825] bound points :0 0
+  Chosen center : [30.219,46.397,8.927] radius : 1.487
+  47) points bounded : 1  points remaining : 9
+Finding center no. 48:
+trial 0: center = [25.1551,45.7,-0.104103] bound points :0 0
+trial 1: center = [30.6561,35.9883,16.7613] bound points :0 0
+trial 2: center = [26.5333,36.5613,7.13281] bound points :0 0
+trial 3: center = [18.0485,34.131,17.7078] bound points :0 0
+trial 4: center = [42.4142,46.4286,22.0432] bound points :0 0
+trial 5: center = [23.9644,31.4489,2.41837] bound points :0 0
+trial 6: center = [22.1101,30.7758,2.73382] bound points :1 1
+trial 7: center = [26.869,31.4234,8.94848] bound points :0 0
+trial 8: center = [33.1592,58.0167,19.2085] bound points :0 0
+trial 9: center = [29.7773,34.784,10.152] bound points :1 1
+  Chosen center : [22.219,30.83,2.64] radius : 1.824
+  48) points bounded : 1  points remaining : 8
+Finding center no. 49:
+trial 0: center = [22.0734,53.248,29.8055] bound points :0 0
+trial 1: center = [19.4595,51.9834,5.73126] bound points :0 0
+trial 2: center = [35.2031,46.697,26.9022] bound points :0 0
+trial 3: center = [24.9977,27.4297,7.2707] bound points :1 1
+trial 4: center = [24.966,34.1006,11.2123] bound points :1 1
+trial 5: center = [23.5715,39.6021,1.43965] bound points :0 0
+trial 6: center = [23.647,50.4145,1.15651] bound points :0 0
+trial 7: center = [23.8292,37.8616,0.632827] bound points :0 0
+trial 8: center = [5.7351,34.7826,4.64725] bound points :0 0
+trial 9: center = [24.4399,57.4599,12.3044] bound points :0 0
+  Chosen center : [25.223,26.51,7.216] radius : 1.6612
+  49) points bounded : 1  points remaining : 7
+Finding center no. 50:
+trial 0: center = [29.1229,37.9593,20.5444] bound points :0 0
+trial 1: center = [25.846,44.188,6.5899] bound points :0 0
+trial 2: center = [12.5028,49.9633,-6.47428] bound points :0 0
+trial 3: center = [35.3996,55.7045,14.3263] bound points :0 0
+trial 4: center = [27.1903,31.9144,10.252] bound points :1 1
+trial 5: center = [20.2354,28.2612,6.36184] bound points :0 0
+trial 6: center = [24.5911,41.1556,24.3801] bound points :0 0
+trial 7: center = [36.8379,41.0948,20.6835] bound points :0 0
+trial 8: center = [9.891,55.5532,11.4868] bound points :0 0
+trial 9: center = [33.1946,42.5514,19.1901] bound points :0 0
+  Chosen center : [26.671,32.092,10.255] radius : 1.487
+  50) points bounded : 1  points remaining : 6
+Finding center no. 51:
+trial 0: center = [27.9867,42.2305,0.0656541] bound points :1 1
+trial 1: center = [26.1691,41.5612,10.1044] bound points :0 0
+trial 2: center = [26.5854,49.8617,27.6289] bound points :0 0
+trial 3: center = [21.5299,50.335,8.4952] bound points :0 0
+trial 4: center = [18.0457,31.056,2.78254] bound points :0 0
+trial 5: center = [31.0998,50.8098,28.0608] bound points :0 0
+trial 6: center = [24.6028,45.0428,2.6424] bound points :0 0
+trial 7: center = [17.7405,54.8056,23.5676] bound points :0 0
+trial 8: center = [5.58078,52.8552,11.8374] bound points :0 0
+trial 9: center = [27.5696,45.0184,8.02866] bound points :1 1
+  Chosen center : [28.285,43.099,0.095] radius : 1.824
+  51) points bounded : 1  points remaining : 5
+Finding center no. 52:
+trial 0: center = [35.924,47.0419,24.8048] bound points :0 0
+trial 1: center = [10.2527,38.3449,21.1502] bound points :0 0
+trial 2: center = [16.9496,37.6106,20.5309] bound points :0 0
+trial 3: center = [11.9158,38.0882,15.0611] bound points :0 0
+trial 4: center = [27.8939,58.2275,13.3373] bound points :0 0
+trial 5: center = [18.5959,27.7893,4.66869] bound points :0 0
+trial 6: center = [34.1262,46.0675,24.0678] bound points :0 0
+trial 7: center = [35.3747,56.165,12.759] bound points :0 0
+trial 8: center = [33.2202,45.3925,14.1683] bound points :0 0
+trial 9: center = [4.70981,44.0964,18.2031] bound points :0 0
+trial 10: center = [9.95205,37.0833,0.449019] bound points :0 0
+trial 11: center = [29.5681,34.7487,9.95495] bound points :1 1
+  Chosen center : [30.115,35.243,9.722] radius : 1.359
+  52) points bounded : 1  points remaining : 4
+Finding center no. 53:
+trial 0: center = [15.5924,46.5659,-3.22368] bound points :0 0
+trial 1: center = [15.0359,33.7531,17.0555] bound points :0 0
+trial 2: center = [5.99018,44.6725,16.937] bound points :0 0
+trial 3: center = [38.9888,50.7305,19.3047] bound points :0 0
+trial 4: center = [40.0363,45.2821,23.5465] bound points :0 0
+trial 5: center = [33.7323,42.7019,24.338] bound points :0 0
+trial 6: center = [22.203,33.5747,3.64943] bound points :0 0
+trial 7: center = [13.1036,57.2779,17.0846] bound points :0 0
+trial 8: center = [11.3281,49.1371,-6.63627] bound points :0 0
+trial 9: center = [6.50176,48.4679,4.00636] bound points :0 0
+trial 10: center = [29.8906,44.5397,27.0568] bound points :0 0
+trial 11: center = [37.3366,52.904,16.1356] bound points :0 0
+trial 12: center = [9.31963,41.4509,-2.87871] bound points :0 0
+trial 13: center = [36.3954,42.3007,15.1846] bound points :0 0
+trial 14: center = [6.74968,48.3456,2.28286] bound points :0 0
+trial 15: center = [16.1447,32.3108,15.8893] bound points :0 0
+trial 16: center = [14.8356,34.7863,2.43239] bound points :0 0
+trial 17: center = [24.4506,46.5194,6.92682] bound points :0 0
+trial 18: center = [22.2097,52.7602,31.5417] bound points :0 0
+trial 19: center = [41.9671,43.1364,15.7119] bound points :0 0
+trial 20: center = [15.3281,46.662,4.4377] bound points :0 0
+trial 21: center = [4.25257,52.1438,13.3658] bound points :0 0
+trial 22: center = [8.95469,52.6899,20.3533] bound points :0 0
+trial 23: center = [15.1914,33.1071,-0.0296918] bound points :0 0
+trial 24: center = [37.0932,39.5575,22.8285] bound points :0 0
+trial 25: center = [39.7739,50.4922,16.4067] bound points :0 0
+trial 26: center = [16.0148,58.408,20.6816] bound points :0 0
+trial 27: center = [21.5537,27.1208,6.6631] bound points :0 0
+trial 28: center = [32.2586,43.6088,21.8136] bound points :0 0
+trial 29: center = [24.5779,31.11,15.6555] bound points :0 0
+trial 30: center = [29.1401,42.3729,12.4358] bound points :1 1
+  Chosen center : [29.675,41.631,12.473] radius : 1.824
+  53) points bounded : 1  points remaining : 3
+Finding center no. 54:
+trial 0: center = [26.8541,31.9041,-0.598005] bound points :1 1
+trial 1: center = [31.5644,55.609,10.7247] bound points :0 0
+trial 2: center = [22.4022,39.7486,23.945] bound points :0 0
+trial 3: center = [10.4789,32.6142,8.13533] bound points :0 0
+trial 4: center = [10.5999,44.2082,21.9731] bound points :0 0
+trial 5: center = [31.4208,55.7445,21.952] bound points :0 0
+trial 6: center = [25.7683,43.2244,25.8668] bound points :0 0
+trial 7: center = [10.3855,41.5336,-5.43887] bound points :0 0
+trial 8: center = [8.28328,38.0865,14.2869] bound points :0 0
+trial 9: center = [25.3466,31.3182,-3.24918] bound points :0 0
+  Chosen center : [26.527,32.135,-0.455] radius : 1.6612
+  54) points bounded : 1  points remaining : 2
+Finding center no. 55:
+trial 0: center = [11.3304,54.5546,19.983] bound points :0 0
+trial 1: center = [15.2716,54.475,14.3947] bound points :0 0
+trial 2: center = [27.2929,33.6044,12.1009] bound points :0 0
+trial 3: center = [36.671,39.2916,19.2592] bound points :0 0
+trial 4: center = [32.7562,58.1877,19.6986] bound points :0 0
+trial 5: center = [26.8761,55.2434,15.5256] bound points :0 0
+trial 6: center = [24.6584,51.7856,20.3088] bound points :0 0
+trial 7: center = [32.5482,38.8275,22.2832] bound points :0 0
+trial 8: center = [36.5904,52.9717,14.4768] bound points :0 0
+trial 9: center = [19.6877,37.6672,22.8304] bound points :0 0
+trial 10: center = [20.9939,51.047,12.4412] bound points :0 0
+trial 11: center = [12.9912,43.0436,-7.35969] bound points :0 0
+trial 12: center = [17.4742,30.3686,13.435] bound points :0 0
+trial 13: center = [12.5901,30.5408,11.3294] bound points :0 0
+trial 14: center = [11.727,57.3281,15.6032] bound points :0 0
+trial 15: center = [16.5874,45.5552,-3.15071] bound points :0 0
+trial 16: center = [36.5535,53.7528,19.1241] bound points :0 0
+trial 17: center = [19.2198,55.697,23.5477] bound points :0 0
+trial 18: center = [34.4614,52.355,25.0938] bound points :0 0
+trial 19: center = [18.5885,53.4496,3.12486] bound points :0 0
+trial 20: center = [33.9718,41.7205,21.9589] bound points :0 0
+trial 21: center = [16.7699,55.7496,25.5413] bound points :0 0
+trial 22: center = [21.9747,37.7347,22.496] bound points :0 0
+trial 23: center = [8.37924,43.6347,1.31379] bound points :0 0
+trial 24: center = [29.307,51.7033,28.6157] bound points :0 0
+trial 25: center = [30.3883,34.7448,9.11211] bound points :0 0
+trial 26: center = [28.1744,38.4461,14.1182] bound points :0 0
+trial 27: center = [21.3753,54.478,23.1189] bound points :0 0
+trial 28: center = [32.2605,53.4022,23.9115] bound points :0 0
+trial 29: center = [6.72949,36.8757,12.722] bound points :0 0
+trial 30: center = [26.2193,53.5698,24.2164] bound points :0 0
+trial 31: center = [16.5955,41.4007,9.9906] bound points :0 0
+trial 32: center = [31.3602,54.788,21.1847] bound points :0 0
+trial 33: center = [25.9478,43.715,26.3142] bound points :0 0
+trial 34: center = [17.9633,48.0305,27.8523] bound points :0 0
+trial 35: center = [28.7378,36.179,11.8245] bound points :0 0
+trial 36: center = [37.2803,47.4523,24.9838] bound points :0 0
+trial 37: center = [23.1952,31.7229,-2.46294] bound points :0 0
+trial 38: center = [34.4077,40.5324,22.3099] bound points :0 0
+trial 39: center = [26.3092,38.1645,9.16105] bound points :0 0
+trial 40: center = [36.6905,50.7883,15.7221] bound points :0 0
+  Chosen center : [28.301,44.689,7.816] radius : 1.824
+  55) points bounded : 1  points remaining : 1
+Finding center no. 56:
+trial 0: center = [32.5133,54.5582,9.7114] bound points :0 0
+trial 1: center = [34.0876,40.9391,23.3007] bound points :0 0
+trial 2: center = [35.7863,40.1722,22.3546] bound points :0 0
+trial 3: center = [17.0083,54.2534,20.7959] bound points :0 0
+trial 4: center = [22.9887,26.6358,7.36802] bound points :0 0
+trial 5: center = [8.77138,37.8377,15.0724] bound points :0 0
+trial 6: center = [35.1528,47.6384,28.3819] bound points :0 0
+trial 7: center = [29.7728,40.4471,12.4845] bound points :0 0
+trial 8: center = [41.4393,43.8415,21.787] bound points :0 0
+trial 9: center = [33.8456,54.5207,22.0153] bound points :0 0
+trial 10: center = [11.1797,36.0905,-2.85595] bound points :0 0
+trial 11: center = [21.5648,49.2073,12.019] bound points :0 0
+trial 12: center = [28.0833,35.0536,17.5602] bound points :0 0
+trial 13: center = [14.3282,38.0892,-3.35552] bound points :0 0
+trial 14: center = [25.7617,37.0628,6.5884] bound points :0 0
+trial 15: center = [21.9636,38.2668,-3.64727] bound points :0 0
+trial 16: center = [22.982,39.9506,26.5488] bound points :0 0
+trial 17: center = [28.8241,57.4255,12.5774] bound points :0 0
+trial 18: center = [18.8659,56.5012,27.6691] bound points :0 0
+trial 19: center = [18.4159,55.1502,22.4923] bound points :0 0
+trial 20: center = [20.0238,49.5024,26.8648] bound points :0 0
+trial 21: center = [35.3319,50.4114,27.2639] bound points :0 0
+trial 22: center = [26.3006,39.8696,12.0282] bound points :0 0
+trial 23: center = [28.5447,35.5956,16.2907] bound points :0 0
+trial 24: center = [25.8567,44.5048,6.42659] bound points :0 0
+trial 25: center = [32.5952,58.9703,14.7906] bound points :0 0
+trial 26: center = [27.8829,36.0492,19.2459] bound points :0 0
+trial 27: center = [42.6538,44.3804,21.2726] bound points :0 0
+trial 28: center = [26.4014,45.7422,25.9951] bound points :0 0
+trial 29: center = [16.019,49.7841,23.6919] bound points :0 0
+trial 30: center = [26.2376,39.7875,26.0031] bound points :0 0
+trial 31: center = [36.0189,46.1155,25.74] bound points :0 0
+trial 32: center = [26.864,34.4029,13.1142] bound points :0 0
+trial 33: center = [17.383,46.7213,8.68792] bound points :0 0
+trial 34: center = [23.2137,40.4757,25.9995] bound points :0 0
+trial 35: center = [41.8464,46.7515,16.227] bound points :0 0
+trial 36: center = [25.0534,41.6273,6.35908] bound points :0 0
+trial 37: center = [31.1154,54.9622,7.46618] bound points :0 0
+trial 38: center = [18.8085,29.3108,14.6685] bound points :0 0
+trial 39: center = [29.6866,49.9227,28.5229] bound points :0 0
+trial 40: center = [19.2553,42.3795,-0.262098] bound points :0 0
+  Chosen center : [40.828,43.274,15.283] radius : 1.721
+  56) points bounded : 1  points remaining : 0
+Total Centers = 57
+modifying radius to connect
+ct 0 ki 0 -> connected
+ct 0 ki 1 -> connected
+ct 0 ki 2 -> connected
+ct 0 ki 3 -> connected
+ct 0 ki 4 -> connected
+ct 0 ki 5 -> connected
+ct 0 ki 6 -> connected
+ct 0 ki 7 -> connected
+ct 0 ki 8 -> connected
+ct 0 ki 9 -> connected
+ct 0 ki 10 -> connected
+ct 0 ki 11 -> connected
+ct 0 ki 12 -> connected
+ct 0 ki 13 -> connected
+ct 0 ki 14 -> connected
+ct 0 ki 15 -> connected
+ct 0 ki 16 -> connected
+ct 0 ki 17 -> connected
+ct 0 ki 18 -> connected
+ct 0 ki 19 -> connected
+ct 0 ki 20 -> connected
+ct 0 ki 21 -> connected
+ct 0 ki 22 -> connected
+ct 0 ki 23 -> connected
+ct 0 ki 24 -> connected
+ct 0 ki 25 -> connected
+ct 0 ki 26 -> connected
+ct 0 ki 27 -> connected
+ct 0 ki 28 -> connected
+ct 0 ki 29 -> connected
+ct 0 ki 30 -> connected
+ct 0 ki 31 -> connected
+ct 0 ki 32 -> connected
+ct 0 ki 33 -> connected
+ct 0 ki 34 -> connected
+ct 0 ki 35 -> connected
+ct 0 ki 36 -> connected
+ct 0 ki 37 -> connected
+ct 0 ki 38 -> connected
+ct 0 ki 39 -> connected
+ct 0 ki 40 -> connected
+ct 0 ki 41 -> connected
+ct 0 ki 42 -> connected
+ct 0 ki 43 -> connected
+ct 0 ki 44 -> connected
+ct 0 ki 45 -> connected
+ct 0 ki 46 -> connected
+ct 0 ki 47 -> connected
+ct 0 ki 48 -> connected
+ct 0 ki 49 -> connected
+ct 0 ki 50 -> connected
+ct 0 ki 51 -> connected
+ct 0 ki 52 -> connected
+ct 0 ki 53 -> connected
+ct 0 ki 54 -> connected
+ct 0 ki 55 -> connected
+Writing centers to centers_chainA_ca_p1.5d3_s5i1.cen
+total time taken [s] 88.6923

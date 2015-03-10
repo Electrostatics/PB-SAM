@@ -1,0 +1,48 @@
+running self-polarization ...
+EPS_SOLVENT:78 EPS_IN: 4 KAPPA: 0.0737403009
+N_POLES = 10
+SPHERE TOLERANCE ( for extracting charges ) = 0
+ NUM_POINTS_I 250000 NUM_POINTS_X 10000
+ MIN SEPDIST for using CXFormN 5
+Reading PQR file /home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/config/1BRS_chainD_p1.5d3_s5i1.pqr
+/home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/config/1BRS_chainD_p1.5d3_s5i1.pqr: atoms: 1403, net charge: -5
+rcen : [34.44809615,36.32038462,5.309865385] ; no. of centers:  52
+ =============== Molecule 0================
+Molecule 0 constructed.
+After creating molecules: VM: 957.5976562; RSS: 3483
+self polarize with farfield freq = 1
+m_total = 52
+After 1st round : ct 1 maxdev 2.736592e-01 total dev: 4.284851e+02 avg 8.240098e+00
+1 ) count 52 maxdev: 2.724304e-01 dev: 1.031221e+02 avg: 1.983118e+00
+2 ) count 35 maxdev: 2.879472e-01 dev: 2.046974e+01 avg: 3.936489e-01
+3 ) count 4 maxdev: 1.187072e-01 dev: 1.821998e+01 avg: 3.503843e-01
+4 ) count 18 maxdev: 4.236006e-02 dev: 9.427045e+00 avg: 1.812893e-01
+5 ) count 52 maxdev: 8.612621e-02 dev: 4.068230e+00 avg: 7.823519e-02
+6 ) count 3 maxdev: 1.251766e-02 dev: 3.417163e+00 avg: 6.571466e-02
+7 ) count 26 maxdev: 4.101336e-02 dev: 4.843473e+00 avg: 9.314372e-02
+8 ) count 9 maxdev: 4.653585e-02 dev: 2.626759e+00 avg: 5.051459e-02
+9 ) count 2 maxdev: 7.913358e-03 dev: 2.303453e+00 avg: 4.429717e-02
+10 ) count 52 maxdev: 1.162063e-02 dev: 1.279217e+00 avg: 2.460033e-02
+11 ) count 13 maxdev: 2.259258e-02 dev: 8.774190e-01 avg: 1.687344e-02
+12 ) count 4 maxdev: 4.437457e-02 dev: 7.746975e-01 avg: 1.489803e-02
+13 ) count 1 maxdev: 2.559745e-03 dev: 6.775056e-01 avg: 1.302895e-02
+14 ) count 27 maxdev: 7.452952e-03 dev: 8.879839e-01 avg: 1.707661e-02
+15 ) count 52 maxdev: 2.005476e-03 dev: 3.202039e-01 avg: 6.157767e-03
+16 ) count 17 maxdev: 5.250037e-02 dev: 3.574544e-01 avg: 6.874124e-03
+17 ) count 1 maxdev: 4.453095e-03 dev: 1.983026e-01 avg: 3.813512e-03
+18 ) count 5 maxdev: 2.113404e-03 dev: 1.812295e-01 avg: 3.485183e-03
+19 ) count 6 maxdev: 1.189865e-03 dev: 1.098171e-01 avg: 2.111868e-03
+20 ) count 52 maxdev: 3.990592e-03 dev: 9.579354e-02 avg: 1.842183e-03
+21 ) count 1 maxdev: 3.079934e-04 dev: 8.706781e-02 avg: 1.674381e-03
+22 ) count 29 maxdev: 3.661230e-03 dev: 4.326512e-02 avg: 8.320216e-04
+23 ) count 3 maxdev: 1.114645e-02 dev: 6.171887e-02 avg: 1.186901e-03
+24 ) count 2 maxdev: 1.281962e-04 dev: 3.174862e-02 avg: 6.105503e-04
+25 ) count 52 maxdev: 1.129961e-03 dev: 6.893831e-02 avg: 1.325737e-03
+26 ) count 5 maxdev: 9.478329e-04 dev: 5.108386e-02 avg: 9.823819e-04
+27 ) count 3 maxdev: 1.209982e-04 dev: 3.089879e-02 avg: 5.942075e-04
+28 ) count 25 maxdev: 4.656124e-04 dev: 1.841208e-02 avg: 3.540784e-04
+29 ) count 2 maxdev: 3.929713e-05 dev: 1.221565e-02 avg: 2.349163e-04
+Time taken to polarize [s]: 6.42397, ct: 30, per cycle: 0.2141323333
+Potential converged : ct 30 total dev: 1.221565e-02 avg 2.349163e-04
+avg moldev = 3.929713205e-05
+Total Solve Time [s] = 6.722857

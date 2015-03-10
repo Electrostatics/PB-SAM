@@ -1,0 +1,107 @@
+running self-polarization ...
+EPS_SOLVENT:78 EPS_IN: 4 KAPPA: 0.0737403009
+N_POLES = 30
+SPHERE TOLERANCE (for extracting charges) = 0
+ NUM_POINTS_I 250000 NUM_POINTS_X 10000
+ MIN SEPDIST for using CXFormN 5
+Reading PQR file /home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/config/1BRS_chainD_p1.5d3_s5i1.pqr
+/home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/config/1BRS_chainD_p1.5d3_s5i1.pqr: atoms: 1403, net charge: -5
+rcen : [34.51277551,36.35328571,5.535204082] ; no. of centers:  49
+ =============== Molecule 0================
+Molecule 0 constructed.
+After creating molecules: VM: 983.1835938; RSS: 81195
+self polarize with farfield freq = 1
+m_total = 49
+After 1st round : ct 1 maxdev 3.792948e-01 total dev: 4.066671e+02 avg 8.299329e+00
+1) count 49 maxdev: 4.663599e-01 dev: 2.880327e+02 avg: 5.878219e+00
+2) count 43 maxdev: 4.784620e-01 dev: 1.622759e+02 avg: 3.311753e+00
+3) count 26 maxdev: 4.629684e-01 dev: 8.803839e+01 avg: 1.796702e+00
+4) count 21 maxdev: 4.928175e-01 dev: 1.064352e+02 avg: 2.172147e+00
+5) count 49 maxdev: 3.603126e-01 dev: 8.609358e+01 avg: 1.757012e+00
+6) count 23 maxdev: 4.404993e-01 dev: 8.892203e+01 avg: 1.814735e+00
+7) count 20 maxdev: 4.845194e-01 dev: 6.851845e+01 avg: 1.398336e+00
+8) count 14 maxdev: 3.517271e-01 dev: 5.102921e+01 avg: 1.041412e+00
+9) count 16 maxdev: 4.528342e-01 dev: 5.503491e+01 avg: 1.123161e+00
+10) count 49 maxdev: 4.827931e-01 dev: 8.194723e+01 avg: 1.672392e+00
+11) count 20 maxdev: 4.883019e-01 dev: 6.246232e+01 avg: 1.274741e+00
+12) count 12 maxdev: 4.398125e-01 dev: 5.861854e+01 avg: 1.196297e+00
+13) count 12 maxdev: 4.910746e-01 dev: 6.614756e+01 avg: 1.349950e+00
+14) count 10 maxdev: 4.937001e-01 dev: 7.302533e+01 avg: 1.490313e+00
+15) count 49 maxdev: 4.807039e-01 dev: 1.153769e+02 avg: 2.354631e+00
+16) count 23 maxdev: 4.954342e-01 dev: 8.068689e+01 avg: 1.646671e+00
+17) count 20 maxdev: 4.894806e-01 dev: 8.494946e+01 avg: 1.733662e+00
+18) count 20 maxdev: 4.905705e-01 dev: 1.145612e+02 avg: 2.337983e+00
+19) count 20 maxdev: 4.899223e-01 dev: 1.269672e+02 avg: 2.591168e+00
+20) count 49 maxdev: 4.737590e-01 dev: 4.427598e+02 avg: 9.035914e+00
+21) count 48 maxdev: 4.931185e-01 dev: 3.515412e+02 avg: 7.174309e+00
+22) count 42 maxdev: 4.879788e-01 dev: 3.637420e+02 avg: 7.423306e+00
+23) count 36 maxdev: 4.952142e-01 dev: 3.544945e+02 avg: 7.234581e+00
+24) count 31 maxdev: 4.908290e-01 dev: 2.414336e+02 avg: 4.927216e+00
+25) count 49 maxdev: 4.748967e-01 dev: 1.336401e+02 avg: 2.727350e+00
+26) count 32 maxdev: 4.195658e-01 dev: 1.644030e+02 avg: 3.355164e+00
+27) count 31 maxdev: 4.859743e-01 dev: 1.321956e+02 avg: 2.697870e+00
+28) count 24 maxdev: 4.747268e-01 dev: 1.422562e+02 avg: 2.903188e+00
+29) count 21 maxdev: 4.858773e-01 dev: 1.772905e+02 avg: 3.618173e+00
+30) count 49 maxdev: 4.717473e-01 dev: 3.134940e+02 avg: 6.397838e+00
+31) count 37 maxdev: 4.706177e-01 dev: 2.479408e+02 avg: 5.060016e+00
+32) count 34 maxdev: 4.680120e-01 dev: 2.543255e+02 avg: 5.190316e+00
+33) count 31 maxdev: 4.641906e-01 dev: 1.305959e+02 avg: 2.665222e+00
+34) count 27 maxdev: 4.621291e-01 dev: 1.330669e+02 avg: 2.715651e+00
+35) count 49 maxdev: 4.826004e-01 dev: 1.774353e+02 avg: 3.621129e+00
+36) count 31 maxdev: 4.637327e-01 dev: 1.570974e+02 avg: 3.206069e+00
+37) count 28 maxdev: 4.910421e-01 dev: 1.032554e+02 avg: 2.107254e+00
+38) count 22 maxdev: 4.755703e-01 dev: 6.363948e+01 avg: 1.298765e+00
+39) count 15 maxdev: 4.740484e-01 dev: 4.060050e+01 avg: 8.285816e-01
+40) count 49 maxdev: 4.395924e-01 dev: 1.111202e+02 avg: 2.267760e+00
+41) count 30 maxdev: 3.651470e-01 dev: 8.822649e+01 avg: 1.800541e+00
+42) count 24 maxdev: 3.371434e-01 dev: 5.537849e+01 avg: 1.130173e+00
+43) count 16 maxdev: 3.892921e-01 dev: 4.550041e+01 avg: 9.285797e-01
+44) count 11 maxdev: 2.669042e-01 dev: 3.680260e+01 avg: 7.510735e-01
+45) count 49 maxdev: 4.653252e-01 dev: 1.780654e+02 avg: 3.633987e+00
+46) count 33 maxdev: 3.930695e-01 dev: 1.195399e+02 avg: 2.439590e+00
+47) count 27 maxdev: 2.992463e-01 dev: 7.546252e+01 avg: 1.540051e+00
+48) count 26 maxdev: 4.788638e-01 dev: 7.534062e+01 avg: 1.537564e+00
+49) count 16 maxdev: 4.558688e-01 dev: 5.538688e+01 avg: 1.130344e+00
+50) count 49 maxdev: 4.926582e-01 dev: 6.531823e+01 avg: 1.333025e+00
+51) count 24 maxdev: 4.253812e-01 dev: 5.326239e+01 avg: 1.086988e+00
+52) count 18 maxdev: 4.074328e-01 dev: 4.172632e+01 avg: 8.515575e-01
+53) count 10 maxdev: 4.356784e-01 dev: 3.798851e+01 avg: 7.752758e-01
+54) count 3 maxdev: 3.287460e-01 dev: 3.549847e+01 avg: 7.244586e-01
+55) count 49 maxdev: 9.377062e-02 dev: 2.644457e+01 avg: 5.396851e-01
+56) count 22 maxdev: 3.562315e-01 dev: 1.339522e+01 avg: 2.733719e-01
+57) count 6 maxdev: 1.345268e-01 dev: 9.672844e+00 avg: 1.974050e-01
+58) count 7 maxdev: 5.239750e-02 dev: 8.763182e+00 avg: 1.788404e-01
+59) count 15 maxdev: 4.994125e-03 dev: 3.931738e+00 avg: 8.023955e-02
+60) count 49 maxdev: 5.877171e-02 dev: 4.562408e+00 avg: 9.311037e-02
+61) count 11 maxdev: 4.302513e-02 dev: 4.647147e+00 avg: 9.483973e-02
+62) count 10 maxdev: 1.304659e-02 dev: 2.058730e+00 avg: 4.201490e-02
+63) count 25 maxdev: 5.415170e-02 dev: 1.367197e+00 avg: 2.790198e-02
+64) count 3 maxdev: 3.527931e-03 dev: 1.167132e+00 avg: 2.381901e-02
+65) count 49 maxdev: 1.753861e-02 dev: 1.286561e+00 avg: 2.625635e-02
+66) count 11 maxdev: 3.184192e-03 dev: 7.022563e-01 avg: 1.433176e-02
+67) count 25 maxdev: 1.351319e-02 dev: 8.490445e-01 avg: 1.732744e-02
+68) count 6 maxdev: 1.548284e-02 dev: 4.391353e-01 avg: 8.961944e-03
+69) count 3 maxdev: 1.701930e-03 dev: 2.963114e-01 avg: 6.047171e-03
+70) count 49 maxdev: 8.498865e-03 dev: 4.373228e-01 avg: 8.924955e-03
+71) count 9 maxdev: 7.469175e-03 dev: 2.126474e-01 avg: 4.339743e-03
+72) count 2 maxdev: 6.168399e-04 dev: 1.848849e-01 avg: 3.773162e-03
+73) count 28 maxdev: 2.710555e-03 dev: 1.092277e-01 avg: 2.229137e-03
+74) count 6 maxdev: 8.119296e-04 dev: 7.329865e-02 avg: 1.495891e-03
+75) count 49 maxdev: 2.358012e-03 dev: 2.018320e-01 avg: 4.119021e-03
+76) count 14 maxdev: 3.600352e-03 dev: 1.533765e-01 avg: 3.130133e-03
+77) count 6 maxdev: 3.655235e-04 dev: 8.569211e-02 avg: 1.748819e-03
+78) count 23 maxdev: 7.353703e-04 dev: 6.142430e-02 avg: 1.253557e-03
+79) count 6 maxdev: 2.449297e-04 dev: 3.527998e-02 avg: 7.199996e-04
+80) count 49 maxdev: 1.366253e-03 dev: 9.114135e-02 avg: 1.860028e-03
+81) count 7 maxdev: 3.021575e-03 dev: 8.999697e-02 avg: 1.836673e-03
+82) count 2 maxdev: 8.051489e-03 dev: 1.577423e-01 avg: 3.219230e-03
+83) count 2 maxdev: 2.727448e-04 dev: 4.033134e-02 avg: 8.230886e-04
+84) count 16 maxdev: 9.342227e-04 dev: 2.750519e-02 avg: 5.613303e-04
+85) count 49 maxdev: 1.360929e-03 dev: 3.675320e-02 avg: 7.500654e-04
+86) count 5 maxdev: 4.672967e-04 dev: 2.955118e-02 avg: 6.030853e-04
+87) count 12 maxdev: 4.229583e-04 dev: 2.986414e-02 avg: 6.094723e-04
+88) count 6 maxdev: 4.054446e-05 dev: 1.547576e-02 avg: 3.158319e-04
+Time taken to polarize [s]: 198.306606, ct: 89, per cycle: 2.228164112
+Potential converged : ct 89 total dev: 1.547576e-02 avg 3.158319e-04
+avg moldev = 4.054445876e-05
+Total Solve Time [s] = 201.966973

@@ -1,0 +1,18 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -cwd
+#$ -o makeMat.out
+#$ -j y
+#$ -pe orte 54
+
+THREAD=54
+EXEC=$PBSAMHOME/working_code/PBSAM_all/bin/pbsam_20
+LOGFILE=makeMat_A.log
+
+MOLDIR=$PBSAMHOME/working_code/PBSAM_all/test/1BRS
+
+SALT_CONC=0.05
+
+PQRFILE=$MOLDIR/PREP_makeSpheres/chainA_ca_p1.5d3_s5i1.pqr
+
+$EXEC mat $THREAD $SALT_CONC  $PQRFILE > $LOGFILE 

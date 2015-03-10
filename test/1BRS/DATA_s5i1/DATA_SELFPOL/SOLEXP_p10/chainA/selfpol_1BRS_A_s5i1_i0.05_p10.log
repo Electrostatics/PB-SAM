@@ -1,0 +1,36 @@
+running self-polarization ...
+EPS_SOLVENT:78 EPS_IN: 4 KAPPA: 0.0737403009
+N_POLES = 10
+SPHERE TOLERANCE ( for extracting charges ) = 0
+ NUM_POINTS_I 250000 NUM_POINTS_X 10000
+ MIN SEPDIST for using CXFormN 5
+Reading PQR file /home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/config/1BRS_chainA_p1.5d3_s5i1.pqr
+/home/lfelberg/PBSAM/working_code/PBSAM_all/test/1BRS/config/1BRS_chainA_p1.5d3_s5i1.pqr: atoms: 1730, net charge: 2
+rcen : [25.23938889,40.53301852,10.08633333] ; no. of centers:  54
+ =============== Molecule 0================
+Molecule 0 constructed.
+After creating molecules: VM: 1009.949219; RSS: 3664
+self polarize with farfield freq = 1
+m_total = 54
+After 1st round : ct 1 maxdev 3.194471e-01 total dev: 4.099367e+02 avg 7.591420e+00
+1 ) count 54 maxdev: 4.688576e-01 dev: 5.459806e+01 avg: 1.011075e+00
+2 ) count 13 maxdev: 4.205817e-02 dev: 3.331421e+01 avg: 6.169298e-01
+3 ) count 46 maxdev: 7.289315e-02 dev: 1.161780e+01 avg: 2.151444e-01
+4 ) count 9 maxdev: 6.150575e-02 dev: 7.074533e+00 avg: 1.310099e-01
+5 ) count 54 maxdev: 1.634472e-02 dev: 3.884380e+00 avg: 7.193296e-02
+6 ) count 17 maxdev: 1.108131e-02 dev: 2.302920e+00 avg: 4.264668e-02
+7 ) count 18 maxdev: 3.528916e-03 dev: 9.662790e-01 avg: 1.789405e-02
+8 ) count 26 maxdev: 3.755786e-03 dev: 9.134287e-01 avg: 1.691535e-02
+9 ) count 10 maxdev: 8.023454e-03 dev: 4.211005e-01 avg: 7.798157e-03
+10 ) count 54 maxdev: 2.691530e-03 dev: 5.638293e-01 avg: 1.044128e-02
+11 ) count 16 maxdev: 9.279305e-04 dev: 2.217053e-01 avg: 4.105654e-03
+12 ) count 22 maxdev: 2.799238e-03 dev: 9.561666e-02 avg: 1.770679e-03
+13 ) count 2 maxdev: 1.933173e-04 dev: 7.004806e-02 avg: 1.297186e-03
+14 ) count 38 maxdev: 3.095327e-04 dev: 8.635381e-02 avg: 1.599145e-03
+15 ) count 54 maxdev: 2.941109e-04 dev: 3.756667e-02 avg: 6.956791e-04
+16 ) count 7 maxdev: 1.053727e-04 dev: 1.911609e-02 avg: 3.540016e-04
+17 ) count 16 maxdev: 4.756332e-05 dev: 1.382868e-02 avg: 2.560866e-04
+Time taken to polarize [s]: 5.895564, ct: 18, per cycle: 0.3275313333
+Potential converged : ct 18 total dev: 1.382868e-02 avg 2.560866e-04
+avg moldev = 4.756332494e-05
+Total Solve Time [s] = 6.173597

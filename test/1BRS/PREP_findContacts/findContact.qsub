@@ -1,0 +1,19 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -cwd
+#$ -o findContact.out
+#$ -j y
+
+EXEC=../../../bin/findContacts
+
+cenpqr1fname=../PREP_makeSpheres/chainA_ca_p1.5d3_s5i1.pqr 
+cenpqr2fname=../PREP_makeSpheres/chainD_ca_p1.5d3_s5i1.pqr 
+
+atomcontactfname=./contactlist
+atompqr1fname=../config/1BRS_chainA.pqr 
+atompqr2fname=../config/1BRS_chainD.pqr 
+
+LOGFILE=findContact_s5i1.log
+$EXEC $cenpqr1fname $cenpqr2fname $atomcontactfname $atompqr1fname $atompqr2fname > $LOGFILE 2>&1 
+
+
