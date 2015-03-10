@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classCRotCoeff.html#aa52111e9c4cb2949dfae960437742536" title="CRotCoeff::reset" alt="" coords="251,5,373,32"/>
-<area shape="rect" id="node7" href="$util_8h.html#acb5dee8f2390b15de14c17e1893a1816" title="resetPos function" alt="" coords="275,56,349,83"/>
-<area shape="rect" id="node9" href="$classCMolecule.html#a9a0a5da46546f7ab6f9cca56a9ff7fc9" title="The CMolecule computeMaxRadius function." alt="" coords="208,107,416,133"/>
-<area shape="rect" id="node11" href="$classCMolecule.html#a7e7066984d8a4520a7e990ebefe60fa5" title="CMolecule::getNKS" alt="" coords="243,157,381,184"/>
-<area shape="rect" id="node5" href="$classCRotCoeff.html#a4668070c3eacacf17be98bc2fb348287" title="CRotCoeff::isSingular" alt="" coords="465,5,615,32"/>
-</map>

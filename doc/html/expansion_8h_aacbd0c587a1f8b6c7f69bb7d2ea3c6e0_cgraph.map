@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classCRange.html#a589cce90cd0bc2766c3b08f7f3d1175a" title="CRange::intersection" alt="" coords="129,35,274,61"/>
-<area shape="rect" id="node5" href="$classCRange.html#a300319aff8dd27fefc004b6c724b4655" title="CRange::p1" alt="" coords="323,9,415,36"/>
-<area shape="rect" id="node7" href="$classCRange.html#a88c073347df45fa05a0e88fd91021d2b" title="CRange::p2" alt="" coords="323,72,415,99"/>
-<area shape="rect" id="node9" href="$classCExpan.html#a8603cbb7c8f67972e825d583711d59fd" title="CExpan::getRange" alt="" coords="135,136,268,163"/>
-<area shape="rect" id="node11" href="$classCExpan.html#a849c5d81bbc37ea52dd660d5950f264c" title="CExpan::getScale" alt="" coords="137,187,265,213"/>
-</map>

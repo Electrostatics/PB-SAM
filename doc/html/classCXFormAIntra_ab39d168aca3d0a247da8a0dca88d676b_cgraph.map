@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classCExpan.html#a8603cbb7c8f67972e825d583711d59fd" title="CExpan::getRange" alt="" coords="219,5,352,32"/>
-<area shape="rect" id="node5" href="$classCRange.html#a88c073347df45fa05a0e88fd91021d2b" title="CRange::p2" alt="" coords="239,56,331,83"/>
-<area shape="rect" id="node7" href="$classCRotCoeff.html#a81aa02ca1487dab4a101741bae0debfb" title="CRotCoeff rotate function." alt="" coords="222,131,349,157"/>
-<area shape="rect" id="node10" href="$classCTransCoeff.html#a1d1d9ced218d76afb362aa1f7d5a27da" title="TransCoeff translate function." alt="" coords="208,205,363,232"/>
-</map>

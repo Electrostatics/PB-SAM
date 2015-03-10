@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classCMolecule.html#a2adf36bbc14a0e47ba9e13e6aeb01b38" title="CMolecule::getID" alt="" coords="226,5,350,32"/>
-<area shape="rect" id="node5" href="$classCSystem.html#a29136721e5abd3ee40781adbee13d9e0" title="The CSystem pbcPos function." alt="" coords="223,56,353,83"/>
-<area shape="rect" id="node13" href="$classCMolecule.html#afd397d1dafbdb90c8d00df1b2a4a51d2" title="CMolecule::getRCen" alt="" coords="216,107,360,133"/>
-<area shape="rect" id="node7" href="$classCPnt.html#a5867d45fc05ae371116367067eb23f48" title="The CSpPnt class print x." alt="" coords="408,5,475,32"/>
-<area shape="rect" id="node9" href="$classCPnt.html#ac9283f60e70f312ee1784de6c6ea5aec" title="The CSpPnt class print y." alt="" coords="408,56,475,83"/>
-<area shape="rect" id="node11" href="$classCPnt.html#a37d139ebe50234ab753472b896c7d17c" title="The CSpPnt class print z." alt="" coords="408,107,475,133"/>
-</map>

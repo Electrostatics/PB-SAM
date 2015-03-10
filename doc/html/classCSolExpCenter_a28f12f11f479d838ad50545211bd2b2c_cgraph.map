@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classCTriExpan.html#a2abfca44411177f675cf9de0c5d96319" title="CTriExpan::reset" alt="" coords="251,31,373,57"/>
-<area shape="rect" id="node11" href="$classCTriExpan.html#a51f47a9ae7f19a2558400c525e1716cd" title="CTriExpan::setScale" alt="" coords="241,81,383,108"/>
-<area shape="rect" id="node5" href="$classCExpan.html#a8a6140fec725f418de3895bbf954e830" title="CExpan::reset" alt="" coords="443,31,549,57"/>
-<area shape="rect" id="node7" href="$classCRange.html#a88c073347df45fa05a0e88fd91021d2b" title="CRange::p2" alt="" coords="609,5,701,32"/>
-<area shape="rect" id="node9" href="$classCRange.html#a300319aff8dd27fefc004b6c724b4655" title="CRange::p1" alt="" coords="609,56,701,83"/>
-<area shape="rect" id="node13" href="$classCExpan.html#aa36e147d92fd44b430f8962b2f358e8d" title="CExpan::setScale" alt="" coords="432,81,560,108"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classCMolecule.html#a0fa1612bc8788e89494554e7a6847af7" title="CMolecule::getKS" alt="" coords="273,5,401,32"/>
-<area shape="rect" id="node5" href="$classCSolExpCenter.html#adce98ad1dd45ff4382715e6281edf70b" title="CSolExpCenter::IsEmptyInter\lPolList" alt="" coords="239,57,435,98"/>
-<area shape="rect" id="node7" href="$classCSolExpCenter.html#a3ef672da73c2caf77eaaf3eaf5b37ad1" title="CSolExpCenter::IsNoInteractionList" alt="" coords="222,123,453,149"/>
-</map>

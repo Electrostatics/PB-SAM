@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$util_8h.html#ad864dc450da6954264580e4318e011eb" title="seedRand" alt="" coords="261,5,342,32"/>
-<area shape="rect" id="node5" href="$util_8h.html#aa1d26866fab397a6e6346c7e9de15ecc" title="read_timer function" alt="" coords="260,56,343,83"/>
-<area shape="rect" id="node7" href="$readutil_8cpp.html#a967cc51a609e5efa8c63b9cb16328320" title="readpqrAtoms function" alt="" coords="250,107,353,133"/>
-<area shape="rect" id="node9" href="$readutil_8cpp.html#aa3cbb66ef66dec76b358e17aab2a9dc4" title="readpqrCenters function" alt="" coords="246,157,357,184"/>
-</map>

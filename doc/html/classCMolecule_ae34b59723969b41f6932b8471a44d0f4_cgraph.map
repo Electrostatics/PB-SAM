@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classCSystem.html#a29136721e5abd3ee40781adbee13d9e0" title="The CSystem pbcPos function." alt="" coords="281,56,410,83"/>
-<area shape="rect" id="node11" href="$classCMolecule.html#a7430fa54562834246e9d53d0479712ff" title="CMolecule::getMaxR" alt="" coords="273,107,418,133"/>
-<area shape="rect" id="node13" href="$classCExpCenter.html#a84f867868f8eb0785e95561f26cd0194" title="CExpCenter::getCen" alt="" coords="273,157,417,184"/>
-<area shape="rect" id="node15" href="$classCExpCenter.html#adc18426f677b5984a468101ebfeefef6" title="CExpCenter::getRad" alt="" coords="273,208,417,235"/>
-<area shape="rect" id="node5" href="$classCPnt.html#a5867d45fc05ae371116367067eb23f48" title="The CSpPnt class print x." alt="" coords="467,5,533,32"/>
-<area shape="rect" id="node7" href="$classCPnt.html#ac9283f60e70f312ee1784de6c6ea5aec" title="The CSpPnt class print y." alt="" coords="467,56,533,83"/>
-<area shape="rect" id="node9" href="$classCPnt.html#a37d139ebe50234ab753472b896c7d17c" title="The CSpPnt class print z." alt="" coords="467,107,533,133"/>
-</map>
