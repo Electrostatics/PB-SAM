@@ -197,7 +197,7 @@ CBDnam::run(int &scount, char* runname)
   double totaltime = 0;
   double start, end;
 
-  while (status == RUNNING && scount < 300000)
+  while (status == RUNNING) // Removed upper limit && scount < 300000)
 	{
 		REAL dt = compute_dt();
 		REAL dist = CMolecule::getC2CDist(m_mols[0], m_mols[1]);
