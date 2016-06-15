@@ -1,3 +1,4 @@
+#This repository has been deprecated.
 ##Building PB-SAM
 
 This is the directory containing source code and examples for the semi-analytical solution of
